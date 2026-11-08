@@ -101,7 +101,6 @@ then run `run all`. Expect the INFO file-open line followed by the PASS line.
 
 ## Repository / Push Status
 
-This workspace currently has no `.git` directory and no configured Git remote.
-The report and source files can be committed and pushed after this folder is
-opened or initialized as the intended Git repository and its remote is
-configured. No commit or push has been made from this workspace.
+Repository URL:
+https://github.com/HarshithaModekurty/Event-driven-spiking-neural-network-core-of-leaky-integrate-and-fire-neurons-
+This report accompanies the implementation files for the single-neuron LIF stage. The local working folder is not itself a Git checkout; publishing is performed through a checkout of the repository's `main` branch.

@@ -1,0 +1,12 @@
+.venv/
+__pycache__/
+*.py[cod]
+build/
+data/mnist/
+proof_images/mnist/
+RTL_PROJECT.cache/
+RTL_PROJECT.hw/
+RTL_PROJECT.ip_user_files/
+RTL_PROJECT.sim/
+RTL_PROJECT.srcs/
+*.jou
