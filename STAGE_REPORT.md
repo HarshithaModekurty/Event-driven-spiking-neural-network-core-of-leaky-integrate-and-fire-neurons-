@@ -1,8 +1,8 @@
 # RTL Project Stage Report
 
 **Report date:** 2026-11-08  
-**Current stage:** Single-neuron LIF RTL and Python reference comparison  
-**Stage status:** Implemented and locally verified
+**Current stage:** Time-multiplexed LIF state engine
+**Stage status:** Implemented and locally verified for a 4-neuron simulation configuration
 
 ## Project Goal
 
@@ -14,11 +14,24 @@ spike routing, a processor-facing control/data path, and classification output.
 
 The current implementation is the first hardware building block: one
 synthesizable Verilog LIF neuron and a cycle-by-cycle test against the Python
-golden model.
+golden model. The same transition datapath is now time-multiplexed across a
+parameterized population state array.
 
 - `rtl/lif_neuron.v` implements a 16-bit unsigned membrane, signed 32-bit input
   current, optional shift-based leak, threshold detection, reset value,
   refractory countdown, synchronous reset, and clock enable.
+- `rtl/lif_transition.v` contains the shared combinational LIF state transition
+  used by both the single-neuron wrapper and population stepper.
+- `rtl/lif_population_stepper.v` holds membrane, refractory, and input-current
+  arrays and updates one neuron per enabled processing clock. It defaults to
+  256 neurons; the current testbench instantiates four.
+- The population block accepts one signed current per neuron before each step,
+  then produces a spike bitmap and supports indexed state readback. Synapse
+  accumulation and event routing are intentionally not implemented yet.
+- The population vector generator's `CONFIG` is the source of the RTL threshold,
+  reset value, leak settings, and refractory period. These parameters are packed
+  into each test row, and the testbench uses the first row's settings for reset
+  and each row's settings for its update.
 - `golden_model/lif.py` is the behavioral reference. Its defaults are threshold
   32, reset value 0, leak shift 4, and refractory period 0.
 - `rtl/tb/lif_neuron_tb.v` reads expected vectors, drives the neuron, and checks
@@ -27,6 +40,9 @@ golden model.
   both the source and Vivado-imported testbench copy if the project is moved.
 - `tools/run_lif_rtl_check.py` generates the vectors from the Python model and
   runs the Verilog testbench under Icarus Verilog.
+- `rtl/tb/lif_population_stepper_tb.v` and
+  `tools/run_population_rtl_check.py` compare the time-multiplexed population
+  state against persistent Python `LIFNeuron` instances.
 - `build/lif_rtl/lif_vectors.txt` contains the generated test data. Each row
   has 11 decimal fields: reset, enable, input current, threshold, reset value,
   leak enable, leak shift, refractory period, expected spike, expected
@@ -56,20 +72,30 @@ counter. When disabled, the state holds and `spike` is deasserted.
   `\.venv\bin\python.exe -m unittest discover -s tests -v`.
 - Icarus RTL comparison: **518 LIF cycles passed** using
   `\.venv\bin\python.exe -m tools.run_lif_rtl_check`.
+- Icarus population comparison: **64 time steps × 4 neurons passed** using
+  `\.venv\bin\python.exe -m tools.run_population_rtl_check`; spike masks,
+  membrane states, and refractory counters matched the persistent Python
+  neuron instances.
 - Vivado 2023.2 XSim: the imported Verilog sources compiled and elaborated;
-  simulation opened the direct-path vector file and printed
-  `PASS: matched Python golden model for 518 LIF cycles`.
+  the single-neuron test printed
+  `PASS: matched Python golden model for 518 LIF cycles`, and the population
+  test printed
+  `PASS: matched Python model for 64 population time steps (4 neurons)`.
 - The vectors include the Python default configuration plus additional cases
   for signed positive/negative currents, threshold crossing, reset, leak
   variations, saturation, refractory operation, and disabled cycles.
 
 These results verify the single-neuron RTL block against the reference model.
-They do **not** verify the complete classifier in RTL.
+The population comparison verifies the shared datapath and serial state updates
+for four neurons. Neither result verifies synaptic routing or the complete
+classifier in RTL.
 
 ## Not Yet Implemented
 
-- 256-neuron time-multiplexed controller and neuron-state storage.
-- Synapse table/memory, signed weight accumulation, and complete spike routing.
+- Synapse table/memory, signed weight accumulation, and source-spike routing
+  into per-neuron currents.
+- Scaling/verification of the time-multiplexed population engine at 256 neurons
+  in Vivado synthesis and implementation.
 - Integrated AER queues/arbitration and formal fairness checks.
 - Processor interface, AXI4-Lite configuration, DMA input path, interrupt,
   and UART integration in RTL.
@@ -79,11 +105,10 @@ They do **not** verify the complete classifier in RTL.
 
 ## Next Recommended Milestone
 
-Implement the time-step controller and state memory for the 256 neurons, first
-with a small parameterized neuron count for simulation. Compare each neuron
-state and emitted spike against the Python network model. Then add synapse
-memory/accumulation and spike routing before integrating the processor and
-peripheral interfaces.
+Add synapse storage and source-spike accumulation in front of the population
+stepper, then compare routed currents, spike bitmaps, and state against
+`SNNGoldenModel`. After that, verify the 256-neuron configuration and integrate
+the AER/processor interfaces.
 
 ## Reproducible Commands
 
@@ -92,12 +117,14 @@ Run these commands from `D:\RTL_PROJECT`:
 ```powershell
 .\.venv\bin\python.exe -m unittest discover -s tests -v
 .\.venv\bin\python.exe -m tools.run_lif_rtl_check
+.\.venv\bin\python.exe -m tools.run_population_rtl_check
 ```
 
-For Vivado, use `rtl/lif_neuron.v` as the design source and
-`rtl/tb/lif_neuron_tb.v` as the simulation top. Regenerate the vector file
-first, reset/relaunch simulation so Vivado recompiles the imported testbench,
-then run `run all`. Expect the INFO file-open line followed by the PASS line.
+The Vivado project retains `lif_neuron` as its synthesis top and selects
+`lif_population_stepper_tb` as its simulation top. Regenerate the population
+vector file first, reset/relaunch simulation so Vivado recompiles imported
+sources, then run `run all`. Expect the Python-vector INFO line followed by a
+PASS line for 64 time steps and four neurons.
 
 ## Repository / Push Status
 

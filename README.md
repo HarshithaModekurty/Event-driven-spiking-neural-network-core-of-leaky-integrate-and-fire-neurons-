@@ -116,6 +116,42 @@ cycles (about 5180 ns). Add `dut.membrane`, `dut.spike`,
 The testbench uses a 1 ns timescale. Vivado records its waveform in its WDB;
 `$dumpfile/$dumpvars` are enabled only for Icarus, which creates the VCD.
 
+## Next RTL Block: Time-Multiplexed Neuron Population
+
+`rtl/lif_population_stepper.v` stores each neuron's membrane and refractory
+state in arrays and visits one neuron per clock using the shared combinational
+`rtl/lif_transition.v` datapath. The default parameter is 256 neurons; its
+current simulation config uses 4 neurons so cycle-by-cycle state can be checked
+easily. Before each population step, software/testbench writes one signed
+current per neuron. The controller returns a spike bitmap and has a debug state
+read port.
+
+This block verifies serialized neuron-state updates; it does not yet contain a
+synapse table, accumulate currents from source spikes, or route AER events. Those
+are subsequent stages.
+
+Run the Python-generated four-neuron comparison from PowerShell:
+
+```powershell
+.venv\bin\python.exe -m tools.run_population_rtl_check
+```
+
+The runner compares 64 population time steps against four persistent Python
+`LIFNeuron` instances and reports each run's result. It writes
+`build/lif_population/lif_population_vectors.txt` and, under Icarus,
+`build/lif_population/lif_population_stepper.vcd`. Vivado uses
+`lif_population_stepper_tb` as its simulation top and reads the same vector
+file by its absolute path; change the path in
+`rtl/tb/lif_population_stepper_tb.v` if this workspace is moved.
+
+Python's `CONFIG` is the source of the population test parameters. Every vector
+row begins with `threshold reset_value leak_enable leak_shift refractory_period`,
+followed by four input currents, the expected spike bitmap, four expected
+membrane values, and four expected refractory counters. The testbench loads the
+first row's configuration before reset, then loads the configuration from every
+row before its step, so the RTL is not relying on a separate copy of the
+population parameters.
+
 ## Behavioral contract for RTL comparison
 
 1. Membrane state is an unsigned 16-bit value. Addition saturates to 65535 and
@@ -149,6 +185,10 @@ same explicit saturation/wrap rule to both implementations.
 - `examples/train_toy_classifier.py`: self-contained offline-training example.
 - `examples/mnist_live_demo.py`: real MNIST image training and live holdout proof.
 - `rtl/lif_neuron.v`: first synthesizable Verilog neuron datapath.
+- `rtl/lif_transition.v`: shared combinational LIF state transition.
+- `rtl/lif_population_stepper.v`: parameterized time-multiplexed neuron state engine.
 - `rtl/tb/lif_neuron_tb.v`: vector-driven Verilog self-checking testbench.
+- `rtl/tb/lif_population_stepper_tb.v`: population vector testbench.
 - `tools/run_lif_rtl_check.py`: Python golden-vector generator and Icarus runner.
+- `tools/run_population_rtl_check.py`: Python-driven population RTL comparison.
 - `tests/test_golden_model.py`: executable model checks.

@@ -65,6 +65,7 @@ def main() -> None:
         "lif_neuron_tb",
         "-o",
         str(BUILD_DIR / "lif_neuron_tb.vvp"),
+        str(ROOT / "rtl" / "lif_transition.v"),
         str(ROOT / "rtl" / "lif_neuron.v"),
         str(ROOT / "rtl" / "tb" / "lif_neuron_tb.v"),
     ]

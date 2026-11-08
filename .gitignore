@@ -2,6 +2,7 @@
 __pycache__/
 *.py[cod]
 build/
+build/lif_population/
 data/mnist/
 proof_images/mnist/
 RTL_PROJECT.cache/

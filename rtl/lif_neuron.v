@@ -13,20 +13,23 @@ module lif_neuron (
     output reg [15:0] refractory_remaining
 );
 
-    reg signed [32:0] leaked_membrane;
-    reg signed [32:0] updated_membrane;
-    reg [15:0] leak_amount;
+    wire [15:0] membrane_next;
+    wire spike_next;
+    wire [15:0] refractory_next;
 
-    always @* begin
-        if (leak_enable) begin
-            leak_amount = membrane >> leak_shift;
-        end else begin
-            leak_amount = 16'd0;
-        end
-
-        leaked_membrane = $signed({1'b0, membrane}) - $signed({1'b0, leak_amount});
-        updated_membrane = leaked_membrane + {{1{input_current[31]}}, input_current};
-    end
+    lif_transition transition_unit (
+        .membrane_in(membrane),
+        .refractory_in(refractory_remaining),
+        .input_current(input_current),
+        .threshold(threshold),
+        .reset_value(reset_value),
+        .leak_enable(leak_enable),
+        .leak_shift(leak_shift),
+        .refractory_period(refractory_period),
+        .membrane_next(membrane_next),
+        .spike_next(spike_next),
+        .refractory_next(refractory_next)
+    );
 
     always @(posedge clk) begin
         if (rst) begin
@@ -34,24 +37,9 @@ module lif_neuron (
             spike <= 1'b0;
             refractory_remaining <= 16'd0;
         end else if (enable) begin
-            if (refractory_remaining != 16'd0) begin
-                membrane <= reset_value;
-                spike <= 1'b0;
-                refractory_remaining <= refractory_remaining - 16'd1;
-            end else if (updated_membrane >= $signed({1'b0, threshold})) begin
-                membrane <= reset_value;
-                spike <= 1'b1;
-                refractory_remaining <= refractory_period;
-            end else begin
-                if (updated_membrane < 33'sd0) begin
-                    membrane <= 16'd0;
-                end else if (updated_membrane > 33'sd65535) begin
-                    membrane <= 16'hffff;
-                end else begin
-                    membrane <= updated_membrane[15:0];
-                end
-                spike <= 1'b0;
-            end
+            membrane <= membrane_next;
+            spike <= spike_next;
+            refractory_remaining <= refractory_next;
         end else begin
             spike <= 1'b0;
         end
