@@ -50,6 +50,15 @@ class SNNGoldenModel:
             for destination, weight in enumerate(row):
                 self.set_weight(source, destination, weight)
 
+    def route_currents(self, source_spikes: Iterable[int]) -> list[int]:
+        """Sum signed synapse weights from spiking sources into each target."""
+        currents = [0] * self.num_neurons
+        for source in source_spikes:
+            self._check_neuron_id(source)
+            for destination, weight in enumerate(self.weights[source]):
+                currents[destination] += weight
+        return currents
+
     def step(self, input_spikes: Iterable[int] = ()) -> list[int]:
         """Consume source addresses and return neuron addresses that fired.
 

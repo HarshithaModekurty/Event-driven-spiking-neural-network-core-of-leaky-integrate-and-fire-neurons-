@@ -1,0 +1,14 @@
+{
+  "top": "lif_core_timing_harness",
+  "core": "lif_snn_core",
+  "launch_bits": 341,
+  "capture_bits": 290,
+  "part": "xc7z020clg400-1",
+  "clock_period_ns": 10.0,
+  "neuron_states": 256,
+  "synapse_entries": 65536,
+  "block_ram_primitives": 8,
+  "routed_setup_slack_ns": 0.508,
+  "routed_hold_slack_ns": 0.032,
+  "out_of_context": true
+}

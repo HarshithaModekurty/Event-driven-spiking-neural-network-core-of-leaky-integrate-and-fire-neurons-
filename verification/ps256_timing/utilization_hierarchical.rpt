@@ -1,0 +1,34 @@
+Copyright 1986-2022 Xilinx, Inc. All Rights Reserved. Copyright 2022-2023 Advanced Micro Devices, Inc. All Rights Reserved.
+---------------------------------------------------------------------------------------------------------------------------------------------
+| Tool Version : Vivado v.2023.2 (win64) Build 4029153 Fri Oct 13 20:14:34 MDT 2023
+| Date         : Tue Nov 10 18:02:59 2026
+| Host         : DESKTOP-J3M0MBG running 64-bit major release  (build 9200)
+| Command      : report_utilization -hierarchical -file D:/RTL_PROJECT/build/ps256_timing/utilization_hierarchical.rpt
+| Design       : lif_core_timing_harness
+| Device       : xc7z020clg400-1
+| Speed File   : -1
+| Design State : Routed
+---------------------------------------------------------------------------------------------------------------------------------------------
+
+Utilization Design Information
+
+Table of Contents
+-----------------
+1. Utilization by Hierarchy
+
+1. Utilization by Hierarchy
+---------------------------
+
++-----------------------------+------------------------+------------+------------+---------+------+-------+--------+--------+------------+
+|           Instance          |         Module         | Total LUTs | Logic LUTs | LUTRAMs | SRLs |  FFs  | RAMB36 | RAMB18 | DSP Blocks |
++-----------------------------+------------------------+------------+------------+---------+------+-------+--------+--------+------------+
+| lif_core_timing_harness     |                  (top) |       8463 |       8463 |       0 |    0 | 18254 |      8 |      0 |          0 |
+|   (lif_core_timing_harness) |                  (top) |          1 |          1 |       0 |    0 |   631 |      0 |      0 |          0 |
+|   core                      |           lif_snn_core |       8462 |       8462 |       0 |    0 | 17623 |      8 |      0 |          0 |
+|     (core)                  |           lif_snn_core |          1 |          1 |       0 |    0 |   258 |      0 |      0 |          0 |
+|     population_stepper      | lif_population_stepper |       7634 |       7634 |       0 |    0 | 16920 |      0 |      0 |          0 |
+|     synapse_router          |     lif_synapse_router |        828 |        828 |       0 |    0 |   445 |      8 |      0 |          0 |
++-----------------------------+------------------------+------------+------------+---------+------+-------+--------+--------+------------+
+* Note: The sum of lower-level cells may be larger than their parent cells total, due to cross-hierarchy LUT combining
+
+

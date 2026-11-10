@@ -5,6 +5,8 @@ module lif_population_stepper_tb;
     parameter NUM_NEURONS = 4;
     parameter ADDR_WIDTH = 2;
     parameter NUM_TIME_STEPS = 64;
+    parameter SPIKE_WORDS = (NUM_NEURONS + 31) / 32;
+    parameter VECTOR_FIELDS = 5 + 3*NUM_NEURONS + SPIKE_WORDS;
 
     reg clk;
     reg rst;
@@ -26,14 +28,15 @@ module lif_population_stepper_tb;
 
     integer vectors_checked;
     integer failed;
-    integer vector_values[0:17];
+    integer vector_values[0:VECTOR_FIELDS-1];
     integer neuron;
     integer field_index;
+    integer spike_word;
     integer transaction;
-    integer expected_spikes;
+    reg [NUM_NEURONS-1:0] expected_spikes;
     integer expected_membrane[0:NUM_NEURONS-1];
     integer expected_refractory[0:NUM_NEURONS-1];
-    reg [32*(3*NUM_NEURONS+6)-1:0] vector_memory[0:NUM_TIME_STEPS-1];
+    reg [32*VECTOR_FIELDS-1:0] vector_memory[0:NUM_TIME_STEPS-1];
 
     always #5 clk = ~clk;
 
@@ -92,7 +95,7 @@ module lif_population_stepper_tb;
         rst = 1'b0;
 
         for (transaction = 0; transaction < NUM_TIME_STEPS; transaction = transaction + 1) begin
-            for (field_index = 0; field_index < 3*NUM_NEURONS+6; field_index = field_index + 1) begin
+            for (field_index = 0; field_index < VECTOR_FIELDS; field_index = field_index + 1) begin
                 vector_values[field_index] = vector_memory[transaction] >> (32*field_index);
             end
             threshold = vector_values[0];
@@ -100,10 +103,14 @@ module lif_population_stepper_tb;
             leak_enable = vector_values[2];
             leak_shift = vector_values[3];
             refractory_period = vector_values[4];
-            expected_spikes = vector_values[NUM_NEURONS + 5];
+            expected_spikes = {NUM_NEURONS{1'b0}};
             for (neuron = 0; neuron < NUM_NEURONS; neuron = neuron + 1) begin
-                expected_membrane[neuron] = vector_values[NUM_NEURONS + 6 + neuron];
-                expected_refractory[neuron] = vector_values[2*NUM_NEURONS + 6 + neuron];
+                spike_word = vector_values[5 + NUM_NEURONS + neuron/32];
+                expected_spikes[neuron] = (spike_word >> (neuron % 32)) & 1;
+            end
+            for (neuron = 0; neuron < NUM_NEURONS; neuron = neuron + 1) begin
+                expected_membrane[neuron] = vector_values[5 + NUM_NEURONS + SPIKE_WORDS + neuron];
+                expected_refractory[neuron] = vector_values[5 + 2*NUM_NEURONS + SPIKE_WORDS + neuron];
 
                 @(negedge clk);
                 current_write = 1'b1;
@@ -132,7 +139,7 @@ module lif_population_stepper_tb;
             end
 
             if (spike_vector !== expected_spikes[NUM_NEURONS-1:0]) begin
-                $display("FAIL: transaction %0d spike mask got %0d expected %0d", transaction + 1, spike_vector, expected_spikes);
+                $display("FAIL: transaction %0d spike vector got %h expected %h", transaction + 1, spike_vector, expected_spikes);
                 failed = 1;
             end
 

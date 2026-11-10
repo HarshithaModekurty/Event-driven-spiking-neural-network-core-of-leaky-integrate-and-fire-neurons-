@@ -1,0 +1,682 @@
+Copyright 1986-2022 Xilinx, Inc. All Rights Reserved. Copyright 2022-2023 Advanced Micro Devices, Inc. All Rights Reserved.
+---------------------------------------------------------------------------------------------------------------------------------------------
+| Tool Version : Vivado v.2023.2 (win64) Build 4029153 Fri Oct 13 20:14:34 MDT 2023
+| Date         : Tue Nov 10 18:02:57 2026
+| Host         : DESKTOP-J3M0MBG running 64-bit major release  (build 9200)
+| Command      : report_timing -delay_type max -max_paths 10 -file D:/RTL_PROJECT/build/ps256_timing/setup_paths.rpt
+| Design       : lif_core_timing_harness
+| Device       : 7z020-clg400
+| Speed File   : -1  PRODUCTION 1.12 2019-11-22
+| Design State : Routed
+---------------------------------------------------------------------------------------------------------------------------------------------
+
+Timing Report
+
+Slack (MET) :             0.508ns  (required time - arrival time)
+  Source:                 core/synapse_router/FSM_sequential_state_reg[0]/C
+                            (rising edge-triggered cell FDRE clocked by core_clk  {rise@0.000ns fall@5.000ns period=10.000ns})
+  Destination:            core/synapse_router/current_value_reg[22]_rep__0/D
+                            (rising edge-triggered cell FDRE clocked by core_clk  {rise@0.000ns fall@5.000ns period=10.000ns})
+  Path Group:             core_clk
+  Path Type:              Setup (Max at Slow Process Corner)
+  Requirement:            10.000ns  (core_clk rise@10.000ns - core_clk rise@0.000ns)
+  Data Path Delay:        9.236ns  (logic 0.715ns (7.741%)  route 8.521ns (92.259%))
+  Logic Levels:           1  (LUT4=1)
+  Clock Path Skew:        -0.199ns (DCD - SCD + CPR)
+    Destination Clock Delay (DCD):    2.557ns = ( 12.557 - 10.000 ) 
+    Source Clock Delay      (SCD):    2.815ns
+    Clock Pessimism Removal (CPR):    0.059ns
+  Clock Uncertainty:      0.135ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE + UU
+    Total System Jitter     (TSJ):    0.071ns
+    Total Input Jitter      (TIJ):    0.000ns
+    Discrete Jitter          (DJ):    0.000ns
+    Phase Error              (PE):    0.000ns
+    User Uncertainty         (UU):    0.100ns
+
+    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------
+                         (clock core_clk rise edge)
+                                                      0.000     0.000 r  
+                                                      0.000     0.000 r  clk (IN)
+                         net (fo=0)                   0.973     0.973    clk
+    BUFGCTRL_X0Y0        BUFG (Prop_bufg_I_O)         0.101     1.074 r  core_clock_buffer/O
+                         net (fo=18270, routed)       1.741     2.815    core/synapse_router/clk
+    SLICE_X24Y14         FDRE                                         r  core/synapse_router/FSM_sequential_state_reg[0]/C
+  -------------------------------------------------------------------    -------------------
+    SLICE_X24Y14         FDRE (Prop_fdre_C_Q)         0.419     3.234 f  core/synapse_router/FSM_sequential_state_reg[0]/Q
+                         net (fo=185, routed)         8.521    11.755    core/synapse_router/state__0[0]
+    SLICE_X82Y66         LUT4 (Prop_lut4_I0_O)        0.296    12.051 r  core/synapse_router/current_value[22]_rep_i_1__0/O
+                         net (fo=1, routed)           0.000    12.051    core/synapse_router/current_value[22]_rep_i_1__0_n_0
+    SLICE_X82Y66         FDRE                                         r  core/synapse_router/current_value_reg[22]_rep__0/D
+  -------------------------------------------------------------------    -------------------
+
+                         (clock core_clk rise edge)
+                                                     10.000    10.000 r  
+                                                      0.000    10.000 r  clk (IN)
+                         net (fo=0)                   0.924    10.924    clk
+    BUFGCTRL_X0Y0        BUFG (Prop_bufg_I_O)         0.091    11.015 r  core_clock_buffer/O
+                         net (fo=18270, routed)       1.542    12.557    core/synapse_router/clk
+    SLICE_X82Y66         FDRE                                         r  core/synapse_router/current_value_reg[22]_rep__0/C
+                         clock pessimism              0.059    12.616    
+                         clock uncertainty           -0.135    12.480    
+    SLICE_X82Y66         FDRE (Setup_fdre_C_D)        0.079    12.559    core/synapse_router/current_value_reg[22]_rep__0
+  -------------------------------------------------------------------
+                         required time                         12.559    
+                         arrival time                         -12.051    
+  -------------------------------------------------------------------
+                         slack                                  0.508    
+
+Slack (MET) :             0.638ns  (required time - arrival time)
+  Source:                 core/synapse_router/source_index_reg[1]/C
+                            (rising edge-triggered cell FDRE clocked by core_clk  {rise@0.000ns fall@5.000ns period=10.000ns})
+  Destination:            core/synapse_router/current_value_reg[18]/CE
+                            (rising edge-triggered cell FDRE clocked by core_clk  {rise@0.000ns fall@5.000ns period=10.000ns})
+  Path Group:             core_clk
+  Path Type:              Setup (Max at Slow Process Corner)
+  Requirement:            10.000ns  (core_clk rise@10.000ns - core_clk rise@0.000ns)
+  Data Path Delay:        8.813ns  (logic 2.054ns (23.306%)  route 6.759ns (76.694%))
+  Logic Levels:           7  (LUT4=1 LUT6=2 MUXF7=2 MUXF8=2)
+  Clock Path Skew:        -0.208ns (DCD - SCD + CPR)
+    Destination Clock Delay (DCD):    2.556ns = ( 12.556 - 10.000 ) 
+    Source Clock Delay      (SCD):    2.823ns
+    Clock Pessimism Removal (CPR):    0.059ns
+  Clock Uncertainty:      0.135ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE + UU
+    Total System Jitter     (TSJ):    0.071ns
+    Total Input Jitter      (TIJ):    0.000ns
+    Discrete Jitter          (DJ):    0.000ns
+    Phase Error              (PE):    0.000ns
+    User Uncertainty         (UU):    0.100ns
+
+    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------
+                         (clock core_clk rise edge)
+                                                      0.000     0.000 r  
+                                                      0.000     0.000 r  clk (IN)
+                         net (fo=0)                   0.973     0.973    clk
+    BUFGCTRL_X0Y0        BUFG (Prop_bufg_I_O)         0.101     1.074 r  core_clock_buffer/O
+                         net (fo=18270, routed)       1.749     2.823    core/synapse_router/clk
+    SLICE_X20Y11         FDRE                                         r  core/synapse_router/source_index_reg[1]/C
+  -------------------------------------------------------------------    -------------------
+    SLICE_X20Y11         FDRE (Prop_fdre_C_Q)         0.478     3.301 r  core/synapse_router/source_index_reg[1]/Q
+                         net (fo=83, routed)          1.649     4.950    core/synapse_router/source_index_reg_n_0_[1]
+    SLICE_X9Y5           LUT6 (Prop_lut6_I2_O)        0.295     5.245 f  core/synapse_router/busy_i_41/O
+                         net (fo=1, routed)           0.000     5.245    core/synapse_router/busy_i_41_n_0
+    SLICE_X9Y5           MUXF7 (Prop_muxf7_I1_O)      0.245     5.490 f  core/synapse_router/busy_reg_i_20/O
+                         net (fo=1, routed)           0.000     5.490    core/synapse_router/busy_reg_i_20_n_0
+    SLICE_X9Y5           MUXF8 (Prop_muxf8_I0_O)      0.104     5.594 f  core/synapse_router/busy_reg_i_10/O
+                         net (fo=1, routed)           1.189     6.783    core/synapse_router/busy_reg_i_10_n_0
+    SLICE_X22Y11         LUT6 (Prop_lut6_I3_O)        0.316     7.099 f  core/synapse_router/busy_i_6/O
+                         net (fo=2, routed)           0.000     7.099    core/synapse_router/busy_i_6_n_0
+    SLICE_X22Y11         MUXF7 (Prop_muxf7_I0_O)      0.209     7.308 f  core/synapse_router/destination_index_reg[7]_i_9/O
+                         net (fo=1, routed)           0.000     7.308    core/synapse_router/destination_index_reg[7]_i_9_n_0
+    SLICE_X22Y11         MUXF8 (Prop_muxf8_I1_O)      0.088     7.396 f  core/synapse_router/destination_index_reg[7]_i_5/O
+                         net (fo=8, routed)           1.235     8.631    core/synapse_router/destination_index_reg[7]_i_5_n_0
+    SLICE_X24Y27         LUT4 (Prop_lut4_I0_O)        0.319     8.950 r  core/synapse_router/current_valid_i_1/O
+                         net (fo=137, routed)         2.686    11.636    core/synapse_router/current_valid_i_1_n_0
+    SLICE_X81Y66         FDRE                                         r  core/synapse_router/current_value_reg[18]/CE
+  -------------------------------------------------------------------    -------------------
+
+                         (clock core_clk rise edge)
+                                                     10.000    10.000 r  
+                                                      0.000    10.000 r  clk (IN)
+                         net (fo=0)                   0.924    10.924    clk
+    BUFGCTRL_X0Y0        BUFG (Prop_bufg_I_O)         0.091    11.015 r  core_clock_buffer/O
+                         net (fo=18270, routed)       1.541    12.556    core/synapse_router/clk
+    SLICE_X81Y66         FDRE                                         r  core/synapse_router/current_value_reg[18]/C
+                         clock pessimism              0.059    12.615    
+                         clock uncertainty           -0.135    12.479    
+    SLICE_X81Y66         FDRE (Setup_fdre_C_CE)      -0.205    12.274    core/synapse_router/current_value_reg[18]
+  -------------------------------------------------------------------
+                         required time                         12.274    
+                         arrival time                         -11.636    
+  -------------------------------------------------------------------
+                         slack                                  0.638    
+
+Slack (MET) :             0.638ns  (required time - arrival time)
+  Source:                 core/synapse_router/source_index_reg[1]/C
+                            (rising edge-triggered cell FDRE clocked by core_clk  {rise@0.000ns fall@5.000ns period=10.000ns})
+  Destination:            core/synapse_router/current_value_reg[18]_rep/CE
+                            (rising edge-triggered cell FDRE clocked by core_clk  {rise@0.000ns fall@5.000ns period=10.000ns})
+  Path Group:             core_clk
+  Path Type:              Setup (Max at Slow Process Corner)
+  Requirement:            10.000ns  (core_clk rise@10.000ns - core_clk rise@0.000ns)
+  Data Path Delay:        8.813ns  (logic 2.054ns (23.306%)  route 6.759ns (76.694%))
+  Logic Levels:           7  (LUT4=1 LUT6=2 MUXF7=2 MUXF8=2)
+  Clock Path Skew:        -0.208ns (DCD - SCD + CPR)
+    Destination Clock Delay (DCD):    2.556ns = ( 12.556 - 10.000 ) 
+    Source Clock Delay      (SCD):    2.823ns
+    Clock Pessimism Removal (CPR):    0.059ns
+  Clock Uncertainty:      0.135ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE + UU
+    Total System Jitter     (TSJ):    0.071ns
+    Total Input Jitter      (TIJ):    0.000ns
+    Discrete Jitter          (DJ):    0.000ns
+    Phase Error              (PE):    0.000ns
+    User Uncertainty         (UU):    0.100ns
+
+    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------
+                         (clock core_clk rise edge)
+                                                      0.000     0.000 r  
+                                                      0.000     0.000 r  clk (IN)
+                         net (fo=0)                   0.973     0.973    clk
+    BUFGCTRL_X0Y0        BUFG (Prop_bufg_I_O)         0.101     1.074 r  core_clock_buffer/O
+                         net (fo=18270, routed)       1.749     2.823    core/synapse_router/clk
+    SLICE_X20Y11         FDRE                                         r  core/synapse_router/source_index_reg[1]/C
+  -------------------------------------------------------------------    -------------------
+    SLICE_X20Y11         FDRE (Prop_fdre_C_Q)         0.478     3.301 r  core/synapse_router/source_index_reg[1]/Q
+                         net (fo=83, routed)          1.649     4.950    core/synapse_router/source_index_reg_n_0_[1]
+    SLICE_X9Y5           LUT6 (Prop_lut6_I2_O)        0.295     5.245 f  core/synapse_router/busy_i_41/O
+                         net (fo=1, routed)           0.000     5.245    core/synapse_router/busy_i_41_n_0
+    SLICE_X9Y5           MUXF7 (Prop_muxf7_I1_O)      0.245     5.490 f  core/synapse_router/busy_reg_i_20/O
+                         net (fo=1, routed)           0.000     5.490    core/synapse_router/busy_reg_i_20_n_0
+    SLICE_X9Y5           MUXF8 (Prop_muxf8_I0_O)      0.104     5.594 f  core/synapse_router/busy_reg_i_10/O
+                         net (fo=1, routed)           1.189     6.783    core/synapse_router/busy_reg_i_10_n_0
+    SLICE_X22Y11         LUT6 (Prop_lut6_I3_O)        0.316     7.099 f  core/synapse_router/busy_i_6/O
+                         net (fo=2, routed)           0.000     7.099    core/synapse_router/busy_i_6_n_0
+    SLICE_X22Y11         MUXF7 (Prop_muxf7_I0_O)      0.209     7.308 f  core/synapse_router/destination_index_reg[7]_i_9/O
+                         net (fo=1, routed)           0.000     7.308    core/synapse_router/destination_index_reg[7]_i_9_n_0
+    SLICE_X22Y11         MUXF8 (Prop_muxf8_I1_O)      0.088     7.396 f  core/synapse_router/destination_index_reg[7]_i_5/O
+                         net (fo=8, routed)           1.235     8.631    core/synapse_router/destination_index_reg[7]_i_5_n_0
+    SLICE_X24Y27         LUT4 (Prop_lut4_I0_O)        0.319     8.950 r  core/synapse_router/current_valid_i_1/O
+                         net (fo=137, routed)         2.686    11.636    core/synapse_router/current_valid_i_1_n_0
+    SLICE_X81Y66         FDRE                                         r  core/synapse_router/current_value_reg[18]_rep/CE
+  -------------------------------------------------------------------    -------------------
+
+                         (clock core_clk rise edge)
+                                                     10.000    10.000 r  
+                                                      0.000    10.000 r  clk (IN)
+                         net (fo=0)                   0.924    10.924    clk
+    BUFGCTRL_X0Y0        BUFG (Prop_bufg_I_O)         0.091    11.015 r  core_clock_buffer/O
+                         net (fo=18270, routed)       1.541    12.556    core/synapse_router/clk
+    SLICE_X81Y66         FDRE                                         r  core/synapse_router/current_value_reg[18]_rep/C
+                         clock pessimism              0.059    12.615    
+                         clock uncertainty           -0.135    12.479    
+    SLICE_X81Y66         FDRE (Setup_fdre_C_CE)      -0.205    12.274    core/synapse_router/current_value_reg[18]_rep
+  -------------------------------------------------------------------
+                         required time                         12.274    
+                         arrival time                         -11.636    
+  -------------------------------------------------------------------
+                         slack                                  0.638    
+
+Slack (MET) :             0.638ns  (required time - arrival time)
+  Source:                 core/synapse_router/source_index_reg[1]/C
+                            (rising edge-triggered cell FDRE clocked by core_clk  {rise@0.000ns fall@5.000ns period=10.000ns})
+  Destination:            core/synapse_router/current_value_reg[18]_rep__0/CE
+                            (rising edge-triggered cell FDRE clocked by core_clk  {rise@0.000ns fall@5.000ns period=10.000ns})
+  Path Group:             core_clk
+  Path Type:              Setup (Max at Slow Process Corner)
+  Requirement:            10.000ns  (core_clk rise@10.000ns - core_clk rise@0.000ns)
+  Data Path Delay:        8.813ns  (logic 2.054ns (23.306%)  route 6.759ns (76.694%))
+  Logic Levels:           7  (LUT4=1 LUT6=2 MUXF7=2 MUXF8=2)
+  Clock Path Skew:        -0.208ns (DCD - SCD + CPR)
+    Destination Clock Delay (DCD):    2.556ns = ( 12.556 - 10.000 ) 
+    Source Clock Delay      (SCD):    2.823ns
+    Clock Pessimism Removal (CPR):    0.059ns
+  Clock Uncertainty:      0.135ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE + UU
+    Total System Jitter     (TSJ):    0.071ns
+    Total Input Jitter      (TIJ):    0.000ns
+    Discrete Jitter          (DJ):    0.000ns
+    Phase Error              (PE):    0.000ns
+    User Uncertainty         (UU):    0.100ns
+
+    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------
+                         (clock core_clk rise edge)
+                                                      0.000     0.000 r  
+                                                      0.000     0.000 r  clk (IN)
+                         net (fo=0)                   0.973     0.973    clk
+    BUFGCTRL_X0Y0        BUFG (Prop_bufg_I_O)         0.101     1.074 r  core_clock_buffer/O
+                         net (fo=18270, routed)       1.749     2.823    core/synapse_router/clk
+    SLICE_X20Y11         FDRE                                         r  core/synapse_router/source_index_reg[1]/C
+  -------------------------------------------------------------------    -------------------
+    SLICE_X20Y11         FDRE (Prop_fdre_C_Q)         0.478     3.301 r  core/synapse_router/source_index_reg[1]/Q
+                         net (fo=83, routed)          1.649     4.950    core/synapse_router/source_index_reg_n_0_[1]
+    SLICE_X9Y5           LUT6 (Prop_lut6_I2_O)        0.295     5.245 f  core/synapse_router/busy_i_41/O
+                         net (fo=1, routed)           0.000     5.245    core/synapse_router/busy_i_41_n_0
+    SLICE_X9Y5           MUXF7 (Prop_muxf7_I1_O)      0.245     5.490 f  core/synapse_router/busy_reg_i_20/O
+                         net (fo=1, routed)           0.000     5.490    core/synapse_router/busy_reg_i_20_n_0
+    SLICE_X9Y5           MUXF8 (Prop_muxf8_I0_O)      0.104     5.594 f  core/synapse_router/busy_reg_i_10/O
+                         net (fo=1, routed)           1.189     6.783    core/synapse_router/busy_reg_i_10_n_0
+    SLICE_X22Y11         LUT6 (Prop_lut6_I3_O)        0.316     7.099 f  core/synapse_router/busy_i_6/O
+                         net (fo=2, routed)           0.000     7.099    core/synapse_router/busy_i_6_n_0
+    SLICE_X22Y11         MUXF7 (Prop_muxf7_I0_O)      0.209     7.308 f  core/synapse_router/destination_index_reg[7]_i_9/O
+                         net (fo=1, routed)           0.000     7.308    core/synapse_router/destination_index_reg[7]_i_9_n_0
+    SLICE_X22Y11         MUXF8 (Prop_muxf8_I1_O)      0.088     7.396 f  core/synapse_router/destination_index_reg[7]_i_5/O
+                         net (fo=8, routed)           1.235     8.631    core/synapse_router/destination_index_reg[7]_i_5_n_0
+    SLICE_X24Y27         LUT4 (Prop_lut4_I0_O)        0.319     8.950 r  core/synapse_router/current_valid_i_1/O
+                         net (fo=137, routed)         2.686    11.636    core/synapse_router/current_valid_i_1_n_0
+    SLICE_X81Y66         FDRE                                         r  core/synapse_router/current_value_reg[18]_rep__0/CE
+  -------------------------------------------------------------------    -------------------
+
+                         (clock core_clk rise edge)
+                                                     10.000    10.000 r  
+                                                      0.000    10.000 r  clk (IN)
+                         net (fo=0)                   0.924    10.924    clk
+    BUFGCTRL_X0Y0        BUFG (Prop_bufg_I_O)         0.091    11.015 r  core_clock_buffer/O
+                         net (fo=18270, routed)       1.541    12.556    core/synapse_router/clk
+    SLICE_X81Y66         FDRE                                         r  core/synapse_router/current_value_reg[18]_rep__0/C
+                         clock pessimism              0.059    12.615    
+                         clock uncertainty           -0.135    12.479    
+    SLICE_X81Y66         FDRE (Setup_fdre_C_CE)      -0.205    12.274    core/synapse_router/current_value_reg[18]_rep__0
+  -------------------------------------------------------------------
+                         required time                         12.274    
+                         arrival time                         -11.636    
+  -------------------------------------------------------------------
+                         slack                                  0.638    
+
+Slack (MET) :             0.638ns  (required time - arrival time)
+  Source:                 core/synapse_router/source_index_reg[1]/C
+                            (rising edge-triggered cell FDRE clocked by core_clk  {rise@0.000ns fall@5.000ns period=10.000ns})
+  Destination:            core/synapse_router/current_value_reg[18]_rep__1/CE
+                            (rising edge-triggered cell FDRE clocked by core_clk  {rise@0.000ns fall@5.000ns period=10.000ns})
+  Path Group:             core_clk
+  Path Type:              Setup (Max at Slow Process Corner)
+  Requirement:            10.000ns  (core_clk rise@10.000ns - core_clk rise@0.000ns)
+  Data Path Delay:        8.813ns  (logic 2.054ns (23.306%)  route 6.759ns (76.694%))
+  Logic Levels:           7  (LUT4=1 LUT6=2 MUXF7=2 MUXF8=2)
+  Clock Path Skew:        -0.208ns (DCD - SCD + CPR)
+    Destination Clock Delay (DCD):    2.556ns = ( 12.556 - 10.000 ) 
+    Source Clock Delay      (SCD):    2.823ns
+    Clock Pessimism Removal (CPR):    0.059ns
+  Clock Uncertainty:      0.135ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE + UU
+    Total System Jitter     (TSJ):    0.071ns
+    Total Input Jitter      (TIJ):    0.000ns
+    Discrete Jitter          (DJ):    0.000ns
+    Phase Error              (PE):    0.000ns
+    User Uncertainty         (UU):    0.100ns
+
+    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------
+                         (clock core_clk rise edge)
+                                                      0.000     0.000 r  
+                                                      0.000     0.000 r  clk (IN)
+                         net (fo=0)                   0.973     0.973    clk
+    BUFGCTRL_X0Y0        BUFG (Prop_bufg_I_O)         0.101     1.074 r  core_clock_buffer/O
+                         net (fo=18270, routed)       1.749     2.823    core/synapse_router/clk
+    SLICE_X20Y11         FDRE                                         r  core/synapse_router/source_index_reg[1]/C
+  -------------------------------------------------------------------    -------------------
+    SLICE_X20Y11         FDRE (Prop_fdre_C_Q)         0.478     3.301 r  core/synapse_router/source_index_reg[1]/Q
+                         net (fo=83, routed)          1.649     4.950    core/synapse_router/source_index_reg_n_0_[1]
+    SLICE_X9Y5           LUT6 (Prop_lut6_I2_O)        0.295     5.245 f  core/synapse_router/busy_i_41/O
+                         net (fo=1, routed)           0.000     5.245    core/synapse_router/busy_i_41_n_0
+    SLICE_X9Y5           MUXF7 (Prop_muxf7_I1_O)      0.245     5.490 f  core/synapse_router/busy_reg_i_20/O
+                         net (fo=1, routed)           0.000     5.490    core/synapse_router/busy_reg_i_20_n_0
+    SLICE_X9Y5           MUXF8 (Prop_muxf8_I0_O)      0.104     5.594 f  core/synapse_router/busy_reg_i_10/O
+                         net (fo=1, routed)           1.189     6.783    core/synapse_router/busy_reg_i_10_n_0
+    SLICE_X22Y11         LUT6 (Prop_lut6_I3_O)        0.316     7.099 f  core/synapse_router/busy_i_6/O
+                         net (fo=2, routed)           0.000     7.099    core/synapse_router/busy_i_6_n_0
+    SLICE_X22Y11         MUXF7 (Prop_muxf7_I0_O)      0.209     7.308 f  core/synapse_router/destination_index_reg[7]_i_9/O
+                         net (fo=1, routed)           0.000     7.308    core/synapse_router/destination_index_reg[7]_i_9_n_0
+    SLICE_X22Y11         MUXF8 (Prop_muxf8_I1_O)      0.088     7.396 f  core/synapse_router/destination_index_reg[7]_i_5/O
+                         net (fo=8, routed)           1.235     8.631    core/synapse_router/destination_index_reg[7]_i_5_n_0
+    SLICE_X24Y27         LUT4 (Prop_lut4_I0_O)        0.319     8.950 r  core/synapse_router/current_valid_i_1/O
+                         net (fo=137, routed)         2.686    11.636    core/synapse_router/current_valid_i_1_n_0
+    SLICE_X81Y66         FDRE                                         r  core/synapse_router/current_value_reg[18]_rep__1/CE
+  -------------------------------------------------------------------    -------------------
+
+                         (clock core_clk rise edge)
+                                                     10.000    10.000 r  
+                                                      0.000    10.000 r  clk (IN)
+                         net (fo=0)                   0.924    10.924    clk
+    BUFGCTRL_X0Y0        BUFG (Prop_bufg_I_O)         0.091    11.015 r  core_clock_buffer/O
+                         net (fo=18270, routed)       1.541    12.556    core/synapse_router/clk
+    SLICE_X81Y66         FDRE                                         r  core/synapse_router/current_value_reg[18]_rep__1/C
+                         clock pessimism              0.059    12.615    
+                         clock uncertainty           -0.135    12.479    
+    SLICE_X81Y66         FDRE (Setup_fdre_C_CE)      -0.205    12.274    core/synapse_router/current_value_reg[18]_rep__1
+  -------------------------------------------------------------------
+                         required time                         12.274    
+                         arrival time                         -11.636    
+  -------------------------------------------------------------------
+                         slack                                  0.638    
+
+Slack (MET) :             0.667ns  (required time - arrival time)
+  Source:                 core/population_stepper/selected_membrane_reg[3]/C
+                            (rising edge-triggered cell FDRE clocked by core_clk  {rise@0.000ns fall@5.000ns period=10.000ns})
+  Destination:            core/population_stepper/result_spike_reg/D
+                            (rising edge-triggered cell FDRE clocked by core_clk  {rise@0.000ns fall@5.000ns period=10.000ns})
+  Path Group:             core_clk
+  Path Type:              Setup (Max at Slow Process Corner)
+  Requirement:            10.000ns  (core_clk rise@10.000ns - core_clk rise@0.000ns)
+  Data Path Delay:        9.027ns  (logic 3.972ns (43.999%)  route 5.055ns (56.001%))
+  Logic Levels:           15  (CARRY4=9 LUT2=2 LUT3=1 LUT6=3)
+  Clock Path Skew:        -0.127ns (DCD - SCD + CPR)
+    Destination Clock Delay (DCD):    2.565ns = ( 12.565 - 10.000 ) 
+    Source Clock Delay      (SCD):    2.865ns
+    Clock Pessimism Removal (CPR):    0.173ns
+  Clock Uncertainty:      0.135ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE + UU
+    Total System Jitter     (TSJ):    0.071ns
+    Total Input Jitter      (TIJ):    0.000ns
+    Discrete Jitter          (DJ):    0.000ns
+    Phase Error              (PE):    0.000ns
+    User Uncertainty         (UU):    0.100ns
+
+    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------
+                         (clock core_clk rise edge)
+                                                      0.000     0.000 r  
+                                                      0.000     0.000 r  clk (IN)
+                         net (fo=0)                   0.973     0.973    clk
+    BUFGCTRL_X0Y0        BUFG (Prop_bufg_I_O)         0.101     1.074 r  core_clock_buffer/O
+                         net (fo=18270, routed)       1.791     2.865    core/population_stepper/clk
+    SLICE_X95Y33         FDRE                                         r  core/population_stepper/selected_membrane_reg[3]/C
+  -------------------------------------------------------------------    -------------------
+    SLICE_X95Y33         FDRE (Prop_fdre_C_Q)         0.456     3.321 f  core/population_stepper/selected_membrane_reg[3]/Q
+                         net (fo=3, routed)           1.651     4.972    core/population_stepper/selected_membrane[3]
+    SLICE_X68Y31         LUT6 (Prop_lut6_I0_O)        0.124     5.096 f  core/population_stepper/result_membrane[7]_i_22/O
+                         net (fo=4, routed)           0.622     5.718    core/population_stepper/result_membrane[7]_i_22_n_0
+    SLICE_X66Y31         LUT3 (Prop_lut3_I0_O)        0.153     5.871 f  core/population_stepper/result_membrane[7]_i_14/O
+                         net (fo=3, routed)           0.445     6.316    core/population_stepper/result_membrane[7]_i_14_n_0
+    SLICE_X64Y31         LUT6 (Prop_lut6_I3_O)        0.331     6.647 r  core/population_stepper/result_membrane[3]_i_3/O
+                         net (fo=2, routed)           0.495     7.142    core/population_stepper/result_membrane[3]_i_3_n_0
+    SLICE_X65Y32         LUT6 (Prop_lut6_I0_O)        0.124     7.266 r  core/population_stepper/result_membrane[3]_i_6/O
+                         net (fo=1, routed)           0.000     7.266    core/population_stepper/result_membrane[3]_i_6_n_0
+    SLICE_X65Y32         CARRY4 (Prop_carry4_S[3]_CO[3])
+                                                      0.401     7.667 r  core/population_stepper/result_membrane_reg[3]_i_2/CO[3]
+                         net (fo=1, routed)           0.000     7.667    core/population_stepper/result_membrane_reg[3]_i_2_n_0
+    SLICE_X65Y33         CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.114     7.781 r  core/population_stepper/result_membrane_reg[7]_i_2/CO[3]
+                         net (fo=1, routed)           0.000     7.781    core/population_stepper/result_membrane_reg[7]_i_2_n_0
+    SLICE_X65Y34         CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.114     7.895 r  core/population_stepper/result_membrane_reg[11]_i_2/CO[3]
+                         net (fo=1, routed)           0.000     7.895    core/population_stepper/result_membrane_reg[11]_i_2_n_0
+    SLICE_X65Y35         CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.114     8.009 r  core/population_stepper/result_membrane_reg[15]_i_7/CO[3]
+                         net (fo=1, routed)           0.000     8.009    core/population_stepper/result_membrane_reg[15]_i_7_n_0
+    SLICE_X65Y36         CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.114     8.123 r  core/population_stepper/result_membrane_reg[15]_i_72/CO[3]
+                         net (fo=1, routed)           0.000     8.123    core/population_stepper/result_membrane_reg[15]_i_72_n_0
+    SLICE_X65Y37         CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.114     8.237 r  core/population_stepper/result_membrane_reg[15]_i_58/CO[3]
+                         net (fo=1, routed)           0.000     8.237    core/population_stepper/result_membrane_reg[15]_i_58_n_0
+    SLICE_X65Y38         CARRY4 (Prop_carry4_CI_O[3])
+                                                      0.313     8.550 f  core/population_stepper/result_membrane_reg[15]_i_29/O[3]
+                         net (fo=4, routed)           0.881     9.431    core/population_stepper/result_membrane_reg[15]_i_29_n_4
+    SLICE_X63Y36         LUT2 (Prop_lut2_I0_O)        0.306     9.737 r  core/population_stepper/result_membrane[15]_i_41/O
+                         net (fo=1, routed)           0.000     9.737    core/population_stepper/result_membrane[15]_i_41_n_0
+    SLICE_X63Y36         CARRY4 (Prop_carry4_S[1]_CO[3])
+                                                      0.550    10.287 r  core/population_stepper/result_membrane_reg[15]_i_9/CO[3]
+                         net (fo=1, routed)           0.000    10.287    core/population_stepper/result_membrane_reg[15]_i_9_n_0
+    SLICE_X63Y37         CARRY4 (Prop_carry4_CI_CO[0])
+                                                      0.271    10.558 r  core/population_stepper/result_membrane_reg[15]_i_4/CO[0]
+                         net (fo=81, routed)          0.638    11.196    core/population_stepper/result_membrane_reg[15]_i_4_n_3
+    SLICE_X67Y36         LUT2 (Prop_lut2_I0_O)        0.373    11.569 r  core/population_stepper/result_spike_i_1/O
+                         net (fo=1, routed)           0.323    11.892    core/population_stepper/next_spike
+    SLICE_X64Y36         FDRE                                         r  core/population_stepper/result_spike_reg/D
+  -------------------------------------------------------------------    -------------------
+
+                         (clock core_clk rise edge)
+                                                     10.000    10.000 r  
+                                                      0.000    10.000 r  clk (IN)
+                         net (fo=0)                   0.924    10.924    clk
+    BUFGCTRL_X0Y0        BUFG (Prop_bufg_I_O)         0.091    11.015 r  core_clock_buffer/O
+                         net (fo=18270, routed)       1.549    12.565    core/population_stepper/clk
+    SLICE_X64Y36         FDRE                                         r  core/population_stepper/result_spike_reg/C
+                         clock pessimism              0.173    12.738    
+                         clock uncertainty           -0.135    12.603    
+    SLICE_X64Y36         FDRE (Setup_fdre_C_D)       -0.043    12.560    core/population_stepper/result_spike_reg
+  -------------------------------------------------------------------
+                         required time                         12.560    
+                         arrival time                         -11.892    
+  -------------------------------------------------------------------
+                         slack                                  0.667    
+
+Slack (MET) :             0.714ns  (required time - arrival time)
+  Source:                 core/synapse_router/source_index_reg[1]/C
+                            (rising edge-triggered cell FDRE clocked by core_clk  {rise@0.000ns fall@5.000ns period=10.000ns})
+  Destination:            core/synapse_router/current_value_reg[22]/CE
+                            (rising edge-triggered cell FDRE clocked by core_clk  {rise@0.000ns fall@5.000ns period=10.000ns})
+  Path Group:             core_clk
+  Path Type:              Setup (Max at Slow Process Corner)
+  Requirement:            10.000ns  (core_clk rise@10.000ns - core_clk rise@0.000ns)
+  Data Path Delay:        8.774ns  (logic 2.054ns (23.410%)  route 6.720ns (76.590%))
+  Logic Levels:           7  (LUT4=1 LUT6=2 MUXF7=2 MUXF8=2)
+  Clock Path Skew:        -0.207ns (DCD - SCD + CPR)
+    Destination Clock Delay (DCD):    2.557ns = ( 12.557 - 10.000 ) 
+    Source Clock Delay      (SCD):    2.823ns
+    Clock Pessimism Removal (CPR):    0.059ns
+  Clock Uncertainty:      0.135ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE + UU
+    Total System Jitter     (TSJ):    0.071ns
+    Total Input Jitter      (TIJ):    0.000ns
+    Discrete Jitter          (DJ):    0.000ns
+    Phase Error              (PE):    0.000ns
+    User Uncertainty         (UU):    0.100ns
+
+    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------
+                         (clock core_clk rise edge)
+                                                      0.000     0.000 r  
+                                                      0.000     0.000 r  clk (IN)
+                         net (fo=0)                   0.973     0.973    clk
+    BUFGCTRL_X0Y0        BUFG (Prop_bufg_I_O)         0.101     1.074 r  core_clock_buffer/O
+                         net (fo=18270, routed)       1.749     2.823    core/synapse_router/clk
+    SLICE_X20Y11         FDRE                                         r  core/synapse_router/source_index_reg[1]/C
+  -------------------------------------------------------------------    -------------------
+    SLICE_X20Y11         FDRE (Prop_fdre_C_Q)         0.478     3.301 r  core/synapse_router/source_index_reg[1]/Q
+                         net (fo=83, routed)          1.649     4.950    core/synapse_router/source_index_reg_n_0_[1]
+    SLICE_X9Y5           LUT6 (Prop_lut6_I2_O)        0.295     5.245 f  core/synapse_router/busy_i_41/O
+                         net (fo=1, routed)           0.000     5.245    core/synapse_router/busy_i_41_n_0
+    SLICE_X9Y5           MUXF7 (Prop_muxf7_I1_O)      0.245     5.490 f  core/synapse_router/busy_reg_i_20/O
+                         net (fo=1, routed)           0.000     5.490    core/synapse_router/busy_reg_i_20_n_0
+    SLICE_X9Y5           MUXF8 (Prop_muxf8_I0_O)      0.104     5.594 f  core/synapse_router/busy_reg_i_10/O
+                         net (fo=1, routed)           1.189     6.783    core/synapse_router/busy_reg_i_10_n_0
+    SLICE_X22Y11         LUT6 (Prop_lut6_I3_O)        0.316     7.099 f  core/synapse_router/busy_i_6/O
+                         net (fo=2, routed)           0.000     7.099    core/synapse_router/busy_i_6_n_0
+    SLICE_X22Y11         MUXF7 (Prop_muxf7_I0_O)      0.209     7.308 f  core/synapse_router/destination_index_reg[7]_i_9/O
+                         net (fo=1, routed)           0.000     7.308    core/synapse_router/destination_index_reg[7]_i_9_n_0
+    SLICE_X22Y11         MUXF8 (Prop_muxf8_I1_O)      0.088     7.396 f  core/synapse_router/destination_index_reg[7]_i_5/O
+                         net (fo=8, routed)           1.235     8.631    core/synapse_router/destination_index_reg[7]_i_5_n_0
+    SLICE_X24Y27         LUT4 (Prop_lut4_I0_O)        0.319     8.950 r  core/synapse_router/current_valid_i_1/O
+                         net (fo=137, routed)         2.647    11.597    core/synapse_router/current_valid_i_1_n_0
+    SLICE_X82Y66         FDRE                                         r  core/synapse_router/current_value_reg[22]/CE
+  -------------------------------------------------------------------    -------------------
+
+                         (clock core_clk rise edge)
+                                                     10.000    10.000 r  
+                                                      0.000    10.000 r  clk (IN)
+                         net (fo=0)                   0.924    10.924    clk
+    BUFGCTRL_X0Y0        BUFG (Prop_bufg_I_O)         0.091    11.015 r  core_clock_buffer/O
+                         net (fo=18270, routed)       1.542    12.557    core/synapse_router/clk
+    SLICE_X82Y66         FDRE                                         r  core/synapse_router/current_value_reg[22]/C
+                         clock pessimism              0.059    12.616    
+                         clock uncertainty           -0.135    12.480    
+    SLICE_X82Y66         FDRE (Setup_fdre_C_CE)      -0.169    12.311    core/synapse_router/current_value_reg[22]
+  -------------------------------------------------------------------
+                         required time                         12.311    
+                         arrival time                         -11.597    
+  -------------------------------------------------------------------
+                         slack                                  0.714    
+
+Slack (MET) :             0.714ns  (required time - arrival time)
+  Source:                 core/synapse_router/source_index_reg[1]/C
+                            (rising edge-triggered cell FDRE clocked by core_clk  {rise@0.000ns fall@5.000ns period=10.000ns})
+  Destination:            core/synapse_router/current_value_reg[22]_rep/CE
+                            (rising edge-triggered cell FDRE clocked by core_clk  {rise@0.000ns fall@5.000ns period=10.000ns})
+  Path Group:             core_clk
+  Path Type:              Setup (Max at Slow Process Corner)
+  Requirement:            10.000ns  (core_clk rise@10.000ns - core_clk rise@0.000ns)
+  Data Path Delay:        8.774ns  (logic 2.054ns (23.410%)  route 6.720ns (76.590%))
+  Logic Levels:           7  (LUT4=1 LUT6=2 MUXF7=2 MUXF8=2)
+  Clock Path Skew:        -0.207ns (DCD - SCD + CPR)
+    Destination Clock Delay (DCD):    2.557ns = ( 12.557 - 10.000 ) 
+    Source Clock Delay      (SCD):    2.823ns
+    Clock Pessimism Removal (CPR):    0.059ns
+  Clock Uncertainty:      0.135ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE + UU
+    Total System Jitter     (TSJ):    0.071ns
+    Total Input Jitter      (TIJ):    0.000ns
+    Discrete Jitter          (DJ):    0.000ns
+    Phase Error              (PE):    0.000ns
+    User Uncertainty         (UU):    0.100ns
+
+    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------
+                         (clock core_clk rise edge)
+                                                      0.000     0.000 r  
+                                                      0.000     0.000 r  clk (IN)
+                         net (fo=0)                   0.973     0.973    clk
+    BUFGCTRL_X0Y0        BUFG (Prop_bufg_I_O)         0.101     1.074 r  core_clock_buffer/O
+                         net (fo=18270, routed)       1.749     2.823    core/synapse_router/clk
+    SLICE_X20Y11         FDRE                                         r  core/synapse_router/source_index_reg[1]/C
+  -------------------------------------------------------------------    -------------------
+    SLICE_X20Y11         FDRE (Prop_fdre_C_Q)         0.478     3.301 r  core/synapse_router/source_index_reg[1]/Q
+                         net (fo=83, routed)          1.649     4.950    core/synapse_router/source_index_reg_n_0_[1]
+    SLICE_X9Y5           LUT6 (Prop_lut6_I2_O)        0.295     5.245 f  core/synapse_router/busy_i_41/O
+                         net (fo=1, routed)           0.000     5.245    core/synapse_router/busy_i_41_n_0
+    SLICE_X9Y5           MUXF7 (Prop_muxf7_I1_O)      0.245     5.490 f  core/synapse_router/busy_reg_i_20/O
+                         net (fo=1, routed)           0.000     5.490    core/synapse_router/busy_reg_i_20_n_0
+    SLICE_X9Y5           MUXF8 (Prop_muxf8_I0_O)      0.104     5.594 f  core/synapse_router/busy_reg_i_10/O
+                         net (fo=1, routed)           1.189     6.783    core/synapse_router/busy_reg_i_10_n_0
+    SLICE_X22Y11         LUT6 (Prop_lut6_I3_O)        0.316     7.099 f  core/synapse_router/busy_i_6/O
+                         net (fo=2, routed)           0.000     7.099    core/synapse_router/busy_i_6_n_0
+    SLICE_X22Y11         MUXF7 (Prop_muxf7_I0_O)      0.209     7.308 f  core/synapse_router/destination_index_reg[7]_i_9/O
+                         net (fo=1, routed)           0.000     7.308    core/synapse_router/destination_index_reg[7]_i_9_n_0
+    SLICE_X22Y11         MUXF8 (Prop_muxf8_I1_O)      0.088     7.396 f  core/synapse_router/destination_index_reg[7]_i_5/O
+                         net (fo=8, routed)           1.235     8.631    core/synapse_router/destination_index_reg[7]_i_5_n_0
+    SLICE_X24Y27         LUT4 (Prop_lut4_I0_O)        0.319     8.950 r  core/synapse_router/current_valid_i_1/O
+                         net (fo=137, routed)         2.647    11.597    core/synapse_router/current_valid_i_1_n_0
+    SLICE_X82Y66         FDRE                                         r  core/synapse_router/current_value_reg[22]_rep/CE
+  -------------------------------------------------------------------    -------------------
+
+                         (clock core_clk rise edge)
+                                                     10.000    10.000 r  
+                                                      0.000    10.000 r  clk (IN)
+                         net (fo=0)                   0.924    10.924    clk
+    BUFGCTRL_X0Y0        BUFG (Prop_bufg_I_O)         0.091    11.015 r  core_clock_buffer/O
+                         net (fo=18270, routed)       1.542    12.557    core/synapse_router/clk
+    SLICE_X82Y66         FDRE                                         r  core/synapse_router/current_value_reg[22]_rep/C
+                         clock pessimism              0.059    12.616    
+                         clock uncertainty           -0.135    12.480    
+    SLICE_X82Y66         FDRE (Setup_fdre_C_CE)      -0.169    12.311    core/synapse_router/current_value_reg[22]_rep
+  -------------------------------------------------------------------
+                         required time                         12.311    
+                         arrival time                         -11.597    
+  -------------------------------------------------------------------
+                         slack                                  0.714    
+
+Slack (MET) :             0.714ns  (required time - arrival time)
+  Source:                 core/synapse_router/source_index_reg[1]/C
+                            (rising edge-triggered cell FDRE clocked by core_clk  {rise@0.000ns fall@5.000ns period=10.000ns})
+  Destination:            core/synapse_router/current_value_reg[22]_rep__0/CE
+                            (rising edge-triggered cell FDRE clocked by core_clk  {rise@0.000ns fall@5.000ns period=10.000ns})
+  Path Group:             core_clk
+  Path Type:              Setup (Max at Slow Process Corner)
+  Requirement:            10.000ns  (core_clk rise@10.000ns - core_clk rise@0.000ns)
+  Data Path Delay:        8.774ns  (logic 2.054ns (23.410%)  route 6.720ns (76.590%))
+  Logic Levels:           7  (LUT4=1 LUT6=2 MUXF7=2 MUXF8=2)
+  Clock Path Skew:        -0.207ns (DCD - SCD + CPR)
+    Destination Clock Delay (DCD):    2.557ns = ( 12.557 - 10.000 ) 
+    Source Clock Delay      (SCD):    2.823ns
+    Clock Pessimism Removal (CPR):    0.059ns
+  Clock Uncertainty:      0.135ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE + UU
+    Total System Jitter     (TSJ):    0.071ns
+    Total Input Jitter      (TIJ):    0.000ns
+    Discrete Jitter          (DJ):    0.000ns
+    Phase Error              (PE):    0.000ns
+    User Uncertainty         (UU):    0.100ns
+
+    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------
+                         (clock core_clk rise edge)
+                                                      0.000     0.000 r  
+                                                      0.000     0.000 r  clk (IN)
+                         net (fo=0)                   0.973     0.973    clk
+    BUFGCTRL_X0Y0        BUFG (Prop_bufg_I_O)         0.101     1.074 r  core_clock_buffer/O
+                         net (fo=18270, routed)       1.749     2.823    core/synapse_router/clk
+    SLICE_X20Y11         FDRE                                         r  core/synapse_router/source_index_reg[1]/C
+  -------------------------------------------------------------------    -------------------
+    SLICE_X20Y11         FDRE (Prop_fdre_C_Q)         0.478     3.301 r  core/synapse_router/source_index_reg[1]/Q
+                         net (fo=83, routed)          1.649     4.950    core/synapse_router/source_index_reg_n_0_[1]
+    SLICE_X9Y5           LUT6 (Prop_lut6_I2_O)        0.295     5.245 f  core/synapse_router/busy_i_41/O
+                         net (fo=1, routed)           0.000     5.245    core/synapse_router/busy_i_41_n_0
+    SLICE_X9Y5           MUXF7 (Prop_muxf7_I1_O)      0.245     5.490 f  core/synapse_router/busy_reg_i_20/O
+                         net (fo=1, routed)           0.000     5.490    core/synapse_router/busy_reg_i_20_n_0
+    SLICE_X9Y5           MUXF8 (Prop_muxf8_I0_O)      0.104     5.594 f  core/synapse_router/busy_reg_i_10/O
+                         net (fo=1, routed)           1.189     6.783    core/synapse_router/busy_reg_i_10_n_0
+    SLICE_X22Y11         LUT6 (Prop_lut6_I3_O)        0.316     7.099 f  core/synapse_router/busy_i_6/O
+                         net (fo=2, routed)           0.000     7.099    core/synapse_router/busy_i_6_n_0
+    SLICE_X22Y11         MUXF7 (Prop_muxf7_I0_O)      0.209     7.308 f  core/synapse_router/destination_index_reg[7]_i_9/O
+                         net (fo=1, routed)           0.000     7.308    core/synapse_router/destination_index_reg[7]_i_9_n_0
+    SLICE_X22Y11         MUXF8 (Prop_muxf8_I1_O)      0.088     7.396 f  core/synapse_router/destination_index_reg[7]_i_5/O
+                         net (fo=8, routed)           1.235     8.631    core/synapse_router/destination_index_reg[7]_i_5_n_0
+    SLICE_X24Y27         LUT4 (Prop_lut4_I0_O)        0.319     8.950 r  core/synapse_router/current_valid_i_1/O
+                         net (fo=137, routed)         2.647    11.597    core/synapse_router/current_valid_i_1_n_0
+    SLICE_X82Y66         FDRE                                         r  core/synapse_router/current_value_reg[22]_rep__0/CE
+  -------------------------------------------------------------------    -------------------
+
+                         (clock core_clk rise edge)
+                                                     10.000    10.000 r  
+                                                      0.000    10.000 r  clk (IN)
+                         net (fo=0)                   0.924    10.924    clk
+    BUFGCTRL_X0Y0        BUFG (Prop_bufg_I_O)         0.091    11.015 r  core_clock_buffer/O
+                         net (fo=18270, routed)       1.542    12.557    core/synapse_router/clk
+    SLICE_X82Y66         FDRE                                         r  core/synapse_router/current_value_reg[22]_rep__0/C
+                         clock pessimism              0.059    12.616    
+                         clock uncertainty           -0.135    12.480    
+    SLICE_X82Y66         FDRE (Setup_fdre_C_CE)      -0.169    12.311    core/synapse_router/current_value_reg[22]_rep__0
+  -------------------------------------------------------------------
+                         required time                         12.311    
+                         arrival time                         -11.597    
+  -------------------------------------------------------------------
+                         slack                                  0.714    
+
+Slack (MET) :             0.719ns  (required time - arrival time)
+  Source:                 core/population_stepper/neuron_index_reg[5]_rep__2/C
+                            (rising edge-triggered cell FDRE clocked by core_clk  {rise@0.000ns fall@5.000ns period=10.000ns})
+  Destination:            core/population_stepper/selected_membrane_reg[0]/D
+                            (rising edge-triggered cell FDRE clocked by core_clk  {rise@0.000ns fall@5.000ns period=10.000ns})
+  Path Group:             core_clk
+  Path Type:              Setup (Max at Slow Process Corner)
+  Requirement:            10.000ns  (core_clk rise@10.000ns - core_clk rise@0.000ns)
+  Data Path Delay:        9.083ns  (logic 1.116ns (12.286%)  route 7.967ns (87.714%))
+  Logic Levels:           3  (LUT6=1 MUXF7=1 MUXF8=1)
+  Clock Path Skew:        -0.127ns (DCD - SCD + CPR)
+    Destination Clock Delay (DCD):    2.620ns = ( 12.620 - 10.000 ) 
+    Source Clock Delay      (SCD):    2.819ns
+    Clock Pessimism Removal (CPR):    0.073ns
+  Clock Uncertainty:      0.135ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE + UU
+    Total System Jitter     (TSJ):    0.071ns
+    Total Input Jitter      (TIJ):    0.000ns
+    Discrete Jitter          (DJ):    0.000ns
+    Phase Error              (PE):    0.000ns
+    User Uncertainty         (UU):    0.100ns
+
+    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------
+                         (clock core_clk rise edge)
+                                                      0.000     0.000 r  
+                                                      0.000     0.000 r  clk (IN)
+                         net (fo=0)                   0.973     0.973    clk
+    BUFGCTRL_X0Y0        BUFG (Prop_bufg_I_O)         0.101     1.074 r  core_clock_buffer/O
+                         net (fo=18270, routed)       1.745     2.819    core/population_stepper/clk
+    SLICE_X22Y13         FDRE                                         r  core/population_stepper/neuron_index_reg[5]_rep__2/C
+  -------------------------------------------------------------------    -------------------
+    SLICE_X22Y13         FDRE (Prop_fdre_C_Q)         0.478     3.297 r  core/population_stepper/neuron_index_reg[5]_rep__2/Q
+                         net (fo=109, routed)         7.967    11.264    core/population_stepper/neuron_index_reg[5]_rep__2_n_0
+    SLICE_X95Y25         LUT6 (Prop_lut6_I2_O)        0.296    11.560 r  core/population_stepper/selected_membrane[0]_i_4/O
+                         net (fo=1, routed)           0.000    11.560    core/population_stepper/selected_membrane[0]_i_4_n_0
+    SLICE_X95Y25         MUXF7 (Prop_muxf7_I0_O)      0.238    11.798 r  core/population_stepper/selected_membrane_reg[0]_i_2/O
+                         net (fo=1, routed)           0.000    11.798    core/population_stepper/selected_membrane_reg[0]_i_2_n_0
+    SLICE_X95Y25         MUXF8 (Prop_muxf8_I0_O)      0.104    11.902 r  core/population_stepper/selected_membrane_reg[0]_i_1/O
+                         net (fo=1, routed)           0.000    11.902    core/population_stepper/membrane_state[0]
+    SLICE_X95Y25         FDRE                                         r  core/population_stepper/selected_membrane_reg[0]/D
+  -------------------------------------------------------------------    -------------------
+
+                         (clock core_clk rise edge)
+                                                     10.000    10.000 r  
+                                                      0.000    10.000 r  clk (IN)
+                         net (fo=0)                   0.924    10.924    clk
+    BUFGCTRL_X0Y0        BUFG (Prop_bufg_I_O)         0.091    11.015 r  core_clock_buffer/O
+                         net (fo=18270, routed)       1.604    12.620    core/population_stepper/clk
+    SLICE_X95Y25         FDRE                                         r  core/population_stepper/selected_membrane_reg[0]/C
+                         clock pessimism              0.073    12.692    
+                         clock uncertainty           -0.135    12.557    
+    SLICE_X95Y25         FDRE (Setup_fdre_C_D)        0.064    12.621    core/population_stepper/selected_membrane_reg[0]
+  -------------------------------------------------------------------
+                         required time                         12.621    
+                         arrival time                         -11.902    
+  -------------------------------------------------------------------
+                         slack                                  0.719    
+
+
+
+

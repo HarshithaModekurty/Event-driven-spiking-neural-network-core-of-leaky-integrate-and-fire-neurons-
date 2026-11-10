@@ -48,6 +48,14 @@ class NetworkTests(unittest.TestCase):
         with self.assertRaises(ValueError):
             binary.set_weight(0, 1, -1)
 
+    def test_signed_synapse_current_routing(self) -> None:
+        model = SNNGoldenModel(4, weight_bits=4)
+        model.set_weight(0, 0, 3)
+        model.set_weight(0, 2, -2)
+        model.set_weight(3, 0, -1)
+        model.set_weight(3, 1, 5)
+        self.assertEqual(model.route_currents([0, 3]), [2, 5, -2, 0])
+
 
 class EncodingAndArbitrationTests(unittest.TestCase):
     def test_rate_encoder_emits_full_intensity_each_tick(self) -> None:

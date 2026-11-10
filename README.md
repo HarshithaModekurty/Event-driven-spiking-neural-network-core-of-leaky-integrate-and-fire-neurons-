@@ -3,6 +3,18 @@
 See [STAGE_REPORT.md](STAGE_REPORT.md) for completed work, verification results,
 remaining project stages, and the next recommended milestone.
 
+See [TIMING_CLOSURE.md](TIMING_CLOSURE.md) for the registered neuron-read
+schedule, constraints applied before synthesis, and routed setup/hold checks.
+
+Trained MNIST inference now has an RTL comparison. See
+[MNIST_RTL_VERIFICATION.md](MNIST_RTL_VERIFICATION.md) for the address mapping,
+saved trained weights, per-image results, and Vivado instructions. Run
+`python -m tools.run_mnist_rtl_check` or add `--simulator xsim` for Vivado XSim.
+
+See [CORE_WALKTHROUGH.md](CORE_WALKTHROUGH.md) for a plain-English explanation
+of the connected core, the actual four-neuron ring example, and Vivado signals
+to inspect.
+
 This folder contains a dependency-free Python behavioral reference for the
 RTL project in `Screenshot 2026-10-28 143938.png`.
 
@@ -44,36 +56,39 @@ To stream more samples, use for example:
 .venv\bin\python.exe -m examples.train_toy_classifier --samples 20 --seed 91
 ```
 
-## Real MNIST Image Proof
+## Trained MNIST proof within the PS limits
 
-The live bar demo above uses generated toy images. For real handwritten digits,
-run:
+The primary classifier uses exactly 256 stored LIF states and a 256x256
+signed four-bit synapse matrix. Inputs are 15x15 downsampled images at
+addresses 0..224, bias is 225, 226..245 are reserved states, and output
+digits occupy states 246..255. All 256 states are visited and checked each tick.
+The input-source states have no incoming connections in this baseline;
+they remain zero but are physically present and processed.
 
 ```powershell
-.venv\bin\python.exe -m examples.mnist_live_demo --samples 20 --train-count 12000 --seed 91
+python -m tools.run_mnist_rtl_check
+python -m tools.run_mnist_rtl_check --simulator xsim
 ```
 
-This uses the official MNIST training partition for offline training and
-selects images only from the separate official test partition for evaluation.
-It prints each original 28x28 image as grayscale ASCII, its true digit, the
-predicted digit, and the ten output-neuron membrane scores. The 28x28 image is
-area-averaged and binarized to 16x16 for the 256 input neurons, then passed
-through the signed 4-bit LIF network. Output digit is the neuron with the
-highest membrane potential after eight rate-coded ticks.
+Both simulators matched all 20 held-out predictions and all 256 states over
+160 ticks (40,960 neuron updates). The retrained 15x15 model scored 17/20
+(85%) on that selected test subset; this is not full-test-set accuracy.
+Original images, learned weights, per-image results, vectors and hashes
+are saved in `build/mnist256/`.
 
-The script saves each original grayscale MNIST test image as a PNG and appends
-the per-image results to `proof_images/mnist/predictions.csv`. You can open the
-PNG files individually in Windows Photos/Paint and show them in sample order;
-the CSV maps each image filename to its true and predicted digit. The selected
-test image indices do not overlap the training partition.
+For a Python-only live demonstration with ASCII images:
 
-The dataset archives are stored in `data/mnist/`. They are the standard MNIST
-IDX gzip files, also available from the [MNIST dataset page](http://yann.lecun.com/exdb/mnist/)
-and the [Google-hosted mirror](https://storage.googleapis.com/cvdf-datasets/mnist/).
-The reported subset accuracy is only an evaluation sample, not the full MNIST
-benchmark accuracy. This is a software golden-model demonstration; RTL proof
-still requires comparing RTL outputs against these same image inputs and
-weights.
+```powershell
+python -m examples.mnist256_demo
+```
+
+See [MNIST_RTL_VERIFICATION.md](MNIST_RTL_VERIFICATION.md) for Vivado GUI
+commands and the exact mapping. The screenshot is the authoritative PS;
+[STAGE_REPORT.md](STAGE_REPORT.md) tracks all remaining requirements.
+The older `examples.mnist_live_demo` and `build/mnist_rtl/` results used
+a different diagnostic mapping; their 95% subset result does not apply
+to this corrected classifier. The synapse router now uses scheduled
+synchronous reads; full-core synthesis is provided by `tools/synth_ps256.tcl`.
 
 ## First RTL Block: LIF Neuron
 
@@ -116,19 +131,22 @@ cycles (about 5180 ns). Add `dut.membrane`, `dut.spike`,
 The testbench uses a 1 ns timescale. Vivado records its waveform in its WDB;
 `$dumpfile/$dumpvars` are enabled only for Icarus, which creates the VCD.
 
-## Next RTL Block: Time-Multiplexed Neuron Population
+## Population, Synapse, and Core RTL
 
 `rtl/lif_population_stepper.v` stores each neuron's membrane and refractory
-state in arrays and visits one neuron per clock using the shared combinational
+state in arrays and uses separate read, calculation and write clocks
+for each neuron, using the shared combinational
 `rtl/lif_transition.v` datapath. The default parameter is 256 neurons; its
 current simulation config uses 4 neurons so cycle-by-cycle state can be checked
 easily. Before each population step, software/testbench writes one signed
 current per neuron. The controller returns a spike bitmap and has a debug state
 read port.
 
-This block verifies serialized neuron-state updates; it does not yet contain a
-synapse table, accumulate currents from source spikes, or route AER events. Those
-are subsequent stages.
+The population stepper has been checked at both 4 and 256 neurons. Signed-4-bit
+synapse storage and source-spike current routing are implemented in
+`rtl/lif_synapse_router.v`. The integrated `rtl/lif_snn_core.v` routes source
+spikes, loads the resulting current for each destination, updates the
+population, then feeds the output spikes into the following time step.
 
 Run the Python-generated four-neuron comparison from PowerShell:
 
@@ -151,6 +169,30 @@ membrane values, and four expected refractory counters. The testbench loads the
 first row's configuration before reset, then loads the configuration from every
 row before its step, so the RTL is not relying on a separate copy of the
 population parameters.
+
+Run the 256-neuron population check and standalone synapse-router check:
+
+```powershell
+.venv\bin\python.exe -m tools.run_population_rtl_check --neurons 256 --steps 64
+.venv\bin\python.exe -m tools.run_synapse_router_check --neurons 256 --transactions 32
+```
+
+Run the integrated router-to-population core against `SNNGoldenModel`:
+
+```powershell
+.venv\bin\python.exe -m tools.run_snn_core_check --neurons 4 --transactions 24
+.venv\bin\python.exe -m tools.run_snn_core_check --neurons 256 --transactions 4
+```
+
+The standalone router test checks signed accumulated destination currents.
+The integrated example uses a deterministic excitatory ring: neuron `n` has a
+weight of `+7` to neuron `(n + 1) mod N`, the threshold is `8`, and the first
+input event is at neuron 0. Its first output spike is neuron 1, the next is
+neuron 2, and the spike continues around the ring. The test compares each
+transaction's spike vector, membrane, and refractory states with
+`SNNGoldenModel`. Python generates deterministic weight/event files under
+`build/lif_router/` and `build/lif_snn_core/`; generate these before running the
+corresponding Vivado simulation.
 
 ## Behavioral contract for RTL comparison
 
@@ -183,12 +225,22 @@ same explicit saturation/wrap rule to both implementations.
 - `golden_model/aer.py`: queued AER arbiter.
 - `golden_model/raster.py`: UART spike-raster formatter.
 - `examples/train_toy_classifier.py`: self-contained offline-training example.
-- `examples/mnist_live_demo.py`: real MNIST image training and live holdout proof.
+- `examples/mnist256_demo.py`: primary PS-aligned 256-state classifier.
+- `examples/mnist_live_demo.py`: historical model and shared data/training helpers.
 - `rtl/lif_neuron.v`: first synthesizable Verilog neuron datapath.
 - `rtl/lif_transition.v`: shared combinational LIF state transition.
 - `rtl/lif_population_stepper.v`: parameterized time-multiplexed neuron state engine.
+- `rtl/lif_synapse_router.v`: signed-4-bit synapse storage and serial current router.
+- `rtl/lif_snn_core.v`: router/population sequencing and recurrent spike feedback.
+- `rtl/lif_class_readout.v`: synthesizable largest-membrane digit selector.
 - `rtl/tb/lif_neuron_tb.v`: vector-driven Verilog self-checking testbench.
 - `rtl/tb/lif_population_stepper_tb.v`: population vector testbench.
+- `rtl/tb/lif_synapse_router_tb.v`: standalone router comparison testbench.
+- `rtl/tb/lif_snn_core_tb.v`: integrated SNN comparison testbench.
+- `rtl/tb/lif_mnist_tb.v`: trained-image state and hardware digit comparison.
 - `tools/run_lif_rtl_check.py`: Python golden-vector generator and Icarus runner.
 - `tools/run_population_rtl_check.py`: Python-driven population RTL comparison.
+- `tools/run_synapse_router_check.py`: Python-driven signed synapse routing check.
+- `tools/run_snn_core_check.py`: integrated recurrent SNN/Python comparison.
+- `tools/run_mnist_rtl_check.py`: trained-weight export and Icarus/Vivado MNIST verification.
 - `tests/test_golden_model.py`: executable model checks.

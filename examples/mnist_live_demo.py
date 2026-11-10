@@ -56,15 +56,16 @@ def load_labels(path: Path) -> list[int]:
     return list(data[8:])
 
 
-def features_from_image(image: bytes, rows: int = SOURCE_SIZE, columns: int = SOURCE_SIZE) -> list[int]:
-    """Area-average a grayscale image to 16x16 and binarize for RTL inputs."""
+def features_from_image(image: bytes, rows: int = SOURCE_SIZE, columns: int = SOURCE_SIZE,
+                        model_size: int = MODEL_SIZE) -> list[int]:
+    """Reduce a grayscale image to a square binary feature grid."""
     features = []
-    for out_y in range(MODEL_SIZE):
-        y0 = out_y * rows // MODEL_SIZE
-        y1 = (out_y + 1) * rows // MODEL_SIZE
-        for out_x in range(MODEL_SIZE):
-            x0 = out_x * columns // MODEL_SIZE
-            x1 = (out_x + 1) * columns // MODEL_SIZE
+    for out_y in range(model_size):
+        y0 = out_y * rows // model_size
+        y1 = (out_y + 1) * rows // model_size
+        for out_x in range(model_size):
+            x0 = out_x * columns // model_size
+            x1 = (out_x + 1) * columns // model_size
             pixels = [image[y * columns + x] for y in range(y0, y1) for x in range(x0, x1)]
             features.append(int(sum(pixels) / len(pixels) >= 80))
     return features
@@ -74,7 +75,7 @@ def train_perceptron(
     training_features: list[list[int]], labels: list[int], epochs: int, seed: int
 ) -> list[list[int]]:
     """Train a multiclass perceptron offline using only the MNIST train split."""
-    weights = [[0] * (MODEL_PIXELS + 1) for _ in range(OUTPUT_COUNT)]
+    weights = [[0] * (len(training_features[0]) + 1) for _ in range(OUTPUT_COUNT)]
     order = list(range(len(labels)))
     rng = random.Random(seed)
     for epoch in range(epochs):
@@ -105,7 +106,7 @@ def train_perceptron(
 
 def quantize_centered(weights: list[list[int]]) -> list[list[int]]:
     """Center each input's class weights, then quantize to signed 4-bit."""
-    feature_count = MODEL_PIXELS + 1
+    feature_count = len(weights[0])
     centered = [[0.0] * feature_count for _ in range(OUTPUT_COUNT)]
     peak = 0.0
     for feature in range(feature_count):

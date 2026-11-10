@@ -3,11 +3,16 @@ __pycache__/
 *.py[cod]
 build/
 build/lif_population/
+build/lif_router/
+build/lif_snn_core/
 data/mnist/
 proof_images/mnist/
 RTL_PROJECT.cache/
 RTL_PROJECT.hw/
 RTL_PROJECT.ip_user_files/
 RTL_PROJECT.sim/
+xsim.dir/
+.Xil/
+vivado_pid*.str
 RTL_PROJECT.srcs/
 *.jou

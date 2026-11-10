@@ -1,0 +1,21 @@
+{
+  "simulator": "iverilog",
+  "images_matched": 20,
+  "ticks_matched": 160,
+  "state_updates_checked": 40960,
+  "neuron_states": 256,
+  "synapse_entries": 65536,
+  "correct": 17,
+  "accuracy_percent": 85.0,
+  "weights_sha256": "979adab23b7772466954b6011a3ce250e37e2fa9d32f53285555f031962e9896",
+  "vectors_sha256": "95f0a72f49fb68f3996b6b56e22e0218dc58dd2d1dc849416686446e6a8e4e86",
+  "rtl_predictions_sha256": "a739971431918f46fd4aeb08c43555becf38918217d68453dd642599b09bf7fb",
+  "source_sha256": {
+    "rtl\\lif_transition.v": "41739aee8a2d2fd8ed55bf3ebf3c8ac9151a26ae7bc75d66d78d0884adac9f1f",
+    "rtl\\lif_population_stepper.v": "ebb8240e8addb568388eebfe9ba8dc344c006d554cc82af8b8d31dce4a24b515",
+    "rtl\\lif_synapse_router.v": "34a031f294899cfc2214047c2d683d2f05a8bfab7749a00dc90deddd2c165c44",
+    "rtl\\lif_snn_core.v": "284cd7bcde09e0a9aed17b294081412c8cd8f82a3942f4cfd1bd32dc04f7b2fb",
+    "rtl\\lif_class_readout.v": "026e23b92205bb8ac776b092c2c810901ec7af30ed373b7980f46a7b44ea950f",
+    "rtl\\tb\\lif_mnist_tb.v": "75baac43bfae374d6ef19ec2cbf37cc3c980c681cac762ff805ace1e7d1a0b97"
+  }
+}
