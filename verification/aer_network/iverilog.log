@@ -1,0 +1,2 @@
+PASS: AER network 8 frames, 410 packets, 2048 state updates; input stalls=2461026 output stalls=689 full-output stalls=576
+D:\RTL_PROJECT\rtl\tb\lif_aer_snn_core_tb.v:172: $finish called at 7740890000 (1ps)

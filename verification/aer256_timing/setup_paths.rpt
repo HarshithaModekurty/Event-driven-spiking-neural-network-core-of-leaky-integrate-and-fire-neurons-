@@ -1,0 +1,927 @@
+Copyright 1986-2022 Xilinx, Inc. All Rights Reserved. Copyright 2022-2023 Advanced Micro Devices, Inc. All Rights Reserved.
+---------------------------------------------------------------------------------------------------------------------------------------------
+| Tool Version : Vivado v.2023.2 (win64) Build 4029153 Fri Oct 13 20:14:34 MDT 2023
+| Date         : Tue Nov 10 18:46:04 2026
+| Host         : DESKTOP-J3M0MBG running 64-bit major release  (build 9200)
+| Command      : report_timing -delay_type max -max_paths 10 -file D:/RTL_PROJECT/build/aer256_timing/setup_paths.rpt
+| Design       : lif_aer_timing_harness
+| Device       : 7z020-clg400
+| Speed File   : -1  PRODUCTION 1.12 2019-11-22
+| Design State : Routed
+---------------------------------------------------------------------------------------------------------------------------------------------
+
+Timing Report
+
+Slack (MET) :             0.300ns  (required time - arrival time)
+  Source:                 core/core/population_stepper/selected_membrane_reg[9]/C
+                            (rising edge-triggered cell FDRE clocked by core_clk  {rise@0.000ns fall@5.000ns period=10.000ns})
+  Destination:            core/core/population_stepper/result_refractory_reg[12]_rep/D
+                            (rising edge-triggered cell FDRE clocked by core_clk  {rise@0.000ns fall@5.000ns period=10.000ns})
+  Path Group:             core_clk
+  Path Type:              Setup (Max at Slow Process Corner)
+  Requirement:            10.000ns  (core_clk rise@10.000ns - core_clk rise@0.000ns)
+  Data Path Delay:        9.379ns  (logic 4.202ns (44.805%)  route 5.177ns (55.195%))
+  Logic Levels:           15  (CARRY4=9 LUT2=1 LUT3=1 LUT5=2 LUT6=2)
+  Clock Path Skew:        -0.219ns (DCD - SCD + CPR)
+    Destination Clock Delay (DCD):    2.505ns = ( 12.505 - 10.000 ) 
+    Source Clock Delay      (SCD):    2.796ns
+    Clock Pessimism Removal (CPR):    0.073ns
+  Clock Uncertainty:      0.135ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE + UU
+    Total System Jitter     (TSJ):    0.071ns
+    Total Input Jitter      (TIJ):    0.000ns
+    Discrete Jitter          (DJ):    0.000ns
+    Phase Error              (PE):    0.000ns
+    User Uncertainty         (UU):    0.100ns
+
+    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------
+                         (clock core_clk rise edge)
+                                                      0.000     0.000 r  
+                                                      0.000     0.000 r  clk (IN)
+                         net (fo=0)                   0.973     0.973    clk
+    BUFGCTRL_X0Y0        BUFG (Prop_bufg_I_O)         0.101     1.074 r  core_clock_buffer/O
+                         net (fo=18864, routed)       1.722     2.796    core/core/population_stepper/clk
+    SLICE_X68Y33         FDRE                                         r  core/core/population_stepper/selected_membrane_reg[9]/C
+  -------------------------------------------------------------------    -------------------
+    SLICE_X68Y33         FDRE (Prop_fdre_C_Q)         0.456     3.252 f  core/core/population_stepper/selected_membrane_reg[9]/Q
+                         net (fo=6, routed)           1.378     4.630    core/core/population_stepper/selected_membrane[9]
+    SLICE_X60Y42         LUT5 (Prop_lut5_I0_O)        0.152     4.782 f  core/core/population_stepper/result_membrane[7]_i_20/O
+                         net (fo=4, routed)           0.787     5.569    core/core/population_stepper/result_membrane[7]_i_20_n_0
+    SLICE_X58Y42         LUT3 (Prop_lut3_I2_O)        0.355     5.924 f  core/core/population_stepper/result_membrane[7]_i_14/O
+                         net (fo=3, routed)           0.309     6.234    core/core/population_stepper/result_membrane[7]_i_14_n_0
+    SLICE_X58Y42         LUT6 (Prop_lut6_I3_O)        0.331     6.565 r  core/core/population_stepper/result_membrane[3]_i_3/O
+                         net (fo=2, routed)           0.497     7.062    core/core/population_stepper/result_membrane[3]_i_3_n_0
+    SLICE_X59Y42         LUT6 (Prop_lut6_I0_O)        0.124     7.186 r  core/core/population_stepper/result_membrane[3]_i_6/O
+                         net (fo=1, routed)           0.000     7.186    core/core/population_stepper/result_membrane[3]_i_6_n_0
+    SLICE_X59Y42         CARRY4 (Prop_carry4_S[3]_CO[3])
+                                                      0.401     7.587 r  core/core/population_stepper/result_membrane_reg[3]_i_2/CO[3]
+                         net (fo=1, routed)           0.000     7.587    core/core/population_stepper/result_membrane_reg[3]_i_2_n_0
+    SLICE_X59Y43         CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.114     7.701 r  core/core/population_stepper/result_membrane_reg[7]_i_2/CO[3]
+                         net (fo=1, routed)           0.000     7.701    core/core/population_stepper/result_membrane_reg[7]_i_2_n_0
+    SLICE_X59Y44         CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.114     7.815 r  core/core/population_stepper/result_membrane_reg[11]_i_2/CO[3]
+                         net (fo=1, routed)           0.000     7.815    core/core/population_stepper/result_membrane_reg[11]_i_2_n_0
+    SLICE_X59Y45         CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.114     7.929 r  core/core/population_stepper/result_membrane_reg[15]_i_7/CO[3]
+                         net (fo=1, routed)           0.000     7.929    core/core/population_stepper/result_membrane_reg[15]_i_7_n_0
+    SLICE_X59Y46         CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.114     8.043 r  core/core/population_stepper/result_membrane_reg[15]_i_72/CO[3]
+                         net (fo=1, routed)           0.000     8.043    core/core/population_stepper/result_membrane_reg[15]_i_72_n_0
+    SLICE_X59Y47         CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.114     8.157 r  core/core/population_stepper/result_membrane_reg[15]_i_58/CO[3]
+                         net (fo=1, routed)           0.000     8.157    core/core/population_stepper/result_membrane_reg[15]_i_58_n_0
+    SLICE_X59Y48         CARRY4 (Prop_carry4_CI_O[1])
+                                                      0.334     8.491 f  core/core/population_stepper/result_membrane_reg[15]_i_29/O[1]
+                         net (fo=4, routed)           0.870     9.361    core/core/population_stepper/result_membrane_reg[15]_i_29_n_6
+    SLICE_X57Y47         LUT2 (Prop_lut2_I0_O)        0.303     9.664 r  core/core/population_stepper/result_membrane[15]_i_42/O
+                         net (fo=1, routed)           0.000     9.664    core/core/population_stepper/result_membrane[15]_i_42_n_0
+    SLICE_X57Y47         CARRY4 (Prop_carry4_S[0]_CO[3])
+                                                      0.532    10.196 r  core/core/population_stepper/result_membrane_reg[15]_i_9/CO[3]
+                         net (fo=1, routed)           0.000    10.196    core/core/population_stepper/result_membrane_reg[15]_i_9_n_0
+    SLICE_X57Y48         CARRY4 (Prop_carry4_CI_CO[0])
+                                                      0.271    10.467 r  core/core/population_stepper/result_membrane_reg[15]_i_4/CO[0]
+                         net (fo=84, routed)          1.335    11.802    core/core/population_stepper/result_membrane_reg[15]_i_4_n_3
+    SLICE_X43Y38         LUT5 (Prop_lut5_I1_O)        0.373    12.175 r  core/core/population_stepper/result_refractory[12]_rep_i_1/O
+                         net (fo=1, routed)           0.000    12.175    core/core/population_stepper/result_refractory[12]_rep_i_1_n_0
+    SLICE_X43Y38         FDRE                                         r  core/core/population_stepper/result_refractory_reg[12]_rep/D
+  -------------------------------------------------------------------    -------------------
+
+                         (clock core_clk rise edge)
+                                                     10.000    10.000 r  
+                                                      0.000    10.000 r  clk (IN)
+                         net (fo=0)                   0.924    10.924    clk
+    BUFGCTRL_X0Y0        BUFG (Prop_bufg_I_O)         0.091    11.015 r  core_clock_buffer/O
+                         net (fo=18864, routed)       1.489    12.505    core/core/population_stepper/clk
+    SLICE_X43Y38         FDRE                                         r  core/core/population_stepper/result_refractory_reg[12]_rep/C
+                         clock pessimism              0.073    12.577    
+                         clock uncertainty           -0.135    12.442    
+    SLICE_X43Y38         FDRE (Setup_fdre_C_D)        0.032    12.474    core/core/population_stepper/result_refractory_reg[12]_rep
+  -------------------------------------------------------------------
+                         required time                         12.474    
+                         arrival time                         -12.175    
+  -------------------------------------------------------------------
+                         slack                                  0.300    
+
+Slack (MET) :             0.304ns  (required time - arrival time)
+  Source:                 core/core/population_stepper/selected_membrane_reg[9]/C
+                            (rising edge-triggered cell FDRE clocked by core_clk  {rise@0.000ns fall@5.000ns period=10.000ns})
+  Destination:            core/core/population_stepper/result_refractory_reg[12]_rep__1/D
+                            (rising edge-triggered cell FDRE clocked by core_clk  {rise@0.000ns fall@5.000ns period=10.000ns})
+  Path Group:             core_clk
+  Path Type:              Setup (Max at Slow Process Corner)
+  Requirement:            10.000ns  (core_clk rise@10.000ns - core_clk rise@0.000ns)
+  Data Path Delay:        9.374ns  (logic 4.202ns (44.828%)  route 5.172ns (55.172%))
+  Logic Levels:           15  (CARRY4=9 LUT2=1 LUT3=1 LUT5=2 LUT6=2)
+  Clock Path Skew:        -0.219ns (DCD - SCD + CPR)
+    Destination Clock Delay (DCD):    2.505ns = ( 12.505 - 10.000 ) 
+    Source Clock Delay      (SCD):    2.796ns
+    Clock Pessimism Removal (CPR):    0.073ns
+  Clock Uncertainty:      0.135ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE + UU
+    Total System Jitter     (TSJ):    0.071ns
+    Total Input Jitter      (TIJ):    0.000ns
+    Discrete Jitter          (DJ):    0.000ns
+    Phase Error              (PE):    0.000ns
+    User Uncertainty         (UU):    0.100ns
+
+    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------
+                         (clock core_clk rise edge)
+                                                      0.000     0.000 r  
+                                                      0.000     0.000 r  clk (IN)
+                         net (fo=0)                   0.973     0.973    clk
+    BUFGCTRL_X0Y0        BUFG (Prop_bufg_I_O)         0.101     1.074 r  core_clock_buffer/O
+                         net (fo=18864, routed)       1.722     2.796    core/core/population_stepper/clk
+    SLICE_X68Y33         FDRE                                         r  core/core/population_stepper/selected_membrane_reg[9]/C
+  -------------------------------------------------------------------    -------------------
+    SLICE_X68Y33         FDRE (Prop_fdre_C_Q)         0.456     3.252 f  core/core/population_stepper/selected_membrane_reg[9]/Q
+                         net (fo=6, routed)           1.378     4.630    core/core/population_stepper/selected_membrane[9]
+    SLICE_X60Y42         LUT5 (Prop_lut5_I0_O)        0.152     4.782 f  core/core/population_stepper/result_membrane[7]_i_20/O
+                         net (fo=4, routed)           0.787     5.569    core/core/population_stepper/result_membrane[7]_i_20_n_0
+    SLICE_X58Y42         LUT3 (Prop_lut3_I2_O)        0.355     5.924 f  core/core/population_stepper/result_membrane[7]_i_14/O
+                         net (fo=3, routed)           0.309     6.234    core/core/population_stepper/result_membrane[7]_i_14_n_0
+    SLICE_X58Y42         LUT6 (Prop_lut6_I3_O)        0.331     6.565 r  core/core/population_stepper/result_membrane[3]_i_3/O
+                         net (fo=2, routed)           0.497     7.062    core/core/population_stepper/result_membrane[3]_i_3_n_0
+    SLICE_X59Y42         LUT6 (Prop_lut6_I0_O)        0.124     7.186 r  core/core/population_stepper/result_membrane[3]_i_6/O
+                         net (fo=1, routed)           0.000     7.186    core/core/population_stepper/result_membrane[3]_i_6_n_0
+    SLICE_X59Y42         CARRY4 (Prop_carry4_S[3]_CO[3])
+                                                      0.401     7.587 r  core/core/population_stepper/result_membrane_reg[3]_i_2/CO[3]
+                         net (fo=1, routed)           0.000     7.587    core/core/population_stepper/result_membrane_reg[3]_i_2_n_0
+    SLICE_X59Y43         CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.114     7.701 r  core/core/population_stepper/result_membrane_reg[7]_i_2/CO[3]
+                         net (fo=1, routed)           0.000     7.701    core/core/population_stepper/result_membrane_reg[7]_i_2_n_0
+    SLICE_X59Y44         CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.114     7.815 r  core/core/population_stepper/result_membrane_reg[11]_i_2/CO[3]
+                         net (fo=1, routed)           0.000     7.815    core/core/population_stepper/result_membrane_reg[11]_i_2_n_0
+    SLICE_X59Y45         CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.114     7.929 r  core/core/population_stepper/result_membrane_reg[15]_i_7/CO[3]
+                         net (fo=1, routed)           0.000     7.929    core/core/population_stepper/result_membrane_reg[15]_i_7_n_0
+    SLICE_X59Y46         CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.114     8.043 r  core/core/population_stepper/result_membrane_reg[15]_i_72/CO[3]
+                         net (fo=1, routed)           0.000     8.043    core/core/population_stepper/result_membrane_reg[15]_i_72_n_0
+    SLICE_X59Y47         CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.114     8.157 r  core/core/population_stepper/result_membrane_reg[15]_i_58/CO[3]
+                         net (fo=1, routed)           0.000     8.157    core/core/population_stepper/result_membrane_reg[15]_i_58_n_0
+    SLICE_X59Y48         CARRY4 (Prop_carry4_CI_O[1])
+                                                      0.334     8.491 f  core/core/population_stepper/result_membrane_reg[15]_i_29/O[1]
+                         net (fo=4, routed)           0.870     9.361    core/core/population_stepper/result_membrane_reg[15]_i_29_n_6
+    SLICE_X57Y47         LUT2 (Prop_lut2_I0_O)        0.303     9.664 r  core/core/population_stepper/result_membrane[15]_i_42/O
+                         net (fo=1, routed)           0.000     9.664    core/core/population_stepper/result_membrane[15]_i_42_n_0
+    SLICE_X57Y47         CARRY4 (Prop_carry4_S[0]_CO[3])
+                                                      0.532    10.196 r  core/core/population_stepper/result_membrane_reg[15]_i_9/CO[3]
+                         net (fo=1, routed)           0.000    10.196    core/core/population_stepper/result_membrane_reg[15]_i_9_n_0
+    SLICE_X57Y48         CARRY4 (Prop_carry4_CI_CO[0])
+                                                      0.271    10.467 r  core/core/population_stepper/result_membrane_reg[15]_i_4/CO[0]
+                         net (fo=84, routed)          1.330    11.797    core/core/population_stepper/result_membrane_reg[15]_i_4_n_3
+    SLICE_X43Y38         LUT5 (Prop_lut5_I1_O)        0.373    12.170 r  core/core/population_stepper/result_refractory[12]_rep__1_i_1/O
+                         net (fo=1, routed)           0.000    12.170    core/core/population_stepper/result_refractory[12]_rep__1_i_1_n_0
+    SLICE_X43Y38         FDRE                                         r  core/core/population_stepper/result_refractory_reg[12]_rep__1/D
+  -------------------------------------------------------------------    -------------------
+
+                         (clock core_clk rise edge)
+                                                     10.000    10.000 r  
+                                                      0.000    10.000 r  clk (IN)
+                         net (fo=0)                   0.924    10.924    clk
+    BUFGCTRL_X0Y0        BUFG (Prop_bufg_I_O)         0.091    11.015 r  core_clock_buffer/O
+                         net (fo=18864, routed)       1.489    12.505    core/core/population_stepper/clk
+    SLICE_X43Y38         FDRE                                         r  core/core/population_stepper/result_refractory_reg[12]_rep__1/C
+                         clock pessimism              0.073    12.577    
+                         clock uncertainty           -0.135    12.442    
+    SLICE_X43Y38         FDRE (Setup_fdre_C_D)        0.031    12.473    core/core/population_stepper/result_refractory_reg[12]_rep__1
+  -------------------------------------------------------------------
+                         required time                         12.473    
+                         arrival time                         -12.170    
+  -------------------------------------------------------------------
+                         slack                                  0.304    
+
+Slack (MET) :             0.321ns  (required time - arrival time)
+  Source:                 core/core/population_stepper/selected_membrane_reg[9]/C
+                            (rising edge-triggered cell FDRE clocked by core_clk  {rise@0.000ns fall@5.000ns period=10.000ns})
+  Destination:            core/core/population_stepper/result_refractory_reg[1]/D
+                            (rising edge-triggered cell FDRE clocked by core_clk  {rise@0.000ns fall@5.000ns period=10.000ns})
+  Path Group:             core_clk
+  Path Type:              Setup (Max at Slow Process Corner)
+  Requirement:            10.000ns  (core_clk rise@10.000ns - core_clk rise@0.000ns)
+  Data Path Delay:        9.397ns  (logic 4.202ns (44.715%)  route 5.195ns (55.285%))
+  Logic Levels:           15  (CARRY4=9 LUT2=1 LUT3=1 LUT5=2 LUT6=2)
+  Clock Path Skew:        -0.224ns (DCD - SCD + CPR)
+    Destination Clock Delay (DCD):    2.500ns = ( 12.500 - 10.000 ) 
+    Source Clock Delay      (SCD):    2.796ns
+    Clock Pessimism Removal (CPR):    0.073ns
+  Clock Uncertainty:      0.135ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE + UU
+    Total System Jitter     (TSJ):    0.071ns
+    Total Input Jitter      (TIJ):    0.000ns
+    Discrete Jitter          (DJ):    0.000ns
+    Phase Error              (PE):    0.000ns
+    User Uncertainty         (UU):    0.100ns
+
+    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------
+                         (clock core_clk rise edge)
+                                                      0.000     0.000 r  
+                                                      0.000     0.000 r  clk (IN)
+                         net (fo=0)                   0.973     0.973    clk
+    BUFGCTRL_X0Y0        BUFG (Prop_bufg_I_O)         0.101     1.074 r  core_clock_buffer/O
+                         net (fo=18864, routed)       1.722     2.796    core/core/population_stepper/clk
+    SLICE_X68Y33         FDRE                                         r  core/core/population_stepper/selected_membrane_reg[9]/C
+  -------------------------------------------------------------------    -------------------
+    SLICE_X68Y33         FDRE (Prop_fdre_C_Q)         0.456     3.252 f  core/core/population_stepper/selected_membrane_reg[9]/Q
+                         net (fo=6, routed)           1.378     4.630    core/core/population_stepper/selected_membrane[9]
+    SLICE_X60Y42         LUT5 (Prop_lut5_I0_O)        0.152     4.782 f  core/core/population_stepper/result_membrane[7]_i_20/O
+                         net (fo=4, routed)           0.787     5.569    core/core/population_stepper/result_membrane[7]_i_20_n_0
+    SLICE_X58Y42         LUT3 (Prop_lut3_I2_O)        0.355     5.924 f  core/core/population_stepper/result_membrane[7]_i_14/O
+                         net (fo=3, routed)           0.309     6.234    core/core/population_stepper/result_membrane[7]_i_14_n_0
+    SLICE_X58Y42         LUT6 (Prop_lut6_I3_O)        0.331     6.565 r  core/core/population_stepper/result_membrane[3]_i_3/O
+                         net (fo=2, routed)           0.497     7.062    core/core/population_stepper/result_membrane[3]_i_3_n_0
+    SLICE_X59Y42         LUT6 (Prop_lut6_I0_O)        0.124     7.186 r  core/core/population_stepper/result_membrane[3]_i_6/O
+                         net (fo=1, routed)           0.000     7.186    core/core/population_stepper/result_membrane[3]_i_6_n_0
+    SLICE_X59Y42         CARRY4 (Prop_carry4_S[3]_CO[3])
+                                                      0.401     7.587 r  core/core/population_stepper/result_membrane_reg[3]_i_2/CO[3]
+                         net (fo=1, routed)           0.000     7.587    core/core/population_stepper/result_membrane_reg[3]_i_2_n_0
+    SLICE_X59Y43         CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.114     7.701 r  core/core/population_stepper/result_membrane_reg[7]_i_2/CO[3]
+                         net (fo=1, routed)           0.000     7.701    core/core/population_stepper/result_membrane_reg[7]_i_2_n_0
+    SLICE_X59Y44         CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.114     7.815 r  core/core/population_stepper/result_membrane_reg[11]_i_2/CO[3]
+                         net (fo=1, routed)           0.000     7.815    core/core/population_stepper/result_membrane_reg[11]_i_2_n_0
+    SLICE_X59Y45         CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.114     7.929 r  core/core/population_stepper/result_membrane_reg[15]_i_7/CO[3]
+                         net (fo=1, routed)           0.000     7.929    core/core/population_stepper/result_membrane_reg[15]_i_7_n_0
+    SLICE_X59Y46         CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.114     8.043 r  core/core/population_stepper/result_membrane_reg[15]_i_72/CO[3]
+                         net (fo=1, routed)           0.000     8.043    core/core/population_stepper/result_membrane_reg[15]_i_72_n_0
+    SLICE_X59Y47         CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.114     8.157 r  core/core/population_stepper/result_membrane_reg[15]_i_58/CO[3]
+                         net (fo=1, routed)           0.000     8.157    core/core/population_stepper/result_membrane_reg[15]_i_58_n_0
+    SLICE_X59Y48         CARRY4 (Prop_carry4_CI_O[1])
+                                                      0.334     8.491 f  core/core/population_stepper/result_membrane_reg[15]_i_29/O[1]
+                         net (fo=4, routed)           0.870     9.361    core/core/population_stepper/result_membrane_reg[15]_i_29_n_6
+    SLICE_X57Y47         LUT2 (Prop_lut2_I0_O)        0.303     9.664 r  core/core/population_stepper/result_membrane[15]_i_42/O
+                         net (fo=1, routed)           0.000     9.664    core/core/population_stepper/result_membrane[15]_i_42_n_0
+    SLICE_X57Y47         CARRY4 (Prop_carry4_S[0]_CO[3])
+                                                      0.532    10.196 r  core/core/population_stepper/result_membrane_reg[15]_i_9/CO[3]
+                         net (fo=1, routed)           0.000    10.196    core/core/population_stepper/result_membrane_reg[15]_i_9_n_0
+    SLICE_X57Y48         CARRY4 (Prop_carry4_CI_CO[0])
+                                                      0.271    10.467 r  core/core/population_stepper/result_membrane_reg[15]_i_4/CO[0]
+                         net (fo=84, routed)          1.354    11.820    core/core/population_stepper/result_membrane_reg[15]_i_4_n_3
+    SLICE_X46Y33         LUT5 (Prop_lut5_I1_O)        0.373    12.193 r  core/core/population_stepper/result_refractory[1]_i_1/O
+                         net (fo=1, routed)           0.000    12.193    core/core/population_stepper/next_refractory[1]
+    SLICE_X46Y33         FDRE                                         r  core/core/population_stepper/result_refractory_reg[1]/D
+  -------------------------------------------------------------------    -------------------
+
+                         (clock core_clk rise edge)
+                                                     10.000    10.000 r  
+                                                      0.000    10.000 r  clk (IN)
+                         net (fo=0)                   0.924    10.924    clk
+    BUFGCTRL_X0Y0        BUFG (Prop_bufg_I_O)         0.091    11.015 r  core_clock_buffer/O
+                         net (fo=18864, routed)       1.484    12.500    core/core/population_stepper/clk
+    SLICE_X46Y33         FDRE                                         r  core/core/population_stepper/result_refractory_reg[1]/C
+                         clock pessimism              0.073    12.572    
+                         clock uncertainty           -0.135    12.437    
+    SLICE_X46Y33         FDRE (Setup_fdre_C_D)        0.077    12.514    core/core/population_stepper/result_refractory_reg[1]
+  -------------------------------------------------------------------
+                         required time                         12.514    
+                         arrival time                         -12.193    
+  -------------------------------------------------------------------
+                         slack                                  0.321    
+
+Slack (MET) :             0.328ns  (required time - arrival time)
+  Source:                 core/core/population_stepper/selected_membrane_reg[9]/C
+                            (rising edge-triggered cell FDRE clocked by core_clk  {rise@0.000ns fall@5.000ns period=10.000ns})
+  Destination:            core/core/population_stepper/result_refractory_reg[1]_rep__1/D
+                            (rising edge-triggered cell FDRE clocked by core_clk  {rise@0.000ns fall@5.000ns period=10.000ns})
+  Path Group:             core_clk
+  Path Type:              Setup (Max at Slow Process Corner)
+  Requirement:            10.000ns  (core_clk rise@10.000ns - core_clk rise@0.000ns)
+  Data Path Delay:        9.394ns  (logic 4.202ns (44.729%)  route 5.192ns (55.271%))
+  Logic Levels:           15  (CARRY4=9 LUT2=1 LUT3=1 LUT5=2 LUT6=2)
+  Clock Path Skew:        -0.224ns (DCD - SCD + CPR)
+    Destination Clock Delay (DCD):    2.500ns = ( 12.500 - 10.000 ) 
+    Source Clock Delay      (SCD):    2.796ns
+    Clock Pessimism Removal (CPR):    0.073ns
+  Clock Uncertainty:      0.135ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE + UU
+    Total System Jitter     (TSJ):    0.071ns
+    Total Input Jitter      (TIJ):    0.000ns
+    Discrete Jitter          (DJ):    0.000ns
+    Phase Error              (PE):    0.000ns
+    User Uncertainty         (UU):    0.100ns
+
+    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------
+                         (clock core_clk rise edge)
+                                                      0.000     0.000 r  
+                                                      0.000     0.000 r  clk (IN)
+                         net (fo=0)                   0.973     0.973    clk
+    BUFGCTRL_X0Y0        BUFG (Prop_bufg_I_O)         0.101     1.074 r  core_clock_buffer/O
+                         net (fo=18864, routed)       1.722     2.796    core/core/population_stepper/clk
+    SLICE_X68Y33         FDRE                                         r  core/core/population_stepper/selected_membrane_reg[9]/C
+  -------------------------------------------------------------------    -------------------
+    SLICE_X68Y33         FDRE (Prop_fdre_C_Q)         0.456     3.252 f  core/core/population_stepper/selected_membrane_reg[9]/Q
+                         net (fo=6, routed)           1.378     4.630    core/core/population_stepper/selected_membrane[9]
+    SLICE_X60Y42         LUT5 (Prop_lut5_I0_O)        0.152     4.782 f  core/core/population_stepper/result_membrane[7]_i_20/O
+                         net (fo=4, routed)           0.787     5.569    core/core/population_stepper/result_membrane[7]_i_20_n_0
+    SLICE_X58Y42         LUT3 (Prop_lut3_I2_O)        0.355     5.924 f  core/core/population_stepper/result_membrane[7]_i_14/O
+                         net (fo=3, routed)           0.309     6.234    core/core/population_stepper/result_membrane[7]_i_14_n_0
+    SLICE_X58Y42         LUT6 (Prop_lut6_I3_O)        0.331     6.565 r  core/core/population_stepper/result_membrane[3]_i_3/O
+                         net (fo=2, routed)           0.497     7.062    core/core/population_stepper/result_membrane[3]_i_3_n_0
+    SLICE_X59Y42         LUT6 (Prop_lut6_I0_O)        0.124     7.186 r  core/core/population_stepper/result_membrane[3]_i_6/O
+                         net (fo=1, routed)           0.000     7.186    core/core/population_stepper/result_membrane[3]_i_6_n_0
+    SLICE_X59Y42         CARRY4 (Prop_carry4_S[3]_CO[3])
+                                                      0.401     7.587 r  core/core/population_stepper/result_membrane_reg[3]_i_2/CO[3]
+                         net (fo=1, routed)           0.000     7.587    core/core/population_stepper/result_membrane_reg[3]_i_2_n_0
+    SLICE_X59Y43         CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.114     7.701 r  core/core/population_stepper/result_membrane_reg[7]_i_2/CO[3]
+                         net (fo=1, routed)           0.000     7.701    core/core/population_stepper/result_membrane_reg[7]_i_2_n_0
+    SLICE_X59Y44         CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.114     7.815 r  core/core/population_stepper/result_membrane_reg[11]_i_2/CO[3]
+                         net (fo=1, routed)           0.000     7.815    core/core/population_stepper/result_membrane_reg[11]_i_2_n_0
+    SLICE_X59Y45         CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.114     7.929 r  core/core/population_stepper/result_membrane_reg[15]_i_7/CO[3]
+                         net (fo=1, routed)           0.000     7.929    core/core/population_stepper/result_membrane_reg[15]_i_7_n_0
+    SLICE_X59Y46         CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.114     8.043 r  core/core/population_stepper/result_membrane_reg[15]_i_72/CO[3]
+                         net (fo=1, routed)           0.000     8.043    core/core/population_stepper/result_membrane_reg[15]_i_72_n_0
+    SLICE_X59Y47         CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.114     8.157 r  core/core/population_stepper/result_membrane_reg[15]_i_58/CO[3]
+                         net (fo=1, routed)           0.000     8.157    core/core/population_stepper/result_membrane_reg[15]_i_58_n_0
+    SLICE_X59Y48         CARRY4 (Prop_carry4_CI_O[1])
+                                                      0.334     8.491 f  core/core/population_stepper/result_membrane_reg[15]_i_29/O[1]
+                         net (fo=4, routed)           0.870     9.361    core/core/population_stepper/result_membrane_reg[15]_i_29_n_6
+    SLICE_X57Y47         LUT2 (Prop_lut2_I0_O)        0.303     9.664 r  core/core/population_stepper/result_membrane[15]_i_42/O
+                         net (fo=1, routed)           0.000     9.664    core/core/population_stepper/result_membrane[15]_i_42_n_0
+    SLICE_X57Y47         CARRY4 (Prop_carry4_S[0]_CO[3])
+                                                      0.532    10.196 r  core/core/population_stepper/result_membrane_reg[15]_i_9/CO[3]
+                         net (fo=1, routed)           0.000    10.196    core/core/population_stepper/result_membrane_reg[15]_i_9_n_0
+    SLICE_X57Y48         CARRY4 (Prop_carry4_CI_CO[0])
+                                                      0.271    10.467 r  core/core/population_stepper/result_membrane_reg[15]_i_4/CO[0]
+                         net (fo=84, routed)          1.351    11.817    core/core/population_stepper/result_membrane_reg[15]_i_4_n_3
+    SLICE_X46Y33         LUT5 (Prop_lut5_I1_O)        0.373    12.190 r  core/core/population_stepper/result_refractory[1]_rep__1_i_1/O
+                         net (fo=1, routed)           0.000    12.190    core/core/population_stepper/result_refractory[1]_rep__1_i_1_n_0
+    SLICE_X46Y33         FDRE                                         r  core/core/population_stepper/result_refractory_reg[1]_rep__1/D
+  -------------------------------------------------------------------    -------------------
+
+                         (clock core_clk rise edge)
+                                                     10.000    10.000 r  
+                                                      0.000    10.000 r  clk (IN)
+                         net (fo=0)                   0.924    10.924    clk
+    BUFGCTRL_X0Y0        BUFG (Prop_bufg_I_O)         0.091    11.015 r  core_clock_buffer/O
+                         net (fo=18864, routed)       1.484    12.500    core/core/population_stepper/clk
+    SLICE_X46Y33         FDRE                                         r  core/core/population_stepper/result_refractory_reg[1]_rep__1/C
+                         clock pessimism              0.073    12.572    
+                         clock uncertainty           -0.135    12.437    
+    SLICE_X46Y33         FDRE (Setup_fdre_C_D)        0.081    12.518    core/core/population_stepper/result_refractory_reg[1]_rep__1
+  -------------------------------------------------------------------
+                         required time                         12.518    
+                         arrival time                         -12.190    
+  -------------------------------------------------------------------
+                         slack                                  0.328    
+
+Slack (MET) :             0.330ns  (required time - arrival time)
+  Source:                 core/core/population_stepper/selected_membrane_reg[9]/C
+                            (rising edge-triggered cell FDRE clocked by core_clk  {rise@0.000ns fall@5.000ns period=10.000ns})
+  Destination:            core/core/population_stepper/result_refractory_reg[3]_rep__1/D
+                            (rising edge-triggered cell FDRE clocked by core_clk  {rise@0.000ns fall@5.000ns period=10.000ns})
+  Path Group:             core_clk
+  Path Type:              Setup (Max at Slow Process Corner)
+  Requirement:            10.000ns  (core_clk rise@10.000ns - core_clk rise@0.000ns)
+  Data Path Delay:        9.396ns  (logic 4.202ns (44.723%)  route 5.194ns (55.277%))
+  Logic Levels:           15  (CARRY4=9 LUT2=1 LUT3=1 LUT5=2 LUT6=2)
+  Clock Path Skew:        -0.219ns (DCD - SCD + CPR)
+    Destination Clock Delay (DCD):    2.505ns = ( 12.505 - 10.000 ) 
+    Source Clock Delay      (SCD):    2.796ns
+    Clock Pessimism Removal (CPR):    0.073ns
+  Clock Uncertainty:      0.135ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE + UU
+    Total System Jitter     (TSJ):    0.071ns
+    Total Input Jitter      (TIJ):    0.000ns
+    Discrete Jitter          (DJ):    0.000ns
+    Phase Error              (PE):    0.000ns
+    User Uncertainty         (UU):    0.100ns
+
+    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------
+                         (clock core_clk rise edge)
+                                                      0.000     0.000 r  
+                                                      0.000     0.000 r  clk (IN)
+                         net (fo=0)                   0.973     0.973    clk
+    BUFGCTRL_X0Y0        BUFG (Prop_bufg_I_O)         0.101     1.074 r  core_clock_buffer/O
+                         net (fo=18864, routed)       1.722     2.796    core/core/population_stepper/clk
+    SLICE_X68Y33         FDRE                                         r  core/core/population_stepper/selected_membrane_reg[9]/C
+  -------------------------------------------------------------------    -------------------
+    SLICE_X68Y33         FDRE (Prop_fdre_C_Q)         0.456     3.252 f  core/core/population_stepper/selected_membrane_reg[9]/Q
+                         net (fo=6, routed)           1.378     4.630    core/core/population_stepper/selected_membrane[9]
+    SLICE_X60Y42         LUT5 (Prop_lut5_I0_O)        0.152     4.782 f  core/core/population_stepper/result_membrane[7]_i_20/O
+                         net (fo=4, routed)           0.787     5.569    core/core/population_stepper/result_membrane[7]_i_20_n_0
+    SLICE_X58Y42         LUT3 (Prop_lut3_I2_O)        0.355     5.924 f  core/core/population_stepper/result_membrane[7]_i_14/O
+                         net (fo=3, routed)           0.309     6.234    core/core/population_stepper/result_membrane[7]_i_14_n_0
+    SLICE_X58Y42         LUT6 (Prop_lut6_I3_O)        0.331     6.565 r  core/core/population_stepper/result_membrane[3]_i_3/O
+                         net (fo=2, routed)           0.497     7.062    core/core/population_stepper/result_membrane[3]_i_3_n_0
+    SLICE_X59Y42         LUT6 (Prop_lut6_I0_O)        0.124     7.186 r  core/core/population_stepper/result_membrane[3]_i_6/O
+                         net (fo=1, routed)           0.000     7.186    core/core/population_stepper/result_membrane[3]_i_6_n_0
+    SLICE_X59Y42         CARRY4 (Prop_carry4_S[3]_CO[3])
+                                                      0.401     7.587 r  core/core/population_stepper/result_membrane_reg[3]_i_2/CO[3]
+                         net (fo=1, routed)           0.000     7.587    core/core/population_stepper/result_membrane_reg[3]_i_2_n_0
+    SLICE_X59Y43         CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.114     7.701 r  core/core/population_stepper/result_membrane_reg[7]_i_2/CO[3]
+                         net (fo=1, routed)           0.000     7.701    core/core/population_stepper/result_membrane_reg[7]_i_2_n_0
+    SLICE_X59Y44         CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.114     7.815 r  core/core/population_stepper/result_membrane_reg[11]_i_2/CO[3]
+                         net (fo=1, routed)           0.000     7.815    core/core/population_stepper/result_membrane_reg[11]_i_2_n_0
+    SLICE_X59Y45         CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.114     7.929 r  core/core/population_stepper/result_membrane_reg[15]_i_7/CO[3]
+                         net (fo=1, routed)           0.000     7.929    core/core/population_stepper/result_membrane_reg[15]_i_7_n_0
+    SLICE_X59Y46         CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.114     8.043 r  core/core/population_stepper/result_membrane_reg[15]_i_72/CO[3]
+                         net (fo=1, routed)           0.000     8.043    core/core/population_stepper/result_membrane_reg[15]_i_72_n_0
+    SLICE_X59Y47         CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.114     8.157 r  core/core/population_stepper/result_membrane_reg[15]_i_58/CO[3]
+                         net (fo=1, routed)           0.000     8.157    core/core/population_stepper/result_membrane_reg[15]_i_58_n_0
+    SLICE_X59Y48         CARRY4 (Prop_carry4_CI_O[1])
+                                                      0.334     8.491 f  core/core/population_stepper/result_membrane_reg[15]_i_29/O[1]
+                         net (fo=4, routed)           0.870     9.361    core/core/population_stepper/result_membrane_reg[15]_i_29_n_6
+    SLICE_X57Y47         LUT2 (Prop_lut2_I0_O)        0.303     9.664 r  core/core/population_stepper/result_membrane[15]_i_42/O
+                         net (fo=1, routed)           0.000     9.664    core/core/population_stepper/result_membrane[15]_i_42_n_0
+    SLICE_X57Y47         CARRY4 (Prop_carry4_S[0]_CO[3])
+                                                      0.532    10.196 r  core/core/population_stepper/result_membrane_reg[15]_i_9/CO[3]
+                         net (fo=1, routed)           0.000    10.196    core/core/population_stepper/result_membrane_reg[15]_i_9_n_0
+    SLICE_X57Y48         CARRY4 (Prop_carry4_CI_CO[0])
+                                                      0.271    10.467 r  core/core/population_stepper/result_membrane_reg[15]_i_4/CO[0]
+                         net (fo=84, routed)          1.352    11.819    core/core/population_stepper/result_membrane_reg[15]_i_4_n_3
+    SLICE_X42Y38         LUT5 (Prop_lut5_I1_O)        0.373    12.192 r  core/core/population_stepper/result_refractory[3]_rep__1_i_1/O
+                         net (fo=1, routed)           0.000    12.192    core/core/population_stepper/result_refractory[3]_rep__1_i_1_n_0
+    SLICE_X42Y38         FDRE                                         r  core/core/population_stepper/result_refractory_reg[3]_rep__1/D
+  -------------------------------------------------------------------    -------------------
+
+                         (clock core_clk rise edge)
+                                                     10.000    10.000 r  
+                                                      0.000    10.000 r  clk (IN)
+                         net (fo=0)                   0.924    10.924    clk
+    BUFGCTRL_X0Y0        BUFG (Prop_bufg_I_O)         0.091    11.015 r  core_clock_buffer/O
+                         net (fo=18864, routed)       1.489    12.505    core/core/population_stepper/clk
+    SLICE_X42Y38         FDRE                                         r  core/core/population_stepper/result_refractory_reg[3]_rep__1/C
+                         clock pessimism              0.073    12.577    
+                         clock uncertainty           -0.135    12.442    
+    SLICE_X42Y38         FDRE (Setup_fdre_C_D)        0.079    12.521    core/core/population_stepper/result_refractory_reg[3]_rep__1
+  -------------------------------------------------------------------
+                         required time                         12.521    
+                         arrival time                         -12.192    
+  -------------------------------------------------------------------
+                         slack                                  0.330    
+
+Slack (MET) :             0.334ns  (required time - arrival time)
+  Source:                 core/core/population_stepper/selected_membrane_reg[9]/C
+                            (rising edge-triggered cell FDRE clocked by core_clk  {rise@0.000ns fall@5.000ns period=10.000ns})
+  Destination:            core/core/population_stepper/result_refractory_reg[11]/D
+                            (rising edge-triggered cell FDRE clocked by core_clk  {rise@0.000ns fall@5.000ns period=10.000ns})
+  Path Group:             core_clk
+  Path Type:              Setup (Max at Slow Process Corner)
+  Requirement:            10.000ns  (core_clk rise@10.000ns - core_clk rise@0.000ns)
+  Data Path Delay:        9.390ns  (logic 4.202ns (44.752%)  route 5.188ns (55.248%))
+  Logic Levels:           15  (CARRY4=9 LUT2=1 LUT3=1 LUT5=2 LUT6=2)
+  Clock Path Skew:        -0.219ns (DCD - SCD + CPR)
+    Destination Clock Delay (DCD):    2.505ns = ( 12.505 - 10.000 ) 
+    Source Clock Delay      (SCD):    2.796ns
+    Clock Pessimism Removal (CPR):    0.073ns
+  Clock Uncertainty:      0.135ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE + UU
+    Total System Jitter     (TSJ):    0.071ns
+    Total Input Jitter      (TIJ):    0.000ns
+    Discrete Jitter          (DJ):    0.000ns
+    Phase Error              (PE):    0.000ns
+    User Uncertainty         (UU):    0.100ns
+
+    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------
+                         (clock core_clk rise edge)
+                                                      0.000     0.000 r  
+                                                      0.000     0.000 r  clk (IN)
+                         net (fo=0)                   0.973     0.973    clk
+    BUFGCTRL_X0Y0        BUFG (Prop_bufg_I_O)         0.101     1.074 r  core_clock_buffer/O
+                         net (fo=18864, routed)       1.722     2.796    core/core/population_stepper/clk
+    SLICE_X68Y33         FDRE                                         r  core/core/population_stepper/selected_membrane_reg[9]/C
+  -------------------------------------------------------------------    -------------------
+    SLICE_X68Y33         FDRE (Prop_fdre_C_Q)         0.456     3.252 f  core/core/population_stepper/selected_membrane_reg[9]/Q
+                         net (fo=6, routed)           1.378     4.630    core/core/population_stepper/selected_membrane[9]
+    SLICE_X60Y42         LUT5 (Prop_lut5_I0_O)        0.152     4.782 f  core/core/population_stepper/result_membrane[7]_i_20/O
+                         net (fo=4, routed)           0.787     5.569    core/core/population_stepper/result_membrane[7]_i_20_n_0
+    SLICE_X58Y42         LUT3 (Prop_lut3_I2_O)        0.355     5.924 f  core/core/population_stepper/result_membrane[7]_i_14/O
+                         net (fo=3, routed)           0.309     6.234    core/core/population_stepper/result_membrane[7]_i_14_n_0
+    SLICE_X58Y42         LUT6 (Prop_lut6_I3_O)        0.331     6.565 r  core/core/population_stepper/result_membrane[3]_i_3/O
+                         net (fo=2, routed)           0.497     7.062    core/core/population_stepper/result_membrane[3]_i_3_n_0
+    SLICE_X59Y42         LUT6 (Prop_lut6_I0_O)        0.124     7.186 r  core/core/population_stepper/result_membrane[3]_i_6/O
+                         net (fo=1, routed)           0.000     7.186    core/core/population_stepper/result_membrane[3]_i_6_n_0
+    SLICE_X59Y42         CARRY4 (Prop_carry4_S[3]_CO[3])
+                                                      0.401     7.587 r  core/core/population_stepper/result_membrane_reg[3]_i_2/CO[3]
+                         net (fo=1, routed)           0.000     7.587    core/core/population_stepper/result_membrane_reg[3]_i_2_n_0
+    SLICE_X59Y43         CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.114     7.701 r  core/core/population_stepper/result_membrane_reg[7]_i_2/CO[3]
+                         net (fo=1, routed)           0.000     7.701    core/core/population_stepper/result_membrane_reg[7]_i_2_n_0
+    SLICE_X59Y44         CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.114     7.815 r  core/core/population_stepper/result_membrane_reg[11]_i_2/CO[3]
+                         net (fo=1, routed)           0.000     7.815    core/core/population_stepper/result_membrane_reg[11]_i_2_n_0
+    SLICE_X59Y45         CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.114     7.929 r  core/core/population_stepper/result_membrane_reg[15]_i_7/CO[3]
+                         net (fo=1, routed)           0.000     7.929    core/core/population_stepper/result_membrane_reg[15]_i_7_n_0
+    SLICE_X59Y46         CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.114     8.043 r  core/core/population_stepper/result_membrane_reg[15]_i_72/CO[3]
+                         net (fo=1, routed)           0.000     8.043    core/core/population_stepper/result_membrane_reg[15]_i_72_n_0
+    SLICE_X59Y47         CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.114     8.157 r  core/core/population_stepper/result_membrane_reg[15]_i_58/CO[3]
+                         net (fo=1, routed)           0.000     8.157    core/core/population_stepper/result_membrane_reg[15]_i_58_n_0
+    SLICE_X59Y48         CARRY4 (Prop_carry4_CI_O[1])
+                                                      0.334     8.491 f  core/core/population_stepper/result_membrane_reg[15]_i_29/O[1]
+                         net (fo=4, routed)           0.870     9.361    core/core/population_stepper/result_membrane_reg[15]_i_29_n_6
+    SLICE_X57Y47         LUT2 (Prop_lut2_I0_O)        0.303     9.664 r  core/core/population_stepper/result_membrane[15]_i_42/O
+                         net (fo=1, routed)           0.000     9.664    core/core/population_stepper/result_membrane[15]_i_42_n_0
+    SLICE_X57Y47         CARRY4 (Prop_carry4_S[0]_CO[3])
+                                                      0.532    10.196 r  core/core/population_stepper/result_membrane_reg[15]_i_9/CO[3]
+                         net (fo=1, routed)           0.000    10.196    core/core/population_stepper/result_membrane_reg[15]_i_9_n_0
+    SLICE_X57Y48         CARRY4 (Prop_carry4_CI_CO[0])
+                                                      0.271    10.467 r  core/core/population_stepper/result_membrane_reg[15]_i_4/CO[0]
+                         net (fo=84, routed)          1.346    11.813    core/core/population_stepper/result_membrane_reg[15]_i_4_n_3
+    SLICE_X42Y38         LUT5 (Prop_lut5_I1_O)        0.373    12.186 r  core/core/population_stepper/result_refractory[11]_i_1/O
+                         net (fo=1, routed)           0.000    12.186    core/core/population_stepper/next_refractory[11]
+    SLICE_X42Y38         FDRE                                         r  core/core/population_stepper/result_refractory_reg[11]/D
+  -------------------------------------------------------------------    -------------------
+
+                         (clock core_clk rise edge)
+                                                     10.000    10.000 r  
+                                                      0.000    10.000 r  clk (IN)
+                         net (fo=0)                   0.924    10.924    clk
+    BUFGCTRL_X0Y0        BUFG (Prop_bufg_I_O)         0.091    11.015 r  core_clock_buffer/O
+                         net (fo=18864, routed)       1.489    12.505    core/core/population_stepper/clk
+    SLICE_X42Y38         FDRE                                         r  core/core/population_stepper/result_refractory_reg[11]/C
+                         clock pessimism              0.073    12.577    
+                         clock uncertainty           -0.135    12.442    
+    SLICE_X42Y38         FDRE (Setup_fdre_C_D)        0.077    12.519    core/core/population_stepper/result_refractory_reg[11]
+  -------------------------------------------------------------------
+                         required time                         12.519    
+                         arrival time                         -12.186    
+  -------------------------------------------------------------------
+                         slack                                  0.334    
+
+Slack (MET) :             0.334ns  (required time - arrival time)
+  Source:                 core/core/population_stepper/selected_membrane_reg[9]/C
+                            (rising edge-triggered cell FDRE clocked by core_clk  {rise@0.000ns fall@5.000ns period=10.000ns})
+  Destination:            core/core/population_stepper/result_refractory_reg[2]_rep/D
+                            (rising edge-triggered cell FDRE clocked by core_clk  {rise@0.000ns fall@5.000ns period=10.000ns})
+  Path Group:             core_clk
+  Path Type:              Setup (Max at Slow Process Corner)
+  Requirement:            10.000ns  (core_clk rise@10.000ns - core_clk rise@0.000ns)
+  Data Path Delay:        9.386ns  (logic 4.202ns (44.768%)  route 5.184ns (55.232%))
+  Logic Levels:           15  (CARRY4=9 LUT2=1 LUT3=1 LUT5=2 LUT6=2)
+  Clock Path Skew:        -0.224ns (DCD - SCD + CPR)
+    Destination Clock Delay (DCD):    2.500ns = ( 12.500 - 10.000 ) 
+    Source Clock Delay      (SCD):    2.796ns
+    Clock Pessimism Removal (CPR):    0.073ns
+  Clock Uncertainty:      0.135ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE + UU
+    Total System Jitter     (TSJ):    0.071ns
+    Total Input Jitter      (TIJ):    0.000ns
+    Discrete Jitter          (DJ):    0.000ns
+    Phase Error              (PE):    0.000ns
+    User Uncertainty         (UU):    0.100ns
+
+    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------
+                         (clock core_clk rise edge)
+                                                      0.000     0.000 r  
+                                                      0.000     0.000 r  clk (IN)
+                         net (fo=0)                   0.973     0.973    clk
+    BUFGCTRL_X0Y0        BUFG (Prop_bufg_I_O)         0.101     1.074 r  core_clock_buffer/O
+                         net (fo=18864, routed)       1.722     2.796    core/core/population_stepper/clk
+    SLICE_X68Y33         FDRE                                         r  core/core/population_stepper/selected_membrane_reg[9]/C
+  -------------------------------------------------------------------    -------------------
+    SLICE_X68Y33         FDRE (Prop_fdre_C_Q)         0.456     3.252 f  core/core/population_stepper/selected_membrane_reg[9]/Q
+                         net (fo=6, routed)           1.378     4.630    core/core/population_stepper/selected_membrane[9]
+    SLICE_X60Y42         LUT5 (Prop_lut5_I0_O)        0.152     4.782 f  core/core/population_stepper/result_membrane[7]_i_20/O
+                         net (fo=4, routed)           0.787     5.569    core/core/population_stepper/result_membrane[7]_i_20_n_0
+    SLICE_X58Y42         LUT3 (Prop_lut3_I2_O)        0.355     5.924 f  core/core/population_stepper/result_membrane[7]_i_14/O
+                         net (fo=3, routed)           0.309     6.234    core/core/population_stepper/result_membrane[7]_i_14_n_0
+    SLICE_X58Y42         LUT6 (Prop_lut6_I3_O)        0.331     6.565 r  core/core/population_stepper/result_membrane[3]_i_3/O
+                         net (fo=2, routed)           0.497     7.062    core/core/population_stepper/result_membrane[3]_i_3_n_0
+    SLICE_X59Y42         LUT6 (Prop_lut6_I0_O)        0.124     7.186 r  core/core/population_stepper/result_membrane[3]_i_6/O
+                         net (fo=1, routed)           0.000     7.186    core/core/population_stepper/result_membrane[3]_i_6_n_0
+    SLICE_X59Y42         CARRY4 (Prop_carry4_S[3]_CO[3])
+                                                      0.401     7.587 r  core/core/population_stepper/result_membrane_reg[3]_i_2/CO[3]
+                         net (fo=1, routed)           0.000     7.587    core/core/population_stepper/result_membrane_reg[3]_i_2_n_0
+    SLICE_X59Y43         CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.114     7.701 r  core/core/population_stepper/result_membrane_reg[7]_i_2/CO[3]
+                         net (fo=1, routed)           0.000     7.701    core/core/population_stepper/result_membrane_reg[7]_i_2_n_0
+    SLICE_X59Y44         CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.114     7.815 r  core/core/population_stepper/result_membrane_reg[11]_i_2/CO[3]
+                         net (fo=1, routed)           0.000     7.815    core/core/population_stepper/result_membrane_reg[11]_i_2_n_0
+    SLICE_X59Y45         CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.114     7.929 r  core/core/population_stepper/result_membrane_reg[15]_i_7/CO[3]
+                         net (fo=1, routed)           0.000     7.929    core/core/population_stepper/result_membrane_reg[15]_i_7_n_0
+    SLICE_X59Y46         CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.114     8.043 r  core/core/population_stepper/result_membrane_reg[15]_i_72/CO[3]
+                         net (fo=1, routed)           0.000     8.043    core/core/population_stepper/result_membrane_reg[15]_i_72_n_0
+    SLICE_X59Y47         CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.114     8.157 r  core/core/population_stepper/result_membrane_reg[15]_i_58/CO[3]
+                         net (fo=1, routed)           0.000     8.157    core/core/population_stepper/result_membrane_reg[15]_i_58_n_0
+    SLICE_X59Y48         CARRY4 (Prop_carry4_CI_O[1])
+                                                      0.334     8.491 f  core/core/population_stepper/result_membrane_reg[15]_i_29/O[1]
+                         net (fo=4, routed)           0.870     9.361    core/core/population_stepper/result_membrane_reg[15]_i_29_n_6
+    SLICE_X57Y47         LUT2 (Prop_lut2_I0_O)        0.303     9.664 r  core/core/population_stepper/result_membrane[15]_i_42/O
+                         net (fo=1, routed)           0.000     9.664    core/core/population_stepper/result_membrane[15]_i_42_n_0
+    SLICE_X57Y47         CARRY4 (Prop_carry4_S[0]_CO[3])
+                                                      0.532    10.196 r  core/core/population_stepper/result_membrane_reg[15]_i_9/CO[3]
+                         net (fo=1, routed)           0.000    10.196    core/core/population_stepper/result_membrane_reg[15]_i_9_n_0
+    SLICE_X57Y48         CARRY4 (Prop_carry4_CI_CO[0])
+                                                      0.271    10.467 r  core/core/population_stepper/result_membrane_reg[15]_i_4/CO[0]
+                         net (fo=84, routed)          1.342    11.809    core/core/population_stepper/result_membrane_reg[15]_i_4_n_3
+    SLICE_X46Y33         LUT5 (Prop_lut5_I1_O)        0.373    12.182 r  core/core/population_stepper/result_refractory[2]_rep_i_1/O
+                         net (fo=1, routed)           0.000    12.182    core/core/population_stepper/result_refractory[2]_rep_i_1_n_0
+    SLICE_X46Y33         FDRE                                         r  core/core/population_stepper/result_refractory_reg[2]_rep/D
+  -------------------------------------------------------------------    -------------------
+
+                         (clock core_clk rise edge)
+                                                     10.000    10.000 r  
+                                                      0.000    10.000 r  clk (IN)
+                         net (fo=0)                   0.924    10.924    clk
+    BUFGCTRL_X0Y0        BUFG (Prop_bufg_I_O)         0.091    11.015 r  core_clock_buffer/O
+                         net (fo=18864, routed)       1.484    12.500    core/core/population_stepper/clk
+    SLICE_X46Y33         FDRE                                         r  core/core/population_stepper/result_refractory_reg[2]_rep/C
+                         clock pessimism              0.073    12.572    
+                         clock uncertainty           -0.135    12.437    
+    SLICE_X46Y33         FDRE (Setup_fdre_C_D)        0.079    12.516    core/core/population_stepper/result_refractory_reg[2]_rep
+  -------------------------------------------------------------------
+                         required time                         12.516    
+                         arrival time                         -12.182    
+  -------------------------------------------------------------------
+                         slack                                  0.334    
+
+Slack (MET) :             0.340ns  (required time - arrival time)
+  Source:                 core/core/population_stepper/selected_membrane_reg[9]/C
+                            (rising edge-triggered cell FDRE clocked by core_clk  {rise@0.000ns fall@5.000ns period=10.000ns})
+  Destination:            core/core/population_stepper/result_refractory_reg[11]_rep/D
+                            (rising edge-triggered cell FDRE clocked by core_clk  {rise@0.000ns fall@5.000ns period=10.000ns})
+  Path Group:             core_clk
+  Path Type:              Setup (Max at Slow Process Corner)
+  Requirement:            10.000ns  (core_clk rise@10.000ns - core_clk rise@0.000ns)
+  Data Path Delay:        9.386ns  (logic 4.202ns (44.771%)  route 5.184ns (55.229%))
+  Logic Levels:           15  (CARRY4=9 LUT2=1 LUT3=1 LUT5=2 LUT6=2)
+  Clock Path Skew:        -0.219ns (DCD - SCD + CPR)
+    Destination Clock Delay (DCD):    2.505ns = ( 12.505 - 10.000 ) 
+    Source Clock Delay      (SCD):    2.796ns
+    Clock Pessimism Removal (CPR):    0.073ns
+  Clock Uncertainty:      0.135ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE + UU
+    Total System Jitter     (TSJ):    0.071ns
+    Total Input Jitter      (TIJ):    0.000ns
+    Discrete Jitter          (DJ):    0.000ns
+    Phase Error              (PE):    0.000ns
+    User Uncertainty         (UU):    0.100ns
+
+    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------
+                         (clock core_clk rise edge)
+                                                      0.000     0.000 r  
+                                                      0.000     0.000 r  clk (IN)
+                         net (fo=0)                   0.973     0.973    clk
+    BUFGCTRL_X0Y0        BUFG (Prop_bufg_I_O)         0.101     1.074 r  core_clock_buffer/O
+                         net (fo=18864, routed)       1.722     2.796    core/core/population_stepper/clk
+    SLICE_X68Y33         FDRE                                         r  core/core/population_stepper/selected_membrane_reg[9]/C
+  -------------------------------------------------------------------    -------------------
+    SLICE_X68Y33         FDRE (Prop_fdre_C_Q)         0.456     3.252 f  core/core/population_stepper/selected_membrane_reg[9]/Q
+                         net (fo=6, routed)           1.378     4.630    core/core/population_stepper/selected_membrane[9]
+    SLICE_X60Y42         LUT5 (Prop_lut5_I0_O)        0.152     4.782 f  core/core/population_stepper/result_membrane[7]_i_20/O
+                         net (fo=4, routed)           0.787     5.569    core/core/population_stepper/result_membrane[7]_i_20_n_0
+    SLICE_X58Y42         LUT3 (Prop_lut3_I2_O)        0.355     5.924 f  core/core/population_stepper/result_membrane[7]_i_14/O
+                         net (fo=3, routed)           0.309     6.234    core/core/population_stepper/result_membrane[7]_i_14_n_0
+    SLICE_X58Y42         LUT6 (Prop_lut6_I3_O)        0.331     6.565 r  core/core/population_stepper/result_membrane[3]_i_3/O
+                         net (fo=2, routed)           0.497     7.062    core/core/population_stepper/result_membrane[3]_i_3_n_0
+    SLICE_X59Y42         LUT6 (Prop_lut6_I0_O)        0.124     7.186 r  core/core/population_stepper/result_membrane[3]_i_6/O
+                         net (fo=1, routed)           0.000     7.186    core/core/population_stepper/result_membrane[3]_i_6_n_0
+    SLICE_X59Y42         CARRY4 (Prop_carry4_S[3]_CO[3])
+                                                      0.401     7.587 r  core/core/population_stepper/result_membrane_reg[3]_i_2/CO[3]
+                         net (fo=1, routed)           0.000     7.587    core/core/population_stepper/result_membrane_reg[3]_i_2_n_0
+    SLICE_X59Y43         CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.114     7.701 r  core/core/population_stepper/result_membrane_reg[7]_i_2/CO[3]
+                         net (fo=1, routed)           0.000     7.701    core/core/population_stepper/result_membrane_reg[7]_i_2_n_0
+    SLICE_X59Y44         CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.114     7.815 r  core/core/population_stepper/result_membrane_reg[11]_i_2/CO[3]
+                         net (fo=1, routed)           0.000     7.815    core/core/population_stepper/result_membrane_reg[11]_i_2_n_0
+    SLICE_X59Y45         CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.114     7.929 r  core/core/population_stepper/result_membrane_reg[15]_i_7/CO[3]
+                         net (fo=1, routed)           0.000     7.929    core/core/population_stepper/result_membrane_reg[15]_i_7_n_0
+    SLICE_X59Y46         CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.114     8.043 r  core/core/population_stepper/result_membrane_reg[15]_i_72/CO[3]
+                         net (fo=1, routed)           0.000     8.043    core/core/population_stepper/result_membrane_reg[15]_i_72_n_0
+    SLICE_X59Y47         CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.114     8.157 r  core/core/population_stepper/result_membrane_reg[15]_i_58/CO[3]
+                         net (fo=1, routed)           0.000     8.157    core/core/population_stepper/result_membrane_reg[15]_i_58_n_0
+    SLICE_X59Y48         CARRY4 (Prop_carry4_CI_O[1])
+                                                      0.334     8.491 f  core/core/population_stepper/result_membrane_reg[15]_i_29/O[1]
+                         net (fo=4, routed)           0.870     9.361    core/core/population_stepper/result_membrane_reg[15]_i_29_n_6
+    SLICE_X57Y47         LUT2 (Prop_lut2_I0_O)        0.303     9.664 r  core/core/population_stepper/result_membrane[15]_i_42/O
+                         net (fo=1, routed)           0.000     9.664    core/core/population_stepper/result_membrane[15]_i_42_n_0
+    SLICE_X57Y47         CARRY4 (Prop_carry4_S[0]_CO[3])
+                                                      0.532    10.196 r  core/core/population_stepper/result_membrane_reg[15]_i_9/CO[3]
+                         net (fo=1, routed)           0.000    10.196    core/core/population_stepper/result_membrane_reg[15]_i_9_n_0
+    SLICE_X57Y48         CARRY4 (Prop_carry4_CI_CO[0])
+                                                      0.271    10.467 r  core/core/population_stepper/result_membrane_reg[15]_i_4/CO[0]
+                         net (fo=84, routed)          1.342    11.809    core/core/population_stepper/result_membrane_reg[15]_i_4_n_3
+    SLICE_X42Y38         LUT5 (Prop_lut5_I1_O)        0.373    12.182 r  core/core/population_stepper/result_refractory[11]_rep_i_1/O
+                         net (fo=1, routed)           0.000    12.182    core/core/population_stepper/result_refractory[11]_rep_i_1_n_0
+    SLICE_X42Y38         FDRE                                         r  core/core/population_stepper/result_refractory_reg[11]_rep/D
+  -------------------------------------------------------------------    -------------------
+
+                         (clock core_clk rise edge)
+                                                     10.000    10.000 r  
+                                                      0.000    10.000 r  clk (IN)
+                         net (fo=0)                   0.924    10.924    clk
+    BUFGCTRL_X0Y0        BUFG (Prop_bufg_I_O)         0.091    11.015 r  core_clock_buffer/O
+                         net (fo=18864, routed)       1.489    12.505    core/core/population_stepper/clk
+    SLICE_X42Y38         FDRE                                         r  core/core/population_stepper/result_refractory_reg[11]_rep/C
+                         clock pessimism              0.073    12.577    
+                         clock uncertainty           -0.135    12.442    
+    SLICE_X42Y38         FDRE (Setup_fdre_C_D)        0.079    12.521    core/core/population_stepper/result_refractory_reg[11]_rep
+  -------------------------------------------------------------------
+                         required time                         12.521    
+                         arrival time                         -12.182    
+  -------------------------------------------------------------------
+                         slack                                  0.340    
+
+Slack (MET) :             0.341ns  (required time - arrival time)
+  Source:                 core/core/population_stepper/selected_membrane_reg[9]/C
+                            (rising edge-triggered cell FDRE clocked by core_clk  {rise@0.000ns fall@5.000ns period=10.000ns})
+  Destination:            core/core/population_stepper/result_refractory_reg[11]_rep__1/D
+                            (rising edge-triggered cell FDRE clocked by core_clk  {rise@0.000ns fall@5.000ns period=10.000ns})
+  Path Group:             core_clk
+  Path Type:              Setup (Max at Slow Process Corner)
+  Requirement:            10.000ns  (core_clk rise@10.000ns - core_clk rise@0.000ns)
+  Data Path Delay:        9.387ns  (logic 4.202ns (44.766%)  route 5.185ns (55.234%))
+  Logic Levels:           15  (CARRY4=9 LUT2=1 LUT3=1 LUT5=2 LUT6=2)
+  Clock Path Skew:        -0.219ns (DCD - SCD + CPR)
+    Destination Clock Delay (DCD):    2.505ns = ( 12.505 - 10.000 ) 
+    Source Clock Delay      (SCD):    2.796ns
+    Clock Pessimism Removal (CPR):    0.073ns
+  Clock Uncertainty:      0.135ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE + UU
+    Total System Jitter     (TSJ):    0.071ns
+    Total Input Jitter      (TIJ):    0.000ns
+    Discrete Jitter          (DJ):    0.000ns
+    Phase Error              (PE):    0.000ns
+    User Uncertainty         (UU):    0.100ns
+
+    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------
+                         (clock core_clk rise edge)
+                                                      0.000     0.000 r  
+                                                      0.000     0.000 r  clk (IN)
+                         net (fo=0)                   0.973     0.973    clk
+    BUFGCTRL_X0Y0        BUFG (Prop_bufg_I_O)         0.101     1.074 r  core_clock_buffer/O
+                         net (fo=18864, routed)       1.722     2.796    core/core/population_stepper/clk
+    SLICE_X68Y33         FDRE                                         r  core/core/population_stepper/selected_membrane_reg[9]/C
+  -------------------------------------------------------------------    -------------------
+    SLICE_X68Y33         FDRE (Prop_fdre_C_Q)         0.456     3.252 f  core/core/population_stepper/selected_membrane_reg[9]/Q
+                         net (fo=6, routed)           1.378     4.630    core/core/population_stepper/selected_membrane[9]
+    SLICE_X60Y42         LUT5 (Prop_lut5_I0_O)        0.152     4.782 f  core/core/population_stepper/result_membrane[7]_i_20/O
+                         net (fo=4, routed)           0.787     5.569    core/core/population_stepper/result_membrane[7]_i_20_n_0
+    SLICE_X58Y42         LUT3 (Prop_lut3_I2_O)        0.355     5.924 f  core/core/population_stepper/result_membrane[7]_i_14/O
+                         net (fo=3, routed)           0.309     6.234    core/core/population_stepper/result_membrane[7]_i_14_n_0
+    SLICE_X58Y42         LUT6 (Prop_lut6_I3_O)        0.331     6.565 r  core/core/population_stepper/result_membrane[3]_i_3/O
+                         net (fo=2, routed)           0.497     7.062    core/core/population_stepper/result_membrane[3]_i_3_n_0
+    SLICE_X59Y42         LUT6 (Prop_lut6_I0_O)        0.124     7.186 r  core/core/population_stepper/result_membrane[3]_i_6/O
+                         net (fo=1, routed)           0.000     7.186    core/core/population_stepper/result_membrane[3]_i_6_n_0
+    SLICE_X59Y42         CARRY4 (Prop_carry4_S[3]_CO[3])
+                                                      0.401     7.587 r  core/core/population_stepper/result_membrane_reg[3]_i_2/CO[3]
+                         net (fo=1, routed)           0.000     7.587    core/core/population_stepper/result_membrane_reg[3]_i_2_n_0
+    SLICE_X59Y43         CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.114     7.701 r  core/core/population_stepper/result_membrane_reg[7]_i_2/CO[3]
+                         net (fo=1, routed)           0.000     7.701    core/core/population_stepper/result_membrane_reg[7]_i_2_n_0
+    SLICE_X59Y44         CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.114     7.815 r  core/core/population_stepper/result_membrane_reg[11]_i_2/CO[3]
+                         net (fo=1, routed)           0.000     7.815    core/core/population_stepper/result_membrane_reg[11]_i_2_n_0
+    SLICE_X59Y45         CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.114     7.929 r  core/core/population_stepper/result_membrane_reg[15]_i_7/CO[3]
+                         net (fo=1, routed)           0.000     7.929    core/core/population_stepper/result_membrane_reg[15]_i_7_n_0
+    SLICE_X59Y46         CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.114     8.043 r  core/core/population_stepper/result_membrane_reg[15]_i_72/CO[3]
+                         net (fo=1, routed)           0.000     8.043    core/core/population_stepper/result_membrane_reg[15]_i_72_n_0
+    SLICE_X59Y47         CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.114     8.157 r  core/core/population_stepper/result_membrane_reg[15]_i_58/CO[3]
+                         net (fo=1, routed)           0.000     8.157    core/core/population_stepper/result_membrane_reg[15]_i_58_n_0
+    SLICE_X59Y48         CARRY4 (Prop_carry4_CI_O[1])
+                                                      0.334     8.491 f  core/core/population_stepper/result_membrane_reg[15]_i_29/O[1]
+                         net (fo=4, routed)           0.870     9.361    core/core/population_stepper/result_membrane_reg[15]_i_29_n_6
+    SLICE_X57Y47         LUT2 (Prop_lut2_I0_O)        0.303     9.664 r  core/core/population_stepper/result_membrane[15]_i_42/O
+                         net (fo=1, routed)           0.000     9.664    core/core/population_stepper/result_membrane[15]_i_42_n_0
+    SLICE_X57Y47         CARRY4 (Prop_carry4_S[0]_CO[3])
+                                                      0.532    10.196 r  core/core/population_stepper/result_membrane_reg[15]_i_9/CO[3]
+                         net (fo=1, routed)           0.000    10.196    core/core/population_stepper/result_membrane_reg[15]_i_9_n_0
+    SLICE_X57Y48         CARRY4 (Prop_carry4_CI_CO[0])
+                                                      0.271    10.467 r  core/core/population_stepper/result_membrane_reg[15]_i_4/CO[0]
+                         net (fo=84, routed)          1.343    11.810    core/core/population_stepper/result_membrane_reg[15]_i_4_n_3
+    SLICE_X42Y38         LUT5 (Prop_lut5_I1_O)        0.373    12.183 r  core/core/population_stepper/result_refractory[11]_rep__1_i_1/O
+                         net (fo=1, routed)           0.000    12.183    core/core/population_stepper/result_refractory[11]_rep__1_i_1_n_0
+    SLICE_X42Y38         FDRE                                         r  core/core/population_stepper/result_refractory_reg[11]_rep__1/D
+  -------------------------------------------------------------------    -------------------
+
+                         (clock core_clk rise edge)
+                                                     10.000    10.000 r  
+                                                      0.000    10.000 r  clk (IN)
+                         net (fo=0)                   0.924    10.924    clk
+    BUFGCTRL_X0Y0        BUFG (Prop_bufg_I_O)         0.091    11.015 r  core_clock_buffer/O
+                         net (fo=18864, routed)       1.489    12.505    core/core/population_stepper/clk
+    SLICE_X42Y38         FDRE                                         r  core/core/population_stepper/result_refractory_reg[11]_rep__1/C
+                         clock pessimism              0.073    12.577    
+                         clock uncertainty           -0.135    12.442    
+    SLICE_X42Y38         FDRE (Setup_fdre_C_D)        0.081    12.523    core/core/population_stepper/result_refractory_reg[11]_rep__1
+  -------------------------------------------------------------------
+                         required time                         12.523    
+                         arrival time                         -12.183    
+  -------------------------------------------------------------------
+                         slack                                  0.341    
+
+Slack (MET) :             0.344ns  (required time - arrival time)
+  Source:                 core/core/population_stepper/selected_membrane_reg[9]/C
+                            (rising edge-triggered cell FDRE clocked by core_clk  {rise@0.000ns fall@5.000ns period=10.000ns})
+  Destination:            core/core/population_stepper/result_refractory_reg[2]_rep__1/D
+                            (rising edge-triggered cell FDRE clocked by core_clk  {rise@0.000ns fall@5.000ns period=10.000ns})
+  Path Group:             core_clk
+  Path Type:              Setup (Max at Slow Process Corner)
+  Requirement:            10.000ns  (core_clk rise@10.000ns - core_clk rise@0.000ns)
+  Data Path Delay:        9.376ns  (logic 4.202ns (44.816%)  route 5.174ns (55.184%))
+  Logic Levels:           15  (CARRY4=9 LUT2=1 LUT3=1 LUT5=2 LUT6=2)
+  Clock Path Skew:        -0.224ns (DCD - SCD + CPR)
+    Destination Clock Delay (DCD):    2.500ns = ( 12.500 - 10.000 ) 
+    Source Clock Delay      (SCD):    2.796ns
+    Clock Pessimism Removal (CPR):    0.073ns
+  Clock Uncertainty:      0.135ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE + UU
+    Total System Jitter     (TSJ):    0.071ns
+    Total Input Jitter      (TIJ):    0.000ns
+    Discrete Jitter          (DJ):    0.000ns
+    Phase Error              (PE):    0.000ns
+    User Uncertainty         (UU):    0.100ns
+
+    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------
+                         (clock core_clk rise edge)
+                                                      0.000     0.000 r  
+                                                      0.000     0.000 r  clk (IN)
+                         net (fo=0)                   0.973     0.973    clk
+    BUFGCTRL_X0Y0        BUFG (Prop_bufg_I_O)         0.101     1.074 r  core_clock_buffer/O
+                         net (fo=18864, routed)       1.722     2.796    core/core/population_stepper/clk
+    SLICE_X68Y33         FDRE                                         r  core/core/population_stepper/selected_membrane_reg[9]/C
+  -------------------------------------------------------------------    -------------------
+    SLICE_X68Y33         FDRE (Prop_fdre_C_Q)         0.456     3.252 f  core/core/population_stepper/selected_membrane_reg[9]/Q
+                         net (fo=6, routed)           1.378     4.630    core/core/population_stepper/selected_membrane[9]
+    SLICE_X60Y42         LUT5 (Prop_lut5_I0_O)        0.152     4.782 f  core/core/population_stepper/result_membrane[7]_i_20/O
+                         net (fo=4, routed)           0.787     5.569    core/core/population_stepper/result_membrane[7]_i_20_n_0
+    SLICE_X58Y42         LUT3 (Prop_lut3_I2_O)        0.355     5.924 f  core/core/population_stepper/result_membrane[7]_i_14/O
+                         net (fo=3, routed)           0.309     6.234    core/core/population_stepper/result_membrane[7]_i_14_n_0
+    SLICE_X58Y42         LUT6 (Prop_lut6_I3_O)        0.331     6.565 r  core/core/population_stepper/result_membrane[3]_i_3/O
+                         net (fo=2, routed)           0.497     7.062    core/core/population_stepper/result_membrane[3]_i_3_n_0
+    SLICE_X59Y42         LUT6 (Prop_lut6_I0_O)        0.124     7.186 r  core/core/population_stepper/result_membrane[3]_i_6/O
+                         net (fo=1, routed)           0.000     7.186    core/core/population_stepper/result_membrane[3]_i_6_n_0
+    SLICE_X59Y42         CARRY4 (Prop_carry4_S[3]_CO[3])
+                                                      0.401     7.587 r  core/core/population_stepper/result_membrane_reg[3]_i_2/CO[3]
+                         net (fo=1, routed)           0.000     7.587    core/core/population_stepper/result_membrane_reg[3]_i_2_n_0
+    SLICE_X59Y43         CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.114     7.701 r  core/core/population_stepper/result_membrane_reg[7]_i_2/CO[3]
+                         net (fo=1, routed)           0.000     7.701    core/core/population_stepper/result_membrane_reg[7]_i_2_n_0
+    SLICE_X59Y44         CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.114     7.815 r  core/core/population_stepper/result_membrane_reg[11]_i_2/CO[3]
+                         net (fo=1, routed)           0.000     7.815    core/core/population_stepper/result_membrane_reg[11]_i_2_n_0
+    SLICE_X59Y45         CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.114     7.929 r  core/core/population_stepper/result_membrane_reg[15]_i_7/CO[3]
+                         net (fo=1, routed)           0.000     7.929    core/core/population_stepper/result_membrane_reg[15]_i_7_n_0
+    SLICE_X59Y46         CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.114     8.043 r  core/core/population_stepper/result_membrane_reg[15]_i_72/CO[3]
+                         net (fo=1, routed)           0.000     8.043    core/core/population_stepper/result_membrane_reg[15]_i_72_n_0
+    SLICE_X59Y47         CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.114     8.157 r  core/core/population_stepper/result_membrane_reg[15]_i_58/CO[3]
+                         net (fo=1, routed)           0.000     8.157    core/core/population_stepper/result_membrane_reg[15]_i_58_n_0
+    SLICE_X59Y48         CARRY4 (Prop_carry4_CI_O[1])
+                                                      0.334     8.491 f  core/core/population_stepper/result_membrane_reg[15]_i_29/O[1]
+                         net (fo=4, routed)           0.870     9.361    core/core/population_stepper/result_membrane_reg[15]_i_29_n_6
+    SLICE_X57Y47         LUT2 (Prop_lut2_I0_O)        0.303     9.664 r  core/core/population_stepper/result_membrane[15]_i_42/O
+                         net (fo=1, routed)           0.000     9.664    core/core/population_stepper/result_membrane[15]_i_42_n_0
+    SLICE_X57Y47         CARRY4 (Prop_carry4_S[0]_CO[3])
+                                                      0.532    10.196 r  core/core/population_stepper/result_membrane_reg[15]_i_9/CO[3]
+                         net (fo=1, routed)           0.000    10.196    core/core/population_stepper/result_membrane_reg[15]_i_9_n_0
+    SLICE_X57Y48         CARRY4 (Prop_carry4_CI_CO[0])
+                                                      0.271    10.467 r  core/core/population_stepper/result_membrane_reg[15]_i_4/CO[0]
+                         net (fo=84, routed)          1.332    11.799    core/core/population_stepper/result_membrane_reg[15]_i_4_n_3
+    SLICE_X46Y33         LUT5 (Prop_lut5_I1_O)        0.373    12.172 r  core/core/population_stepper/result_refractory[2]_rep__1_i_1/O
+                         net (fo=1, routed)           0.000    12.172    core/core/population_stepper/result_refractory[2]_rep__1_i_1_n_0
+    SLICE_X46Y33         FDRE                                         r  core/core/population_stepper/result_refractory_reg[2]_rep__1/D
+  -------------------------------------------------------------------    -------------------
+
+                         (clock core_clk rise edge)
+                                                     10.000    10.000 r  
+                                                      0.000    10.000 r  clk (IN)
+                         net (fo=0)                   0.924    10.924    clk
+    BUFGCTRL_X0Y0        BUFG (Prop_bufg_I_O)         0.091    11.015 r  core_clock_buffer/O
+                         net (fo=18864, routed)       1.484    12.500    core/core/population_stepper/clk
+    SLICE_X46Y33         FDRE                                         r  core/core/population_stepper/result_refractory_reg[2]_rep__1/C
+                         clock pessimism              0.073    12.572    
+                         clock uncertainty           -0.135    12.437    
+    SLICE_X46Y33         FDRE (Setup_fdre_C_D)        0.079    12.516    core/core/population_stepper/result_refractory_reg[2]_rep__1
+  -------------------------------------------------------------------
+                         required time                         12.516    
+                         arrival time                         -12.172    
+  -------------------------------------------------------------------
+                         slack                                  0.344    
+
+
+
+

@@ -1,0 +1,18 @@
+ECHO is off.
+ECHO is off.
+
+****** xsim v2023.2 (64-bit)
+  **** SW Build 4029153 on Fri Oct 13 20:14:34 MDT 2023
+  **** IP Build 4028589 on Sat Oct 14 00:45:43 MDT 2023
+  **** SharedData Build 4025554 on Tue Oct 10 17:18:54 MDT 2023
+    ** Copyright 1986-2022 Xilinx, Inc. All Rights Reserved.
+    ** Copyright 2022-2023 Advanced Micro Devices, Inc. All Rights Reserved.
+
+source xsim.dir/aer_network/xsim_script.tcl
+# xsim {aer_network} -testplusarg DATA_DIR=D:/RTL_PROJECT/build/aer_network -autoloadwcfg -runall
+Time resolution is 1 ps
+run -all
+PASS: AER network 8 frames, 410 packets, 2048 state updates; input stalls=2461006 output stalls=686 full-output stalls=575
+$finish called at time : 7740890 ns : File "D:/RTL_PROJECT/rtl/tb/lif_aer_snn_core_tb.v" Line 172
+exit
+INFO: [Common 17-206] Exiting xsim at Tue Nov 10 18:56:09 2026...

@@ -1,0 +1,170 @@
+# Framed AER around the 256-state core
+
+The requirement source is `Screenshot 2026-10-28 143938.png`. The new
+`rtl/lif_aer_snn_core.v` wraps the existing `lif_snn_core` with four input
+queues, a round-robin arbiter, a time-step barrier and an output queue.
+The core still stores 256 neuron states and 65,536 signed four-bit weights.
+Its shared calculator still uses read, calculate and write clocks.
+
+## Clocked request/acknowledge contract
+
+All ports use the same rising-edge clock. A token transfers on an edge
+where **request AND acknowledge are high**. Here acknowledgment indicates
+the receiver can accept the token; it may be high before a request arrives.
+
+- Keep request, address and end flag stable until the transfer edge.
+- After a transfer, withdraw request or present the next token.
+- Holding request high across several acknowledged edges sends several
+  tokens. This is a synchronous streaming handshake, not a four-phase
+  asynchronous link. A different clock domain needs a separate CDC bridge.
+- Reset cancels queued tokens, held grants and partial steps. It clears
+  neuron/recurrent state but preserves programmed synapse weights.
+
+| Token | Address | End flag |
+|---|---|---:|
+| Spike from neuron/source 0 | `8'h00` | 0 |
+| Spike from neuron/source 255 | `8'hff` | 0 |
+| End of the current time step | Ignored; output uses zero | 1 |
+
+`in_addr[8*p +: 8]`, `in_end[p]`, `in_req[p]` and `in_ack[p]` belong to
+input port `p`, for `p=0..3`. All 256 addresses are valid. No address is
+reserved as an end marker; the separate flag carries that information.
+
+## Assigning events to steps
+
+Each producer sends its events for a step followed by **one separate end
+token**. Every port must send an end token, even if it has no spikes.
+An end token does not also carry a spike. For example:
+
+```text
+Port 0: spike 0, spike 225, END | spike 10, END | ...
+Port 1: END                    | END           | ...
+Port 2: spike 255, END         | END           | ...
+Port 3: END                    | END           | ...
+```
+
+The input arbiter reads only ports that have not ended the current step.
+Later-step tokens can remain queued behind each port's end token without
+being included in the current input bitmap. Queue-full conditions apply
+backpressure. Independent producers must continue making progress on their
+current step; a missing end token intentionally prevents the barrier opening.
+
+After all four end tokens have been consumed, the wrapper captures neuron
+configuration and launches exactly one core step. Configuration is held
+internally throughout that calculation. Weights are accepted only on edges
+with `weight_write && weight_ready`; program all entries before inference.
+Input requests have priority over a simultaneous weight request.
+
+The existing source bitmap represents **one active bit per source per step**.
+Repeated input addresses coalesce, including repetition across ports and
+overlap with a remembered recurrent spike. The Python network now uses that
+same source-set rule. Previously it counted duplicates in its input list
+multiple times, an edge case not exercised by the earlier ring/MNIST tests.
+This correction does not change preprocessing, trained weights or the
+recorded MNIST predictions. It is explicitly tested with signed connections.
+The stress fixture also gives source 255 a +3 connection to neuron 128:
+at the overlap step the correct membrane is 6, below threshold 8; counting
+that source twice would cause an incorrect spike. The RTL state comparison
+checks this witness as well as the complete population.
+
+## Output framing and backpressure
+
+The wrapper snapshots the finished spike bitmap, emits each set address
+once in ascending order, then queues an output end token. An empty spike
+bitmap still produces its end token. It retains pending spikes when the
+output queue is full and holds the queue head stable until acknowledged.
+
+`tick_done` pulses when the neuron calculation has completed. `frame_done`
+pulses when the receiver accepts the output end token. The next step starts
+collecting only after that output frame has drained; its input tokens may
+already be queued. A stalled output receiver therefore stalls step progress
+and eventually backpressures input producers without overwriting a result.
+`frame_done` is a completion indication, not the future output-spike IRQ.
+
+Default queue depths are 16 tokens per input and 16 output tokens. The
+integration regression deliberately uses depths 3 and 4 to force wraparound
+and full queues. Depth one and non-power-of-two wraparound have unit coverage.
+
+## Round-robin BDD block
+
+`aer_rr_arbiter.v` selects one queued port and registers its token and one-hot
+grant. It changes the next-port pointer only when that token is accepted.
+A selection becomes visible for at least one clock before it can transfer;
+there is an idle/select cycle between grants. Service is one token per two
+clocks when the collector accepts continuously.
+
+`aer_rr_select.v` is generated by `python -m tools.generate_aer_rr` as a
+reduced ordered BDD. The six inputs are two next-port bits and four request
+bits. Sharing identical subgraphs and eliminating equal-branch nodes yields
+38 nonterminal nodes. All 64 Boolean combinations are checked against an
+independent cyclic-priority loop; the stateful scheduler is also compared
+against `golden_model.aer.RoundRobinAERArbiter` under stalls and reset.
+The chosen BDD implementation satisfies the requested BDD representation;
+no ESPRESSO minimization or optimal area claim is made.
+
+CTL fairness and refractory proofs remain separate required work. Progress
+requires eventual receiver acknowledgment, all producers eventually ending
+their current step, and no perpetual reset. Simulation is not a CTL proof.
+
+## Run the verification
+
+From the documented active workspace `D:/RTL_PROJECT`:
+
+```powershell
+python -m unittest discover -s tests -v
+python -m tools.run_aer_rtl_check
+python -m tools.run_aer_rtl_check --simulator xsim
+python -m tools.run_aer_rtl_check --scenario mnist
+python -m tools.run_aer_rtl_check --scenario mnist --simulator xsim
+```
+
+The stress run checks eight steps, 410 output tokens (402 spikes and eight
+end markers), all 2,048 state updates, input/output stalls, FIFO-full output
+retention, partial-step reset, signed inhibition and recurrence. The MNIST
+run uses the same offline-trained checkpoint and 20 held-out images as the
+bitmap-interface comparison: 160 steps and 40,960 state updates. It verifies
+all output membranes/refractory counters, so the final class scores match
+Python; accuracy remains 17/20 (85%). With the existing high-threshold score
+readout, these MNIST runs emit end markers rather than output spikes. The
+stress run supplies the nonzero spike-transport verification.
+
+Evidence is generated under `build/aer_network/` and `build/aer_mnist/`.
+Each simulator report includes RTL/reference hashes, test parameters and
+input/expected-vector hashes. The stress and MNIST directories are separate.
+
+For the Vivado GUI, generate vectors with `--generate-only`, reopen the saved
+project, then source the selected scenario's `configure_vivado.tcl` before
+launching behavioral simulation and using `run all`. Example:
+
+```tcl
+source D:/RTL_PROJECT/build/aer_network/configure_vivado.tcl
+launch_simulation -simset sim_1 -mode behavioral
+run all
+```
+
+Inspect `in_req`, `in_ack`, `in_addr`, `in_end`, `out_req`, `out_ack`,
+`out_addr`, `out_end`, `tick_done` and `frame_done`. Internally, `closed_ports`,
+`input_bitmap`, `arbiter.held_grant` and the queue levels explain stalls.
+
+The saved synthesis top is the AER wrapper; the older core/bitmap testbenches
+remain available. Run `tools/synth_aer256.tcl` for constrained synthesis,
+placement and routing in `lif_aer_timing_harness`. The harness has actual
+launch/capture registers and a BUFG, with the same 10 ns clock and 0.100 ns
+uncertainty used for the core-only run. Results go to `build/aer256_timing/`.
+Do not substitute the older core-only timing results for this new wrapper.
+
+The completed Vivado 2023.2 run on `xc7z020clg400-1` met routed setup
+**+0.300 ns** and hold **+0.024 ns**, with zero failing endpoints and zero
+TNS/THS. All routable nets completed. No false-path or multicycle exceptions
+were applied. The AER-wrapped core uses 9,350 LUTs, 18,337 flip-flops, eight
+RAMB36E1 blocks and zero DSPs. The timing fixture adds one LUT, 431 flip-flops
+and one BUFG. Its virtual external ports do not establish board timing.
+DRC reports zero errors and retains two context warnings: observation ports
+have no physical output loads, and this standalone fixture has no PS7 block.
+
+```powershell
+& 'F:\Xilinx\Vivado\2023.2\bin\vivado.bat' -mode batch -source tools/synth_aer256.tcl -log build/aer256_timing.log -journal build/aer256_timing.jou
+```
+
+Board interfaces, hardware rate encoding, AXI/RV32/DMA, IRQ/UART, CTL proofs
+and the paper optimization comparison remain required integration work.

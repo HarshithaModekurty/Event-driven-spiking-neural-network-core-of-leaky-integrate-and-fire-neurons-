@@ -5,6 +5,20 @@ Report date: 2026-11-10. Authoritative specification:
 
 ## Current milestone
 
+The integrated top is now `lif_aer_snn_core`: four clocked AER input queues,
+a round-robin BDD arbiter, per-port end-of-step markers, and a backpressured
+output queue wrap the existing 256-state core. See `AER_PROTOCOL.md` for
+the transfer contract, framing, test commands and remaining formal work.
+
+Icarus and Vivado XSim both passed the AER stress run: eight steps, 410
+output tokens (402 spikes plus eight end markers), and all 2,048 state
+updates. It exercises full output queues, input/output stalls, address 255,
+partial-frame reset and repeated/external-recurrent source overlaps. Both
+also passed the trained 20-image MNIST path through AER: 160 framed steps,
+40,960 state updates and matching final class scores. The same learned
+weights still score 17/20 (85%) on that fixed subset. Source and vector
+hashes are recorded separately for each simulator/scenario.
+
 The primary classifier is corrected to **256 actual time-multiplexed LIF
 states and a 256x256 signed four-bit synapse table**. Ten output neurons are
 included within those 256. A single shared LIF transition unit uses separate
@@ -29,7 +43,9 @@ architectural changes and uncertain requirements.
 
 ## Verification completed for the correction
 
-- **11 unit/directed RTL tests passed**, including pipeline commit/reset behavior, last-pixel/bias/output address
+- **15 unit/directed RTL tests passed**, including queue wrap/full/reset,
+  BDD truth-table equivalence, Python arbiter traces, duplicate-source semantics,
+  pipeline commit/reset behavior, last-pixel/bias/output address
   boundaries, square matrix dimensions, signed currents, offset recurrence,
   readout tie handling, all-zero and maximum scores.
 - Icarus classifier: **20/20 Python/RTL predictions matched**, **160 ticks**,
@@ -85,13 +101,21 @@ the full-core baseline above.
 
 ## Traceability to every screenshot requirement
 
+The new AER wrapper also completed 100 MHz implementation in a registered
+timing fixture: **setup +0.300 ns, hold +0.024 ns**, zero failing endpoints.
+The AER-wrapped core uses **9,350 LUTs, 18,337 flip-flops, eight RAMB36E1
+blocks and zero DSPs** in this run. Fixture overhead is one LUT, 431
+flip-flops and one BUFG. Reports are under `build/aer256_timing/`.
+This measurement includes the queues and scheduler, and remains distinct
+from full-SoC or board timing closure.
+
 | Screenshot requirement | Current status / evidence |
 |---|---|
 | 256 time-multiplexed LIF states, 16-bit membrane, leak, threshold, reset, refractory | Implemented; full-population stress and integrated state comparisons |
 | 256x256 1-bit or 4-bit synapse memory in BRAM | Four-bit table implemented and mapped to 8 RAMB36E1 blocks in full-core synthesis |
-| AER input/output queues and handshake | Not implemented in RTL; current parallel spike bitmap is a test interface |
-| Time-step accumulate, leak/fire, emit controller | Core implemented; host/frame protocol still required |
-| Round-robin AER arbiter as ESPRESSO/BDD block | Python reference only; RTL and required representation/optimization remain |
+| AER input/output queues and handshake | Clocked request/acknowledge, bounded queues, backpressure and explicit end markers implemented and simulated |
+| Time-step accumulate, leak/fire, emit controller | Framed collect/compute/emit/drain controller implemented; future DMA/host integration remains |
+| Round-robin AER arbiter as ESPRESSO/BDD block | Four-port RTL arbiter with generated 38-node reduced ordered BDD; all 64 grant combinations and stateful Python traces checked |
 | Input rate encoder | Python reference; hardware encoder/integration remains |
 | RV32 weight loading over AXI4-Lite | Not implemented |
 | DMA spike delivery | Not implemented |
@@ -102,16 +126,16 @@ the full-core baseline above.
 | Classification accuracy | 17/20 for the selected held-out simulation subset; full-test-set/on-board measurements remain |
 | Synaptic events per inference | Python counts saved per image; hardware counter and comparison remain |
 | Resource table / baseline vs paper design | Full-core baseline resource table measured; paper implementation/comparison still required |
-| CTL eventual AER acknowledgment (fairness) | Not proven; needs implemented AER/arbiter and formal model |
+| CTL eventual AER acknowledgment (fairness) | RTL/BDD implemented; CTL model, explicit environment assumptions and proof still required |
 | CTL no firing when refractory | Directed simulation exists; CTL proof not completed |
 | Complete pattern-to-class UART/LED demonstration | Not completed on FPGA |
 
 ## Next required milestone
 
-Build AER input/output queues and the request/acknowledge protocol around the
-fixed-size core. Implement and verify round-robin arbitration, including the
-specified ESPRESSO/BDD work and fairness assumptions, then add hardware input
-encoding/frame sequencing. Continue with RV32/AXI4-Lite, DMA, interrupt and
+Develop the CTL fairness/refractory model for the implemented scheduler/core,
+with receiver and end-of-step progress assumptions made explicit. Add the
+hardware rate encoder and connect it to the framed input interface.
+Continue with RV32/AXI4-Lite, DMA, interrupt and
 UART integration. Add the formal proofs and research optimization comparison;
 measure the complete implementation and demonstrate it on the target board.
 Do not claim these requirements from the present core simulation results.
@@ -123,12 +147,15 @@ cd D:\RTL_PROJECT
 python -m tools.run_mnist_rtl_check
 python -m tools.run_mnist_rtl_check --simulator xsim
 python -m unittest discover -s tests -v
+python -m tools.run_aer_rtl_check
+python -m tools.run_aer_rtl_check --scenario mnist --simulator xsim
 ```
 
 For GUI simulation and evidence formats, read `MNIST_RTL_VERIFICATION.md`.
-The `.xpr` synthesis top is now the full default `lif_snn_core`, and its saved
-simulation top is the 256-state `lif_mnist_tb`. The dedicated implementation
-script instantiates that full default core in a timing-only fixture with
+The `.xpr` synthesis top is now `lif_aer_snn_core`, and its saved simulation
+top is `lif_aer_snn_core_tb`. The older bitmap classifier is selectable with
+its generated configuration script. Dedicated implementation scripts
+instantiate the old core or the new AER top in timing-only fixtures with
 launch/capture registers and a real clock buffer. It does not modify an open
 Vivado project. Core timing in that registered context does not establish
 future full-system or board timing closure.

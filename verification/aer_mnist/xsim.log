@@ -1,0 +1,20 @@
+ECHO is off.
+ECHO is off.
+
+****** xsim v2023.2 (64-bit)
+  **** SW Build 4029153 on Fri Oct 13 20:14:34 MDT 2023
+  **** IP Build 4028589 on Sat Oct 14 00:45:43 MDT 2023
+  **** SharedData Build 4025554 on Tue Oct 10 17:18:54 MDT 2023
+    ** Copyright 1986-2022 Xilinx, Inc. All Rights Reserved.
+    ** Copyright 2022-2023 Advanced Micro Devices, Inc. All Rights Reserved.
+
+source xsim.dir/aer_network/xsim_script.tcl
+# xsim {aer_network} -testplusarg DATA_DIR=D:/RTL_PROJECT/build/aer_mnist -autoloadwcfg -runall
+Time resolution is 1 ps
+run -all
+PASS: AER network 160 frames, 160 packets, 40960 state updates; input stalls=42599130 output stalls=2551 full-output stalls=0
+$finish called at time : 122444590 ns : File "D:/RTL_PROJECT/rtl/tb/lif_aer_snn_core_tb.v" Line 172
+run: Time (s): cpu = 00:00:00 ; elapsed = 00:01:07 . Memory (MB): peak = 199.270 ; gain = 0.000
+exit
+INFO: xsimkernel Simulation Memory Usage: 11556 KB (Peak: 11556 KB), Simulation CPU Usage: 52999 ms
+INFO: [Common 17-206] Exiting xsim at Tue Nov 10 18:44:06 2026...

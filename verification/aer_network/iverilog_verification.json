@@ -1,0 +1,36 @@
+{
+  "frames": 8,
+  "neuron_states": 256,
+  "synapse_entries": 65536,
+  "state_updates_checked": 2048,
+  "input_packet_stride": 100,
+  "output_packets": 410,
+  "output_spikes": 402,
+  "simulator": "iverilog",
+  "scenario": "stress",
+  "parameters": {
+    "FRAMES": 8,
+    "PORT_WORDS": 100,
+    "OUTPUT_WORDS": 410
+  },
+  "artifact_sha256": {
+    "weights.hex": "3e724f0c678374673baeb320946c7d01d15882e87589cda863799bd73d3c9a44",
+    "input_packets.hex": "9e52addf370b95b68dc68399186bbd716e42a2abdc639cbeb625e2fc41611c3b",
+    "input_counts.hex": "e8158ea67c157ee2ee083f8da37b32f845c3bab7d809466f9cd6f82f25545f62",
+    "output_packets.hex": "8357b57294ad086b4f71ffde51a9643f8e8e6fc91adee650c5849b7038356d1d",
+    "states.hex": "b164733d71c6ccb275213567bd657b877330e56d06abf8b933c418ffc8db8eb5"
+  },
+  "source_sha256": {
+    "rtl\\aer_event_fifo.v": "be36fc03305342feaa62eeb8f43c5cef0f5b3c0fe2a654876da55b32f009a45f",
+    "rtl\\aer_rr_select.v": "0386d354e6215f8e4eb447d7d3f04a96678b544bfd7406f17bcce91e661da8b5",
+    "rtl\\aer_rr_arbiter.v": "10d3d3e1fce8bc49290ea7f7a5bc2ed0fa25d0ed1e8209802ad12b0e92a3d2bc",
+    "rtl\\lif_transition.v": "41739aee8a2d2fd8ed55bf3ebf3c8ac9151a26ae7bc75d66d78d0884adac9f1f",
+    "rtl\\lif_population_stepper.v": "ebb8240e8addb568388eebfe9ba8dc344c006d554cc82af8b8d31dce4a24b515",
+    "rtl\\lif_synapse_router.v": "34a031f294899cfc2214047c2d683d2f05a8bfab7749a00dc90deddd2c165c44",
+    "rtl\\lif_snn_core.v": "284cd7bcde09e0a9aed17b294081412c8cd8f82a3942f4cfd1bd32dc04f7b2fb",
+    "rtl\\lif_aer_snn_core.v": "3ee9f60555e40d21839647231ac712ae546aafe5e0c9ff959779f6e947c73d2e",
+    "rtl\\tb\\lif_aer_snn_core_tb.v": "88bece7957f144186cd9b8d28a779ae918d6fa74d2c2abe892302779204fbddc",
+    "golden_model\\network.py": "26c465f719749e2191acdf6a01877cf6cdda868c94b31f32a2c792f53829accc",
+    "golden_model\\lif.py": "d1ea06ac0c3ac242799b2b13c6525c139b2298f5cf10b0477428e5c9dc79fb37"
+  }
+}

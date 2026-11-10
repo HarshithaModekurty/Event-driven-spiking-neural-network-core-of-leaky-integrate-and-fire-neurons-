@@ -1,5 +1,11 @@
 # MNIST verification with the required 256-state core
 
+This page documents the original bitmap-interface regression. The new
+framed AER regression sends the same learned inputs through queues and the
+arbiter; use `python -m tools.run_aer_rtl_check --scenario mnist` or add
+`--simulator xsim`. See `AER_PROTOCOL.md`. The saved project now defaults to
+the AER testbench; its generated configuration can select either regression.
+
 The authoritative requirement is `Screenshot 2026-10-28 143938.png`.
 The classifier now instantiates **256 actual LIF states**, a single shared
 LIF transition datapath, and **256x256 signed four-bit synapse entries**.
@@ -158,8 +164,9 @@ test-set benchmark. The mistakes are recorded, not removed from evaluation.
    address and class signals. `neuron_index` must visit all 0..255 each tick.
    The core state scan count must be 256 at completion.
 
-The saved project now selects the full core for synthesis and the 256-state
-classifier for simulation. To select the small ring regression instead,
+The saved project now selects the AER wrapper for synthesis and its framed
+testbench for simulation. The configuration script above selects the bitmap
+classifier. To select the small ring regression instead,
 close simulation and set:
 
 ```tcl

@@ -1,0 +1,42 @@
+Copyright 1986-2022 Xilinx, Inc. All Rights Reserved. Copyright 2022-2023 Advanced Micro Devices, Inc. All Rights Reserved.
+---------------------------------------------------------------------------------------------------------------------------------------------
+| Tool Version : Vivado v.2023.2 (win64) Build 4029153 Fri Oct 13 20:14:34 MDT 2023
+| Date         : Tue Nov 10 18:46:06 2026
+| Host         : DESKTOP-J3M0MBG running 64-bit major release  (build 9200)
+| Command      : report_utilization -hierarchical -file D:/RTL_PROJECT/build/aer256_timing/utilization_hierarchical.rpt
+| Design       : lif_aer_timing_harness
+| Device       : xc7z020clg400-1
+| Speed File   : -1
+| Design State : Routed
+---------------------------------------------------------------------------------------------------------------------------------------------
+
+Utilization Design Information
+
+Table of Contents
+-----------------
+1. Utilization by Hierarchy
+
+1. Utilization by Hierarchy
+---------------------------
+
++----------------------------+------------------------+------------+------------+---------+------+-------+--------+--------+------------+
+|          Instance          |         Module         | Total LUTs | Logic LUTs | LUTRAMs | SRLs |  FFs  | RAMB36 | RAMB18 | DSP Blocks |
++----------------------------+------------------------+------------+------------+---------+------+-------+--------+--------+------------+
+| lif_aer_timing_harness     |                  (top) |       9351 |       9311 |      40 |    0 | 18768 |      8 |      0 |          0 |
+|   (lif_aer_timing_harness) |                  (top) |          1 |          1 |       0 |    0 |   431 |      0 |      0 |          0 |
+|   core                     |       lif_aer_snn_core |       9350 |       9310 |      40 |    0 | 18337 |      8 |      0 |          0 |
+|     (core)                 |       lif_aer_snn_core |          7 |          7 |       0 |    0 |   589 |      0 |      0 |          0 |
+|     arbiter                |         aer_rr_arbiter |        555 |        555 |       0 |    0 |    23 |      0 |      0 |          0 |
+|     core                   |           lif_snn_core |       8573 |       8573 |       0 |    0 | 17660 |      8 |      0 |          0 |
+|       (core)               |           lif_snn_core |          1 |          1 |       0 |    0 |   258 |      0 |      0 |          0 |
+|       population_stepper   | lif_population_stepper |       7667 |       7667 |       0 |    0 | 16957 |      0 |      0 |          0 |
+|       synapse_router       |     lif_synapse_router |        906 |        906 |       0 |    0 |   445 |      8 |      0 |          0 |
+|     inputs[0].queue        |         aer_event_fifo |         29 |         21 |       8 |    0 |    13 |      0 |      0 |          0 |
+|     inputs[1].queue        |       aer_event_fifo_0 |         29 |         21 |       8 |    0 |    13 |      0 |      0 |          0 |
+|     inputs[2].queue        |       aer_event_fifo_1 |         52 |         44 |       8 |    0 |    13 |      0 |      0 |          0 |
+|     inputs[3].queue        |       aer_event_fifo_2 |         25 |         17 |       8 |    0 |    13 |      0 |      0 |          0 |
+|     output_queue           |       aer_event_fifo_3 |        102 |         94 |       8 |    0 |    13 |      0 |      0 |          0 |
++----------------------------+------------------------+------------+------------+---------+------+-------+--------+--------+------------+
+* Note: The sum of lower-level cells may be larger than their parent cells total, due to cross-hierarchy LUT combining
+
+

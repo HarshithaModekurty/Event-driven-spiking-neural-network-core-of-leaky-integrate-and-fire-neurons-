@@ -53,7 +53,7 @@ class SNNGoldenModel:
     def route_currents(self, source_spikes: Iterable[int]) -> list[int]:
         """Sum signed synapse weights from spiking sources into each target."""
         currents = [0] * self.num_neurons
-        for source in source_spikes:
+        for source in set(source_spikes):
             self._check_neuron_id(source)
             for destination, weight in enumerate(self.weights[source]):
                 currents[destination] += weight
@@ -70,7 +70,9 @@ class SNNGoldenModel:
         for source in external:
             self._check_neuron_id(source)
 
-        sources = self.pending_spikes + external
+        # A neuron/source has one spike bit per tick, as in the RTL bitmap.
+        # Repeated packets and an external/recurrent overlap assert that bit once.
+        sources = sorted(set(self.pending_spikes).union(external))
         currents = [0] * self.num_neurons
         for source in sources:
             row = self.weights[source]

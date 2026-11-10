@@ -3,6 +3,10 @@
 See [STAGE_REPORT.md](STAGE_REPORT.md) for completed work, verification results,
 remaining project stages, and the next recommended milestone.
 
+The integrated core now has framed AER input/output queues and a four-port
+round-robin BDD arbiter. See [AER_PROTOCOL.md](AER_PROTOCOL.md) for the
+request/acknowledge contract, time-step boundaries and verification commands.
+
 See [TIMING_CLOSURE.md](TIMING_CLOSURE.md) for the registered neuron-read
 schedule, constraints applied before synthesis, and routed setup/hold checks.
 

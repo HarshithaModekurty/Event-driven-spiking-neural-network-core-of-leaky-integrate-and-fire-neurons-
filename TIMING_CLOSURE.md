@@ -1,5 +1,9 @@
 # 100 MHz timing closure of the 256-state core
 
+This records the core-only timing milestone. The later AER-wrapped core is
+implemented separately by `tools/synth_aer256.tcl`; see `AER_PROTOCOL.md` and
+`build/aer256_timing/` for its own routed timing and resource results.
+
 The requirement source remains `Screenshot 2026-10-28 143938.png`. This change
 retains 256 stored LIF states, one shared update datapath, and the 256x256
 signed four-bit synapse table. It changes the update schedule, not neuron

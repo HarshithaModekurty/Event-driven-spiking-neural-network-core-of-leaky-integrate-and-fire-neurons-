@@ -1,4 +1,4 @@
-# Verification snapshot before AER integration
+# Core and AER verification snapshots
 
 These are copies of the small evidence files produced for the 256-state,
 256x256 four-bit SNN core on 2026-11-10. They preserve results in Git while
@@ -14,6 +14,12 @@ remain untracked. The snapshot is not automatically updated by a new run.
   per-image predictions and both simulator verification records. Python,
   Icarus and XSim agreed for 20 images / 160 ticks / 40,960 state updates;
   accuracy on that selected test subset was 17/20 (85%).
+
+The subsequent AER milestone adds `aer256_timing/`, `aer_network/` and
+`aer_mnist/`. These preserve the new wrapper's routed timing reports and the
+source/vector-bound simulator results separately from the original core
+milestone. See `AER_PROTOCOL.md`; neither snapshot establishes board timing
+or the outstanding CTL proofs.
 
 Reproduction commands and the original Windows paths are documented in
 `TIMING_CLOSURE.md` and `MNIST_RTL_VERIFICATION.md`. The testbench defaults

@@ -1,0 +1,18 @@
+{
+  "variables": [
+    "next_port[1]",
+    "next_port[0]",
+    "requests[3]",
+    "requests[2]",
+    "requests[1]",
+    "requests[0]"
+  ],
+  "nonterminal_nodes": 38,
+  "truth_table_rows": 64,
+  "roots": [
+    11,
+    20,
+    29,
+    39
+  ]
+}
