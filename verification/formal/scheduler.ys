@@ -1,0 +1,1 @@
+read_verilog rtl/aer_rr_select.v rtl/aer_rr_arbiter.v formal/aer_scheduler.v; prep -top aer_scheduler -flatten; opt_clean; write_smv build/formal_checks/scheduler_raw.smv

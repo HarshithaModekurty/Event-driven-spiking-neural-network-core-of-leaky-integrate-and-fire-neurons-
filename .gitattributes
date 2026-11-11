@@ -1,0 +1,34 @@
+# Verification receipts hash exact source bytes. Preserve the tested line
+# endings on checkout, independently of a developer's core.autocrlf.
+# This changes no source bytes or RTL behavior.
+.gitattributes text eol=lf
+constraints/timing_harness_100mhz.xdc text eol=lf
+constraints/timing_harness_context.xdc text eol=lf
+formal/aer_queues.v text eol=lf
+formal/aer_scheduler.v text eol=lf
+formal/lif_refractory.v text eol=lf
+golden_model/encoding.py text eol=crlf
+golden_model/lif.py text eol=crlf
+golden_model/network.py text eol=crlf
+requirements-formal.txt text eol=lf
+rtl/aer_event_fifo.v text eol=lf
+rtl/aer_rate_encoder.v text eol=lf
+rtl/aer_rr_arbiter.v text eol=lf
+rtl/aer_rr_select.v text eol=lf
+rtl/lif_aer_snn_core.v text eol=lf
+rtl/lif_population_stepper.v text eol=crlf
+rtl/lif_rate_aer_snn_core.v text eol=lf
+rtl/lif_snn_core.v text eol=crlf
+rtl/lif_synapse_router.v text eol=lf
+rtl/lif_transition.v text eol=crlf
+rtl/rate_encoder_transition.v text eol=lf
+rtl/tb/aer_rate_encoder_tb.v text eol=lf
+rtl/tb/lif_rate_snn_tb.v text eol=lf
+rtl/tb/rate_encoder_transition_tb.v text eol=lf
+tests/test_rate_encoder_rtl.py text eol=lf
+tools/check_rate_project.tcl text eol=lf
+tools/fixtures/lif_rate_timing_harness.v text eol=lf
+tools/run_formal_checks.py text eol=lf
+tools/run_rate_snn_check.py text eol=lf
+tools/setup_formal_tools.py text eol=lf
+tools/synth_rate256.tcl text eol=lf

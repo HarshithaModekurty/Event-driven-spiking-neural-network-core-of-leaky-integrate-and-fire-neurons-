@@ -1,0 +1,289 @@
+
+-- Executing script file `build/formal_checks/refractory.ys' --
+
+1. Executing Verilog-2005 frontend: rtl/lif_transition.v
+Parsing Verilog input from `rtl/lif_transition.v' to AST representation.
+Generating RTLIL representation for module `\lif_transition'.
+Successfully finished Verilog frontend.
+
+2. Executing Verilog-2005 frontend: formal/lif_refractory.v
+Parsing Verilog input from `formal/lif_refractory.v' to AST representation.
+Generating RTLIL representation for module `\lif_refractory'.
+Successfully finished Verilog frontend.
+
+3. Executing PREP pass.
+
+3.1. Executing HIERARCHY pass (managing design hierarchy).
+
+3.1.1. Analyzing design hierarchy..
+Top module:  \lif_refractory
+Used module:     \lif_transition
+
+3.1.2. Analyzing design hierarchy..
+Top module:  \lif_refractory
+Used module:     \lif_transition
+Removed 0 unused modules.
+
+3.2. Executing PROC pass (convert processes to netlists).
+
+3.2.1. Executing PROC_CLEAN pass (remove empty switches from decision trees).
+Cleaned up 0 empty switches.
+
+3.2.2. Executing PROC_RMDEAD pass (remove dead branches from decision trees).
+Marked 5 switch rules as full_case in process $proc$rtl/lif_transition.v:19$1 in module lif_transition.
+Removed a total of 0 dead cases.
+
+3.2.3. Executing PROC_PRUNE pass (remove redundant assignments in processes).
+Removed 0 redundant assignments.
+Promoted 6 assignments to connections.
+
+3.2.4. Executing PROC_INIT pass (extract init attributes).
+
+3.2.5. Executing PROC_ARST pass (detect async resets in processes).
+
+3.2.6. Executing PROC_ROM pass (convert switches to ROMs).
+Converted 0 switches.
+<suppressed ~5 debug messages>
+
+3.2.7. Executing PROC_MUX pass (convert decision trees to multiplexers).
+Creating decoders for process `\lif_transition.$proc$rtl/lif_transition.v:19$1'.
+     1/9: $4\membrane_next[15:0]
+     2/9: $3\membrane_next[15:0]
+     3/9: $2\refractory_next[15:0]
+     4/9: $2\spike_next[0:0]
+     5/9: $2\membrane_next[15:0]
+     6/9: $1\refractory_next[15:0]
+     7/9: $1\membrane_next[15:0]
+     8/9: $1\spike_next[0:0]
+     9/9: $1\leak_amount[15:0]
+
+3.2.8. Executing PROC_DLATCH pass (convert process syncs to latches).
+No latch inferred for signal `\lif_transition.\membrane_next' from process `\lif_transition.$proc$rtl/lif_transition.v:19$1'.
+No latch inferred for signal `\lif_transition.\spike_next' from process `\lif_transition.$proc$rtl/lif_transition.v:19$1'.
+No latch inferred for signal `\lif_transition.\refractory_next' from process `\lif_transition.$proc$rtl/lif_transition.v:19$1'.
+No latch inferred for signal `\lif_transition.\leaked_membrane' from process `\lif_transition.$proc$rtl/lif_transition.v:19$1'.
+No latch inferred for signal `\lif_transition.\updated_membrane' from process `\lif_transition.$proc$rtl/lif_transition.v:19$1'.
+No latch inferred for signal `\lif_transition.\leak_amount' from process `\lif_transition.$proc$rtl/lif_transition.v:19$1'.
+
+3.2.9. Executing PROC_DFF pass (convert process syncs to FFs).
+
+3.2.10. Executing PROC_MEMWR pass (convert process memory writes to cells).
+
+3.2.11. Executing PROC_CLEAN pass (remove empty switches from decision trees).
+Found and cleaned up 5 empty switches in `\lif_transition.$proc$rtl/lif_transition.v:19$1'.
+Removing empty process `lif_transition.$proc$rtl/lif_transition.v:19$1'.
+Cleaned up 5 empty switches.
+
+3.2.12. Executing OPT_EXPR pass (perform const folding).
+Optimizing module lif_refractory.
+<suppressed ~2 debug messages>
+Optimizing module lif_transition.
+<suppressed ~1 debug messages>
+
+3.3. Executing CHECK pass (checking for obvious problems).
+Checking module lif_refractory...
+Checking module lif_transition...
+Found and reported 0 problems.
+
+3.4. Executing FLATTEN pass (flatten design).
+Deleting now unused module lif_transition.
+<suppressed ~1 debug messages>
+
+3.5. Executing FUTURE pass.
+
+3.6. Executing OPT_EXPR pass (perform const folding).
+Optimizing module lif_refractory.
+
+3.7. Executing CHECK pass (checking for obvious problems).
+Checking module lif_refractory...
+Found and reported 0 problems.
+
+3.8. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \lif_refractory..
+Removed 0 unused cells and 40 unused wires.
+<suppressed ~1 debug messages>
+
+3.9. Executing OPT pass (performing simple optimizations).
+
+3.9.1. Executing OPT_EXPR pass (perform const folding).
+Optimizing module lif_refractory.
+
+3.9.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\lif_refractory'.
+Computing hashes of 35 cells of `\lif_refractory'.
+Finding duplicate cells in `\lif_refractory'.
+Computing hashes of 33 cells of `\lif_refractory'.
+Finding duplicate cells in `\lif_refractory'.
+<suppressed ~6 debug messages>
+Removed a total of 2 cells.
+
+3.9.3. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \lif_refractory..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+    dead port 1/2 on $mux $flatten\dut.$procmux$23.
+    dead port 1/2 on $mux $flatten\dut.$procmux$26.
+    dead port 1/2 on $mux $flatten\dut.$procmux$29.
+    dead port 1/2 on $mux $flatten\dut.$procmux$35.
+    dead port 1/2 on $mux $flatten\dut.$procmux$38.
+    dead port 1/2 on $mux $flatten\dut.$procmux$44.
+    dead port 1/2 on $mux $flatten\dut.$procmux$50.
+    dead port 1/2 on $mux $flatten\dut.$procmux$56.
+Removed 8 multiplexer ports.
+<suppressed ~21 debug messages>
+
+3.9.4. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \lif_refractory.
+Performed a total of 0 changes.
+
+3.9.5. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\lif_refractory'.
+Computing hashes of 25 cells of `\lif_refractory'.
+Finding duplicate cells in `\lif_refractory'.
+Removed a total of 0 cells.
+
+3.9.6. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \lif_refractory..
+Removed 0 unused cells and 10 unused wires.
+<suppressed ~1 debug messages>
+
+3.9.7. Executing OPT_EXPR pass (perform const folding).
+Optimizing module lif_refractory.
+
+3.9.8. Rerunning OPT passes. (Maybe there is more to do..)
+
+3.9.9. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \lif_refractory..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Removed 0 multiplexer ports.
+<suppressed ~13 debug messages>
+
+3.9.10. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \lif_refractory.
+Performed a total of 0 changes.
+
+3.9.11. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\lif_refractory'.
+Computing hashes of 25 cells of `\lif_refractory'.
+Finding duplicate cells in `\lif_refractory'.
+Removed a total of 0 cells.
+
+3.9.12. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \lif_refractory..
+
+3.9.13. Executing OPT_EXPR pass (perform const folding).
+Optimizing module lif_refractory.
+
+3.9.14. Finished fast OPT passes. (There is nothing left to do.)
+
+3.10. Executing WREDUCE pass (reducing word size of cells).
+Removed top 16 bits (of 33) from port B of cell lif_refractory.$flatten\dut.$gt$rtl/lif_transition.v:42$9 ($gt).
+Removed top 32 bits (of 33) from port B of cell lif_refractory.$flatten\dut.$lt$rtl/lif_transition.v:40$8 ($lt).
+Removed top 16 bits (of 33) from port B of cell lif_refractory.$flatten\dut.$ge$rtl/lif_transition.v:36$7 ($ge).
+Removed top 15 bits (of 16) from port B of cell lif_refractory.$flatten\dut.$sub$rtl/lif_transition.v:35$6 ($sub).
+Removed top 16 bits (of 33) from port A of cell lif_refractory.$flatten\dut.$sub$rtl/lif_transition.v:26$3 ($sub).
+Removed top 16 bits (of 33) from port B of cell lif_refractory.$flatten\dut.$sub$rtl/lif_transition.v:26$3 ($sub).
+Converting cell lif_refractory.$flatten\dut.$sub$rtl/lif_transition.v:26$3 ($sub) from signed to unsigned.
+Removed top 15 bits (of 33) from port Y of cell lif_refractory.$flatten\dut.$sub$rtl/lif_transition.v:26$3 ($sub).
+Removed top 1 bits (of 17) from port A of cell lif_refractory.$flatten\dut.$sub$rtl/lif_transition.v:26$3 ($sub).
+Removed top 1 bits (of 17) from port B of cell lif_refractory.$flatten\dut.$sub$rtl/lif_transition.v:26$3 ($sub).
+Removed top 1 bits (of 18) from port Y of cell lif_refractory.$flatten\dut.$sub$rtl/lif_transition.v:26$3 ($sub).
+
+3.11. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \lif_refractory..
+
+3.12. Executing MEMORY_COLLECT pass (generating $mem cells).
+
+3.13. Executing OPT pass (performing simple optimizations).
+
+3.13.1. Executing OPT_EXPR pass (perform const folding).
+Optimizing module lif_refractory.
+
+3.13.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\lif_refractory'.
+Computing hashes of 25 cells of `\lif_refractory'.
+Finding duplicate cells in `\lif_refractory'.
+Removed a total of 0 cells.
+
+3.13.3. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \lif_refractory..
+
+3.13.4. Finished fast OPT passes.
+
+3.14. Executing SORT pass.
+
+3.15. Printing statistics.
+
+=== lif_refractory ===
+
+        +----------Local Count, excluding submodules.
+        | 
+       43 wires
+      492 wire bits
+       27 public wires
+      386 public wire bits
+       10 ports
+      120 port bits
+       25 cells
+        1   $add
+        2   $eq
+        1   $ge
+        1   $gt
+        1   $logic_and
+        2   $logic_not
+        2   $logic_or
+        1   $lt
+        9   $mux
+        1   $reduce_bool
+        1   $scopeinfo
+        1   $shr
+        2   $sub
+
+3.16. Executing CHECK pass (checking for obvious problems).
+Checking module lif_refractory...
+Found and reported 0 problems.
+
+4. Executing SAT pass (solving SAT problems in the circuit).
+Using SAT solver `minisat`.
+
+Setting up SAT problem:
+Final constraint equation: { } = { }
+Imported 25 cells to SAT database.
+Import proof-constraint: \safe = 1'1
+Import proof-constraint: \countdown_safe = 1'1
+Final proof equation: { \countdown_safe \safe } = 2'11
+Import show expression: \current
+Import show expression: \leak_enable
+Import show expression: \leak_shift
+Import show expression: \membrane
+Import show expression: \refractory
+Import show expression: \refractory_period
+Import show expression: \reset_value
+Import show expression: \threshold
+Import show expression: \countdown_safe
+Import show expression: \safe
+
+Solving problem with 2495 variables and 6757 clauses..
+SAT proof finished - no model found: SUCCESS!
+
+                  /$$$$$$      /$$$$$$$$     /$$$$$$$    
+                 /$$__  $$    | $$_____/    | $$__  $$   
+                | $$  \ $$    | $$          | $$  \ $$   
+                | $$  | $$    | $$$$$       | $$  | $$   
+                | $$  | $$    | $$__/       | $$  | $$   
+                | $$/$$ $$    | $$          | $$  | $$   
+                |  $$$$$$/ /$$| $$$$$$$$ /$$| $$$$$$$//$$
+                 \____ $$$|__/|________/|__/|_______/|__/
+                       \__/                              
+
+5. Executing SMV backend.
+
+5.1. Executing BMUXMAP pass.
+
+5.2. Executing DEMUXMAP pass.
+
+5.3. Executing BWMUXMAP pass.
+Creating SMV representation of module lif_refractory.

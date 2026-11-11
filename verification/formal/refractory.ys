@@ -1,0 +1,1 @@
+read_verilog rtl/lif_transition.v formal/lif_refractory.v; prep -top lif_refractory -flatten; sat -verify -prove safe 1 -prove countdown_safe 1 -show-inputs -show-outputs; write_smv build/formal_checks/refractory_raw.smv

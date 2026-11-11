@@ -1,0 +1,1 @@
+read_verilog build/formal_checks/priority_mutant.v rtl/aer_rr_arbiter.v formal/aer_scheduler.v; prep -top aer_scheduler -flatten; opt_clean; write_smv build/formal_checks/priority_raw.smv

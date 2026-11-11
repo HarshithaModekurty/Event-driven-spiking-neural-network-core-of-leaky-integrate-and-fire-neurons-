@@ -1,0 +1,2 @@
+PASS: rate/AER/SNN 3 images, 24 ticks, 3906 encoder tokens, 1908 output tokens, 6144 state updates
+D:\RTL_PROJECT\rtl\tb\lif_rate_snn_tb.v:121: $finish called at 28169870000 (1ps)

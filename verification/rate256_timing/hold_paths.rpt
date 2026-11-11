@@ -1,0 +1,548 @@
+Copyright 1986-2022 Xilinx, Inc. All Rights Reserved. Copyright 2022-2023 Advanced Micro Devices, Inc. All Rights Reserved.
+---------------------------------------------------------------------------------------------------------------------------------------------
+| Tool Version : Vivado v.2023.2 (win64) Build 4029153 Fri Oct 13 20:14:34 MDT 2023
+| Date         : Wed Nov 11 12:51:00 2026
+| Host         : DESKTOP-J3M0MBG running 64-bit major release  (build 9200)
+| Command      : report_timing -delay_type min -max_paths 10 -file D:/RTL_PROJECT/build/rate256_timing/hold_paths.rpt
+| Design       : lif_rate_timing_harness
+| Device       : 7z020-clg400
+| Speed File   : -1  PRODUCTION 1.12 2019-11-22
+| Design State : Routed
+---------------------------------------------------------------------------------------------------------------------------------------------
+
+Timing Report
+
+Slack (MET) :             0.024ns  (arrival time - required time)
+  Source:                 launch_data_reg[4]/C
+                            (rising edge-triggered cell FDRE clocked by core_clk  {rise@0.000ns fall@5.000ns period=10.000ns})
+  Destination:            core/encoder/intensity_reg_64_127_6_7/RAMA/WADR1
+                            (rising edge-triggered cell RAMD64E clocked by core_clk  {rise@0.000ns fall@5.000ns period=10.000ns})
+  Path Group:             core_clk
+  Path Type:              Hold (Min at Fast Process Corner)
+  Requirement:            0.000ns  (core_clk rise@0.000ns - core_clk rise@0.000ns)
+  Data Path Delay:        0.466ns  (logic 0.141ns (30.275%)  route 0.325ns (69.725%))
+  Logic Levels:           0  
+  Clock Path Skew:        0.033ns (DCD - SCD - CPR)
+    Destination Clock Delay (DCD):    1.311ns
+    Source Clock Delay      (SCD):    1.020ns
+    Clock Pessimism Removal (CPR):    0.258ns
+  Clock Uncertainty:      0.100ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE + UU
+    Total System Jitter     (TSJ):    0.000ns
+    Total Input Jitter      (TIJ):    0.000ns
+    Discrete Jitter          (DJ):    0.000ns
+    Phase Error              (PE):    0.000ns
+    User Uncertainty         (UU):    0.100ns
+
+    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------
+                         (clock core_clk rise edge)
+                                                      0.000     0.000 r  
+                                                      0.000     0.000 r  clk (IN)
+                         net (fo=0)                   0.410     0.410    clk
+    BUFGCTRL_X0Y0        BUFG (Prop_bufg_I_O)         0.026     0.436 r  core_clock_buffer/O
+                         net (fo=21025, routed)       0.584     1.020    core_clk
+    SLICE_X87Y13         FDRE                                         r  launch_data_reg[4]/C
+  -------------------------------------------------------------------    -------------------
+    SLICE_X87Y13         FDRE (Prop_fdre_C_Q)         0.141     1.161 r  launch_data_reg[4]/Q
+                         net (fo=61, routed)          0.325     1.485    core/encoder/intensity_reg_64_127_6_7/ADDRD1
+    SLICE_X82Y15         RAMD64E                                      r  core/encoder/intensity_reg_64_127_6_7/RAMA/WADR1
+  -------------------------------------------------------------------    -------------------
+
+                         (clock core_clk rise edge)
+                                                      0.000     0.000 r  
+                                                      0.000     0.000 r  clk (IN)
+                         net (fo=0)                   0.432     0.432    clk
+    BUFGCTRL_X0Y0        BUFG (Prop_bufg_I_O)         0.029     0.461 r  core_clock_buffer/O
+                         net (fo=21025, routed)       0.850     1.311    core/encoder/intensity_reg_64_127_6_7/WCLK
+    SLICE_X82Y15         RAMD64E                                      r  core/encoder/intensity_reg_64_127_6_7/RAMA/CLK
+                         clock pessimism             -0.258     1.053    
+                         clock uncertainty            0.100     1.153    
+    SLICE_X82Y15         RAMD64E (Hold_ramd64e_CLK_WADR1)
+                                                      0.309     1.462    core/encoder/intensity_reg_64_127_6_7/RAMA
+  -------------------------------------------------------------------
+                         required time                         -1.462    
+                         arrival time                           1.485    
+  -------------------------------------------------------------------
+                         slack                                  0.024    
+
+Slack (MET) :             0.024ns  (arrival time - required time)
+  Source:                 launch_data_reg[4]/C
+                            (rising edge-triggered cell FDRE clocked by core_clk  {rise@0.000ns fall@5.000ns period=10.000ns})
+  Destination:            core/encoder/intensity_reg_64_127_6_7/RAMB/WADR1
+                            (rising edge-triggered cell RAMD64E clocked by core_clk  {rise@0.000ns fall@5.000ns period=10.000ns})
+  Path Group:             core_clk
+  Path Type:              Hold (Min at Fast Process Corner)
+  Requirement:            0.000ns  (core_clk rise@0.000ns - core_clk rise@0.000ns)
+  Data Path Delay:        0.466ns  (logic 0.141ns (30.275%)  route 0.325ns (69.725%))
+  Logic Levels:           0  
+  Clock Path Skew:        0.033ns (DCD - SCD - CPR)
+    Destination Clock Delay (DCD):    1.311ns
+    Source Clock Delay      (SCD):    1.020ns
+    Clock Pessimism Removal (CPR):    0.258ns
+  Clock Uncertainty:      0.100ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE + UU
+    Total System Jitter     (TSJ):    0.000ns
+    Total Input Jitter      (TIJ):    0.000ns
+    Discrete Jitter          (DJ):    0.000ns
+    Phase Error              (PE):    0.000ns
+    User Uncertainty         (UU):    0.100ns
+
+    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------
+                         (clock core_clk rise edge)
+                                                      0.000     0.000 r  
+                                                      0.000     0.000 r  clk (IN)
+                         net (fo=0)                   0.410     0.410    clk
+    BUFGCTRL_X0Y0        BUFG (Prop_bufg_I_O)         0.026     0.436 r  core_clock_buffer/O
+                         net (fo=21025, routed)       0.584     1.020    core_clk
+    SLICE_X87Y13         FDRE                                         r  launch_data_reg[4]/C
+  -------------------------------------------------------------------    -------------------
+    SLICE_X87Y13         FDRE (Prop_fdre_C_Q)         0.141     1.161 r  launch_data_reg[4]/Q
+                         net (fo=61, routed)          0.325     1.485    core/encoder/intensity_reg_64_127_6_7/ADDRD1
+    SLICE_X82Y15         RAMD64E                                      r  core/encoder/intensity_reg_64_127_6_7/RAMB/WADR1
+  -------------------------------------------------------------------    -------------------
+
+                         (clock core_clk rise edge)
+                                                      0.000     0.000 r  
+                                                      0.000     0.000 r  clk (IN)
+                         net (fo=0)                   0.432     0.432    clk
+    BUFGCTRL_X0Y0        BUFG (Prop_bufg_I_O)         0.029     0.461 r  core_clock_buffer/O
+                         net (fo=21025, routed)       0.850     1.311    core/encoder/intensity_reg_64_127_6_7/WCLK
+    SLICE_X82Y15         RAMD64E                                      r  core/encoder/intensity_reg_64_127_6_7/RAMB/CLK
+                         clock pessimism             -0.258     1.053    
+                         clock uncertainty            0.100     1.153    
+    SLICE_X82Y15         RAMD64E (Hold_ramd64e_CLK_WADR1)
+                                                      0.309     1.462    core/encoder/intensity_reg_64_127_6_7/RAMB
+  -------------------------------------------------------------------
+                         required time                         -1.462    
+                         arrival time                           1.485    
+  -------------------------------------------------------------------
+                         slack                                  0.024    
+
+Slack (MET) :             0.024ns  (arrival time - required time)
+  Source:                 launch_data_reg[4]/C
+                            (rising edge-triggered cell FDRE clocked by core_clk  {rise@0.000ns fall@5.000ns period=10.000ns})
+  Destination:            core/encoder/intensity_reg_64_127_6_7/RAMC/WADR1
+                            (rising edge-triggered cell RAMD64E clocked by core_clk  {rise@0.000ns fall@5.000ns period=10.000ns})
+  Path Group:             core_clk
+  Path Type:              Hold (Min at Fast Process Corner)
+  Requirement:            0.000ns  (core_clk rise@0.000ns - core_clk rise@0.000ns)
+  Data Path Delay:        0.466ns  (logic 0.141ns (30.275%)  route 0.325ns (69.725%))
+  Logic Levels:           0  
+  Clock Path Skew:        0.033ns (DCD - SCD - CPR)
+    Destination Clock Delay (DCD):    1.311ns
+    Source Clock Delay      (SCD):    1.020ns
+    Clock Pessimism Removal (CPR):    0.258ns
+  Clock Uncertainty:      0.100ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE + UU
+    Total System Jitter     (TSJ):    0.000ns
+    Total Input Jitter      (TIJ):    0.000ns
+    Discrete Jitter          (DJ):    0.000ns
+    Phase Error              (PE):    0.000ns
+    User Uncertainty         (UU):    0.100ns
+
+    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------
+                         (clock core_clk rise edge)
+                                                      0.000     0.000 r  
+                                                      0.000     0.000 r  clk (IN)
+                         net (fo=0)                   0.410     0.410    clk
+    BUFGCTRL_X0Y0        BUFG (Prop_bufg_I_O)         0.026     0.436 r  core_clock_buffer/O
+                         net (fo=21025, routed)       0.584     1.020    core_clk
+    SLICE_X87Y13         FDRE                                         r  launch_data_reg[4]/C
+  -------------------------------------------------------------------    -------------------
+    SLICE_X87Y13         FDRE (Prop_fdre_C_Q)         0.141     1.161 r  launch_data_reg[4]/Q
+                         net (fo=61, routed)          0.325     1.485    core/encoder/intensity_reg_64_127_6_7/ADDRD1
+    SLICE_X82Y15         RAMD64E                                      r  core/encoder/intensity_reg_64_127_6_7/RAMC/WADR1
+  -------------------------------------------------------------------    -------------------
+
+                         (clock core_clk rise edge)
+                                                      0.000     0.000 r  
+                                                      0.000     0.000 r  clk (IN)
+                         net (fo=0)                   0.432     0.432    clk
+    BUFGCTRL_X0Y0        BUFG (Prop_bufg_I_O)         0.029     0.461 r  core_clock_buffer/O
+                         net (fo=21025, routed)       0.850     1.311    core/encoder/intensity_reg_64_127_6_7/WCLK
+    SLICE_X82Y15         RAMD64E                                      r  core/encoder/intensity_reg_64_127_6_7/RAMC/CLK
+                         clock pessimism             -0.258     1.053    
+                         clock uncertainty            0.100     1.153    
+    SLICE_X82Y15         RAMD64E (Hold_ramd64e_CLK_WADR1)
+                                                      0.309     1.462    core/encoder/intensity_reg_64_127_6_7/RAMC
+  -------------------------------------------------------------------
+                         required time                         -1.462    
+                         arrival time                           1.485    
+  -------------------------------------------------------------------
+                         slack                                  0.024    
+
+Slack (MET) :             0.024ns  (arrival time - required time)
+  Source:                 launch_data_reg[4]/C
+                            (rising edge-triggered cell FDRE clocked by core_clk  {rise@0.000ns fall@5.000ns period=10.000ns})
+  Destination:            core/encoder/intensity_reg_64_127_6_7/RAMD/WADR1
+                            (rising edge-triggered cell RAMD64E clocked by core_clk  {rise@0.000ns fall@5.000ns period=10.000ns})
+  Path Group:             core_clk
+  Path Type:              Hold (Min at Fast Process Corner)
+  Requirement:            0.000ns  (core_clk rise@0.000ns - core_clk rise@0.000ns)
+  Data Path Delay:        0.466ns  (logic 0.141ns (30.275%)  route 0.325ns (69.725%))
+  Logic Levels:           0  
+  Clock Path Skew:        0.033ns (DCD - SCD - CPR)
+    Destination Clock Delay (DCD):    1.311ns
+    Source Clock Delay      (SCD):    1.020ns
+    Clock Pessimism Removal (CPR):    0.258ns
+  Clock Uncertainty:      0.100ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE + UU
+    Total System Jitter     (TSJ):    0.000ns
+    Total Input Jitter      (TIJ):    0.000ns
+    Discrete Jitter          (DJ):    0.000ns
+    Phase Error              (PE):    0.000ns
+    User Uncertainty         (UU):    0.100ns
+
+    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------
+                         (clock core_clk rise edge)
+                                                      0.000     0.000 r  
+                                                      0.000     0.000 r  clk (IN)
+                         net (fo=0)                   0.410     0.410    clk
+    BUFGCTRL_X0Y0        BUFG (Prop_bufg_I_O)         0.026     0.436 r  core_clock_buffer/O
+                         net (fo=21025, routed)       0.584     1.020    core_clk
+    SLICE_X87Y13         FDRE                                         r  launch_data_reg[4]/C
+  -------------------------------------------------------------------    -------------------
+    SLICE_X87Y13         FDRE (Prop_fdre_C_Q)         0.141     1.161 r  launch_data_reg[4]/Q
+                         net (fo=61, routed)          0.325     1.485    core/encoder/intensity_reg_64_127_6_7/ADDRD1
+    SLICE_X82Y15         RAMD64E                                      r  core/encoder/intensity_reg_64_127_6_7/RAMD/WADR1
+  -------------------------------------------------------------------    -------------------
+
+                         (clock core_clk rise edge)
+                                                      0.000     0.000 r  
+                                                      0.000     0.000 r  clk (IN)
+                         net (fo=0)                   0.432     0.432    clk
+    BUFGCTRL_X0Y0        BUFG (Prop_bufg_I_O)         0.029     0.461 r  core_clock_buffer/O
+                         net (fo=21025, routed)       0.850     1.311    core/encoder/intensity_reg_64_127_6_7/WCLK
+    SLICE_X82Y15         RAMD64E                                      r  core/encoder/intensity_reg_64_127_6_7/RAMD/CLK
+                         clock pessimism             -0.258     1.053    
+                         clock uncertainty            0.100     1.153    
+    SLICE_X82Y15         RAMD64E (Hold_ramd64e_CLK_WADR1)
+                                                      0.309     1.462    core/encoder/intensity_reg_64_127_6_7/RAMD
+  -------------------------------------------------------------------
+                         required time                         -1.462    
+                         arrival time                           1.485    
+  -------------------------------------------------------------------
+                         slack                                  0.024    
+
+Slack (MET) :             0.028ns  (arrival time - required time)
+  Source:                 core/network/input_bitmap_reg[172]/C
+                            (rising edge-triggered cell FDRE clocked by core_clk  {rise@0.000ns fall@5.000ns period=10.000ns})
+  Destination:            core/network/core/synapse_router/active_sources_reg[172]/D
+                            (rising edge-triggered cell FDRE clocked by core_clk  {rise@0.000ns fall@5.000ns period=10.000ns})
+  Path Group:             core_clk
+  Path Type:              Hold (Min at Fast Process Corner)
+  Requirement:            0.000ns  (core_clk rise@0.000ns - core_clk rise@0.000ns)
+  Data Path Delay:        0.262ns  (logic 0.186ns (70.964%)  route 0.076ns (29.036%))
+  Logic Levels:           1  (LUT2=1)
+  Clock Path Skew:        0.013ns (DCD - SCD - CPR)
+    Destination Clock Delay (DCD):    1.307ns
+    Source Clock Delay      (SCD):    1.015ns
+    Clock Pessimism Removal (CPR):    0.279ns
+  Clock Uncertainty:      0.100ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE + UU
+    Total System Jitter     (TSJ):    0.000ns
+    Total Input Jitter      (TIJ):    0.000ns
+    Discrete Jitter          (DJ):    0.000ns
+    Phase Error              (PE):    0.000ns
+    User Uncertainty         (UU):    0.100ns
+
+    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------
+                         (clock core_clk rise edge)
+                                                      0.000     0.000 r  
+                                                      0.000     0.000 r  clk (IN)
+                         net (fo=0)                   0.410     0.410    clk
+    BUFGCTRL_X0Y0        BUFG (Prop_bufg_I_O)         0.026     0.436 r  core_clock_buffer/O
+                         net (fo=21025, routed)       0.579     1.015    core/network/clk
+    SLICE_X83Y19         FDRE                                         r  core/network/input_bitmap_reg[172]/C
+  -------------------------------------------------------------------    -------------------
+    SLICE_X83Y19         FDRE (Prop_fdre_C_Q)         0.141     1.156 r  core/network/input_bitmap_reg[172]/Q
+                         net (fo=3, routed)           0.076     1.232    core/network/core/synapse_router/active_sources_reg[172]_0
+    SLICE_X82Y19         LUT2 (Prop_lut2_I0_O)        0.045     1.277 r  core/network/core/synapse_router/active_sources[172]_i_1/O
+                         net (fo=1, routed)           0.000     1.277    core/network/core/synapse_router/routed_sources[172]
+    SLICE_X82Y19         FDRE                                         r  core/network/core/synapse_router/active_sources_reg[172]/D
+  -------------------------------------------------------------------    -------------------
+
+                         (clock core_clk rise edge)
+                                                      0.000     0.000 r  
+                                                      0.000     0.000 r  clk (IN)
+                         net (fo=0)                   0.432     0.432    clk
+    BUFGCTRL_X0Y0        BUFG (Prop_bufg_I_O)         0.029     0.461 r  core_clock_buffer/O
+                         net (fo=21025, routed)       0.846     1.307    core/network/core/synapse_router/clk
+    SLICE_X82Y19         FDRE                                         r  core/network/core/synapse_router/active_sources_reg[172]/C
+                         clock pessimism             -0.279     1.028    
+                         clock uncertainty            0.100     1.128    
+    SLICE_X82Y19         FDRE (Hold_fdre_C_D)         0.121     1.249    core/network/core/synapse_router/active_sources_reg[172]
+  -------------------------------------------------------------------
+                         required time                         -1.249    
+                         arrival time                           1.277    
+  -------------------------------------------------------------------
+                         slack                                  0.028    
+
+Slack (MET) :             0.033ns  (arrival time - required time)
+  Source:                 core/network/inputs[0].queue/write_pointer_reg[3]/C
+                            (rising edge-triggered cell FDRE clocked by core_clk  {rise@0.000ns fall@5.000ns period=10.000ns})
+  Destination:            core/network/inputs[0].queue/memory_reg_0_15_0_5/RAMA/WADR3
+                            (rising edge-triggered cell RAMD32 clocked by core_clk  {rise@0.000ns fall@5.000ns period=10.000ns})
+  Path Group:             core_clk
+  Path Type:              Hold (Min at Fast Process Corner)
+  Requirement:            0.000ns  (core_clk rise@0.000ns - core_clk rise@0.000ns)
+  Data Path Delay:        0.350ns  (logic 0.128ns (36.524%)  route 0.222ns (63.476%))
+  Logic Levels:           0  
+  Clock Path Skew:        0.030ns (DCD - SCD - CPR)
+    Destination Clock Delay (DCD):    1.299ns
+    Source Clock Delay      (SCD):    1.011ns
+    Clock Pessimism Removal (CPR):    0.258ns
+  Clock Uncertainty:      0.100ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE + UU
+    Total System Jitter     (TSJ):    0.000ns
+    Total Input Jitter      (TIJ):    0.000ns
+    Discrete Jitter          (DJ):    0.000ns
+    Phase Error              (PE):    0.000ns
+    User Uncertainty         (UU):    0.100ns
+
+    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------
+                         (clock core_clk rise edge)
+                                                      0.000     0.000 r  
+                                                      0.000     0.000 r  clk (IN)
+                         net (fo=0)                   0.410     0.410    clk
+    BUFGCTRL_X0Y0        BUFG (Prop_bufg_I_O)         0.026     0.436 r  core_clock_buffer/O
+                         net (fo=21025, routed)       0.575     1.011    core/network/inputs[0].queue/clk
+    SLICE_X68Y27         FDRE                                         r  core/network/inputs[0].queue/write_pointer_reg[3]/C
+  -------------------------------------------------------------------    -------------------
+    SLICE_X68Y27         FDRE (Prop_fdre_C_Q)         0.128     1.139 r  core/network/inputs[0].queue/write_pointer_reg[3]/Q
+                         net (fo=17, routed)          0.222     1.361    core/network/inputs[0].queue/memory_reg_0_15_0_5/ADDRD3
+    SLICE_X66Y27         RAMD32                                       r  core/network/inputs[0].queue/memory_reg_0_15_0_5/RAMA/WADR3
+  -------------------------------------------------------------------    -------------------
+
+                         (clock core_clk rise edge)
+                                                      0.000     0.000 r  
+                                                      0.000     0.000 r  clk (IN)
+                         net (fo=0)                   0.432     0.432    clk
+    BUFGCTRL_X0Y0        BUFG (Prop_bufg_I_O)         0.029     0.461 r  core_clock_buffer/O
+                         net (fo=21025, routed)       0.838     1.299    core/network/inputs[0].queue/memory_reg_0_15_0_5/WCLK
+    SLICE_X66Y27         RAMD32                                       r  core/network/inputs[0].queue/memory_reg_0_15_0_5/RAMA/CLK
+                         clock pessimism             -0.258     1.041    
+                         clock uncertainty            0.100     1.141    
+    SLICE_X66Y27         RAMD32 (Hold_ramd32_CLK_WADR3)
+                                                      0.187     1.328    core/network/inputs[0].queue/memory_reg_0_15_0_5/RAMA
+  -------------------------------------------------------------------
+                         required time                         -1.328    
+                         arrival time                           1.361    
+  -------------------------------------------------------------------
+                         slack                                  0.033    
+
+Slack (MET) :             0.033ns  (arrival time - required time)
+  Source:                 core/network/inputs[0].queue/write_pointer_reg[3]/C
+                            (rising edge-triggered cell FDRE clocked by core_clk  {rise@0.000ns fall@5.000ns period=10.000ns})
+  Destination:            core/network/inputs[0].queue/memory_reg_0_15_0_5/RAMA_D1/WADR3
+                            (rising edge-triggered cell RAMD32 clocked by core_clk  {rise@0.000ns fall@5.000ns period=10.000ns})
+  Path Group:             core_clk
+  Path Type:              Hold (Min at Fast Process Corner)
+  Requirement:            0.000ns  (core_clk rise@0.000ns - core_clk rise@0.000ns)
+  Data Path Delay:        0.350ns  (logic 0.128ns (36.524%)  route 0.222ns (63.476%))
+  Logic Levels:           0  
+  Clock Path Skew:        0.030ns (DCD - SCD - CPR)
+    Destination Clock Delay (DCD):    1.299ns
+    Source Clock Delay      (SCD):    1.011ns
+    Clock Pessimism Removal (CPR):    0.258ns
+  Clock Uncertainty:      0.100ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE + UU
+    Total System Jitter     (TSJ):    0.000ns
+    Total Input Jitter      (TIJ):    0.000ns
+    Discrete Jitter          (DJ):    0.000ns
+    Phase Error              (PE):    0.000ns
+    User Uncertainty         (UU):    0.100ns
+
+    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------
+                         (clock core_clk rise edge)
+                                                      0.000     0.000 r  
+                                                      0.000     0.000 r  clk (IN)
+                         net (fo=0)                   0.410     0.410    clk
+    BUFGCTRL_X0Y0        BUFG (Prop_bufg_I_O)         0.026     0.436 r  core_clock_buffer/O
+                         net (fo=21025, routed)       0.575     1.011    core/network/inputs[0].queue/clk
+    SLICE_X68Y27         FDRE                                         r  core/network/inputs[0].queue/write_pointer_reg[3]/C
+  -------------------------------------------------------------------    -------------------
+    SLICE_X68Y27         FDRE (Prop_fdre_C_Q)         0.128     1.139 r  core/network/inputs[0].queue/write_pointer_reg[3]/Q
+                         net (fo=17, routed)          0.222     1.361    core/network/inputs[0].queue/memory_reg_0_15_0_5/ADDRD3
+    SLICE_X66Y27         RAMD32                                       r  core/network/inputs[0].queue/memory_reg_0_15_0_5/RAMA_D1/WADR3
+  -------------------------------------------------------------------    -------------------
+
+                         (clock core_clk rise edge)
+                                                      0.000     0.000 r  
+                                                      0.000     0.000 r  clk (IN)
+                         net (fo=0)                   0.432     0.432    clk
+    BUFGCTRL_X0Y0        BUFG (Prop_bufg_I_O)         0.029     0.461 r  core_clock_buffer/O
+                         net (fo=21025, routed)       0.838     1.299    core/network/inputs[0].queue/memory_reg_0_15_0_5/WCLK
+    SLICE_X66Y27         RAMD32                                       r  core/network/inputs[0].queue/memory_reg_0_15_0_5/RAMA_D1/CLK
+                         clock pessimism             -0.258     1.041    
+                         clock uncertainty            0.100     1.141    
+    SLICE_X66Y27         RAMD32 (Hold_ramd32_CLK_WADR3)
+                                                      0.187     1.328    core/network/inputs[0].queue/memory_reg_0_15_0_5/RAMA_D1
+  -------------------------------------------------------------------
+                         required time                         -1.328    
+                         arrival time                           1.361    
+  -------------------------------------------------------------------
+                         slack                                  0.033    
+
+Slack (MET) :             0.033ns  (arrival time - required time)
+  Source:                 core/network/inputs[0].queue/write_pointer_reg[3]/C
+                            (rising edge-triggered cell FDRE clocked by core_clk  {rise@0.000ns fall@5.000ns period=10.000ns})
+  Destination:            core/network/inputs[0].queue/memory_reg_0_15_0_5/RAMB/WADR3
+                            (rising edge-triggered cell RAMD32 clocked by core_clk  {rise@0.000ns fall@5.000ns period=10.000ns})
+  Path Group:             core_clk
+  Path Type:              Hold (Min at Fast Process Corner)
+  Requirement:            0.000ns  (core_clk rise@0.000ns - core_clk rise@0.000ns)
+  Data Path Delay:        0.350ns  (logic 0.128ns (36.524%)  route 0.222ns (63.476%))
+  Logic Levels:           0  
+  Clock Path Skew:        0.030ns (DCD - SCD - CPR)
+    Destination Clock Delay (DCD):    1.299ns
+    Source Clock Delay      (SCD):    1.011ns
+    Clock Pessimism Removal (CPR):    0.258ns
+  Clock Uncertainty:      0.100ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE + UU
+    Total System Jitter     (TSJ):    0.000ns
+    Total Input Jitter      (TIJ):    0.000ns
+    Discrete Jitter          (DJ):    0.000ns
+    Phase Error              (PE):    0.000ns
+    User Uncertainty         (UU):    0.100ns
+
+    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------
+                         (clock core_clk rise edge)
+                                                      0.000     0.000 r  
+                                                      0.000     0.000 r  clk (IN)
+                         net (fo=0)                   0.410     0.410    clk
+    BUFGCTRL_X0Y0        BUFG (Prop_bufg_I_O)         0.026     0.436 r  core_clock_buffer/O
+                         net (fo=21025, routed)       0.575     1.011    core/network/inputs[0].queue/clk
+    SLICE_X68Y27         FDRE                                         r  core/network/inputs[0].queue/write_pointer_reg[3]/C
+  -------------------------------------------------------------------    -------------------
+    SLICE_X68Y27         FDRE (Prop_fdre_C_Q)         0.128     1.139 r  core/network/inputs[0].queue/write_pointer_reg[3]/Q
+                         net (fo=17, routed)          0.222     1.361    core/network/inputs[0].queue/memory_reg_0_15_0_5/ADDRD3
+    SLICE_X66Y27         RAMD32                                       r  core/network/inputs[0].queue/memory_reg_0_15_0_5/RAMB/WADR3
+  -------------------------------------------------------------------    -------------------
+
+                         (clock core_clk rise edge)
+                                                      0.000     0.000 r  
+                                                      0.000     0.000 r  clk (IN)
+                         net (fo=0)                   0.432     0.432    clk
+    BUFGCTRL_X0Y0        BUFG (Prop_bufg_I_O)         0.029     0.461 r  core_clock_buffer/O
+                         net (fo=21025, routed)       0.838     1.299    core/network/inputs[0].queue/memory_reg_0_15_0_5/WCLK
+    SLICE_X66Y27         RAMD32                                       r  core/network/inputs[0].queue/memory_reg_0_15_0_5/RAMB/CLK
+                         clock pessimism             -0.258     1.041    
+                         clock uncertainty            0.100     1.141    
+    SLICE_X66Y27         RAMD32 (Hold_ramd32_CLK_WADR3)
+                                                      0.187     1.328    core/network/inputs[0].queue/memory_reg_0_15_0_5/RAMB
+  -------------------------------------------------------------------
+                         required time                         -1.328    
+                         arrival time                           1.361    
+  -------------------------------------------------------------------
+                         slack                                  0.033    
+
+Slack (MET) :             0.033ns  (arrival time - required time)
+  Source:                 core/network/inputs[0].queue/write_pointer_reg[3]/C
+                            (rising edge-triggered cell FDRE clocked by core_clk  {rise@0.000ns fall@5.000ns period=10.000ns})
+  Destination:            core/network/inputs[0].queue/memory_reg_0_15_0_5/RAMB_D1/WADR3
+                            (rising edge-triggered cell RAMD32 clocked by core_clk  {rise@0.000ns fall@5.000ns period=10.000ns})
+  Path Group:             core_clk
+  Path Type:              Hold (Min at Fast Process Corner)
+  Requirement:            0.000ns  (core_clk rise@0.000ns - core_clk rise@0.000ns)
+  Data Path Delay:        0.350ns  (logic 0.128ns (36.524%)  route 0.222ns (63.476%))
+  Logic Levels:           0  
+  Clock Path Skew:        0.030ns (DCD - SCD - CPR)
+    Destination Clock Delay (DCD):    1.299ns
+    Source Clock Delay      (SCD):    1.011ns
+    Clock Pessimism Removal (CPR):    0.258ns
+  Clock Uncertainty:      0.100ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE + UU
+    Total System Jitter     (TSJ):    0.000ns
+    Total Input Jitter      (TIJ):    0.000ns
+    Discrete Jitter          (DJ):    0.000ns
+    Phase Error              (PE):    0.000ns
+    User Uncertainty         (UU):    0.100ns
+
+    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------
+                         (clock core_clk rise edge)
+                                                      0.000     0.000 r  
+                                                      0.000     0.000 r  clk (IN)
+                         net (fo=0)                   0.410     0.410    clk
+    BUFGCTRL_X0Y0        BUFG (Prop_bufg_I_O)         0.026     0.436 r  core_clock_buffer/O
+                         net (fo=21025, routed)       0.575     1.011    core/network/inputs[0].queue/clk
+    SLICE_X68Y27         FDRE                                         r  core/network/inputs[0].queue/write_pointer_reg[3]/C
+  -------------------------------------------------------------------    -------------------
+    SLICE_X68Y27         FDRE (Prop_fdre_C_Q)         0.128     1.139 r  core/network/inputs[0].queue/write_pointer_reg[3]/Q
+                         net (fo=17, routed)          0.222     1.361    core/network/inputs[0].queue/memory_reg_0_15_0_5/ADDRD3
+    SLICE_X66Y27         RAMD32                                       r  core/network/inputs[0].queue/memory_reg_0_15_0_5/RAMB_D1/WADR3
+  -------------------------------------------------------------------    -------------------
+
+                         (clock core_clk rise edge)
+                                                      0.000     0.000 r  
+                                                      0.000     0.000 r  clk (IN)
+                         net (fo=0)                   0.432     0.432    clk
+    BUFGCTRL_X0Y0        BUFG (Prop_bufg_I_O)         0.029     0.461 r  core_clock_buffer/O
+                         net (fo=21025, routed)       0.838     1.299    core/network/inputs[0].queue/memory_reg_0_15_0_5/WCLK
+    SLICE_X66Y27         RAMD32                                       r  core/network/inputs[0].queue/memory_reg_0_15_0_5/RAMB_D1/CLK
+                         clock pessimism             -0.258     1.041    
+                         clock uncertainty            0.100     1.141    
+    SLICE_X66Y27         RAMD32 (Hold_ramd32_CLK_WADR3)
+                                                      0.187     1.328    core/network/inputs[0].queue/memory_reg_0_15_0_5/RAMB_D1
+  -------------------------------------------------------------------
+                         required time                         -1.328    
+                         arrival time                           1.361    
+  -------------------------------------------------------------------
+                         slack                                  0.033    
+
+Slack (MET) :             0.033ns  (arrival time - required time)
+  Source:                 core/network/inputs[0].queue/write_pointer_reg[3]/C
+                            (rising edge-triggered cell FDRE clocked by core_clk  {rise@0.000ns fall@5.000ns period=10.000ns})
+  Destination:            core/network/inputs[0].queue/memory_reg_0_15_0_5/RAMC/WADR3
+                            (rising edge-triggered cell RAMD32 clocked by core_clk  {rise@0.000ns fall@5.000ns period=10.000ns})
+  Path Group:             core_clk
+  Path Type:              Hold (Min at Fast Process Corner)
+  Requirement:            0.000ns  (core_clk rise@0.000ns - core_clk rise@0.000ns)
+  Data Path Delay:        0.350ns  (logic 0.128ns (36.524%)  route 0.222ns (63.476%))
+  Logic Levels:           0  
+  Clock Path Skew:        0.030ns (DCD - SCD - CPR)
+    Destination Clock Delay (DCD):    1.299ns
+    Source Clock Delay      (SCD):    1.011ns
+    Clock Pessimism Removal (CPR):    0.258ns
+  Clock Uncertainty:      0.100ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE + UU
+    Total System Jitter     (TSJ):    0.000ns
+    Total Input Jitter      (TIJ):    0.000ns
+    Discrete Jitter          (DJ):    0.000ns
+    Phase Error              (PE):    0.000ns
+    User Uncertainty         (UU):    0.100ns
+
+    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------
+                         (clock core_clk rise edge)
+                                                      0.000     0.000 r  
+                                                      0.000     0.000 r  clk (IN)
+                         net (fo=0)                   0.410     0.410    clk
+    BUFGCTRL_X0Y0        BUFG (Prop_bufg_I_O)         0.026     0.436 r  core_clock_buffer/O
+                         net (fo=21025, routed)       0.575     1.011    core/network/inputs[0].queue/clk
+    SLICE_X68Y27         FDRE                                         r  core/network/inputs[0].queue/write_pointer_reg[3]/C
+  -------------------------------------------------------------------    -------------------
+    SLICE_X68Y27         FDRE (Prop_fdre_C_Q)         0.128     1.139 r  core/network/inputs[0].queue/write_pointer_reg[3]/Q
+                         net (fo=17, routed)          0.222     1.361    core/network/inputs[0].queue/memory_reg_0_15_0_5/ADDRD3
+    SLICE_X66Y27         RAMD32                                       r  core/network/inputs[0].queue/memory_reg_0_15_0_5/RAMC/WADR3
+  -------------------------------------------------------------------    -------------------
+
+                         (clock core_clk rise edge)
+                                                      0.000     0.000 r  
+                                                      0.000     0.000 r  clk (IN)
+                         net (fo=0)                   0.432     0.432    clk
+    BUFGCTRL_X0Y0        BUFG (Prop_bufg_I_O)         0.029     0.461 r  core_clock_buffer/O
+                         net (fo=21025, routed)       0.838     1.299    core/network/inputs[0].queue/memory_reg_0_15_0_5/WCLK
+    SLICE_X66Y27         RAMD32                                       r  core/network/inputs[0].queue/memory_reg_0_15_0_5/RAMC/CLK
+                         clock pessimism             -0.258     1.041    
+                         clock uncertainty            0.100     1.141    
+    SLICE_X66Y27         RAMD32 (Hold_ramd32_CLK_WADR3)
+                                                      0.187     1.328    core/network/inputs[0].queue/memory_reg_0_15_0_5/RAMC
+  -------------------------------------------------------------------
+                         required time                         -1.328    
+                         arrival time                           1.361    
+  -------------------------------------------------------------------
+                         slack                                  0.033    
+
+
+
+

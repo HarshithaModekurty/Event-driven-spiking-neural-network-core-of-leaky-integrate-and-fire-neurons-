@@ -1,0 +1,47 @@
+{
+  "scenario": "stress",
+  "images": 3,
+  "frames": 24,
+  "neuron_states": 256,
+  "synapse_entries": 65536,
+  "state_updates_checked": 6144,
+  "encoder_packets": 3906,
+  "output_packets": 1908,
+  "weights_sha256": "daf3b1a21da2a36d4b86209bf9dc9d445307e2d8d9315e7340bd5ba08c85216f",
+  "simulator": "xsim",
+  "parameters": {
+    "FRAMES": 24,
+    "IMAGES": 3,
+    "INPUT_WORDS": 3906,
+    "OUTPUT_WORDS": 1908,
+    "THRESHOLD": 8,
+    "RESET_VALUE": 3,
+    "LEAK_ENABLE": 1,
+    "REFRACTORY_PERIOD": 2,
+    "REQUIRE_FULL_OUTPUT": 1
+  },
+  "source_sha256": {
+    "rtl\\rate_encoder_transition.v": "edea55d8846a02460faefc055ec1056739313ed102c30006f92cc3c4114ce313",
+    "rtl\\aer_rate_encoder.v": "94feac47f2284c31a41b7b3149e8e71992d5ad294eb1c5ccff0686128345eac3",
+    "rtl\\aer_event_fifo.v": "be36fc03305342feaa62eeb8f43c5cef0f5b3c0fe2a654876da55b32f009a45f",
+    "rtl\\aer_rr_select.v": "0386d354e6215f8e4eb447d7d3f04a96678b544bfd7406f17bcce91e661da8b5",
+    "rtl\\aer_rr_arbiter.v": "10d3d3e1fce8bc49290ea7f7a5bc2ed0fa25d0ed1e8209802ad12b0e92a3d2bc",
+    "rtl\\lif_transition.v": "41739aee8a2d2fd8ed55bf3ebf3c8ac9151a26ae7bc75d66d78d0884adac9f1f",
+    "rtl\\lif_population_stepper.v": "ebb8240e8addb568388eebfe9ba8dc344c006d554cc82af8b8d31dce4a24b515",
+    "rtl\\lif_synapse_router.v": "34a031f294899cfc2214047c2d683d2f05a8bfab7749a00dc90deddd2c165c44",
+    "rtl\\lif_snn_core.v": "284cd7bcde09e0a9aed17b294081412c8cd8f82a3942f4cfd1bd32dc04f7b2fb",
+    "rtl\\lif_aer_snn_core.v": "3ee9f60555e40d21839647231ac712ae546aafe5e0c9ff959779f6e947c73d2e",
+    "rtl\\lif_rate_aer_snn_core.v": "907f000f521e32c4ca73a1c60f2016a95a01ac93ca44099ffe8c201f16c21f36",
+    "rtl\\tb\\lif_rate_snn_tb.v": "b6d87ee323c34dbc2bb39af5ec6779e314c3d3e1b873ea00065b970af15087a4",
+    "golden_model\\encoding.py": "41811ccafbcda52441ad666bf93be67c95f0ebac4f8f0d53a71e961b83446e56",
+    "golden_model\\network.py": "26c465f719749e2191acdf6a01877cf6cdda868c94b31f32a2c792f53829accc",
+    "golden_model\\lif.py": "d1ea06ac0c3ac242799b2b13c6525c139b2298f5cf10b0477428e5c9dc79fb37"
+  },
+  "artifact_sha256": {
+    "encoder_packets.hex": "5eb7793a6ba86abaafe0085eb66258465e0bd7bff6e8b1854d65bea881dfebef",
+    "intensities.hex": "fcdc503e8bca421fbf14b0e6643336d13c0ffa30ae7b92dc95f0f182c47bb1bf",
+    "output_packets.hex": "82bb353d451a8829d1e468782ec084ed5548daf120a0d362b3f5fabf5b9d3e75",
+    "states.hex": "9c7fc947405c6f698b8747a14ee90b7476aaa035d7fa635ce16f72048d3330c2",
+    "weights.hex": "daf3b1a21da2a36d4b86209bf9dc9d445307e2d8d9315e7340bd5ba08c85216f"
+  }
+}

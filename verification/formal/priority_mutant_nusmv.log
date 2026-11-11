@@ -1,0 +1,328 @@
+*** This is NuSMV 2.7.1 (compiled on Mon Sep 29 16:07:59 2025)
+*** Enabled addons are: compass
+*** For more information on NuSMV see <http://nusmv.fbk.eu>
+*** or email to <nusmv-users@list.fbk.eu>.
+*** Please report bugs to <Please report bugs to <nusmv-users@fbk.eu>>
+
+*** Copyright (c) 2010-2025, Fondazione Bruno Kessler
+
+*** This version of NuSMV is linked to the CUDD library version 2.4.1
+*** Copyright (c) 1995-2004, Regents of the University of Colorado
+
+*** This version of NuSMV is linked to the MiniSat SAT solver. 
+*** See http://minisat.se/MiniSat.html
+*** Copyright (c) 2003-2006, Niklas Een, Niklas Sorensson
+*** Copyright (c) 2007-2010, Niklas Sorensson
+
+-- specification AG (bool(_pending[0 : 0]) -> AF bool(_served[0 : 0]))  is true
+-- specification AG (bool(_pending[1 : 1]) -> AF bool(_served[1 : 1]))  is false
+-- as demonstrated by the following execution sequence
+Trace Description: CTL Counterexample 
+Trace Type: Counterexample 
+  -> State: 1.1 <-
+    _queued = 0ud4_0
+    _dut#held_grant = 0ud4_0
+    _dut#out_req = 0ud1_0
+    _acknowledge = 0ud1_0
+    _reset = 0ud1_1
+    _arrivals = 0ud4_0
+    _active = 0ud1_0
+    _dut#addresses = 0ud4_0
+    _dut#out_ack = 0ud1_0
+    _dut#requests = 0ud4_0
+    _dut#rst = 0ud1_1
+    _dut#select_port#grant = 0ud4_0
+    _dut#select_port#requests = 0ud4_0
+    _grant = 0ud4_0
+    _pending = 0ud4_0
+    _$0#queued#3#0# = 0ud4_0
+    _$or$formal#aer_scheduler#v#19$15_Y = 0ud4_0
+    _$not$formal#aer_scheduler#v#19$13_Y = 0ud4_15
+    _$logic_not$formal#aer_scheduler#v#15$9_Y = 0ud1_0
+    _$logic_and$formal#aer_scheduler#v#15$8_Y = 0ud1_0
+    _$logic_and$formal#aer_scheduler#v#15$10_Y = 0ud1_0
+    _dut#selected_grant = 0ud4_0
+    _$flatten#dut##select_port#$ternary$build#formal_checks#priority_mutant#v#1$3_Y = 0ud4_0
+    _$flatten#dut##select_port#$ternary$build#formal_checks#priority_mutant#v#1$2_Y = 0ud4_0
+    _$flatten#dut##select_port#$ternary$build#formal_checks#priority_mutant#v#1$1_Y = 0ud4_0
+    _$flatten#dut#$procmux$30_CMP = 0ud1_0
+    _$flatten#dut#$0#out_req#0#0# = 0ud1_0
+    _$flatten#dut#$procmux$65_Y = 0ud1_0
+    _$flatten#dut#$procmux$63_Y = 0ud1_1
+    _$flatten#dut#$procmux$60_Y = 0ud1_0
+    _$flatten#dut#$0#held_grant#3#0# = 0ud4_0
+    _$flatten#dut#$procmux$42_Y = 0ud4_0
+    _$flatten#dut#$procmux$40_Y = 0ud4_0
+    _$flatten#dut#$procmux$37_Y = 0ud4_0
+    _$and$formal#aer_scheduler#v#19$14_Y = 0ud4_0
+    _served = 0ud4_0
+  -> State: 1.2 <-
+    _reset = 0ud1_0
+    _arrivals = 0ud4_3
+    _dut#rst = 0ud1_0
+    _$0#queued#3#0# = 0ud4_3
+    _$or$formal#aer_scheduler#v#19$15_Y = 0ud4_3
+    _$logic_not$formal#aer_scheduler#v#15$9_Y = 0ud1_1
+  -- Loop starts here
+  -> State: 1.3 <-
+    _queued = 0ud4_3
+    _arrivals = 0ud4_0
+    _dut#requests = 0ud4_3
+    _dut#select_port#grant = 0ud4_1
+    _dut#select_port#requests = 0ud4_3
+    _pending = 0ud4_3
+    _dut#selected_grant = 0ud4_1
+    _$flatten#dut##select_port#$ternary$build#formal_checks#priority_mutant#v#1$3_Y = 0ud4_2
+    _$flatten#dut#$procmux$30_CMP = 0ud1_1
+    _$flatten#dut#$0#out_req#0#0# = 0ud1_1
+    _$flatten#dut#$procmux$65_Y = 0ud1_1
+    _$flatten#dut#$procmux$60_Y = 0ud1_1
+    _$flatten#dut#$0#held_grant#3#0# = 0ud4_1
+    _$flatten#dut#$procmux$42_Y = 0ud4_1
+    _$flatten#dut#$procmux$37_Y = 0ud4_1
+    _$and$formal#aer_scheduler#v#19$14_Y = 0ud4_3
+  -> State: 1.4 <-
+    _dut#held_grant = 0ud4_1
+    _dut#out_req = 0ud1_1
+    _acknowledge = 0ud1_1
+    _arrivals = 0ud4_1
+    _active = 0ud1_1
+    _dut#out_ack = 0ud1_1
+    _grant = 0ud4_1
+    _$not$formal#aer_scheduler#v#19$13_Y = 0ud4_14
+    _$logic_and$formal#aer_scheduler#v#15$8_Y = 0ud1_1
+    _$logic_and$formal#aer_scheduler#v#15$10_Y = 0ud1_1
+    _$flatten#dut#$0#out_req#0#0# = 0ud1_0
+    _$flatten#dut#$procmux$65_Y = 0ud1_0
+    _$flatten#dut#$procmux$63_Y = 0ud1_0
+    _$flatten#dut#$0#held_grant#3#0# = 0ud4_0
+    _$flatten#dut#$procmux$42_Y = 0ud4_0
+    _$and$formal#aer_scheduler#v#19$14_Y = 0ud4_2
+    _served = 0ud4_1
+  -> State: 1.5 <-
+    _dut#held_grant = 0ud4_0
+    _dut#out_req = 0ud1_0
+    _acknowledge = 0ud1_0
+    _arrivals = 0ud4_0
+    _active = 0ud1_0
+    _dut#out_ack = 0ud1_0
+    _grant = 0ud4_0
+    _$not$formal#aer_scheduler#v#19$13_Y = 0ud4_15
+    _$logic_and$formal#aer_scheduler#v#15$8_Y = 0ud1_0
+    _$logic_and$formal#aer_scheduler#v#15$10_Y = 0ud1_0
+    _$flatten#dut#$0#out_req#0#0# = 0ud1_1
+    _$flatten#dut#$procmux$65_Y = 0ud1_1
+    _$flatten#dut#$procmux$63_Y = 0ud1_1
+    _$flatten#dut#$0#held_grant#3#0# = 0ud4_1
+    _$flatten#dut#$procmux$42_Y = 0ud4_1
+    _$and$formal#aer_scheduler#v#19$14_Y = 0ud4_3
+    _served = 0ud4_0
+-- specification AG (bool(_pending[2 : 2]) -> AF bool(_served[2 : 2]))  is false
+-- as demonstrated by the following execution sequence
+Trace Description: CTL Counterexample 
+Trace Type: Counterexample 
+  -> State: 2.1 <-
+    _queued = 0ud4_0
+    _dut#held_grant = 0ud4_0
+    _dut#out_req = 0ud1_0
+    _acknowledge = 0ud1_0
+    _reset = 0ud1_1
+    _arrivals = 0ud4_0
+    _active = 0ud1_0
+    _dut#addresses = 0ud4_0
+    _dut#out_ack = 0ud1_0
+    _dut#requests = 0ud4_0
+    _dut#rst = 0ud1_1
+    _dut#select_port#grant = 0ud4_0
+    _dut#select_port#requests = 0ud4_0
+    _grant = 0ud4_0
+    _pending = 0ud4_0
+    _$0#queued#3#0# = 0ud4_0
+    _$or$formal#aer_scheduler#v#19$15_Y = 0ud4_0
+    _$not$formal#aer_scheduler#v#19$13_Y = 0ud4_15
+    _$logic_not$formal#aer_scheduler#v#15$9_Y = 0ud1_0
+    _$logic_and$formal#aer_scheduler#v#15$8_Y = 0ud1_0
+    _$logic_and$formal#aer_scheduler#v#15$10_Y = 0ud1_0
+    _dut#selected_grant = 0ud4_0
+    _$flatten#dut##select_port#$ternary$build#formal_checks#priority_mutant#v#1$3_Y = 0ud4_0
+    _$flatten#dut##select_port#$ternary$build#formal_checks#priority_mutant#v#1$2_Y = 0ud4_0
+    _$flatten#dut##select_port#$ternary$build#formal_checks#priority_mutant#v#1$1_Y = 0ud4_0
+    _$flatten#dut#$procmux$30_CMP = 0ud1_0
+    _$flatten#dut#$0#out_req#0#0# = 0ud1_0
+    _$flatten#dut#$procmux$65_Y = 0ud1_0
+    _$flatten#dut#$procmux$63_Y = 0ud1_1
+    _$flatten#dut#$procmux$60_Y = 0ud1_0
+    _$flatten#dut#$0#held_grant#3#0# = 0ud4_0
+    _$flatten#dut#$procmux$42_Y = 0ud4_0
+    _$flatten#dut#$procmux$40_Y = 0ud4_0
+    _$flatten#dut#$procmux$37_Y = 0ud4_0
+    _$and$formal#aer_scheduler#v#19$14_Y = 0ud4_0
+    _served = 0ud4_0
+  -> State: 2.2 <-
+    _reset = 0ud1_0
+    _arrivals = 0ud4_6
+    _dut#rst = 0ud1_0
+    _$0#queued#3#0# = 0ud4_6
+    _$or$formal#aer_scheduler#v#19$15_Y = 0ud4_6
+    _$logic_not$formal#aer_scheduler#v#15$9_Y = 0ud1_1
+  -- Loop starts here
+  -> State: 2.3 <-
+    _queued = 0ud4_6
+    _arrivals = 0ud4_0
+    _dut#requests = 0ud4_6
+    _dut#select_port#grant = 0ud4_2
+    _dut#select_port#requests = 0ud4_6
+    _pending = 0ud4_6
+    _dut#selected_grant = 0ud4_2
+    _$flatten#dut##select_port#$ternary$build#formal_checks#priority_mutant#v#1$3_Y = 0ud4_2
+    _$flatten#dut##select_port#$ternary$build#formal_checks#priority_mutant#v#1$2_Y = 0ud4_4
+    _$flatten#dut#$procmux$30_CMP = 0ud1_1
+    _$flatten#dut#$0#out_req#0#0# = 0ud1_1
+    _$flatten#dut#$procmux$65_Y = 0ud1_1
+    _$flatten#dut#$procmux$60_Y = 0ud1_1
+    _$flatten#dut#$0#held_grant#3#0# = 0ud4_2
+    _$flatten#dut#$procmux$42_Y = 0ud4_2
+    _$flatten#dut#$procmux$37_Y = 0ud4_2
+    _$and$formal#aer_scheduler#v#19$14_Y = 0ud4_6
+  -> State: 2.4 <-
+    _dut#held_grant = 0ud4_2
+    _dut#out_req = 0ud1_1
+    _acknowledge = 0ud1_1
+    _arrivals = 0ud4_2
+    _active = 0ud1_1
+    _dut#out_ack = 0ud1_1
+    _grant = 0ud4_2
+    _$not$formal#aer_scheduler#v#19$13_Y = 0ud4_13
+    _$logic_and$formal#aer_scheduler#v#15$8_Y = 0ud1_1
+    _$logic_and$formal#aer_scheduler#v#15$10_Y = 0ud1_1
+    _$flatten#dut#$0#out_req#0#0# = 0ud1_0
+    _$flatten#dut#$procmux$65_Y = 0ud1_0
+    _$flatten#dut#$procmux$63_Y = 0ud1_0
+    _$flatten#dut#$0#held_grant#3#0# = 0ud4_0
+    _$flatten#dut#$procmux$42_Y = 0ud4_0
+    _$and$formal#aer_scheduler#v#19$14_Y = 0ud4_4
+    _served = 0ud4_2
+  -> State: 2.5 <-
+    _dut#held_grant = 0ud4_0
+    _dut#out_req = 0ud1_0
+    _acknowledge = 0ud1_0
+    _arrivals = 0ud4_0
+    _active = 0ud1_0
+    _dut#out_ack = 0ud1_0
+    _grant = 0ud4_0
+    _$not$formal#aer_scheduler#v#19$13_Y = 0ud4_15
+    _$logic_and$formal#aer_scheduler#v#15$8_Y = 0ud1_0
+    _$logic_and$formal#aer_scheduler#v#15$10_Y = 0ud1_0
+    _$flatten#dut#$0#out_req#0#0# = 0ud1_1
+    _$flatten#dut#$procmux$65_Y = 0ud1_1
+    _$flatten#dut#$procmux$63_Y = 0ud1_1
+    _$flatten#dut#$0#held_grant#3#0# = 0ud4_2
+    _$flatten#dut#$procmux$42_Y = 0ud4_2
+    _$and$formal#aer_scheduler#v#19$14_Y = 0ud4_6
+    _served = 0ud4_0
+-- specification AG (bool(_pending[3 : 3]) -> AF bool(_served[3 : 3]))  is false
+-- as demonstrated by the following execution sequence
+Trace Description: CTL Counterexample 
+Trace Type: Counterexample 
+  -> State: 3.1 <-
+    _queued = 0ud4_0
+    _dut#held_grant = 0ud4_0
+    _dut#out_req = 0ud1_0
+    _acknowledge = 0ud1_0
+    _reset = 0ud1_1
+    _arrivals = 0ud4_0
+    _active = 0ud1_0
+    _dut#addresses = 0ud4_0
+    _dut#out_ack = 0ud1_0
+    _dut#requests = 0ud4_0
+    _dut#rst = 0ud1_1
+    _dut#select_port#grant = 0ud4_0
+    _dut#select_port#requests = 0ud4_0
+    _grant = 0ud4_0
+    _pending = 0ud4_0
+    _$0#queued#3#0# = 0ud4_0
+    _$or$formal#aer_scheduler#v#19$15_Y = 0ud4_0
+    _$not$formal#aer_scheduler#v#19$13_Y = 0ud4_15
+    _$logic_not$formal#aer_scheduler#v#15$9_Y = 0ud1_0
+    _$logic_and$formal#aer_scheduler#v#15$8_Y = 0ud1_0
+    _$logic_and$formal#aer_scheduler#v#15$10_Y = 0ud1_0
+    _dut#selected_grant = 0ud4_0
+    _$flatten#dut##select_port#$ternary$build#formal_checks#priority_mutant#v#1$3_Y = 0ud4_0
+    _$flatten#dut##select_port#$ternary$build#formal_checks#priority_mutant#v#1$2_Y = 0ud4_0
+    _$flatten#dut##select_port#$ternary$build#formal_checks#priority_mutant#v#1$1_Y = 0ud4_0
+    _$flatten#dut#$procmux$30_CMP = 0ud1_0
+    _$flatten#dut#$0#out_req#0#0# = 0ud1_0
+    _$flatten#dut#$procmux$65_Y = 0ud1_0
+    _$flatten#dut#$procmux$63_Y = 0ud1_1
+    _$flatten#dut#$procmux$60_Y = 0ud1_0
+    _$flatten#dut#$0#held_grant#3#0# = 0ud4_0
+    _$flatten#dut#$procmux$42_Y = 0ud4_0
+    _$flatten#dut#$procmux$40_Y = 0ud4_0
+    _$flatten#dut#$procmux$37_Y = 0ud4_0
+    _$and$formal#aer_scheduler#v#19$14_Y = 0ud4_0
+    _served = 0ud4_0
+  -> State: 3.2 <-
+    _reset = 0ud1_0
+    _arrivals = 0ud4_12
+    _dut#rst = 0ud1_0
+    _$0#queued#3#0# = 0ud4_12
+    _$or$formal#aer_scheduler#v#19$15_Y = 0ud4_12
+    _$logic_not$formal#aer_scheduler#v#15$9_Y = 0ud1_1
+  -- Loop starts here
+  -> State: 3.3 <-
+    _queued = 0ud4_12
+    _arrivals = 0ud4_0
+    _dut#requests = 0ud4_12
+    _dut#select_port#grant = 0ud4_4
+    _dut#select_port#requests = 0ud4_12
+    _pending = 0ud4_12
+    _dut#selected_grant = 0ud4_4
+    _$flatten#dut##select_port#$ternary$build#formal_checks#priority_mutant#v#1$3_Y = 0ud4_4
+    _$flatten#dut##select_port#$ternary$build#formal_checks#priority_mutant#v#1$2_Y = 0ud4_4
+    _$flatten#dut##select_port#$ternary$build#formal_checks#priority_mutant#v#1$1_Y = 0ud4_8
+    _$flatten#dut#$procmux$30_CMP = 0ud1_1
+    _$flatten#dut#$0#out_req#0#0# = 0ud1_1
+    _$flatten#dut#$procmux$65_Y = 0ud1_1
+    _$flatten#dut#$procmux$60_Y = 0ud1_1
+    _$flatten#dut#$0#held_grant#3#0# = 0ud4_4
+    _$flatten#dut#$procmux$42_Y = 0ud4_4
+    _$flatten#dut#$procmux$37_Y = 0ud4_4
+    _$and$formal#aer_scheduler#v#19$14_Y = 0ud4_12
+  -> State: 3.4 <-
+    _dut#held_grant = 0ud4_4
+    _dut#out_req = 0ud1_1
+    _acknowledge = 0ud1_1
+    _arrivals = 0ud4_4
+    _active = 0ud1_1
+    _dut#out_ack = 0ud1_1
+    _grant = 0ud4_4
+    _$not$formal#aer_scheduler#v#19$13_Y = 0ud4_11
+    _$logic_and$formal#aer_scheduler#v#15$8_Y = 0ud1_1
+    _$logic_and$formal#aer_scheduler#v#15$10_Y = 0ud1_1
+    _$flatten#dut#$0#out_req#0#0# = 0ud1_0
+    _$flatten#dut#$procmux$65_Y = 0ud1_0
+    _$flatten#dut#$procmux$63_Y = 0ud1_0
+    _$flatten#dut#$0#held_grant#3#0# = 0ud4_0
+    _$flatten#dut#$procmux$42_Y = 0ud4_0
+    _$and$formal#aer_scheduler#v#19$14_Y = 0ud4_8
+    _served = 0ud4_4
+  -> State: 3.5 <-
+    _dut#held_grant = 0ud4_0
+    _dut#out_req = 0ud1_0
+    _acknowledge = 0ud1_0
+    _arrivals = 0ud4_0
+    _active = 0ud1_0
+    _dut#out_ack = 0ud1_0
+    _grant = 0ud4_0
+    _$not$formal#aer_scheduler#v#19$13_Y = 0ud4_15
+    _$logic_and$formal#aer_scheduler#v#15$8_Y = 0ud1_0
+    _$logic_and$formal#aer_scheduler#v#15$10_Y = 0ud1_0
+    _$flatten#dut#$0#out_req#0#0# = 0ud1_1
+    _$flatten#dut#$procmux$65_Y = 0ud1_1
+    _$flatten#dut#$procmux$63_Y = 0ud1_1
+    _$flatten#dut#$0#held_grant#3#0# = 0ud4_4
+    _$flatten#dut#$procmux$42_Y = 0ud4_4
+    _$and$formal#aer_scheduler#v#19$14_Y = 0ud4_12
+    _served = 0ud4_0
+-- specification EF bool(_pending[3 : 3])  is true
+-- specification EF bool(_served[3 : 3])  is true

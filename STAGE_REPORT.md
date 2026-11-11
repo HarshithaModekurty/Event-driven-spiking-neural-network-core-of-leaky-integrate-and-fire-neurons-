@@ -1,11 +1,29 @@
 # RTL project stage report
 
-Report date: 2026-11-10. Authoritative specification:
+Report date: 2026-11-11. Authoritative specification:
 `Screenshot 2026-10-28 143938.png`.
 
 ## Current milestone
 
-The integrated top is now `lif_aer_snn_core`: four clocked AER input queues,
+The integrated top is now `lif_rate_aer_snn_core`: a shared hardware rate
+encoder feeds the framed AER network while retaining all 256 LIF states.
+See `RATE_ENCODER.md` for loading intensities, sample clearing, tick control
+and Vivado commands. Both simulators pass the hardware-encoded stress and
+20-image trained paths, including every encoded packet and neuron update.
+The stress run checks 24 ticks and 6,144 state updates; the trained run checks
+160 ticks and 40,960 state updates with the same 17/20 selected-subset accuracy.
+The encoder arithmetic unit test exhausts all 65,280 legal phase/intensity
+pairs. The full unit suite now has 17 passing tests.
+
+Component CTL proofs now cover the actual scheduler and four depth-16 queues
+under fair downstream consumption. Full-width SAT proves refractory safety
+and countdown; CTL safety also passes with an unconstrained threshold-result
+overapproximation. Expected failures without fairness and with deliberately
+broken selector/refractory logic are detected. See `FORMAL_VERIFICATION.md`
+for assumptions and scope: composition with the complete framed controller
+and future SoC remains required.
+
+The underlying `lif_aer_snn_core` provides four clocked AER input queues,
 a round-robin BDD arbiter, per-port end-of-step markers, and a backpressured
 output queue wrap the existing 256-state core. See `AER_PROTOCOL.md` for
 the transfer contract, framing, test commands and remaining formal work.
@@ -43,7 +61,7 @@ architectural changes and uncertain requirements.
 
 ## Verification completed for the correction
 
-- **15 unit/directed RTL tests passed**, including queue wrap/full/reset,
+- **17 unit/directed RTL tests passed**, including rate arithmetic/streaming, queue wrap/full/reset,
   BDD truth-table equivalence, Python arbiter traces, duplicate-source semantics,
   pipeline commit/reset behavior, last-pixel/bias/output address
   boundaries, square matrix dimensions, signed currents, offset recurrence,
@@ -109,6 +127,14 @@ flip-flops and one BUFG. Reports are under `build/aer256_timing/`.
 This measurement includes the queues and scheduler, and remains distinct
 from full-SoC or board timing closure.
 
+The current rate-encoder/AER/LIF top also passed routed 100 MHz timing:
+**setup +0.179 ns, hold +0.024 ns**, zero failing/unconstrained endpoints
+and zero combinational loops, with no false-path or multicycle exceptions.
+It uses **10,307 LUTs, 20,514 flip-flops, eight RAMB36E1 blocks and zero DSPs**;
+fixture overhead is one LUT, 409 flip-flops and one BUFG. These are registered
+out-of-context results, not full-SoC or board measurements. See
+`verification/rate256_timing/` and `RATE_ENCODER.md` for constraints and scope.
+
 | Screenshot requirement | Current status / evidence |
 |---|---|
 | 256 time-multiplexed LIF states, 16-bit membrane, leak, threshold, reset, refractory | Implemented; full-population stress and integrated state comparisons |
@@ -116,7 +142,7 @@ from full-SoC or board timing closure.
 | AER input/output queues and handshake | Clocked request/acknowledge, bounded queues, backpressure and explicit end markers implemented and simulated |
 | Time-step accumulate, leak/fire, emit controller | Framed collect/compute/emit/drain controller implemented; future DMA/host integration remains |
 | Round-robin AER arbiter as ESPRESSO/BDD block | Four-port RTL arbiter with generated 38-node reduced ordered BDD; all 64 grant combinations and stateful Python traces checked |
-| Input rate encoder | Python reference; hardware encoder/integration remains |
+| Input rate encoder | Hardware shared encoder integrated with AER; exhaustive arithmetic, streaming grayscale and full-network comparisons pass |
 | RV32 weight loading over AXI4-Lite | Not implemented |
 | DMA spike delivery | Not implemented |
 | Output-spike interrupt | Not implemented |
@@ -126,17 +152,16 @@ from full-SoC or board timing closure.
 | Classification accuracy | 17/20 for the selected held-out simulation subset; full-test-set/on-board measurements remain |
 | Synaptic events per inference | Python counts saved per image; hardware counter and comparison remain |
 | Resource table / baseline vs paper design | Full-core baseline resource table measured; paper implementation/comparison still required |
-| CTL eventual AER acknowledgment (fairness) | RTL/BDD implemented; CTL model, explicit environment assumptions and proof still required |
-| CTL no firing when refractory | Directed simulation exists; CTL proof not completed |
+| CTL eventual AER acknowledgment (fairness) | Scheduler and actual depth-16 queue components proven with fair consumer; full framed-controller/SoC composition remains |
+| CTL no firing when refractory | Actual transition unit full-width SAT proof and conservative CTL safety proof pass; complete stored-state/controller formal composition remains |
 | Complete pattern-to-class UART/LED demonstration | Not completed on FPGA |
 
 ## Next required milestone
 
-Develop the CTL fairness/refractory model for the implemented scheduler/core,
-with receiver and end-of-step progress assumptions made explicit. Add the
-hardware rate encoder and connect it to the framed input interface.
-Continue with RV32/AXI4-Lite, DMA, interrupt and
-UART integration. Add the formal proofs and research optimization comparison;
+Continue with RV32/AXI4-Lite weight loading and host control, then DMA,
+interrupt and UART integration. Compose the component formal proofs with
+the complete framed controller and its environment progress assumptions.
+Add the research optimization comparison;
 measure the complete implementation and demonstrate it on the target board.
 Do not claim these requirements from the present core simulation results.
 
@@ -149,11 +174,16 @@ python -m tools.run_mnist_rtl_check --simulator xsim
 python -m unittest discover -s tests -v
 python -m tools.run_aer_rtl_check
 python -m tools.run_aer_rtl_check --scenario mnist --simulator xsim
+python -m tools.run_rate_snn_check
+python -m tools.run_rate_snn_check --scenario mnist --simulator xsim
+python -m tools.setup_formal_tools
+python -m tools.run_formal_checks
 ```
 
 For GUI simulation and evidence formats, read `MNIST_RTL_VERIFICATION.md`.
-The `.xpr` synthesis top is now `lif_aer_snn_core`, and its saved simulation
-top is `lif_aer_snn_core_tb`. The older bitmap classifier is selectable with
+The `.xpr` synthesis top is now `lif_rate_aer_snn_core`, and its saved simulation
+top is `lif_rate_snn_tb`. See `RATE_ENCODER.md` for the required data generation
+and matching simulation settings. The older AER and bitmap classifiers are selectable with
 its generated configuration script. Dedicated implementation scripts
 instantiate the old core or the new AER top in timing-only fixtures with
 launch/capture registers and a real clock buffer. It does not modify an open

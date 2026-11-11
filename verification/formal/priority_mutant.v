@@ -1,0 +1,1 @@
+module aer_rr_select(input wire [3:0] requests, input wire [1:0] next_port, output wire [3:0] grant); assign grant=requests[0]?4'b0001:requests[1]?4'b0010:requests[2]?4'b0100:requests[3]?4'b1000:4'b0; endmodule

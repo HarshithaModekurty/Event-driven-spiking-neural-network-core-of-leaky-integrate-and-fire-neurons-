@@ -7,6 +7,13 @@ The integrated core now has framed AER input/output queues and a four-port
 round-robin BDD arbiter. See [AER_PROTOCOL.md](AER_PROTOCOL.md) for the
 request/acknowledge contract, time-step boundaries and verification commands.
 
+The hardware rate encoder now feeds that AER interface. See
+[RATE_ENCODER.md](RATE_ENCODER.md) for intensity loading, image/tick control,
+Python comparisons and Vivado GUI commands. The integrated top remains a
+256-state design. Source-bound scheduler/queue CTL and full-width refractory
+SAT checks, assumptions and remaining composition work are described in
+[FORMAL_VERIFICATION.md](FORMAL_VERIFICATION.md).
+
 See [TIMING_CLOSURE.md](TIMING_CLOSURE.md) for the registered neuron-read
 schedule, constraints applied before synthesis, and routed setup/hold checks.
 

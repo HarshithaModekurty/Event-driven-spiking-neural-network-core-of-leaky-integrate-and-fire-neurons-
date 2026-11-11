@@ -1,0 +1,1 @@
+read_verilog build/formal_checks/lif_mutant.v formal/lif_refractory.v; prep -top lif_refractory -flatten; sat -falsify -prove safe 1 -show-inputs -show-outputs -dump_json build/formal_checks/lif_mutant_counterexample.json; write_smv build/formal_checks/lif_mutant_raw.smv

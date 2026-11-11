@@ -102,7 +102,9 @@ against `golden_model.aer.RoundRobinAERArbiter` under stalls and reset.
 The chosen BDD implementation satisfies the requested BDD representation;
 no ESPRESSO minimization or optimal area claim is made.
 
-CTL fairness and refractory proofs remain separate required work. Progress
+Component CTL fairness and refractory checks now pass; see
+`FORMAL_VERIFICATION.md` for the source-bound models and scope. Full framed
+controller/SoC proof composition remains required. Progress
 requires eventual receiver acknowledgment, all producers eventually ending
 their current step, and no perpetual reset. Simulation is not a CTL proof.
 
@@ -146,7 +148,8 @@ Inspect `in_req`, `in_ack`, `in_addr`, `in_end`, `out_req`, `out_ack`,
 `out_addr`, `out_end`, `tick_done` and `frame_done`. Internally, `closed_ports`,
 `input_bitmap`, `arbiter.held_grant` and the queue levels explain stalls.
 
-The saved synthesis top is the AER wrapper; the older core/bitmap testbenches
+The saved synthesis top now includes the hardware rate encoder (see
+`RATE_ENCODER.md`); the AER wrapper and older core/bitmap testbenches
 remain available. Run `tools/synth_aer256.tcl` for constrained synthesis,
 placement and routing in `lif_aer_timing_harness`. The harness has actual
 launch/capture registers and a BUFG, with the same 10 ns clock and 0.100 ns
@@ -166,5 +169,6 @@ have no physical output loads, and this standalone fixture has no PS7 block.
 & 'F:\Xilinx\Vivado\2023.2\bin\vivado.bat' -mode batch -source tools/synth_aer256.tcl -log build/aer256_timing.log -journal build/aer256_timing.jou
 ```
 
-Board interfaces, hardware rate encoding, AXI/RV32/DMA, IRQ/UART, CTL proofs
-and the paper optimization comparison remain required integration work.
+Hardware rate encoding is integrated and verified. Board interfaces,
+AXI/RV32/DMA, IRQ/UART, full-system formal composition and the paper
+optimization comparison remain required integration work.

@@ -1,0 +1,20 @@
+ECHO is off.
+ECHO is off.
+
+****** xsim v2023.2 (64-bit)
+  **** SW Build 4029153 on Fri Oct 13 20:14:34 MDT 2023
+  **** IP Build 4028589 on Sat Oct 14 00:45:43 MDT 2023
+  **** SharedData Build 4025554 on Tue Oct 10 17:18:54 MDT 2023
+    ** Copyright 1986-2022 Xilinx, Inc. All Rights Reserved.
+    ** Copyright 2022-2023 Advanced Micro Devices, Inc. All Rights Reserved.
+
+source xsim.dir/rate_snn/xsim_script.tcl
+# xsim {rate_snn} -testplusarg DATA_DIR=D:/RTL_PROJECT/build/rate_mnist -autoloadwcfg -runall
+Time resolution is 1 ps
+run -all
+PASS: rate/AER/SNN 20 images, 160 ticks, 6048 encoder tokens, 160 output tokens, 40960 state updates
+$finish called at time : 123950340 ns : File "D:/RTL_PROJECT/rtl/tb/lif_rate_snn_tb.v" Line 121
+run: Time (s): cpu = 00:00:00 ; elapsed = 00:00:46 . Memory (MB): peak = 199.195 ; gain = 0.000
+exit
+INFO: xsimkernel Simulation Memory Usage: 11648 KB (Peak: 11648 KB), Simulation CPU Usage: 41921 ms
+INFO: [Common 17-206] Exiting xsim at Wed Nov 11 12:53:13 2026...

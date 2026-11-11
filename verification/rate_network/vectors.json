@@ -1,0 +1,12 @@
+{
+  "scenario": "stress",
+  "images": 3,
+  "frames": 24,
+  "neuron_states": 256,
+  "synapse_entries": 65536,
+  "state_updates_checked": 6144,
+  "encoder_packets": 3906,
+  "output_packets": 1908,
+  "weights_sha256": "daf3b1a21da2a36d4b86209bf9dc9d445307e2d8d9315e7340bd5ba08c85216f",
+  "records": []
+}

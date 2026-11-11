@@ -1,0 +1,151 @@
+{
+  "tool_setup": {
+    "nusmv_version": "2.7.1",
+    "nusmv_url": "https://nusmv.fbk.eu/distrib/2.7.1/NuSMV-2.7.1-win64.zip",
+    "nusmv_archive_sha256": "9f191fe0b2c24ca5ed2c111895a4e6c0d91dce951a1a72f538ebe4171e6f1461",
+    "nusmv_executable": "build\\formal_tools\\NuSMV-2.7.1-win64\\bin\\NuSMV.exe",
+    "yosys_python_target": "build\\formal_tools\\python",
+    "python_packages": {
+      "click": "8.5.1",
+      "platformdirs": "4.14.5",
+      "wasmtime": "47.0.1",
+      "yowasp-runtime": "1.96",
+      "yowasp-yosys": "0.70.0.0.post1259"
+    },
+    "nusmv_executable_sha256": "a0aef81aabf1d686fbb07e0c32f93b23cd452bd49ca357f583ec7b51484b8c14"
+  },
+  "checks": [
+    {
+      "model": "build\\formal_checks\\scheduler_fair.smv",
+      "properties": [
+        "AG (bool(_pending[0:0]) -> AF bool(_served[0:0]))",
+        "AG (bool(_pending[1:1]) -> AF bool(_served[1:1]))",
+        "AG (bool(_pending[2:2]) -> AF bool(_served[2:2]))",
+        "AG (bool(_pending[3:3]) -> AF bool(_served[3:3]))",
+        "EF bool(_pending[3:3])",
+        "EF bool(_served[3:3])"
+      ],
+      "outcomes": [
+        "true",
+        "true",
+        "true",
+        "true",
+        "true",
+        "true"
+      ],
+      "fair_receiver": true,
+      "threshold_result_overapproximation": false
+    },
+    {
+      "model": "build\\formal_checks\\scheduler_unfair.smv",
+      "properties": [
+        "AG (bool(_pending[0:0]) -> AF bool(_served[0:0]))",
+        "AG (bool(_pending[1:1]) -> AF bool(_served[1:1]))",
+        "AG (bool(_pending[2:2]) -> AF bool(_served[2:2]))",
+        "AG (bool(_pending[3:3]) -> AF bool(_served[3:3]))",
+        "EF bool(_pending[3:3])",
+        "EF bool(_served[3:3])"
+      ],
+      "outcomes": [
+        "false",
+        "false",
+        "false",
+        "false",
+        "true",
+        "true"
+      ],
+      "fair_receiver": false,
+      "threshold_result_overapproximation": false
+    },
+    {
+      "model": "build\\formal_checks\\queues_fair.smv",
+      "properties": [
+        "AG (bool(_pending[0:0]) -> AF bool(_accepted[0:0]))",
+        "AG (bool(_pending[1:1]) -> AF bool(_accepted[1:1]))",
+        "AG (bool(_pending[2:2]) -> AF bool(_accepted[2:2]))",
+        "AG (bool(_pending[3:3]) -> AF bool(_accepted[3:3]))",
+        "AG (bool(_nonempty[0:0]) -> AF bool(_served[0:0]))",
+        "AG (bool(_nonempty[1:1]) -> AF bool(_served[1:1]))",
+        "AG (bool(_nonempty[2:2]) -> AF bool(_served[2:2]))",
+        "AG (bool(_nonempty[3:3]) -> AF bool(_served[3:3]))",
+        "EF bool(_pending[3:3])",
+        "EF bool(_served[3:3])"
+      ],
+      "outcomes": [
+        "true",
+        "true",
+        "true",
+        "true",
+        "true",
+        "true",
+        "true",
+        "true",
+        "true",
+        "true"
+      ],
+      "fair_receiver": true,
+      "threshold_result_overapproximation": false
+    },
+    {
+      "model": "build\\formal_checks\\refractory_ctl.smv",
+      "properties": [
+        "AG bool(_safe)",
+        "EF (_refractory != 0ud16_0)",
+        "EF bool(_spike)"
+      ],
+      "outcomes": [
+        "true",
+        "true",
+        "true"
+      ],
+      "fair_receiver": false,
+      "threshold_result_overapproximation": true
+    },
+    {
+      "model": "build\\formal_checks\\priority_mutant.smv",
+      "properties": [
+        "AG (bool(_pending[0:0]) -> AF bool(_served[0:0]))",
+        "AG (bool(_pending[1:1]) -> AF bool(_served[1:1]))",
+        "AG (bool(_pending[2:2]) -> AF bool(_served[2:2]))",
+        "AG (bool(_pending[3:3]) -> AF bool(_served[3:3]))",
+        "EF bool(_pending[3:3])",
+        "EF bool(_served[3:3])"
+      ],
+      "outcomes": [
+        "true",
+        "false",
+        "false",
+        "false",
+        "true",
+        "true"
+      ],
+      "fair_receiver": true,
+      "threshold_result_overapproximation": false
+    },
+    {
+      "model": "build\\formal_checks\\lif_mutant.smv",
+      "properties": [
+        "AG bool(_safe)"
+      ],
+      "outcomes": [
+        "false"
+      ],
+      "fair_receiver": false,
+      "threshold_result_overapproximation": true
+    }
+  ],
+  "refractory_uncut_sat": "proved for all full-width inputs",
+  "scope": "four depth-16 queues and scheduler under fair consumption; LIF update safety; not the complete SoC",
+  "source_sha256": {
+    "rtl\\aer_event_fifo.v": "be36fc03305342feaa62eeb8f43c5cef0f5b3c0fe2a654876da55b32f009a45f",
+    "rtl\\aer_rr_select.v": "0386d354e6215f8e4eb447d7d3f04a96678b544bfd7406f17bcce91e661da8b5",
+    "rtl\\aer_rr_arbiter.v": "10d3d3e1fce8bc49290ea7f7a5bc2ed0fa25d0ed1e8209802ad12b0e92a3d2bc",
+    "rtl\\lif_transition.v": "41739aee8a2d2fd8ed55bf3ebf3c8ac9151a26ae7bc75d66d78d0884adac9f1f",
+    "formal\\aer_queues.v": "f8350934caeb11d74419ce6b1564f964e9740308ce03b5032eb260b3897b4f7f",
+    "formal\\aer_scheduler.v": "6875991bc3fc9fef7da93a24ec6e8da5cf3c9de9828f910d1b8f5d496d12ca02",
+    "formal\\lif_refractory.v": "8ba16374780bc86d8cf3476b3fe62855ac06f749820e055510fc800ed7b652ac",
+    "tools\\run_formal_checks.py": "86a96cdb3cd993c6f35ae344841af78a43de1d918af7032cdb24485f760f4f5a",
+    "tools\\setup_formal_tools.py": "93e35358e3ca3f70dec272f891bd26393978ea089187fb77b2c7af71d11a3d8c",
+    "requirements-formal.txt": "9f7e91f4cfdc6a4aa80307de1975045967c16cec5b6880f298072609bb3021c3"
+  }
+}
