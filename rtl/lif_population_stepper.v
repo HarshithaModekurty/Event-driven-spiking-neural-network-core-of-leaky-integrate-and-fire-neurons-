@@ -23,13 +23,18 @@ module lif_population_stepper #(
 
     reg [15:0] membrane_state [0:NUM_NEURONS-1];
     reg [15:0] refractory_state [0:NUM_NEURONS-1];
-    reg signed [31:0] current_state [0:NUM_NEURONS-1];
+    // Scratch currents use synchronous RAM. Valid bits provide reset-to-zero
+    // behavior without resetting the RAM or allocating 8192 enabled FFs.
+    (* ram_style="block" *) reg signed [31:0] current_state [0:NUM_NEURONS-1];
+    reg [NUM_NEURONS-1:0] current_valid;
     reg [ADDR_WIDTH-1:0] neuron_index;
     localparam READ_STATE = 2'd0, CALCULATE = 2'd1, WRITE_STATE = 2'd2;
     reg [1:0] update_phase;
     reg [15:0] selected_membrane;
     reg [15:0] selected_refractory;
-    reg signed [31:0] selected_current;
+    reg signed [31:0] selected_current_data;
+    reg selected_current_valid;
+    wire signed [31:0] selected_current = selected_current_valid ? selected_current_data : 32'sd0;
     reg [15:0] selected_threshold;
     reg [15:0] selected_reset;
     reg selected_leak_enable;
@@ -48,6 +53,15 @@ module lif_population_stepper #(
 
     assign state_read_membrane = membrane_state[state_read_addr];
     assign state_read_refractory = refractory_state[state_read_addr];
+
+    // A read still completes in READ_STATE; CALCULATE and WRITE_STATE retain
+    // exactly their previous cycle positions and neuron arithmetic.
+    always @(posedge clk) begin
+        if (!rst && !busy && current_write && current_addr < NUM_NEURONS)
+            current_state[current_addr] <= current_data;
+        if (!rst && busy && update_phase == READ_STATE)
+            selected_current_data <= current_state[neuron_index];
+    end
 
     lif_transition transition_unit (
         .membrane_in(selected_membrane),
@@ -69,7 +83,8 @@ module lif_population_stepper #(
             update_phase <= READ_STATE;
             selected_membrane <= 0;
             selected_refractory <= 0;
-            selected_current <= 0;
+            selected_current_valid <= 0;
+            current_valid <= {NUM_NEURONS{1'b0}};
             selected_threshold <= 0;
             selected_reset <= 0;
             selected_leak_enable <= 0;
@@ -84,13 +99,12 @@ module lif_population_stepper #(
             for (reset_index = 0; reset_index < NUM_NEURONS; reset_index = reset_index + 1) begin
                 membrane_state[reset_index] <= reset_value;
                 refractory_state[reset_index] <= 16'd0;
-                current_state[reset_index] <= 32'sd0;
             end
         end else begin
             done <= 1'b0;
 
             if (!busy && current_write && current_addr < NUM_NEURONS) begin
-                current_state[current_addr] <= current_data;
+                current_valid[current_addr] <= 1'b1;
             end
 
             if (!busy && start) begin
@@ -102,7 +116,7 @@ module lif_population_stepper #(
                 // Break the large state-select mux away from LIF arithmetic.
                 selected_membrane <= membrane_state[neuron_index];
                 selected_refractory <= refractory_state[neuron_index];
-                selected_current <= current_state[neuron_index];
+                selected_current_valid <= current_valid[neuron_index];
                 selected_threshold <= threshold;
                 selected_reset <= reset_value;
                 selected_leak_enable <= leak_enable;

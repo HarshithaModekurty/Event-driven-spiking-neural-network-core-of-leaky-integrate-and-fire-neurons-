@@ -16,6 +16,11 @@ spike-for-spike comparison, task accuracy, synaptic event counts, a research
 optimization comparison, resources, and CTL fairness/refractory proofs.
 Track unfinished requirements honestly in STAGE_REPORT.md.
 
+The user's target board is Zybo Z7-10 (`xc7z010clg400-1`), confirmed
+2026-11-11. New target-specific synthesis/implementation must use that part.
+Earlier `xc7z020` measurements are historical and do not prove Z7-10 fit or
+timing. Keep all 256 LIF states when integrating the smaller device.
+
 The previous 267-source/10-state classifier was diagnostic, not a compliant
 replacement. Keep Python/RTL mapping, weights, arithmetic and inputs equal.
 Retrain and remeasure if preprocessing changes. Do not claim BRAM inference,

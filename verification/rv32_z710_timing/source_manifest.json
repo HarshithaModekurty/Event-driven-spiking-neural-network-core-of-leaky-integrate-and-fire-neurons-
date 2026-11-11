@@ -1,0 +1,21 @@
+{
+  "rtl/rate_encoder_transition.v": "edea55d8846a02460faefc055ec1056739313ed102c30006f92cc3c4114ce313",
+  "rtl/aer_rate_encoder.v": "94feac47f2284c31a41b7b3149e8e71992d5ad294eb1c5ccff0686128345eac3",
+  "rtl/aer_event_fifo.v": "be36fc03305342feaa62eeb8f43c5cef0f5b3c0fe2a654876da55b32f009a45f",
+  "rtl/aer_rr_select.v": "0386d354e6215f8e4eb447d7d3f04a96678b544bfd7406f17bcce91e661da8b5",
+  "rtl/aer_rr_arbiter.v": "10d3d3e1fce8bc49290ea7f7a5bc2ed0fa25d0ed1e8209802ad12b0e92a3d2bc",
+  "rtl/lif_transition.v": "41739aee8a2d2fd8ed55bf3ebf3c8ac9151a26ae7bc75d66d78d0884adac9f1f",
+  "rtl/lif_population_stepper.v": "f368874ad13705f975d31a78ebc230050a28fbb65981b433a27fe9283fc4ec0c",
+  "rtl/lif_synapse_router.v": "34a031f294899cfc2214047c2d683d2f05a8bfab7749a00dc90deddd2c165c44",
+  "rtl/lif_snn_core.v": "284cd7bcde09e0a9aed17b294081412c8cd8f82a3942f4cfd1bd32dc04f7b2fb",
+  "rtl/lif_aer_snn_core.v": "3ee9f60555e40d21839647231ac712ae546aafe5e0c9ff959779f6e947c73d2e",
+  "rtl/lif_rate_aer_snn_core.v": "907f000f521e32c4ca73a1c60f2016a95a01ac93ca44099ffe8c201f16c21f36",
+  "rtl/vendor/picorv32.v": "bc5abc87e01ade68da257b1771dad1de18976b1109fdbbcc9dd15ebcdd8ea462",
+  "rtl/axi_lite_endpoint.v": "d8a86071f2781af72a35f4493e009fa8d78e42f8885ca1cd22501f1b1a91e65f",
+  "rtl/lif_host_registers.v": "d96cf47890e316559108a2241f2abeb6c805d277dc2f2d38814290cf39aba9a8",
+  "rtl/lif_rv32_soc.v": "76b79a64a01b890575be0e2c9291119c01ff6cfbd0739f9766874c26f6d5d309",
+  "tools/fixtures/lif_rv32_timing_harness.v": "f93cdb502134e6d98b92c21fde82e630e01bb6901a88cca1190002b8ebf148c9",
+  "tools/synth_rv32_z710.tcl": "1f5c7f2711438c14c95a654e777fc50d54c8a168561bcf9af9f58a0ba8e8f3c8",
+  "constraints/timing_harness_100mhz.xdc": "6a251720a96fec6d0b897e4e55926b714b11d5e068f1fa3bb8323296b26152ac",
+  "constraints/timing_harness_context.xdc": "22bd811eb0ad0d71a3b4113a48cd9fc5bf04954042592b502423eb8ba124c150"
+}

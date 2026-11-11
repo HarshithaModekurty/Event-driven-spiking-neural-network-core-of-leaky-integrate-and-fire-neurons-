@@ -1,0 +1,2 @@
+PASS: independent AXI AW/W, simultaneous read/write, WSTRB, B/R stalls, reset cancellation, errors, busy rejection and 258 exactly-once packet pops
+D:\RTL_PROJECT\rtl\tb\lif_axi_lite_tb.v:156: $finish called at 1406820000 (1ps)

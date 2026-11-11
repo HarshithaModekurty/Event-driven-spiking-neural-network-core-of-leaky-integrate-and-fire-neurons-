@@ -5,7 +5,41 @@ Report date: 2026-11-11. Authoritative specification:
 
 ## Current milestone
 
-The integrated top is now `lif_rate_aer_snn_core`: a shared hardware rate
+The integrated top is now `lif_rv32_soc`: a real PicoRV32 host drives
+AXI4-Lite loading, image/tick control, spike reads and state readback for
+the full 256-state network. The board is confirmed as **Zybo Z7-10**,
+`xc7z010clg400-1`. The Vivado project now targets that part; all older
+xc7z020 resource/timing results below are historical measurements.
+See `RV32_AXI_CONTROL.md` for the register map, firmware and test commands.
+
+The AXI peripheral passes independent address/data arrivals, simultaneous
+reads/writes, byte strobes, held responses, reset cancellation, invalid and
+busy accesses, full output queues and 258 exactly-once output packet pops
+in both simulators. Both also pass actual CPU-driven stress inference:
+all 65,536 weights are programmed over AXI, 24 ticks run, and all 6,144
+membrane/refractory readbacks and input/output packets match Python.
+Vivado XSim additionally passes the trained 20-image CPU path: 160 ticks,
+40,960 state readbacks and identical final class predictions. The CPU
+executes readable RV32I firmware; the testbench initializes only boot RAM.
+It does not bypass AXI to load SNN weights, intensities or configuration.
+
+The initial Z7-10 placement attempt failed register/control-set packing
+despite acceptable aggregate counts. The temporary 256x32 current buffer
+now uses synchronous RAM with resettable valid bits, preserving all 256
+membrane/refractory states, arithmetic and the three-clock neuron schedule.
+All results above were rerun on that revision. The 17-test unit suite also
+checks that stale, unwritten current RAM contents read as zero after reset.
+
+The full CPU/RAM/AXI/SNN now passes routed **100 MHz on xc7z010clg400-1**:
+setup **+0.299 ns**, hold **+0.024 ns**, zero failing/unconstrained endpoints
+and zero combinational loops, with no false-path or multicycle exceptions.
+Production SoC resources are **9,582 LUTs, 13,550 flip-flops, 24 RAMB36E1,
+one RAMB18E1 and zero DSPs**. The fixture adds one LUT, 45 flip-flops and
+one BUFG. Eight RAMB36E1 remain dedicated to the synapse table. See
+`verification/rv32_z710_timing/`. This is registered out-of-context closure,
+not a programmed-board test or a full system including DMA/IRQ/UART.
+
+The earlier encoder top `lif_rate_aer_snn_core` provides a shared hardware rate
 encoder feeds the framed AER network while retaining all 256 LIF states.
 See `RATE_ENCODER.md` for loading intensities, sample clearing, tick control
 and Vivado commands. Both simulators pass the hardware-encoded stress and
@@ -127,7 +161,8 @@ flip-flops and one BUFG. Reports are under `build/aer256_timing/`.
 This measurement includes the queues and scheduler, and remains distinct
 from full-SoC or board timing closure.
 
-The current rate-encoder/AER/LIF top also passed routed 100 MHz timing:
+At the earlier rate-encoder milestone (before the Z7-10 current-RAM change),
+the rate-encoder/AER/LIF top passed routed 100 MHz timing on xc7z020:
 **setup +0.179 ns, hold +0.024 ns**, zero failing/unconstrained endpoints
 and zero combinational loops, with no false-path or multicycle exceptions.
 It uses **10,307 LUTs, 20,514 flip-flops, eight RAMB36E1 blocks and zero DSPs**;
@@ -143,7 +178,7 @@ out-of-context results, not full-SoC or board measurements. See
 | Time-step accumulate, leak/fire, emit controller | Framed collect/compute/emit/drain controller implemented; future DMA/host integration remains |
 | Round-robin AER arbiter as ESPRESSO/BDD block | Four-port RTL arbiter with generated 38-node reduced ordered BDD; all 64 grant combinations and stateful Python traces checked |
 | Input rate encoder | Hardware shared encoder integrated with AER; exhaustive arithmetic, streaming grayscale and full-network comparisons pass |
-| RV32 weight loading over AXI4-Lite | Not implemented |
+| RV32 weight loading over AXI4-Lite | Real PicoRV32 CPU, independent-channel AXI endpoint, byte strobes, full table loading, firmware control and inference readback implemented and simulated |
 | DMA spike delivery | Not implemented |
 | Output-spike interrupt | Not implemented |
 | UART spike-raster dump / LEDs | Python text formatter only; RTL peripherals/demo remain |
@@ -158,8 +193,9 @@ out-of-context results, not full-SoC or board measurements. See
 
 ## Next required milestone
 
-Continue with RV32/AXI4-Lite weight loading and host control, then DMA,
-interrupt and UART integration. Compose the component formal proofs with
+Add the Z7-10 board clock/reset/pin wrapper,
+generate a bitstream and compare the first programmed-board results with
+Python. Continue with DMA, interrupt and UART integration. Compose the component formal proofs with
 the complete framed controller and its environment progress assumptions.
 Add the research optimization comparison;
 measure the complete implementation and demonstrate it on the target board.
@@ -178,12 +214,21 @@ python -m tools.run_rate_snn_check
 python -m tools.run_rate_snn_check --scenario mnist --simulator xsim
 python -m tools.setup_formal_tools
 python -m tools.run_formal_checks
+python -m tools.run_axi_check
+python -m tools.run_axi_check --simulator xsim
+python -m tools.run_rv32_check
+python -m tools.run_rv32_check --scenario mnist --simulator xsim
 ```
 
 For GUI simulation and evidence formats, read `MNIST_RTL_VERIFICATION.md`.
-The `.xpr` synthesis top is now `lif_rate_aer_snn_core`, and its saved simulation
-top is `lif_rate_snn_tb`. See `RATE_ENCODER.md` for the required data generation
-and matching simulation settings. The older AER and bitmap classifiers are selectable with
+`tools/create_rv32_project.tcl` creates `build/rv32_vivado/lif_rv32.xpr` with
+synthesis top `lif_rv32_soc` and simulation top `lif_rv32_soc_tb`, on the
+Z7-10 part. Its synthesis generic selects the generated learned
+`build/rv32_mnist/firmware.hex`; generate that image before synthesis.
+The root `.xpr` contains the new canonical sources, but an open GUI can
+retain an older simulation selection; source the matching scenario script.
+See `RV32_AXI_CONTROL.md` for data generation and matching simulation settings.
+The rate-encoder, AER and bitmap classifiers remain selectable with
 its generated configuration script. Dedicated implementation scripts
 instantiate the old core or the new AER top in timing-only fixtures with
 launch/capture registers and a real clock buffer. It does not modify an open

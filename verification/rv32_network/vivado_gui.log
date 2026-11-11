@@ -1,0 +1,208 @@
+#-----------------------------------------------------------
+# Vivado v2023.2 (64-bit)
+# SW Build 4029153 on Fri Oct 13 20:14:34 MDT 2023
+# IP Build 4028589 on Sat Oct 14 00:45:43 MDT 2023
+# SharedData Build 4025554 on Tue Oct 10 17:18:54 MDT 2023
+# Start of session at: Wed Nov 11 15:02:47 2026
+# Process ID: 2064
+# Current directory: D:/RTL_PROJECT
+# Command line: vivado.exe -mode batch -source tools/check_rv32_project.tcl -log build/rv32_gui_check.log -journal build/rv32_gui_check.jou
+# Log file: D:/RTL_PROJECT/build/rv32_gui_check.log
+# Journal file: D:/RTL_PROJECT\build/rv32_gui_check.jou
+# Running On: DESKTOP-J3M0MBG, OS: Windows, CPU Frequency: 1190 MHz, CPU Physical cores: 4, Host memory: 8345 MB
+#-----------------------------------------------------------
+CRITICAL WARNING: [Common 17-741] No write access right to the local Tcl store at 'C'. XilinxTclStore is reverted to the installation area. If you want to use local Tcl Store, please change the access right and relaunch Vivado.
+source tools/check_rv32_project.tcl
+# set ::env(SNN_SCENARIO) stress
+# source [file join [file dirname [info script]] create_rv32_project.tcl]
+## set root [file normalize [file join [file dirname [info script]] ..]]
+## set scenario mnist
+## if {[info exists ::env(SNN_SCENARIO)]} {set scenario $::env(SNN_SCENARIO)}
+## if {$scenario ni {mnist stress}} {error "SNN_SCENARIO must be mnist or stress"}
+## set data_folder [expr {$scenario eq "mnist" ? "rv32_mnist" : "rv32_network"}]
+## if {![file exists [file join $root build $data_folder firmware.hex]]} {error "Generate the selected scenario first"}
+## create_project -force lif_rv32 [file join $root build rv32_vivado] -part xc7z010clg400-1
+create_project: Time (s): cpu = 00:00:25 ; elapsed = 00:00:44 . Memory (MB): peak = 472.262 ; gain = 175.453
+## foreach source {aer_event_fifo.v aer_rr_select.v aer_rr_arbiter.v lif_transition.v lif_population_stepper.v lif_synapse_router.v lif_snn_core.v lif_aer_snn_core.v rate_encoder_transition.v aer_rate_encoder.v lif_rate_aer_snn_core.v vendor/picorv32.v axi_lite_endpoint.v lif_host_registers.v lif_axi_lite.v lif_rv32_soc.v} {
+##     add_files [file join $root rtl $source]
+## }
+## add_files -fileset constrs_1 [file join $root constraints core_100mhz.xdc]
+## add_files -fileset sim_1 [file join $root rtl tb lif_rv32_soc_tb.v]
+## set_property top lif_rv32_soc [get_filesets sources_1]
+## set_property generic [list "BOOT_FILE=[file join $root build rv32_mnist firmware.hex]"] [get_filesets sources_1]
+## source [file join $root build $data_folder configure_vivado.tcl]
+### set_property top lif_rv32_soc_tb [get_filesets sim_1]
+### set_property generic {IMAGES=3 FRAMES=24 INPUT_WORDS=3906 OUTPUT_WORDS=1908} [get_filesets sim_1]
+### set_property -dict [list xsim.simulate.xsim.more_options {-testplusarg "DATA_DIR=D:/RTL_PROJECT/build/rv32_network"}] [get_filesets sim_1]
+### update_compile_order -fileset sim_1
+update_compile_order: Time (s): cpu = 00:00:00 ; elapsed = 00:00:09 . Memory (MB): peak = 472.262 ; gain = 0.000
+## update_compile_order -fileset sources_1
+## update_compile_order -fileset sim_1
+update_compile_order: Time (s): cpu = 00:00:00 ; elapsed = 00:00:07 . Memory (MB): peak = 472.262 ; gain = 0.000
+## puts "Created Z7-10 RV32 project; simulation scenario=$scenario. Board pin/clock wrapper is still required for a board bitstream."
+Created Z7-10 RV32 project; simulation scenario=stress. Board pin/clock wrapper is still required for a board bitstream.
+# if {[get_property PART [current_project]] ne "xc7z010clg400-1"} {error "Wrong board part"}
+# if {[get_property top [get_filesets sources_1]] ne "lif_rv32_soc"} {error "Wrong synthesis top"}
+# if {[get_property top [get_filesets sim_1]] ne "lif_rv32_soc_tb"} {error "Wrong simulation top"}
+# if {![string match "*rv32_mnist/firmware.hex" [get_property generic [get_filesets sources_1]]]} {error "Wrong synthesis boot image"}
+# foreach source [get_files -all] {
+#     if {![file exists $source]} {error "Missing source $source"}
+# }
+# update_compile_order -fileset sources_1
+# update_compile_order -fileset sim_1
+update_compile_order: Time (s): cpu = 00:00:00 ; elapsed = 00:00:06 . Memory (MB): peak = 472.262 ; gain = 0.000
+# launch_simulation -simset sim_1 -mode behavioral
+Command: launch_simulation  -simset sim_1 -mode behavioral
+INFO: [Vivado 12-12493] Simulation top is 'lif_rv32_soc_tb'
+WARNING: [Vivado 12-13340] Unable to auto find GCC executables from simulator install path! (path not set)
+INFO: [Vivado 12-5682] Launching behavioral simulation in 'D:/RTL_PROJECT/build/rv32_vivado/lif_rv32.sim/sim_1/behav/xsim'
+INFO: [SIM-utils-51] Simulation object is 'sim_1'
+INFO: [SIM-utils-72] Using boost library from 'F:/Xilinx/Vivado/2023.2/tps/boost_1_72_0'
+INFO: [SIM-utils-54] Inspecting design source files for 'lif_rv32_soc_tb' in fileset 'sim_1'...
+INFO: [USF-XSim-97] Finding global include files...
+INFO: [USF-XSim-98] Fetching design files from 'sim_1'...
+INFO: [USF-XSim-2] XSim::Compile design
+INFO: [USF-XSim-61] Executing 'COMPILE and ANALYZE' step in 'D:/RTL_PROJECT/build/rv32_vivado/lif_rv32.sim/sim_1/behav/xsim'
+"xvlog --incr --relax -prj lif_rv32_soc_tb_vlog.prj"
+ECHO is off.
+ECHO is off.
+INFO: [VRFC 10-2263] Analyzing Verilog file "D:/RTL_PROJECT/rtl/aer_event_fifo.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module aer_event_fifo
+INFO: [VRFC 10-2263] Analyzing Verilog file "D:/RTL_PROJECT/rtl/aer_rate_encoder.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module aer_rate_encoder
+INFO: [VRFC 10-2263] Analyzing Verilog file "D:/RTL_PROJECT/rtl/aer_rr_arbiter.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module aer_rr_arbiter
+INFO: [VRFC 10-2263] Analyzing Verilog file "D:/RTL_PROJECT/rtl/aer_rr_select.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module aer_rr_select
+INFO: [VRFC 10-2263] Analyzing Verilog file "D:/RTL_PROJECT/rtl/axi_lite_endpoint.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module axi_lite_endpoint
+INFO: [VRFC 10-2263] Analyzing Verilog file "D:/RTL_PROJECT/rtl/lif_aer_snn_core.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module lif_aer_snn_core
+INFO: [VRFC 10-2263] Analyzing Verilog file "D:/RTL_PROJECT/rtl/lif_host_registers.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module lif_host_registers
+INFO: [VRFC 10-2263] Analyzing Verilog file "D:/RTL_PROJECT/rtl/lif_population_stepper.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module lif_population_stepper
+INFO: [VRFC 10-2263] Analyzing Verilog file "D:/RTL_PROJECT/rtl/lif_rate_aer_snn_core.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module lif_rate_aer_snn_core
+INFO: [VRFC 10-2263] Analyzing Verilog file "D:/RTL_PROJECT/rtl/lif_rv32_soc.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module lif_rv32_soc
+INFO: [VRFC 10-2263] Analyzing Verilog file "D:/RTL_PROJECT/rtl/lif_snn_core.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module lif_snn_core
+INFO: [VRFC 10-2263] Analyzing Verilog file "D:/RTL_PROJECT/rtl/lif_synapse_router.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module lif_synapse_router
+INFO: [VRFC 10-2263] Analyzing Verilog file "D:/RTL_PROJECT/rtl/lif_transition.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module lif_transition
+INFO: [VRFC 10-2263] Analyzing Verilog file "D:/RTL_PROJECT/rtl/vendor/picorv32.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module picorv32
+INFO: [VRFC 10-311] analyzing module picorv32_regs
+INFO: [VRFC 10-311] analyzing module picorv32_pcpi_mul
+INFO: [VRFC 10-311] analyzing module picorv32_pcpi_fast_mul
+INFO: [VRFC 10-311] analyzing module picorv32_pcpi_div
+INFO: [VRFC 10-311] analyzing module picorv32_axi
+INFO: [VRFC 10-311] analyzing module picorv32_axi_adapter
+INFO: [VRFC 10-311] analyzing module picorv32_wb
+INFO: [VRFC 10-2263] Analyzing Verilog file "D:/RTL_PROJECT/rtl/rate_encoder_transition.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module rate_encoder_transition
+INFO: [VRFC 10-2263] Analyzing Verilog file "D:/RTL_PROJECT/rtl/tb/lif_rv32_soc_tb.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module lif_rv32_soc_tb
+INFO: [VRFC 10-2263] Analyzing Verilog file "D:/RTL_PROJECT/build/rv32_vivado/lif_rv32.sim/sim_1/behav/xsim/glbl.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module glbl
+run_program: Time (s): cpu = 00:00:00 ; elapsed = 00:00:09 . Memory (MB): peak = 477.121 ; gain = 0.000
+INFO: [USF-XSim-69] 'compile' step finished in '9' seconds
+INFO: [USF-XSim-3] XSim::Elaborate design
+INFO: [USF-XSim-61] Executing 'ELABORATE' step in 'D:/RTL_PROJECT/build/rv32_vivado/lif_rv32.sim/sim_1/behav/xsim'
+"xelab --incr --debug typical --relax --mt 2 -generic_top "IMAGES=3" -generic_top "FRAMES=24" -generic_top "INPUT_WORDS=3906" -generic_top "OUTPUT_WORDS=1908" -L xil_defaultlib -L unisims_ver -L unimacro_ver -L secureip --snapshot lif_rv32_soc_tb_behav xil_defaultlib.lif_rv32_soc_tb xil_defaultlib.glbl -log elaborate.log"
+ECHO is off.
+ECHO is off.
+Vivado Simulator v2023.2
+Copyright 1986-2022 Xilinx, Inc. All Rights Reserved.
+Copyright 2022-2023 Advanced Micro Devices, Inc. All Rights Reserved.
+Running: F:/Xilinx/Vivado/2023.2/bin/unwrapped/win64.o/xelab.exe --incr --debug typical --relax --mt 2 -generic_top IMAGES=3 -generic_top FRAMES=24 -generic_top INPUT_WORDS=3906 -generic_top OUTPUT_WORDS=1908 -L xil_defaultlib -L unisims_ver -L unimacro_ver -L secureip --snapshot lif_rv32_soc_tb_behav xil_defaultlib.lif_rv32_soc_tb xil_defaultlib.glbl -log elaborate.log 
+Using 2 slave threads.
+Starting static elaboration
+Pass Through NonSizing Optimizer
+WARNING: [VRFC 10-3532] module 'glbl' does not have a parameter named 'IMAGES' to override [D:/RTL_PROJECT/build/rv32_vivado/lif_rv32.sim/sim_1/behav/xsim/glbl.v:6]
+Completed static elaboration
+Starting simulation data flow analysis
+WARNING: [XSIM 43-4099] "D:/RTL_PROJECT/rtl/lif_rv32_soc.v" Line 3. Module lif_rv32_soc(BOOT_FILE="") doesn't have a timescale but at least one module in design has a timescale.
+WARNING: [XSIM 43-4099] "D:/RTL_PROJECT/rtl/axi_lite_endpoint.v" Line 4. Module axi_lite_endpoint doesn't have a timescale but at least one module in design has a timescale.
+WARNING: [XSIM 43-4099] "D:/RTL_PROJECT/rtl/lif_host_registers.v" Line 3. Module lif_host_registers doesn't have a timescale but at least one module in design has a timescale.
+WARNING: [XSIM 43-4099] "D:/RTL_PROJECT/rtl/lif_rate_aer_snn_core.v" Line 3. Module lif_rate_aer_snn_core doesn't have a timescale but at least one module in design has a timescale.
+WARNING: [XSIM 43-4099] "D:/RTL_PROJECT/rtl/aer_rate_encoder.v" Line 3. Module aer_rate_encoder doesn't have a timescale but at least one module in design has a timescale.
+WARNING: [XSIM 43-4099] "D:/RTL_PROJECT/rtl/lif_aer_snn_core.v" Line 3. Module lif_aer_snn_core_default doesn't have a timescale but at least one module in design has a timescale.
+WARNING: [XSIM 43-4099] "D:/RTL_PROJECT/rtl/aer_event_fifo.v" Line 2. Module aer_event_fifo_default doesn't have a timescale but at least one module in design has a timescale.
+WARNING: [XSIM 43-4099] "D:/RTL_PROJECT/rtl/aer_event_fifo.v" Line 2. Module aer_event_fifo_default doesn't have a timescale but at least one module in design has a timescale.
+WARNING: [XSIM 43-4099] "D:/RTL_PROJECT/rtl/aer_event_fifo.v" Line 2. Module aer_event_fifo_default doesn't have a timescale but at least one module in design has a timescale.
+WARNING: [XSIM 43-4099] "D:/RTL_PROJECT/rtl/aer_event_fifo.v" Line 2. Module aer_event_fifo_default doesn't have a timescale but at least one module in design has a timescale.
+WARNING: [XSIM 43-4099] "D:/RTL_PROJECT/rtl/aer_rr_arbiter.v" Line 3. Module aer_rr_arbiter doesn't have a timescale but at least one module in design has a timescale.
+WARNING: [XSIM 43-4099] "D:/RTL_PROJECT/rtl/aer_rr_select.v" Line 3. Module aer_rr_select doesn't have a timescale but at least one module in design has a timescale.
+WARNING: [XSIM 43-4099] "D:/RTL_PROJECT/rtl/aer_event_fifo.v" Line 2. Module aer_event_fifo_default doesn't have a timescale but at least one module in design has a timescale.
+WARNING: [XSIM 43-4099] "D:/RTL_PROJECT/rtl/lif_snn_core.v" Line 1. Module lif_snn_core_default doesn't have a timescale but at least one module in design has a timescale.
+WARNING: [XSIM 43-4099] "D:/RTL_PROJECT/rtl/lif_synapse_router.v" Line 2. Module lif_synapse_router(NUM_SOURCES=256,SOURCE_ADDR_WIDTH=8) doesn't have a timescale but at least one module in design has a timescale.
+WARNING: [XSIM 43-4099] "D:/RTL_PROJECT/rtl/lif_population_stepper.v" Line 1. Module lif_population_stepper doesn't have a timescale but at least one module in design has a timescale.
+WARNING: [XSIM 43-4099] "D:/RTL_PROJECT/rtl/lif_transition.v" Line 1. Module lif_transition doesn't have a timescale but at least one module in design has a timescale.
+WARNING: [XSIM 43-4099] "D:/RTL_PROJECT/rtl/lif_rv32_soc.v" Line 3. Module lif_rv32_soc(BOOT_FILE="") doesn't have a timescale but at least one module in design has a timescale.
+WARNING: [XSIM 43-4099] "D:/RTL_PROJECT/rtl/axi_lite_endpoint.v" Line 4. Module axi_lite_endpoint doesn't have a timescale but at least one module in design has a timescale.
+WARNING: [XSIM 43-4099] "D:/RTL_PROJECT/rtl/lif_host_registers.v" Line 3. Module lif_host_registers doesn't have a timescale but at least one module in design has a timescale.
+WARNING: [XSIM 43-4099] "D:/RTL_PROJECT/rtl/lif_rate_aer_snn_core.v" Line 3. Module lif_rate_aer_snn_core doesn't have a timescale but at least one module in design has a timescale.
+WARNING: [XSIM 43-4099] "D:/RTL_PROJECT/rtl/aer_rate_encoder.v" Line 3. Module aer_rate_encoder doesn't have a timescale but at least one module in design has a timescale.
+WARNING: [XSIM 43-4099] "D:/RTL_PROJECT/rtl/lif_aer_snn_core.v" Line 3. Module lif_aer_snn_core_default doesn't have a timescale but at least one module in design has a timescale.
+WARNING: [XSIM 43-4099] "D:/RTL_PROJECT/rtl/aer_event_fifo.v" Line 2. Module aer_event_fifo_default doesn't have a timescale but at least one module in design has a timescale.
+WARNING: [XSIM 43-4099] "D:/RTL_PROJECT/rtl/aer_event_fifo.v" Line 2. Module aer_event_fifo_default doesn't have a timescale but at least one module in design has a timescale.
+WARNING: [XSIM 43-4099] "D:/RTL_PROJECT/rtl/aer_event_fifo.v" Line 2. Module aer_event_fifo_default doesn't have a timescale but at least one module in design has a timescale.
+WARNING: [XSIM 43-4099] "D:/RTL_PROJECT/rtl/aer_event_fifo.v" Line 2. Module aer_event_fifo_default doesn't have a timescale but at least one module in design has a timescale.
+WARNING: [XSIM 43-4099] "D:/RTL_PROJECT/rtl/aer_rr_arbiter.v" Line 3. Module aer_rr_arbiter doesn't have a timescale but at least one module in design has a timescale.
+WARNING: [XSIM 43-4099] "D:/RTL_PROJECT/rtl/aer_rr_select.v" Line 3. Module aer_rr_select doesn't have a timescale but at least one module in design has a timescale.
+WARNING: [XSIM 43-4099] "D:/RTL_PROJECT/rtl/aer_event_fifo.v" Line 2. Module aer_event_fifo_default doesn't have a timescale but at least one module in design has a timescale.
+WARNING: [XSIM 43-4099] "D:/RTL_PROJECT/rtl/lif_snn_core.v" Line 1. Module lif_snn_core_default doesn't have a timescale but at least one module in design has a timescale.
+WARNING: [XSIM 43-4099] "D:/RTL_PROJECT/rtl/lif_synapse_router.v" Line 2. Module lif_synapse_router(NUM_SOURCES=256,SOURCE_ADDR_WIDTH=8) doesn't have a timescale but at least one module in design has a timescale.
+WARNING: [XSIM 43-4099] "D:/RTL_PROJECT/rtl/lif_population_stepper.v" Line 1. Module lif_population_stepper doesn't have a timescale but at least one module in design has a timescale.
+WARNING: [XSIM 43-4099] "D:/RTL_PROJECT/rtl/lif_transition.v" Line 1. Module lif_transition doesn't have a timescale but at least one module in design has a timescale.
+Completed simulation data flow analysis
+Time Resolution for simulation is 1ps
+Compiling module xil_defaultlib.picorv32_axi_adapter
+Compiling module xil_defaultlib.picorv32(ENABLE_COUNTERS=1'b0,EN...
+Compiling module xil_defaultlib.picorv32_axi(ENABLE_COUNTERS=1'b...
+Compiling module xil_defaultlib.axi_lite_endpoint
+Compiling module xil_defaultlib.rate_encoder_transition
+Compiling module xil_defaultlib.aer_rate_encoder
+Compiling module xil_defaultlib.aer_event_fifo_default
+Compiling module xil_defaultlib.aer_rr_select
+Compiling module xil_defaultlib.aer_rr_arbiter
+Compiling module xil_defaultlib.lif_synapse_router(NUM_SOURCES=2...
+Compiling module xil_defaultlib.lif_transition
+Compiling module xil_defaultlib.lif_population_stepper
+Compiling module xil_defaultlib.lif_snn_core_default
+Compiling module xil_defaultlib.lif_aer_snn_core_default
+Compiling module xil_defaultlib.lif_rate_aer_snn_core
+Compiling module xil_defaultlib.lif_host_registers
+Compiling module xil_defaultlib.lif_rv32_soc(BOOT_FILE="")
+Compiling module xil_defaultlib.lif_rv32_soc_tb
+Compiling module xil_defaultlib.glbl
+Built simulation snapshot lif_rv32_soc_tb_behav
+run_program: Time (s): cpu = 00:00:00 ; elapsed = 00:00:27 . Memory (MB): peak = 477.121 ; gain = 0.000
+INFO: [USF-XSim-69] 'elaborate' step finished in '27' seconds
+INFO: [USF-XSim-4] XSim::Simulate design
+INFO: [USF-XSim-61] Executing 'SIMULATE' step in 'D:/RTL_PROJECT/build/rv32_vivado/lif_rv32.sim/sim_1/behav/xsim'
+INFO: [USF-XSim-98] *** Running xsim
+   with args "lif_rv32_soc_tb_behav -key {Behavioral:sim_1:Functional:lif_rv32_soc_tb} -tclbatch {lif_rv32_soc_tb.tcl} -log {simulate.log} -testplusarg "DATA_DIR=D:/RTL_PROJECT/build/rv32_network""
+INFO: [USF-XSim-8] Loading simulator feature
+Time resolution is 1 ps
+source lif_rv32_soc_tb.tcl
+## current_wave_config
+WARNING: [Wavedata 42-489] Can't add object "/lif_rv32_soc_tb/weights" to the wave window because it has 262144 bits, which exceeds the display limit of 65536 bits.  To change the display limit, use the command "set_property display_limit <new limit> [current_wave_config]".
+WARNING: [Wavedata 42-489] Can't add object "/lif_rv32_soc_tb/states" to the wave window because it has 202752 bits, which exceeds the display limit of 65536 bits.  To change the display limit, use the command "set_property display_limit <new limit> [current_wave_config]".
+INFO: [USF-XSim-96] XSim completed. Design snapshot 'lif_rv32_soc_tb_behav' loaded.
+INFO: [USF-XSim-97] XSim simulation ran for 1000ns
+launch_simulation: Time (s): cpu = 00:00:01 ; elapsed = 00:00:41 . Memory (MB): peak = 492.770 ; gain = 20.508
+# run all
+PASS: real RV32/AXI boot, 65536 learned/stress weights, 3 images, 24 ticks, 6144 state reads, 5583977 cycles
+$finish called at time : 55839816 ns : File "D:/RTL_PROJECT/rtl/tb/lif_rv32_soc_tb.v" Line 38
+run: Time (s): cpu = 00:00:16 ; elapsed = 00:04:26 . Memory (MB): peak = 492.770 ; gain = 0.000
+# close_sim
+INFO: xsimkernel Simulation Memory Usage: 20796 KB (Peak: 20796 KB), Simulation CPU Usage: 225843 ms
+INFO: [Simtcl 6-16] Simulation closed
+# close_project
+# puts "PASS: Z7-10 generated project, canonical sources, learned synthesis boot image and RV32 GUI simulation"
+PASS: Z7-10 generated project, canonical sources, learned synthesis boot image and RV32 GUI simulation
+INFO: [Common 17-206] Exiting Vivado at Wed Nov 11 15:09:28 2026...

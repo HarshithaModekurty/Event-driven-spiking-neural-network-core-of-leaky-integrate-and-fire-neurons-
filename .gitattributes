@@ -1,9 +1,9 @@
-# Verification receipts hash exact source bytes. Preserve the tested line
-# endings on checkout, independently of a developer's core.autocrlf.
-# This changes no source bytes or RTL behavior.
+# Preserve exact tested source bytes across Git checkouts.
+# Verification receipts hash source files including their line endings.
 .gitattributes text eol=lf
 constraints/timing_harness_100mhz.xdc text eol=lf
 constraints/timing_harness_context.xdc text eol=lf
+firmware/snn_boot.S text eol=lf
 formal/aer_queues.v text eol=lf
 formal/aer_scheduler.v text eol=lf
 formal/lif_refractory.v text eol=lf
@@ -15,20 +15,35 @@ rtl/aer_event_fifo.v text eol=lf
 rtl/aer_rate_encoder.v text eol=lf
 rtl/aer_rr_arbiter.v text eol=lf
 rtl/aer_rr_select.v text eol=lf
+rtl/axi_lite_endpoint.v text eol=lf
 rtl/lif_aer_snn_core.v text eol=lf
+rtl/lif_axi_lite.v text eol=lf
+rtl/lif_host_registers.v text eol=lf
 rtl/lif_population_stepper.v text eol=crlf
 rtl/lif_rate_aer_snn_core.v text eol=lf
+rtl/lif_rv32_soc.v text eol=lf
 rtl/lif_snn_core.v text eol=crlf
 rtl/lif_synapse_router.v text eol=lf
 rtl/lif_transition.v text eol=crlf
 rtl/rate_encoder_transition.v text eol=lf
 rtl/tb/aer_rate_encoder_tb.v text eol=lf
+rtl/tb/lif_axi_lite_tb.v text eol=lf
+rtl/tb/lif_population_pipeline_tb.v text eol=lf
 rtl/tb/lif_rate_snn_tb.v text eol=lf
+rtl/tb/lif_rv32_soc_tb.v text eol=lf
 rtl/tb/rate_encoder_transition_tb.v text eol=lf
+rtl/vendor/picorv32.v text eol=lf
 tests/test_rate_encoder_rtl.py text eol=lf
 tools/check_rate_project.tcl text eol=lf
+tools/check_rv32_project.tcl text eol=lf
+tools/create_rv32_project.tcl text eol=lf
 tools/fixtures/lif_rate_timing_harness.v text eol=lf
+tools/fixtures/lif_rv32_timing_harness.v text eol=lf
+tools/run_axi_check.py text eol=lf
 tools/run_formal_checks.py text eol=lf
 tools/run_rate_snn_check.py text eol=lf
+tools/run_rv32_check.py text eol=lf
+tools/rv32_assemble.py text eol=lf
 tools/setup_formal_tools.py text eol=lf
 tools/synth_rate256.tcl text eol=lf
+tools/synth_rv32_z710.tcl text eol=lf

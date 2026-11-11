@@ -1,0 +1,2 @@
+PASS: real RV32/AXI boot, 65536 learned/stress weights, 3 images, 24 ticks, 6144 state reads, 5583977 cycles
+D:\RTL_PROJECT\rtl\tb\lif_rv32_soc_tb.v:38: $finish called at 55839816000 (1ps)

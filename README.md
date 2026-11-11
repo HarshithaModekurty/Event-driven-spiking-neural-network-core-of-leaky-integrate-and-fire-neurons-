@@ -3,6 +3,12 @@
 See [STAGE_REPORT.md](STAGE_REPORT.md) for completed work, verification results,
 remaining project stages, and the next recommended milestone.
 
+The integrated host now uses a PicoRV32 processor over AXI4-Lite to load
+weights/intensities and run the full 256-state network. The target board is
+**Zybo Z7-10** (`xc7z010clg400-1`). See [RV32_AXI_CONTROL.md](RV32_AXI_CONTROL.md)
+for registers, firmware, CPU-driven verification and current implementation
+scope. Older xc7z020 timing reports describe the previous target part.
+
 The integrated core now has framed AER input/output queues and a four-port
 round-robin BDD arbiter. See [AER_PROTOCOL.md](AER_PROTOCOL.md) for the
 request/acknowledge contract, time-step boundaries and verification commands.

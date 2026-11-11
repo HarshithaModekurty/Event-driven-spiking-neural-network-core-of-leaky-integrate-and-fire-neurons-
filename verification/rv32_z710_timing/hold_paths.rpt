@@ -1,0 +1,547 @@
+Copyright 1986-2022 Xilinx, Inc. All Rights Reserved. Copyright 2022-2023 Advanced Micro Devices, Inc. All Rights Reserved.
+---------------------------------------------------------------------------------------------------------------------------------------------
+| Tool Version : Vivado v.2023.2 (win64) Build 4029153 Fri Oct 13 20:14:34 MDT 2023
+| Date         : Wed Nov 11 15:18:20 2026
+| Host         : DESKTOP-J3M0MBG running 64-bit major release  (build 9200)
+| Command      : report_timing -delay_type min -max_paths 10 -file D:/RTL_PROJECT/build/rv32_z710_timing/hold_paths.rpt
+| Design       : lif_rv32_timing_harness
+| Device       : 7z010-clg400
+| Speed File   : -1  PRODUCTION 1.12 2019-11-22
+| Design State : Routed
+---------------------------------------------------------------------------------------------------------------------------------------------
+
+Timing Report
+
+Slack (MET) :             0.024ns  (arrival time - required time)
+  Source:                 soc/endpoint/wr_addr_reg[9]_rep__0/C
+                            (rising edge-triggered cell FDRE clocked by core_clk  {rise@0.000ns fall@5.000ns period=10.000ns})
+  Destination:            soc/memory_reg_0_1/ADDRARDADDR[8]
+                            (rising edge-triggered cell RAMB36E1 clocked by core_clk  {rise@0.000ns fall@5.000ns period=10.000ns})
+  Path Group:             core_clk
+  Path Type:              Hold (Min at Fast Process Corner)
+  Requirement:            0.000ns  (core_clk rise@0.000ns - core_clk rise@0.000ns)
+  Data Path Delay:        0.364ns  (logic 0.141ns (38.705%)  route 0.223ns (61.295%))
+  Logic Levels:           0  
+  Clock Path Skew:        0.057ns (DCD - SCD - CPR)
+    Destination Clock Delay (DCD):    1.334ns
+    Source Clock Delay      (SCD):    1.000ns
+    Clock Pessimism Removal (CPR):    0.277ns
+  Clock Uncertainty:      0.100ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE + UU
+    Total System Jitter     (TSJ):    0.000ns
+    Total Input Jitter      (TIJ):    0.000ns
+    Discrete Jitter          (DJ):    0.000ns
+    Phase Error              (PE):    0.000ns
+    User Uncertainty         (UU):    0.100ns
+
+    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------
+                         (clock core_clk rise edge)
+                                                      0.000     0.000 r  
+                                                      0.000     0.000 r  clk (IN)
+                         net (fo=0)                   0.410     0.410    clk
+    BUFGCTRL_X0Y0        BUFG (Prop_bufg_I_O)         0.026     0.436 r  core_clock_buffer/O
+                         net (fo=13819, routed)       0.564     1.000    soc/endpoint/clk
+    SLICE_X26Y1          FDRE                                         r  soc/endpoint/wr_addr_reg[9]_rep__0/C
+  -------------------------------------------------------------------    -------------------
+    SLICE_X26Y1          FDRE (Prop_fdre_C_Q)         0.141     1.141 r  soc/endpoint/wr_addr_reg[9]_rep__0/Q
+                         net (fo=1, routed)           0.223     1.364    soc/endpoint_n_212
+    RAMB36_X1Y0          RAMB36E1                                     r  soc/memory_reg_0_1/ADDRARDADDR[8]
+  -------------------------------------------------------------------    -------------------
+
+                         (clock core_clk rise edge)
+                                                      0.000     0.000 r  
+                                                      0.000     0.000 r  clk (IN)
+                         net (fo=0)                   0.432     0.432    clk
+    BUFGCTRL_X0Y0        BUFG (Prop_bufg_I_O)         0.029     0.461 r  core_clock_buffer/O
+                         net (fo=13819, routed)       0.873     1.334    soc/clk
+    RAMB36_X1Y0          RAMB36E1                                     r  soc/memory_reg_0_1/CLKARDCLK
+                         clock pessimism             -0.277     1.057    
+                         clock uncertainty            0.100     1.157    
+    RAMB36_X1Y0          RAMB36E1 (Hold_ramb36e1_CLKARDCLK_ADDRARDADDR[8])
+                                                      0.183     1.340    soc/memory_reg_0_1
+  -------------------------------------------------------------------
+                         required time                         -1.340    
+                         arrival time                           1.364    
+  -------------------------------------------------------------------
+                         slack                                  0.024    
+
+Slack (MET) :             0.025ns  (arrival time - required time)
+  Source:                 soc/endpoint/wr_addr_reg[4]_rep__18/C
+                            (rising edge-triggered cell FDRE clocked by core_clk  {rise@0.000ns fall@5.000ns period=10.000ns})
+  Destination:            soc/registers/core/network/core/synapse_router/synapse_weight_reg_0_1/ADDRARDADDR[2]
+                            (rising edge-triggered cell RAMB36E1 clocked by core_clk  {rise@0.000ns fall@5.000ns period=10.000ns})
+  Path Group:             core_clk
+  Path Type:              Hold (Min at Fast Process Corner)
+  Requirement:            0.000ns  (core_clk rise@0.000ns - core_clk rise@0.000ns)
+  Data Path Delay:        0.363ns  (logic 0.141ns (38.811%)  route 0.222ns (61.189%))
+  Logic Levels:           0  
+  Clock Path Skew:        0.055ns (DCD - SCD - CPR)
+    Destination Clock Delay (DCD):    1.329ns
+    Source Clock Delay      (SCD):    0.997ns
+    Clock Pessimism Removal (CPR):    0.277ns
+  Clock Uncertainty:      0.100ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE + UU
+    Total System Jitter     (TSJ):    0.000ns
+    Total Input Jitter      (TIJ):    0.000ns
+    Discrete Jitter          (DJ):    0.000ns
+    Phase Error              (PE):    0.000ns
+    User Uncertainty         (UU):    0.100ns
+
+    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------
+                         (clock core_clk rise edge)
+                                                      0.000     0.000 r  
+                                                      0.000     0.000 r  clk (IN)
+                         net (fo=0)                   0.410     0.410    clk
+    BUFGCTRL_X0Y0        BUFG (Prop_bufg_I_O)         0.026     0.436 r  core_clock_buffer/O
+                         net (fo=13819, routed)       0.561     0.997    soc/endpoint/clk
+    SLICE_X26Y11         FDRE                                         r  soc/endpoint/wr_addr_reg[4]_rep__18/C
+  -------------------------------------------------------------------    -------------------
+    SLICE_X26Y11         FDRE (Prop_fdre_C_Q)         0.141     1.138 r  soc/endpoint/wr_addr_reg[4]_rep__18/Q
+                         net (fo=1, routed)           0.222     1.360    soc/registers/core/network/core/synapse_router/synapse_weight_reg_0_1_0[2]
+    RAMB36_X1Y2          RAMB36E1                                     r  soc/registers/core/network/core/synapse_router/synapse_weight_reg_0_1/ADDRARDADDR[2]
+  -------------------------------------------------------------------    -------------------
+
+                         (clock core_clk rise edge)
+                                                      0.000     0.000 r  
+                                                      0.000     0.000 r  clk (IN)
+                         net (fo=0)                   0.432     0.432    clk
+    BUFGCTRL_X0Y0        BUFG (Prop_bufg_I_O)         0.029     0.461 r  core_clock_buffer/O
+                         net (fo=13819, routed)       0.868     1.329    soc/registers/core/network/core/synapse_router/clk
+    RAMB36_X1Y2          RAMB36E1                                     r  soc/registers/core/network/core/synapse_router/synapse_weight_reg_0_1/CLKARDCLK
+                         clock pessimism             -0.277     1.052    
+                         clock uncertainty            0.100     1.152    
+    RAMB36_X1Y2          RAMB36E1 (Hold_ramb36e1_CLKARDCLK_ADDRARDADDR[2])
+                                                      0.183     1.335    soc/registers/core/network/core/synapse_router/synapse_weight_reg_0_1
+  -------------------------------------------------------------------
+                         required time                         -1.335    
+                         arrival time                           1.360    
+  -------------------------------------------------------------------
+                         slack                                  0.025    
+
+Slack (MET) :             0.025ns  (arrival time - required time)
+  Source:                 soc/endpoint/wr_addr_reg[5]/C
+                            (rising edge-triggered cell FDRE clocked by core_clk  {rise@0.000ns fall@5.000ns period=10.000ns})
+  Destination:            soc/registers/core/encoder/intensity_reg_192_255_3_5/RAMA/WADR3
+                            (rising edge-triggered cell RAMD64E clocked by core_clk  {rise@0.000ns fall@5.000ns period=10.000ns})
+  Path Group:             core_clk
+  Path Type:              Hold (Min at Fast Process Corner)
+  Requirement:            0.000ns  (core_clk rise@0.000ns - core_clk rise@0.000ns)
+  Data Path Delay:        0.396ns  (logic 0.141ns (35.618%)  route 0.255ns (64.382%))
+  Logic Levels:           0  
+  Clock Path Skew:        0.031ns (DCD - SCD - CPR)
+    Destination Clock Delay (DCD):    1.276ns
+    Source Clock Delay      (SCD):    0.987ns
+    Clock Pessimism Removal (CPR):    0.258ns
+  Clock Uncertainty:      0.100ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE + UU
+    Total System Jitter     (TSJ):    0.000ns
+    Total Input Jitter      (TIJ):    0.000ns
+    Discrete Jitter          (DJ):    0.000ns
+    Phase Error              (PE):    0.000ns
+    User Uncertainty         (UU):    0.100ns
+
+    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------
+                         (clock core_clk rise edge)
+                                                      0.000     0.000 r  
+                                                      0.000     0.000 r  clk (IN)
+                         net (fo=0)                   0.410     0.410    clk
+    BUFGCTRL_X0Y0        BUFG (Prop_bufg_I_O)         0.026     0.436 r  core_clock_buffer/O
+                         net (fo=13819, routed)       0.551     0.987    soc/endpoint/clk
+    SLICE_X18Y23         FDRE                                         r  soc/endpoint/wr_addr_reg[5]/C
+  -------------------------------------------------------------------    -------------------
+    SLICE_X18Y23         FDRE (Prop_fdre_C_Q)         0.141     1.128 r  soc/endpoint/wr_addr_reg[5]/Q
+                         net (fo=60, routed)          0.255     1.383    soc/registers/core/encoder/intensity_reg_192_255_3_5/ADDRD3
+    SLICE_X20Y23         RAMD64E                                      r  soc/registers/core/encoder/intensity_reg_192_255_3_5/RAMA/WADR3
+  -------------------------------------------------------------------    -------------------
+
+                         (clock core_clk rise edge)
+                                                      0.000     0.000 r  
+                                                      0.000     0.000 r  clk (IN)
+                         net (fo=0)                   0.432     0.432    clk
+    BUFGCTRL_X0Y0        BUFG (Prop_bufg_I_O)         0.029     0.461 r  core_clock_buffer/O
+                         net (fo=13819, routed)       0.815     1.276    soc/registers/core/encoder/intensity_reg_192_255_3_5/WCLK
+    SLICE_X20Y23         RAMD64E                                      r  soc/registers/core/encoder/intensity_reg_192_255_3_5/RAMA/CLK
+                         clock pessimism             -0.258     1.018    
+                         clock uncertainty            0.100     1.118    
+    SLICE_X20Y23         RAMD64E (Hold_ramd64e_CLK_WADR3)
+                                                      0.240     1.358    soc/registers/core/encoder/intensity_reg_192_255_3_5/RAMA
+  -------------------------------------------------------------------
+                         required time                         -1.358    
+                         arrival time                           1.383    
+  -------------------------------------------------------------------
+                         slack                                  0.025    
+
+Slack (MET) :             0.025ns  (arrival time - required time)
+  Source:                 soc/endpoint/wr_addr_reg[5]/C
+                            (rising edge-triggered cell FDRE clocked by core_clk  {rise@0.000ns fall@5.000ns period=10.000ns})
+  Destination:            soc/registers/core/encoder/intensity_reg_192_255_3_5/RAMB/WADR3
+                            (rising edge-triggered cell RAMD64E clocked by core_clk  {rise@0.000ns fall@5.000ns period=10.000ns})
+  Path Group:             core_clk
+  Path Type:              Hold (Min at Fast Process Corner)
+  Requirement:            0.000ns  (core_clk rise@0.000ns - core_clk rise@0.000ns)
+  Data Path Delay:        0.396ns  (logic 0.141ns (35.618%)  route 0.255ns (64.382%))
+  Logic Levels:           0  
+  Clock Path Skew:        0.031ns (DCD - SCD - CPR)
+    Destination Clock Delay (DCD):    1.276ns
+    Source Clock Delay      (SCD):    0.987ns
+    Clock Pessimism Removal (CPR):    0.258ns
+  Clock Uncertainty:      0.100ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE + UU
+    Total System Jitter     (TSJ):    0.000ns
+    Total Input Jitter      (TIJ):    0.000ns
+    Discrete Jitter          (DJ):    0.000ns
+    Phase Error              (PE):    0.000ns
+    User Uncertainty         (UU):    0.100ns
+
+    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------
+                         (clock core_clk rise edge)
+                                                      0.000     0.000 r  
+                                                      0.000     0.000 r  clk (IN)
+                         net (fo=0)                   0.410     0.410    clk
+    BUFGCTRL_X0Y0        BUFG (Prop_bufg_I_O)         0.026     0.436 r  core_clock_buffer/O
+                         net (fo=13819, routed)       0.551     0.987    soc/endpoint/clk
+    SLICE_X18Y23         FDRE                                         r  soc/endpoint/wr_addr_reg[5]/C
+  -------------------------------------------------------------------    -------------------
+    SLICE_X18Y23         FDRE (Prop_fdre_C_Q)         0.141     1.128 r  soc/endpoint/wr_addr_reg[5]/Q
+                         net (fo=60, routed)          0.255     1.383    soc/registers/core/encoder/intensity_reg_192_255_3_5/ADDRD3
+    SLICE_X20Y23         RAMD64E                                      r  soc/registers/core/encoder/intensity_reg_192_255_3_5/RAMB/WADR3
+  -------------------------------------------------------------------    -------------------
+
+                         (clock core_clk rise edge)
+                                                      0.000     0.000 r  
+                                                      0.000     0.000 r  clk (IN)
+                         net (fo=0)                   0.432     0.432    clk
+    BUFGCTRL_X0Y0        BUFG (Prop_bufg_I_O)         0.029     0.461 r  core_clock_buffer/O
+                         net (fo=13819, routed)       0.815     1.276    soc/registers/core/encoder/intensity_reg_192_255_3_5/WCLK
+    SLICE_X20Y23         RAMD64E                                      r  soc/registers/core/encoder/intensity_reg_192_255_3_5/RAMB/CLK
+                         clock pessimism             -0.258     1.018    
+                         clock uncertainty            0.100     1.118    
+    SLICE_X20Y23         RAMD64E (Hold_ramd64e_CLK_WADR3)
+                                                      0.240     1.358    soc/registers/core/encoder/intensity_reg_192_255_3_5/RAMB
+  -------------------------------------------------------------------
+                         required time                         -1.358    
+                         arrival time                           1.383    
+  -------------------------------------------------------------------
+                         slack                                  0.025    
+
+Slack (MET) :             0.025ns  (arrival time - required time)
+  Source:                 soc/endpoint/wr_addr_reg[5]/C
+                            (rising edge-triggered cell FDRE clocked by core_clk  {rise@0.000ns fall@5.000ns period=10.000ns})
+  Destination:            soc/registers/core/encoder/intensity_reg_192_255_3_5/RAMC/WADR3
+                            (rising edge-triggered cell RAMD64E clocked by core_clk  {rise@0.000ns fall@5.000ns period=10.000ns})
+  Path Group:             core_clk
+  Path Type:              Hold (Min at Fast Process Corner)
+  Requirement:            0.000ns  (core_clk rise@0.000ns - core_clk rise@0.000ns)
+  Data Path Delay:        0.396ns  (logic 0.141ns (35.618%)  route 0.255ns (64.382%))
+  Logic Levels:           0  
+  Clock Path Skew:        0.031ns (DCD - SCD - CPR)
+    Destination Clock Delay (DCD):    1.276ns
+    Source Clock Delay      (SCD):    0.987ns
+    Clock Pessimism Removal (CPR):    0.258ns
+  Clock Uncertainty:      0.100ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE + UU
+    Total System Jitter     (TSJ):    0.000ns
+    Total Input Jitter      (TIJ):    0.000ns
+    Discrete Jitter          (DJ):    0.000ns
+    Phase Error              (PE):    0.000ns
+    User Uncertainty         (UU):    0.100ns
+
+    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------
+                         (clock core_clk rise edge)
+                                                      0.000     0.000 r  
+                                                      0.000     0.000 r  clk (IN)
+                         net (fo=0)                   0.410     0.410    clk
+    BUFGCTRL_X0Y0        BUFG (Prop_bufg_I_O)         0.026     0.436 r  core_clock_buffer/O
+                         net (fo=13819, routed)       0.551     0.987    soc/endpoint/clk
+    SLICE_X18Y23         FDRE                                         r  soc/endpoint/wr_addr_reg[5]/C
+  -------------------------------------------------------------------    -------------------
+    SLICE_X18Y23         FDRE (Prop_fdre_C_Q)         0.141     1.128 r  soc/endpoint/wr_addr_reg[5]/Q
+                         net (fo=60, routed)          0.255     1.383    soc/registers/core/encoder/intensity_reg_192_255_3_5/ADDRD3
+    SLICE_X20Y23         RAMD64E                                      r  soc/registers/core/encoder/intensity_reg_192_255_3_5/RAMC/WADR3
+  -------------------------------------------------------------------    -------------------
+
+                         (clock core_clk rise edge)
+                                                      0.000     0.000 r  
+                                                      0.000     0.000 r  clk (IN)
+                         net (fo=0)                   0.432     0.432    clk
+    BUFGCTRL_X0Y0        BUFG (Prop_bufg_I_O)         0.029     0.461 r  core_clock_buffer/O
+                         net (fo=13819, routed)       0.815     1.276    soc/registers/core/encoder/intensity_reg_192_255_3_5/WCLK
+    SLICE_X20Y23         RAMD64E                                      r  soc/registers/core/encoder/intensity_reg_192_255_3_5/RAMC/CLK
+                         clock pessimism             -0.258     1.018    
+                         clock uncertainty            0.100     1.118    
+    SLICE_X20Y23         RAMD64E (Hold_ramd64e_CLK_WADR3)
+                                                      0.240     1.358    soc/registers/core/encoder/intensity_reg_192_255_3_5/RAMC
+  -------------------------------------------------------------------
+                         required time                         -1.358    
+                         arrival time                           1.383    
+  -------------------------------------------------------------------
+                         slack                                  0.025    
+
+Slack (MET) :             0.025ns  (arrival time - required time)
+  Source:                 soc/endpoint/wr_addr_reg[5]/C
+                            (rising edge-triggered cell FDRE clocked by core_clk  {rise@0.000ns fall@5.000ns period=10.000ns})
+  Destination:            soc/registers/core/encoder/intensity_reg_192_255_3_5/RAMD/WADR3
+                            (rising edge-triggered cell RAMD64E clocked by core_clk  {rise@0.000ns fall@5.000ns period=10.000ns})
+  Path Group:             core_clk
+  Path Type:              Hold (Min at Fast Process Corner)
+  Requirement:            0.000ns  (core_clk rise@0.000ns - core_clk rise@0.000ns)
+  Data Path Delay:        0.396ns  (logic 0.141ns (35.618%)  route 0.255ns (64.382%))
+  Logic Levels:           0  
+  Clock Path Skew:        0.031ns (DCD - SCD - CPR)
+    Destination Clock Delay (DCD):    1.276ns
+    Source Clock Delay      (SCD):    0.987ns
+    Clock Pessimism Removal (CPR):    0.258ns
+  Clock Uncertainty:      0.100ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE + UU
+    Total System Jitter     (TSJ):    0.000ns
+    Total Input Jitter      (TIJ):    0.000ns
+    Discrete Jitter          (DJ):    0.000ns
+    Phase Error              (PE):    0.000ns
+    User Uncertainty         (UU):    0.100ns
+
+    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------
+                         (clock core_clk rise edge)
+                                                      0.000     0.000 r  
+                                                      0.000     0.000 r  clk (IN)
+                         net (fo=0)                   0.410     0.410    clk
+    BUFGCTRL_X0Y0        BUFG (Prop_bufg_I_O)         0.026     0.436 r  core_clock_buffer/O
+                         net (fo=13819, routed)       0.551     0.987    soc/endpoint/clk
+    SLICE_X18Y23         FDRE                                         r  soc/endpoint/wr_addr_reg[5]/C
+  -------------------------------------------------------------------    -------------------
+    SLICE_X18Y23         FDRE (Prop_fdre_C_Q)         0.141     1.128 r  soc/endpoint/wr_addr_reg[5]/Q
+                         net (fo=60, routed)          0.255     1.383    soc/registers/core/encoder/intensity_reg_192_255_3_5/ADDRD3
+    SLICE_X20Y23         RAMD64E                                      r  soc/registers/core/encoder/intensity_reg_192_255_3_5/RAMD/WADR3
+  -------------------------------------------------------------------    -------------------
+
+                         (clock core_clk rise edge)
+                                                      0.000     0.000 r  
+                                                      0.000     0.000 r  clk (IN)
+                         net (fo=0)                   0.432     0.432    clk
+    BUFGCTRL_X0Y0        BUFG (Prop_bufg_I_O)         0.029     0.461 r  core_clock_buffer/O
+                         net (fo=13819, routed)       0.815     1.276    soc/registers/core/encoder/intensity_reg_192_255_3_5/WCLK
+    SLICE_X20Y23         RAMD64E                                      r  soc/registers/core/encoder/intensity_reg_192_255_3_5/RAMD/CLK
+                         clock pessimism             -0.258     1.018    
+                         clock uncertainty            0.100     1.118    
+    SLICE_X20Y23         RAMD64E (Hold_ramd64e_CLK_WADR3)
+                                                      0.240     1.358    soc/registers/core/encoder/intensity_reg_192_255_3_5/RAMD
+  -------------------------------------------------------------------
+                         required time                         -1.358    
+                         arrival time                           1.383    
+  -------------------------------------------------------------------
+                         slack                                  0.025    
+
+Slack (MET) :             0.031ns  (arrival time - required time)
+  Source:                 soc/registers/core/network/output_queue/write_pointer_reg[0]/C
+                            (rising edge-triggered cell FDRE clocked by core_clk  {rise@0.000ns fall@5.000ns period=10.000ns})
+  Destination:            soc/registers/core/network/output_queue/memory_reg_0_15_0_5/RAMA/WADR0
+                            (rising edge-triggered cell RAMD32 clocked by core_clk  {rise@0.000ns fall@5.000ns period=10.000ns})
+  Path Group:             core_clk
+  Path Type:              Hold (Min at Fast Process Corner)
+  Requirement:            0.000ns  (core_clk rise@0.000ns - core_clk rise@0.000ns)
+  Data Path Delay:        0.472ns  (logic 0.141ns (29.844%)  route 0.331ns (70.156%))
+  Logic Levels:           0  
+  Clock Path Skew:        0.031ns (DCD - SCD - CPR)
+    Destination Clock Delay (DCD):    1.281ns
+    Source Clock Delay      (SCD):    0.992ns
+    Clock Pessimism Removal (CPR):    0.258ns
+  Clock Uncertainty:      0.100ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE + UU
+    Total System Jitter     (TSJ):    0.000ns
+    Total Input Jitter      (TIJ):    0.000ns
+    Discrete Jitter          (DJ):    0.000ns
+    Phase Error              (PE):    0.000ns
+    User Uncertainty         (UU):    0.100ns
+
+    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------
+                         (clock core_clk rise edge)
+                                                      0.000     0.000 r  
+                                                      0.000     0.000 r  clk (IN)
+                         net (fo=0)                   0.410     0.410    clk
+    BUFGCTRL_X0Y0        BUFG (Prop_bufg_I_O)         0.026     0.436 r  core_clock_buffer/O
+                         net (fo=13819, routed)       0.556     0.992    soc/registers/core/network/output_queue/clk
+    SLICE_X26Y18         FDRE                                         r  soc/registers/core/network/output_queue/write_pointer_reg[0]/C
+  -------------------------------------------------------------------    -------------------
+    SLICE_X26Y18         FDRE (Prop_fdre_C_Q)         0.141     1.133 r  soc/registers/core/network/output_queue/write_pointer_reg[0]/Q
+                         net (fo=20, routed)          0.331     1.464    soc/registers/core/network/output_queue/memory_reg_0_15_0_5/ADDRD0
+    SLICE_X30Y20         RAMD32                                       r  soc/registers/core/network/output_queue/memory_reg_0_15_0_5/RAMA/WADR0
+  -------------------------------------------------------------------    -------------------
+
+                         (clock core_clk rise edge)
+                                                      0.000     0.000 r  
+                                                      0.000     0.000 r  clk (IN)
+                         net (fo=0)                   0.432     0.432    clk
+    BUFGCTRL_X0Y0        BUFG (Prop_bufg_I_O)         0.029     0.461 r  core_clock_buffer/O
+                         net (fo=13819, routed)       0.820     1.281    soc/registers/core/network/output_queue/memory_reg_0_15_0_5/WCLK
+    SLICE_X30Y20         RAMD32                                       r  soc/registers/core/network/output_queue/memory_reg_0_15_0_5/RAMA/CLK
+                         clock pessimism             -0.258     1.023    
+                         clock uncertainty            0.100     1.123    
+    SLICE_X30Y20         RAMD32 (Hold_ramd32_CLK_WADR0)
+                                                      0.310     1.433    soc/registers/core/network/output_queue/memory_reg_0_15_0_5/RAMA
+  -------------------------------------------------------------------
+                         required time                         -1.433    
+                         arrival time                           1.464    
+  -------------------------------------------------------------------
+                         slack                                  0.031    
+
+Slack (MET) :             0.031ns  (arrival time - required time)
+  Source:                 soc/registers/core/network/output_queue/write_pointer_reg[0]/C
+                            (rising edge-triggered cell FDRE clocked by core_clk  {rise@0.000ns fall@5.000ns period=10.000ns})
+  Destination:            soc/registers/core/network/output_queue/memory_reg_0_15_0_5/RAMA_D1/WADR0
+                            (rising edge-triggered cell RAMD32 clocked by core_clk  {rise@0.000ns fall@5.000ns period=10.000ns})
+  Path Group:             core_clk
+  Path Type:              Hold (Min at Fast Process Corner)
+  Requirement:            0.000ns  (core_clk rise@0.000ns - core_clk rise@0.000ns)
+  Data Path Delay:        0.472ns  (logic 0.141ns (29.844%)  route 0.331ns (70.156%))
+  Logic Levels:           0  
+  Clock Path Skew:        0.031ns (DCD - SCD - CPR)
+    Destination Clock Delay (DCD):    1.281ns
+    Source Clock Delay      (SCD):    0.992ns
+    Clock Pessimism Removal (CPR):    0.258ns
+  Clock Uncertainty:      0.100ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE + UU
+    Total System Jitter     (TSJ):    0.000ns
+    Total Input Jitter      (TIJ):    0.000ns
+    Discrete Jitter          (DJ):    0.000ns
+    Phase Error              (PE):    0.000ns
+    User Uncertainty         (UU):    0.100ns
+
+    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------
+                         (clock core_clk rise edge)
+                                                      0.000     0.000 r  
+                                                      0.000     0.000 r  clk (IN)
+                         net (fo=0)                   0.410     0.410    clk
+    BUFGCTRL_X0Y0        BUFG (Prop_bufg_I_O)         0.026     0.436 r  core_clock_buffer/O
+                         net (fo=13819, routed)       0.556     0.992    soc/registers/core/network/output_queue/clk
+    SLICE_X26Y18         FDRE                                         r  soc/registers/core/network/output_queue/write_pointer_reg[0]/C
+  -------------------------------------------------------------------    -------------------
+    SLICE_X26Y18         FDRE (Prop_fdre_C_Q)         0.141     1.133 r  soc/registers/core/network/output_queue/write_pointer_reg[0]/Q
+                         net (fo=20, routed)          0.331     1.464    soc/registers/core/network/output_queue/memory_reg_0_15_0_5/ADDRD0
+    SLICE_X30Y20         RAMD32                                       r  soc/registers/core/network/output_queue/memory_reg_0_15_0_5/RAMA_D1/WADR0
+  -------------------------------------------------------------------    -------------------
+
+                         (clock core_clk rise edge)
+                                                      0.000     0.000 r  
+                                                      0.000     0.000 r  clk (IN)
+                         net (fo=0)                   0.432     0.432    clk
+    BUFGCTRL_X0Y0        BUFG (Prop_bufg_I_O)         0.029     0.461 r  core_clock_buffer/O
+                         net (fo=13819, routed)       0.820     1.281    soc/registers/core/network/output_queue/memory_reg_0_15_0_5/WCLK
+    SLICE_X30Y20         RAMD32                                       r  soc/registers/core/network/output_queue/memory_reg_0_15_0_5/RAMA_D1/CLK
+                         clock pessimism             -0.258     1.023    
+                         clock uncertainty            0.100     1.123    
+    SLICE_X30Y20         RAMD32 (Hold_ramd32_CLK_WADR0)
+                                                      0.310     1.433    soc/registers/core/network/output_queue/memory_reg_0_15_0_5/RAMA_D1
+  -------------------------------------------------------------------
+                         required time                         -1.433    
+                         arrival time                           1.464    
+  -------------------------------------------------------------------
+                         slack                                  0.031    
+
+Slack (MET) :             0.031ns  (arrival time - required time)
+  Source:                 soc/registers/core/network/output_queue/write_pointer_reg[0]/C
+                            (rising edge-triggered cell FDRE clocked by core_clk  {rise@0.000ns fall@5.000ns period=10.000ns})
+  Destination:            soc/registers/core/network/output_queue/memory_reg_0_15_0_5/RAMB/WADR0
+                            (rising edge-triggered cell RAMD32 clocked by core_clk  {rise@0.000ns fall@5.000ns period=10.000ns})
+  Path Group:             core_clk
+  Path Type:              Hold (Min at Fast Process Corner)
+  Requirement:            0.000ns  (core_clk rise@0.000ns - core_clk rise@0.000ns)
+  Data Path Delay:        0.472ns  (logic 0.141ns (29.844%)  route 0.331ns (70.156%))
+  Logic Levels:           0  
+  Clock Path Skew:        0.031ns (DCD - SCD - CPR)
+    Destination Clock Delay (DCD):    1.281ns
+    Source Clock Delay      (SCD):    0.992ns
+    Clock Pessimism Removal (CPR):    0.258ns
+  Clock Uncertainty:      0.100ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE + UU
+    Total System Jitter     (TSJ):    0.000ns
+    Total Input Jitter      (TIJ):    0.000ns
+    Discrete Jitter          (DJ):    0.000ns
+    Phase Error              (PE):    0.000ns
+    User Uncertainty         (UU):    0.100ns
+
+    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------
+                         (clock core_clk rise edge)
+                                                      0.000     0.000 r  
+                                                      0.000     0.000 r  clk (IN)
+                         net (fo=0)                   0.410     0.410    clk
+    BUFGCTRL_X0Y0        BUFG (Prop_bufg_I_O)         0.026     0.436 r  core_clock_buffer/O
+                         net (fo=13819, routed)       0.556     0.992    soc/registers/core/network/output_queue/clk
+    SLICE_X26Y18         FDRE                                         r  soc/registers/core/network/output_queue/write_pointer_reg[0]/C
+  -------------------------------------------------------------------    -------------------
+    SLICE_X26Y18         FDRE (Prop_fdre_C_Q)         0.141     1.133 r  soc/registers/core/network/output_queue/write_pointer_reg[0]/Q
+                         net (fo=20, routed)          0.331     1.464    soc/registers/core/network/output_queue/memory_reg_0_15_0_5/ADDRD0
+    SLICE_X30Y20         RAMD32                                       r  soc/registers/core/network/output_queue/memory_reg_0_15_0_5/RAMB/WADR0
+  -------------------------------------------------------------------    -------------------
+
+                         (clock core_clk rise edge)
+                                                      0.000     0.000 r  
+                                                      0.000     0.000 r  clk (IN)
+                         net (fo=0)                   0.432     0.432    clk
+    BUFGCTRL_X0Y0        BUFG (Prop_bufg_I_O)         0.029     0.461 r  core_clock_buffer/O
+                         net (fo=13819, routed)       0.820     1.281    soc/registers/core/network/output_queue/memory_reg_0_15_0_5/WCLK
+    SLICE_X30Y20         RAMD32                                       r  soc/registers/core/network/output_queue/memory_reg_0_15_0_5/RAMB/CLK
+                         clock pessimism             -0.258     1.023    
+                         clock uncertainty            0.100     1.123    
+    SLICE_X30Y20         RAMD32 (Hold_ramd32_CLK_WADR0)
+                                                      0.310     1.433    soc/registers/core/network/output_queue/memory_reg_0_15_0_5/RAMB
+  -------------------------------------------------------------------
+                         required time                         -1.433    
+                         arrival time                           1.464    
+  -------------------------------------------------------------------
+                         slack                                  0.031    
+
+Slack (MET) :             0.031ns  (arrival time - required time)
+  Source:                 soc/registers/core/network/output_queue/write_pointer_reg[0]/C
+                            (rising edge-triggered cell FDRE clocked by core_clk  {rise@0.000ns fall@5.000ns period=10.000ns})
+  Destination:            soc/registers/core/network/output_queue/memory_reg_0_15_0_5/RAMB_D1/WADR0
+                            (rising edge-triggered cell RAMD32 clocked by core_clk  {rise@0.000ns fall@5.000ns period=10.000ns})
+  Path Group:             core_clk
+  Path Type:              Hold (Min at Fast Process Corner)
+  Requirement:            0.000ns  (core_clk rise@0.000ns - core_clk rise@0.000ns)
+  Data Path Delay:        0.472ns  (logic 0.141ns (29.844%)  route 0.331ns (70.156%))
+  Logic Levels:           0  
+  Clock Path Skew:        0.031ns (DCD - SCD - CPR)
+    Destination Clock Delay (DCD):    1.281ns
+    Source Clock Delay      (SCD):    0.992ns
+    Clock Pessimism Removal (CPR):    0.258ns
+  Clock Uncertainty:      0.100ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE + UU
+    Total System Jitter     (TSJ):    0.000ns
+    Total Input Jitter      (TIJ):    0.000ns
+    Discrete Jitter          (DJ):    0.000ns
+    Phase Error              (PE):    0.000ns
+    User Uncertainty         (UU):    0.100ns
+
+    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------
+                         (clock core_clk rise edge)
+                                                      0.000     0.000 r  
+                                                      0.000     0.000 r  clk (IN)
+                         net (fo=0)                   0.410     0.410    clk
+    BUFGCTRL_X0Y0        BUFG (Prop_bufg_I_O)         0.026     0.436 r  core_clock_buffer/O
+                         net (fo=13819, routed)       0.556     0.992    soc/registers/core/network/output_queue/clk
+    SLICE_X26Y18         FDRE                                         r  soc/registers/core/network/output_queue/write_pointer_reg[0]/C
+  -------------------------------------------------------------------    -------------------
+    SLICE_X26Y18         FDRE (Prop_fdre_C_Q)         0.141     1.133 r  soc/registers/core/network/output_queue/write_pointer_reg[0]/Q
+                         net (fo=20, routed)          0.331     1.464    soc/registers/core/network/output_queue/memory_reg_0_15_0_5/ADDRD0
+    SLICE_X30Y20         RAMD32                                       r  soc/registers/core/network/output_queue/memory_reg_0_15_0_5/RAMB_D1/WADR0
+  -------------------------------------------------------------------    -------------------
+
+                         (clock core_clk rise edge)
+                                                      0.000     0.000 r  
+                                                      0.000     0.000 r  clk (IN)
+                         net (fo=0)                   0.432     0.432    clk
+    BUFGCTRL_X0Y0        BUFG (Prop_bufg_I_O)         0.029     0.461 r  core_clock_buffer/O
+                         net (fo=13819, routed)       0.820     1.281    soc/registers/core/network/output_queue/memory_reg_0_15_0_5/WCLK
+    SLICE_X30Y20         RAMD32                                       r  soc/registers/core/network/output_queue/memory_reg_0_15_0_5/RAMB_D1/CLK
+                         clock pessimism             -0.258     1.023    
+                         clock uncertainty            0.100     1.123    
+    SLICE_X30Y20         RAMD32 (Hold_ramd32_CLK_WADR0)
+                                                      0.310     1.433    soc/registers/core/network/output_queue/memory_reg_0_15_0_5/RAMB_D1
+  -------------------------------------------------------------------
+                         required time                         -1.433    
+                         arrival time                           1.464    
+  -------------------------------------------------------------------
+                         slack                                  0.031    
+
+
+
+

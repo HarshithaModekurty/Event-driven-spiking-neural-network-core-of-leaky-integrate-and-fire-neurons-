@@ -1,3 +1,4 @@
+# Historical xc7z020 context. Current Z7-10 integration uses synth_rv32_z710.tcl.
 # Constrain before synthesis; implement the full 256-state core out of context.
 # Run: vivado -mode batch -source tools/synth_aer256.tcl
 set root [file normalize [file join [file dirname [info script]] ..]]
@@ -32,6 +33,7 @@ check_timing -verbose -file [file join $out check_timing.rpt]
 report_drc -file [file join $out drc.rpt]
 write_xdc -force [file join $out applied_constraints.xdc]
 set brams [get_cells -hier -filter {REF_NAME =~ RAMB*}]
+set synapse_brams [get_cells -hier -filter {REF_NAME =~ RAMB* && NAME =~ *synapse_router*}]
 set setup [get_timing_paths -delay_type max -max_paths 1]
 set hold [get_timing_paths -delay_type min -max_paths 1]
 if {[llength $setup] == 0 || [llength $hold] == 0} {error "Missing setup/hold timing paths"}
@@ -53,6 +55,6 @@ puts $result "  \"routed_hold_slack_ns\": $whs,"
 puts $result "  \"out_of_context\": true"
 puts $result "\}"
 close $result
-if {[llength $brams] != 8} {error "Expected eight BRAM primitives for the 256x256 table"}
+if {[llength $synapse_brams] != 8} {error "Expected eight BRAM primitives for the 256x256 synapse table"}
 if {$wns < 0 || $whs < 0} {error "Routed timing failed: setup=$wns ns hold=$whs ns"}
 puts "PASS: routed AER256 core at 100 MHz: setup slack $wns ns, hold slack $whs ns, [llength $brams] BRAMs"

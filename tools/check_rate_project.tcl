@@ -8,8 +8,8 @@ foreach source [get_files -all] {
 }
 update_compile_order -fileset sources_1
 update_compile_order -fileset sim_1
-if {[get_property top [get_filesets sources_1]] ne "lif_rate_aer_snn_core"} {error "Wrong synthesis top"}
-if {[get_property top [get_filesets sim_1]] ne "lif_rate_snn_tb"} {error "Wrong simulation top"}
+if {[get_property top [get_filesets sources_1]] ni {lif_rate_aer_snn_core lif_rv32_soc}} {error "Unexpected synthesis top"}
+if {[get_property top [get_filesets sim_1]] ni {lif_rate_snn_tb lif_rv32_soc_tb lif_mnist_tb lif_aer_snn_core_tb}} {error "Unexpected simulation top"}
 # Copy path strings before closing: Vivado file objects belong to the old
 # project and must not be passed into the newly created project.
 set sources {}

@@ -1,0 +1,58 @@
+{
+  "scenario": "stress",
+  "images": 3,
+  "frames": 24,
+  "neuron_states": 256,
+  "synapse_entries": 65536,
+  "state_updates_checked": 6144,
+  "encoder_packets": 3906,
+  "output_packets": 1908,
+  "weights_sha256": "daf3b1a21da2a36d4b86209bf9dc9d445307e2d8d9315e7340bd5ba08c85216f",
+  "firmware_instructions": 98,
+  "cpu_predictions": [
+    0,
+    0,
+    0
+  ],
+  "simulator": "xsim",
+  "parameters": {
+    "IMAGES": 3,
+    "FRAMES": 24,
+    "INPUT_WORDS": 3906,
+    "OUTPUT_WORDS": 1908
+  },
+  "source_sha256": {
+    "rtl/rate_encoder_transition.v": "edea55d8846a02460faefc055ec1056739313ed102c30006f92cc3c4114ce313",
+    "rtl/aer_rate_encoder.v": "94feac47f2284c31a41b7b3149e8e71992d5ad294eb1c5ccff0686128345eac3",
+    "rtl/aer_event_fifo.v": "be36fc03305342feaa62eeb8f43c5cef0f5b3c0fe2a654876da55b32f009a45f",
+    "rtl/aer_rr_select.v": "0386d354e6215f8e4eb447d7d3f04a96678b544bfd7406f17bcce91e661da8b5",
+    "rtl/aer_rr_arbiter.v": "10d3d3e1fce8bc49290ea7f7a5bc2ed0fa25d0ed1e8209802ad12b0e92a3d2bc",
+    "rtl/lif_transition.v": "41739aee8a2d2fd8ed55bf3ebf3c8ac9151a26ae7bc75d66d78d0884adac9f1f",
+    "rtl/lif_population_stepper.v": "f368874ad13705f975d31a78ebc230050a28fbb65981b433a27fe9283fc4ec0c",
+    "rtl/lif_synapse_router.v": "34a031f294899cfc2214047c2d683d2f05a8bfab7749a00dc90deddd2c165c44",
+    "rtl/lif_snn_core.v": "284cd7bcde09e0a9aed17b294081412c8cd8f82a3942f4cfd1bd32dc04f7b2fb",
+    "rtl/lif_aer_snn_core.v": "3ee9f60555e40d21839647231ac712ae546aafe5e0c9ff959779f6e947c73d2e",
+    "rtl/lif_rate_aer_snn_core.v": "907f000f521e32c4ca73a1c60f2016a95a01ac93ca44099ffe8c201f16c21f36",
+    "rtl/vendor/picorv32.v": "bc5abc87e01ade68da257b1771dad1de18976b1109fdbbcc9dd15ebcdd8ea462",
+    "rtl/axi_lite_endpoint.v": "d8a86071f2781af72a35f4493e009fa8d78e42f8885ca1cd22501f1b1a91e65f",
+    "rtl/lif_host_registers.v": "d96cf47890e316559108a2241f2abeb6c805d277dc2f2d38814290cf39aba9a8",
+    "rtl/lif_rv32_soc.v": "76b79a64a01b890575be0e2c9291119c01ff6cfbd0739f9766874c26f6d5d309",
+    "rtl/tb/lif_rv32_soc_tb.v": "5db12833cb99bc60aad0ed439aace2e0de85123842338115d6b6b27bd1ba815a",
+    "firmware/snn_boot.S": "3e354ddb4eeae6d746e4ca870bbb59b9a5ae9555e50b5a5c831c6fcaa05de77d",
+    "tools/run_rv32_check.py": "8ed56e167daabe5517e6ee481d713b4982332ec68884f7d3761cdb6d5e30c008",
+    "tools/rv32_assemble.py": "1370477d1246c649a455132dcbdc0fe460d775f885e31d4855801b9b86e5d11a",
+    "tools/run_rate_snn_check.py": "f0f2fcd81970585dc58e68c7b10ee9003ccc9927d767f73c06ee5eecf7494b6e",
+    "golden_model/encoding.py": "41811ccafbcda52441ad666bf93be67c95f0ebac4f8f0d53a71e961b83446e56",
+    "golden_model/lif.py": "d1ea06ac0c3ac242799b2b13c6525c139b2298f5cf10b0477428e5c9dc79fb37",
+    "golden_model/network.py": "26c465f719749e2191acdf6a01877cf6cdda868c94b31f32a2c792f53829accc"
+  },
+  "artifact_sha256": {
+    "encoder_packets.hex": "5eb7793a6ba86abaafe0085eb66258465e0bd7bff6e8b1854d65bea881dfebef",
+    "firmware.hex": "6344896e921bb636b99614b99ae2c5b448ae2562434622170d5424fa8620724b",
+    "intensities.hex": "fcdc503e8bca421fbf14b0e6643336d13c0ffa30ae7b92dc95f0f182c47bb1bf",
+    "output_packets.hex": "82bb353d451a8829d1e468782ec084ed5548daf120a0d362b3f5fabf5b9d3e75",
+    "predictions.hex": "ee94d6b0ab1f8325fba88dd8771ebe44a8dae4ab310d682c1eef20cd7c34828d",
+    "states.hex": "9c7fc947405c6f698b8747a14ee90b7476aaa035d7fa635ce16f72048d3330c2",
+    "weights.hex": "daf3b1a21da2a36d4b86209bf9dc9d445307e2d8d9315e7340bd5ba08c85216f"
+  }
+}

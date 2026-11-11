@@ -1,0 +1,8 @@
+{
+  "file": "build/rv32_mnist/firmware.hex",
+  "sha256": "3c571863ff01965d24daebec47e36139d81d9d7c28ac1782e19ec15d3d4d8165",
+  "words": 16384,
+  "scenario": "mnist",
+  "images": 20,
+  "generator": "python -m tools.run_rv32_check --scenario mnist --generate-only"
+}

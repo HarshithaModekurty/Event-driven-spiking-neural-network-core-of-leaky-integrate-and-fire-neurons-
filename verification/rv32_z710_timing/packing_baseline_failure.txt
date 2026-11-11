@@ -1,0 +1,9 @@
+ERROR: [Place 30-487] The packing of instances into the device could not be obeyed. There are a total of 4400 slices in the device, of which 4246 slices are available, however, the unplaced instances require 4695 slices. Please analyze your design to determine if the number of LUTs, FFs, and/or control sets can be reduced.
+
+Number of control sets and instances constrained to the design
+	Control sets: 1099
+	Luts: 11790 (combined) 12266 (total), available capacity: 17600 
+	Flip flops: 21712, available capacity: 35200
+	NOTE: each slice can only accommodate 1 unique control set so FFs cannot be packed to fully fill every slice
+
+

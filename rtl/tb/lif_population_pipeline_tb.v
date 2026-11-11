@@ -72,6 +72,15 @@ module lif_population_pipeline_tb;
         cycles = 0;
         while (!done && cycles < 24) begin @(posedge clk); #1; cycles = cycles + 1; end
         if (!done || commits != 4 || spikes !== 4'b0001 || membrane !== 0 || refractory !== 2) failed = 1;
+        // The scratch RAM keeps its physical bits across reset; validity must
+        // nevertheless make every unwritten current read as zero afterward.
+        @(negedge clk); rst = 1;
+        @(posedge clk); #1;
+        @(negedge clk); rst = 0; commits = 0;
+        launch;
+        cycles = 0;
+        while (!done && cycles < 24) begin @(posedge clk); #1; cycles = cycles + 1; end
+        if (!done || commits != 4 || spikes !== 0 || membrane !== 0 || refractory !== 0) failed = 1;
         if (failed) $display("FAIL: registered population read / commit / reset");
         else $display("PASS: registered population read, one commit per state, and reset cancels pending write");
         $finish;

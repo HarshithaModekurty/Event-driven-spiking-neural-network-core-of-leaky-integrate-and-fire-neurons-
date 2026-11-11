@@ -1,0 +1,11 @@
+{
+  "part": "xc7z010clg400-1",
+  "synthesis_top": "lif_rv32_soc",
+  "simulation_top": "lif_rv32_soc_tb",
+  "scenario": "stress",
+  "result": "passed actual launch_simulation and run all",
+  "source_sha256": {
+    "tools/create_rv32_project.tcl": "96ff46eebb625ebd9879f9c62f8c4db9dc2c1f9d103a66b27dc512da71ed952f",
+    "tools/check_rv32_project.tcl": "e8c6ff9cc91b9262042c1b4b6d9a872edbfb3119b3556fd40b10f77df7c35d5c"
+  }
+}

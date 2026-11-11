@@ -87,8 +87,9 @@ in `verification/`; generated memories and simulator binaries stay ignored.
 ## Vivado GUI
 
 Generate the vectors first, then reopen `RTL_PROJECT.xpr` if it was already
-open. The saved synthesis top is `lif_rate_aer_snn_core`; the simulation
-top is `lif_rate_snn_tb`. In the Vivado Tcl console, from the project directory:
+open. The current saved project now uses `lif_rv32_soc` and its CPU testbench
+(see `RV32_AXI_CONTROL.md`). The following script selects `lif_rate_snn_tb`
+to test the encoder/network directly. In the Vivado Tcl console, from the project directory:
 
 ```tcl
 source build/rate_network/configure_vivado.tcl
@@ -104,6 +105,10 @@ simulation prints `PASS: rate/AER/SNN 3 images, 24 ticks ... 6144 state updates`
 The older AER/bitmap testbenches remain selectable with their own scripts.
 
 ## Routed implementation
+
+The measurements below are historical at commit `40c3d6e`, before the
+Z7-10 scratch-current RAM change. Current integrated results belong to
+`RV32_AXI_CONTROL.md` and `verification/rv32_z710_timing/`.
 
 ```powershell
 & 'F:/Xilinx/Vivado/2023.2/bin/vivado.bat' -mode batch -source tools/synth_rate256.tcl

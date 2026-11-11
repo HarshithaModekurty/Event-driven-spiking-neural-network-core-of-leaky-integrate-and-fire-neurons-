@@ -148,8 +148,8 @@ Inspect `in_req`, `in_ack`, `in_addr`, `in_end`, `out_req`, `out_ack`,
 `out_addr`, `out_end`, `tick_done` and `frame_done`. Internally, `closed_ports`,
 `input_bitmap`, `arbiter.held_grant` and the queue levels explain stalls.
 
-The saved synthesis top now includes the hardware rate encoder (see
-`RATE_ENCODER.md`); the AER wrapper and older core/bitmap testbenches
+The saved synthesis top now includes the RV32/AXI host and rate encoder
+(see `RV32_AXI_CONTROL.md` and `RATE_ENCODER.md`); the AER wrapper and older core/bitmap testbenches
 remain available. Run `tools/synth_aer256.tcl` for constrained synthesis,
 placement and routing in `lif_aer_timing_harness`. The harness has actual
 launch/capture registers and a BUFG, with the same 10 ns clock and 0.100 ns
@@ -170,5 +170,5 @@ have no physical output loads, and this standalone fixture has no PS7 block.
 ```
 
 Hardware rate encoding is integrated and verified. Board interfaces,
-AXI/RV32/DMA, IRQ/UART, full-system formal composition and the paper
+DMA, IRQ/UART, full-system formal composition and the paper
 optimization comparison remain required integration work.

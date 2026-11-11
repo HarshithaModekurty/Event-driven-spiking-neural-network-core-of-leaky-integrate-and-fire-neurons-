@@ -1,0 +1,18 @@
+ECHO is off.
+ECHO is off.
+
+****** xsim v2023.2 (64-bit)
+  **** SW Build 4029153 on Fri Oct 13 20:14:34 MDT 2023
+  **** IP Build 4028589 on Sat Oct 14 00:45:43 MDT 2023
+  **** SharedData Build 4025554 on Tue Oct 10 17:18:54 MDT 2023
+    ** Copyright 1986-2022 Xilinx, Inc. All Rights Reserved.
+    ** Copyright 2022-2023 Advanced Micro Devices, Inc. All Rights Reserved.
+
+source xsim.dir/axi/xsim_script.tcl
+# xsim {axi} -autoloadwcfg -runall
+Time resolution is 1 ps
+run -all
+PASS: independent AXI AW/W, simultaneous read/write, WSTRB, B/R stalls, reset cancellation, errors, busy rejection and 258 exactly-once packet pops
+$finish called at time : 1406820 ns : File "D:/RTL_PROJECT/rtl/tb/lif_axi_lite_tb.v" Line 156
+exit
+INFO: [Common 17-206] Exiting xsim at Wed Nov 11 14:59:12 2026...
