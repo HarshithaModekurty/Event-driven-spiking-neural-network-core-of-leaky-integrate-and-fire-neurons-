@@ -1,0 +1,700 @@
+{
+    "ltx_root": {
+        "version": 4,
+        "minor": 0,
+        "ltx_data": [
+            {
+                "name": "EDA_PROBESET",
+                "active": true,
+                "debug_cores": [
+                    {
+                        "type": "XSDB_V3",
+                        "name": "dbg_hub",
+                        "spec": "labtools_xsdbm_v3",
+                        "clk_input_freq_hz": "100000000"
+                    },
+                    {
+                        "type": "ILA_V3",
+                        "name": "instrumentation.demo_ila",
+                        "spec": "labtools_ila_v6",
+                        "ipName": "ila",
+                        "core_location": {
+                            "user_chain": 1,
+                            "slave_index": 0,
+                            "bscan_switch_index": 0
+                        },
+                        "uuid": "28DDD41F035E542CB91361D068C5FE92",
+                        "pins": [
+                            {
+                                "name": "probe0",
+                                "id": 0,
+                                "type": "DATA_TRIGGER",
+                                "direction": "IN",
+                                "isVector": false,
+                                "leftIndex": 0,
+                                "rightIndex": 0,
+                                "portIndex": 0,
+                                "nets": [
+                                    {
+                                        "name": "snapshot_pulse",
+                                        "isBus": false
+                                    }
+                                ]
+                            },
+                            {
+                                "name": "probe1",
+                                "id": 1,
+                                "type": "DATA",
+                                "direction": "IN",
+                                "isVector": false,
+                                "leftIndex": 0,
+                                "rightIndex": 0,
+                                "portIndex": 1,
+                                "nets": [
+                                    {
+                                        "name": "snapshot_valid",
+                                        "isBus": false
+                                    }
+                                ]
+                            },
+                            {
+                                "name": "probe2",
+                                "id": 2,
+                                "type": "DATA",
+                                "direction": "IN",
+                                "isVector": true,
+                                "leftIndex": 0,
+                                "rightIndex": 7,
+                                "portIndex": 2,
+                                "nets": [
+                                    {
+                                        "name": "sample_index",
+                                        "isBus": true,
+                                        "subnets": [
+                                            {
+                                                "name": "sample_index[7]"
+                                            },
+                                            {
+                                                "name": "sample_index[6]"
+                                            },
+                                            {
+                                                "name": "sample_index[5]"
+                                            },
+                                            {
+                                                "name": "sample_index[4]"
+                                            },
+                                            {
+                                                "name": "sample_index[3]"
+                                            },
+                                            {
+                                                "name": "sample_index[2]"
+                                            },
+                                            {
+                                                "name": "sample_index[1]"
+                                            },
+                                            {
+                                                "name": "sample_index[0]"
+                                            }
+                                        ]
+                                    }
+                                ]
+                            },
+                            {
+                                "name": "probe3",
+                                "id": 3,
+                                "type": "DATA",
+                                "direction": "IN",
+                                "isVector": true,
+                                "leftIndex": 0,
+                                "rightIndex": 3,
+                                "portIndex": 3,
+                                "nets": [
+                                    {
+                                        "name": "predicted_digit",
+                                        "isBus": true,
+                                        "subnets": [
+                                            {
+                                                "name": "predicted_digit[3]"
+                                            },
+                                            {
+                                                "name": "predicted_digit[2]"
+                                            },
+                                            {
+                                                "name": "predicted_digit[1]"
+                                            },
+                                            {
+                                                "name": "predicted_digit[0]"
+                                            }
+                                        ]
+                                    }
+                                ]
+                            },
+                            {
+                                "name": "probe4",
+                                "id": 4,
+                                "type": "DATA",
+                                "direction": "IN",
+                                "isVector": true,
+                                "leftIndex": 0,
+                                "rightIndex": 159,
+                                "portIndex": 4,
+                                "nets": [
+                                    {
+                                        "name": "scores",
+                                        "isBus": true,
+                                        "subnets": [
+                                            {
+                                                "name": "scores[159]"
+                                            },
+                                            {
+                                                "name": "scores[158]"
+                                            },
+                                            {
+                                                "name": "scores[157]"
+                                            },
+                                            {
+                                                "name": "scores[156]"
+                                            },
+                                            {
+                                                "name": "scores[155]"
+                                            },
+                                            {
+                                                "name": "scores[154]"
+                                            },
+                                            {
+                                                "name": "scores[153]"
+                                            },
+                                            {
+                                                "name": "scores[152]"
+                                            },
+                                            {
+                                                "name": "scores[151]"
+                                            },
+                                            {
+                                                "name": "scores[150]"
+                                            },
+                                            {
+                                                "name": "scores[149]"
+                                            },
+                                            {
+                                                "name": "scores[148]"
+                                            },
+                                            {
+                                                "name": "scores[147]"
+                                            },
+                                            {
+                                                "name": "scores[146]"
+                                            },
+                                            {
+                                                "name": "scores[145]"
+                                            },
+                                            {
+                                                "name": "scores[144]"
+                                            },
+                                            {
+                                                "name": "scores[143]"
+                                            },
+                                            {
+                                                "name": "scores[142]"
+                                            },
+                                            {
+                                                "name": "scores[141]"
+                                            },
+                                            {
+                                                "name": "scores[140]"
+                                            },
+                                            {
+                                                "name": "scores[139]"
+                                            },
+                                            {
+                                                "name": "scores[138]"
+                                            },
+                                            {
+                                                "name": "scores[137]"
+                                            },
+                                            {
+                                                "name": "scores[136]"
+                                            },
+                                            {
+                                                "name": "scores[135]"
+                                            },
+                                            {
+                                                "name": "scores[134]"
+                                            },
+                                            {
+                                                "name": "scores[133]"
+                                            },
+                                            {
+                                                "name": "scores[132]"
+                                            },
+                                            {
+                                                "name": "scores[131]"
+                                            },
+                                            {
+                                                "name": "scores[130]"
+                                            },
+                                            {
+                                                "name": "scores[129]"
+                                            },
+                                            {
+                                                "name": "scores[128]"
+                                            },
+                                            {
+                                                "name": "scores[127]"
+                                            },
+                                            {
+                                                "name": "scores[126]"
+                                            },
+                                            {
+                                                "name": "scores[125]"
+                                            },
+                                            {
+                                                "name": "scores[124]"
+                                            },
+                                            {
+                                                "name": "scores[123]"
+                                            },
+                                            {
+                                                "name": "scores[122]"
+                                            },
+                                            {
+                                                "name": "scores[121]"
+                                            },
+                                            {
+                                                "name": "scores[120]"
+                                            },
+                                            {
+                                                "name": "scores[119]"
+                                            },
+                                            {
+                                                "name": "scores[118]"
+                                            },
+                                            {
+                                                "name": "scores[117]"
+                                            },
+                                            {
+                                                "name": "scores[116]"
+                                            },
+                                            {
+                                                "name": "scores[115]"
+                                            },
+                                            {
+                                                "name": "scores[114]"
+                                            },
+                                            {
+                                                "name": "scores[113]"
+                                            },
+                                            {
+                                                "name": "scores[112]"
+                                            },
+                                            {
+                                                "name": "scores[111]"
+                                            },
+                                            {
+                                                "name": "scores[110]"
+                                            },
+                                            {
+                                                "name": "scores[109]"
+                                            },
+                                            {
+                                                "name": "scores[108]"
+                                            },
+                                            {
+                                                "name": "scores[107]"
+                                            },
+                                            {
+                                                "name": "scores[106]"
+                                            },
+                                            {
+                                                "name": "scores[105]"
+                                            },
+                                            {
+                                                "name": "scores[104]"
+                                            },
+                                            {
+                                                "name": "scores[103]"
+                                            },
+                                            {
+                                                "name": "scores[102]"
+                                            },
+                                            {
+                                                "name": "scores[101]"
+                                            },
+                                            {
+                                                "name": "scores[100]"
+                                            },
+                                            {
+                                                "name": "scores[99]"
+                                            },
+                                            {
+                                                "name": "scores[98]"
+                                            },
+                                            {
+                                                "name": "scores[97]"
+                                            },
+                                            {
+                                                "name": "scores[96]"
+                                            },
+                                            {
+                                                "name": "scores[95]"
+                                            },
+                                            {
+                                                "name": "scores[94]"
+                                            },
+                                            {
+                                                "name": "scores[93]"
+                                            },
+                                            {
+                                                "name": "scores[92]"
+                                            },
+                                            {
+                                                "name": "scores[91]"
+                                            },
+                                            {
+                                                "name": "scores[90]"
+                                            },
+                                            {
+                                                "name": "scores[89]"
+                                            },
+                                            {
+                                                "name": "scores[88]"
+                                            },
+                                            {
+                                                "name": "scores[87]"
+                                            },
+                                            {
+                                                "name": "scores[86]"
+                                            },
+                                            {
+                                                "name": "scores[85]"
+                                            },
+                                            {
+                                                "name": "scores[84]"
+                                            },
+                                            {
+                                                "name": "scores[83]"
+                                            },
+                                            {
+                                                "name": "scores[82]"
+                                            },
+                                            {
+                                                "name": "scores[81]"
+                                            },
+                                            {
+                                                "name": "scores[80]"
+                                            },
+                                            {
+                                                "name": "scores[79]"
+                                            },
+                                            {
+                                                "name": "scores[78]"
+                                            },
+                                            {
+                                                "name": "scores[77]"
+                                            },
+                                            {
+                                                "name": "scores[76]"
+                                            },
+                                            {
+                                                "name": "scores[75]"
+                                            },
+                                            {
+                                                "name": "scores[74]"
+                                            },
+                                            {
+                                                "name": "scores[73]"
+                                            },
+                                            {
+                                                "name": "scores[72]"
+                                            },
+                                            {
+                                                "name": "scores[71]"
+                                            },
+                                            {
+                                                "name": "scores[70]"
+                                            },
+                                            {
+                                                "name": "scores[69]"
+                                            },
+                                            {
+                                                "name": "scores[68]"
+                                            },
+                                            {
+                                                "name": "scores[67]"
+                                            },
+                                            {
+                                                "name": "scores[66]"
+                                            },
+                                            {
+                                                "name": "scores[65]"
+                                            },
+                                            {
+                                                "name": "scores[64]"
+                                            },
+                                            {
+                                                "name": "scores[63]"
+                                            },
+                                            {
+                                                "name": "scores[62]"
+                                            },
+                                            {
+                                                "name": "scores[61]"
+                                            },
+                                            {
+                                                "name": "scores[60]"
+                                            },
+                                            {
+                                                "name": "scores[59]"
+                                            },
+                                            {
+                                                "name": "scores[58]"
+                                            },
+                                            {
+                                                "name": "scores[57]"
+                                            },
+                                            {
+                                                "name": "scores[56]"
+                                            },
+                                            {
+                                                "name": "scores[55]"
+                                            },
+                                            {
+                                                "name": "scores[54]"
+                                            },
+                                            {
+                                                "name": "scores[53]"
+                                            },
+                                            {
+                                                "name": "scores[52]"
+                                            },
+                                            {
+                                                "name": "scores[51]"
+                                            },
+                                            {
+                                                "name": "scores[50]"
+                                            },
+                                            {
+                                                "name": "scores[49]"
+                                            },
+                                            {
+                                                "name": "scores[48]"
+                                            },
+                                            {
+                                                "name": "scores[47]"
+                                            },
+                                            {
+                                                "name": "scores[46]"
+                                            },
+                                            {
+                                                "name": "scores[45]"
+                                            },
+                                            {
+                                                "name": "scores[44]"
+                                            },
+                                            {
+                                                "name": "scores[43]"
+                                            },
+                                            {
+                                                "name": "scores[42]"
+                                            },
+                                            {
+                                                "name": "scores[41]"
+                                            },
+                                            {
+                                                "name": "scores[40]"
+                                            },
+                                            {
+                                                "name": "scores[39]"
+                                            },
+                                            {
+                                                "name": "scores[38]"
+                                            },
+                                            {
+                                                "name": "scores[37]"
+                                            },
+                                            {
+                                                "name": "scores[36]"
+                                            },
+                                            {
+                                                "name": "scores[35]"
+                                            },
+                                            {
+                                                "name": "scores[34]"
+                                            },
+                                            {
+                                                "name": "scores[33]"
+                                            },
+                                            {
+                                                "name": "scores[32]"
+                                            },
+                                            {
+                                                "name": "scores[31]"
+                                            },
+                                            {
+                                                "name": "scores[30]"
+                                            },
+                                            {
+                                                "name": "scores[29]"
+                                            },
+                                            {
+                                                "name": "scores[28]"
+                                            },
+                                            {
+                                                "name": "scores[27]"
+                                            },
+                                            {
+                                                "name": "scores[26]"
+                                            },
+                                            {
+                                                "name": "scores[25]"
+                                            },
+                                            {
+                                                "name": "scores[24]"
+                                            },
+                                            {
+                                                "name": "scores[23]"
+                                            },
+                                            {
+                                                "name": "scores[22]"
+                                            },
+                                            {
+                                                "name": "scores[21]"
+                                            },
+                                            {
+                                                "name": "scores[20]"
+                                            },
+                                            {
+                                                "name": "scores[19]"
+                                            },
+                                            {
+                                                "name": "scores[18]"
+                                            },
+                                            {
+                                                "name": "scores[17]"
+                                            },
+                                            {
+                                                "name": "scores[16]"
+                                            },
+                                            {
+                                                "name": "scores[15]"
+                                            },
+                                            {
+                                                "name": "scores[14]"
+                                            },
+                                            {
+                                                "name": "scores[13]"
+                                            },
+                                            {
+                                                "name": "scores[12]"
+                                            },
+                                            {
+                                                "name": "scores[11]"
+                                            },
+                                            {
+                                                "name": "scores[10]"
+                                            },
+                                            {
+                                                "name": "scores[9]"
+                                            },
+                                            {
+                                                "name": "scores[8]"
+                                            },
+                                            {
+                                                "name": "scores[7]"
+                                            },
+                                            {
+                                                "name": "scores[6]"
+                                            },
+                                            {
+                                                "name": "scores[5]"
+                                            },
+                                            {
+                                                "name": "scores[4]"
+                                            },
+                                            {
+                                                "name": "scores[3]"
+                                            },
+                                            {
+                                                "name": "scores[2]"
+                                            },
+                                            {
+                                                "name": "scores[1]"
+                                            },
+                                            {
+                                                "name": "scores[0]"
+                                            }
+                                        ]
+                                    }
+                                ]
+                            },
+                            {
+                                "name": "probe5",
+                                "id": 5,
+                                "type": "DATA",
+                                "direction": "IN",
+                                "isVector": false,
+                                "leftIndex": 0,
+                                "rightIndex": 0,
+                                "portIndex": 5,
+                                "nets": [
+                                    {
+                                        "name": "error",
+                                        "isBus": false
+                                    }
+                                ]
+                            },
+                            {
+                                "name": "probe6",
+                                "id": 6,
+                                "type": "DATA",
+                                "direction": "IN",
+                                "isVector": false,
+                                "leftIndex": 0,
+                                "rightIndex": 0,
+                                "portIndex": 6,
+                                "nets": [
+                                    {
+                                        "name": "waiting",
+                                        "isBus": false
+                                    }
+                                ]
+                            },
+                            {
+                                "name": "probe7",
+                                "id": 7,
+                                "type": "DATA",
+                                "direction": "IN",
+                                "isVector": false,
+                                "leftIndex": 0,
+                                "rightIndex": 0,
+                                "portIndex": 7,
+                                "nets": [
+                                    {
+                                        "name": "transmitting",
+                                        "isBus": false
+                                    }
+                                ]
+                            },
+                            {
+                                "name": "probe8",
+                                "id": 8,
+                                "type": "DATA",
+                                "direction": "IN",
+                                "isVector": false,
+                                "leftIndex": 0,
+                                "rightIndex": 0,
+                                "portIndex": 8,
+                                "nets": [
+                                    {
+                                        "name": "complete",
+                                        "isBus": false
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                ]
+            }
+        ]
+    }
+}

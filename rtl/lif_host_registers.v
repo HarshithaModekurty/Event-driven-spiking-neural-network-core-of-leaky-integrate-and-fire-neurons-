@@ -7,7 +7,10 @@ module lif_host_registers (
     input wire rd_enable, input wire [31:0] rd_addr,
     output reg [31:0] rd_data, output reg [1:0] rd_resp,
     output reg [31:0] software_result,
-    output wire busy, output wire tick_done, frame_done
+    output wire busy, output wire tick_done, frame_done,
+    output wire input_event_valid, output wire [8:0] input_event_packet,
+    output wire output_event_valid, output wire [8:0] output_event_packet,
+    output wire [7:0] debug_state_address
 );
     localparam OKAY=2'b00, SLVERR=2'b10, DECERR=2'b11;
     reg [15:0] threshold, reset_value, refractory_period;
@@ -15,6 +18,7 @@ module lif_host_registers (
     reg [7:0] state_address;
     reg tick_pending, frame_pending;
     reg host_active;
+    reg clear;
     reg [31:0] ticks, frames, weight_writes, intensity_writes, output_spikes;
     wire [19:0] wa=wr_addr[19:0], ra=rd_addr[19:0];
     wire wregion=(wr_addr[31:20]==12'h400), rregion=(rd_addr[31:20]==12'h400);
@@ -27,17 +31,20 @@ module lif_host_registers (
     wire [15:0] membrane, refractory;
     wire [255:0] spikes;
     wire core_busy;
-    assign busy=host_active;
+    assign busy=host_active || clear;
     wire accepted_write=wr_enable && (wr_resp==OKAY);
     // Admission uses the registered core's busy state. Do not feed the
     // response decoder back through ready/reset into its own command enables.
     wire writable=wr_enable && wregion && wr_addr[1:0]==0 && !busy;
     wire command=writable && wa==20'h00004 && wr_strb[0];
     wire start=command && wr_data[7:0]==8'd1;
-    wire clear=command && wr_data[7:0]==8'd2;
+    wire request_clear=command && wr_data[7:0]==8'd2;
     wire write_weight=writable && weight_window && wr_strb[0];
     wire write_intensity=writable && intensity_window && wr_strb[0];
     wire pop=rd_enable && (rd_resp==OKAY) && ra==20'h00028 && out_req;
+    assign output_event_valid=pop;
+    assign output_event_packet={out_end,out_addr};
+    assign debug_state_address=state_address;
     wire [31:0] output_word=out_req ? {1'b1,22'd0,out_end,out_addr} : 32'd0;
     function [31:0] merge_bytes;
         input [31:0] old_value, value; input [3:0] strobe;
@@ -107,15 +114,19 @@ module lif_host_registers (
         .threshold(threshold),.reset_value(reset_value),.leak_enable(leak_config[8]),
         .leak_shift(leak_config[4:0]),.refractory_period(refractory_period),
         .state_read_addr(state_address),.state_read_membrane(membrane),.state_read_refractory(refractory),
-        .spike_vector(spikes),.busy(core_busy),.tick_done(tick_done),.frame_done(frame_done)
+        .spike_vector(spikes),.busy(core_busy),.tick_done(tick_done),.frame_done(frame_done),
+        .input_event_valid(input_event_valid),.input_event_packet(input_event_packet)
     );
     always @(posedge clk) begin
         if(!resetn) begin
             threshold<=8; reset_value<=0; leak_config<=0; refractory_period<=0; state_address<=0;
             tick_pending<=0; frame_pending<=0; ticks<=0; frames<=0;
             weight_writes<=0; intensity_writes<=0; output_spikes<=0; software_result<=0;
-            host_active<=0;
+            host_active<=0; clear<=0;
         end else begin
+            // Decode AXI once, then drive the wide sample-reset/readiness
+            // network from a flip-flop. Keep admission busy for this cycle.
+            clear<=request_clear;
             if(start) host_active<=1;
             else if(frame_done) host_active<=0;
             if(accepted_write) case(wa)

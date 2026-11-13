@@ -1,12 +1,19 @@
 // PicoRV32 AXI4-Lite master, 64 KiB synchronous BRAM and full 256-state SNN.
 // Boot image contains firmware, learned weights and input intensities.
 module lif_rv32_soc #(
-    parameter BOOT_FILE="build/rv32_network/firmware.hex"
+    parameter BOOT_FILE="build/rv32_network/firmware.hex",
+    parameter ENABLE_DEMO=0
 ) (
     input wire clk, input wire resetn,
     output wire cpu_trap, output reg bus_fault,
     output wire [31:0] software_result,
-    output wire busy, tick_done, frame_done
+    output wire busy, tick_done, frame_done,
+    input wire demo_run,
+    output wire trace_write_valid, output wire [31:0] trace_write_addr,trace_write_data,
+    output wire trace_read_valid, output wire [31:0] trace_read_addr,trace_read_data,
+    output wire [7:0] trace_state_address,
+    output wire input_event_valid, output wire [8:0] input_event_packet,
+    output wire output_event_valid, output wire [8:0] output_event_packet
 );
     wire [31:0] awaddr,wdata,araddr,rdata;
     wire [3:0] wstrb;
@@ -17,6 +24,13 @@ module lif_rv32_soc #(
     wire [3:0] ws;
     wire [1:0] wr,rr;
     wire ready;
+    wire admitted = !ENABLE_DEMO || demo_run;
+    assign trace_write_valid=we && admitted;
+    assign trace_write_addr=wa;
+    assign trace_write_data=wd;
+    assign trace_read_valid=re && ready && admitted;
+    assign trace_read_addr=ra;
+    assign trace_read_data=rd;
     wire [31:0] csr_rd;
     wire [1:0] csr_wr,csr_rr;
     wire ram_write=(wa[31:16]==0), ram_read=(ra[31:16]==0);
@@ -33,13 +47,13 @@ module lif_rv32_soc #(
     always @(posedge clk) begin
         if(!resetn) begin ram_pending<=0; ram_data<=0; bus_fault<=0; end
         else begin
-            if(re && ram_read_good && !ram_pending) begin
+            if(re && admitted && ram_read_good && !ram_pending) begin
                 ram_data<=memory[ra[15:2]]; ram_pending<=1;
-            end else if(re && ready) ram_pending<=0;
+            end else if(re && ready && admitted) ram_pending<=0;
             if((bvalid && bready && bresp!=0) || (rvalid && rready && rresp!=0)) bus_fault<=1;
         end
         // Do not reset the RAM: preserve BRAM inference and loaded firmware.
-        if(resetn && we && ram_write && wa[1:0]==0)
+        if(resetn && we && admitted && ram_write && wa[1:0]==0)
             for(lane=0;lane<4;lane=lane+1) if(ws[lane]) memory[wa[15:2]][lane*8+:8]<=wd[lane*8+:8];
     end
     picorv32_axi #(.ENABLE_COUNTERS(0),.ENABLE_COUNTERS64(0),.ENABLE_IRQ(0),
@@ -59,12 +73,15 @@ module lif_rv32_soc #(
         .s_bresp(bresp),.s_bvalid(bvalid),.s_bready(bready),
         .s_araddr(araddr),.s_arvalid(arvalid),.s_arready(arready),
         .s_rdata(rdata),.s_rresp(rresp),.s_rvalid(rvalid),.s_rready(rready),
-        .wr_enable(we),.wr_addr(wa),.wr_data(wd),.wr_strb(ws),.wr_ready(1'b1),.wr_resp(wr),
-        .rd_enable(re),.rd_addr(ra),.rd_ready(ready),.rd_data(rd),.rd_resp(rr)
+        .wr_enable(we),.wr_addr(wa),.wr_data(wd),.wr_strb(ws),.wr_ready(admitted),.wr_resp(wr),
+        .rd_enable(re),.rd_addr(ra),.rd_ready(ready && admitted),.rd_data(rd),.rd_resp(rr)
     );
     lif_host_registers registers (
-        .clk(clk),.resetn(resetn),.wr_enable(we && !ram_write),.wr_addr(wa),.wr_data(wd),.wr_strb(ws),.wr_resp(csr_wr),
-        .rd_enable(re && !ram_read),.rd_addr(ra),.rd_data(csr_rd),.rd_resp(csr_rr),
-        .software_result(software_result),.busy(busy),.tick_done(tick_done),.frame_done(frame_done)
+        .clk(clk),.resetn(resetn),.wr_enable(we && admitted && !ram_write),.wr_addr(wa),.wr_data(wd),.wr_strb(ws),.wr_resp(csr_wr),
+        .rd_enable(re && admitted && !ram_read),.rd_addr(ra),.rd_data(csr_rd),.rd_resp(csr_rr),
+        .software_result(software_result),.busy(busy),.tick_done(tick_done),.frame_done(frame_done),
+        .input_event_valid(input_event_valid),.input_event_packet(input_event_packet),
+        .output_event_valid(output_event_valid),.output_event_packet(output_event_packet),
+        .debug_state_address(trace_state_address)
     );
 endmodule

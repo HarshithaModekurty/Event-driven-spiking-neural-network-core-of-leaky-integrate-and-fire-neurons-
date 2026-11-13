@@ -1,0 +1,30 @@
+{
+  "physical_board_tested": false,
+  "firmware_matches_cpu_simulation": true,
+  "ila_probe_names_and_score_bit_order_checked": true,
+  "ila_uuid": "28DDD41F035E542CB91361D068C5FE92",
+  "bus_skew_constraints": 4,
+  "min_bus_skew_slack_ns": 8.741,
+  "source_and_artifact_hashes_checked": true,
+  "archived_sha256": {
+    "applied_constraints.xdc": "bc23485ebe931d4a98747253db298faa8f4d8098d24abbe61d0d645adfbf9e39",
+    "build_manifest.json": "92068ed90f4968e47d48d6c1173908cf09726b569f41e57a9a148d710bf759e1",
+    "bus_skew.rpt": "1207e192d3f0faf877f71759129ac04f77023edd887c34ba476338da4736b43c",
+    "cdc.rpt": "917a66b5c7af9de1941b65dd7f0e19a9d30baa288405c10cc447f322a224f515",
+    "check_timing.rpt": "b22af87ecef91ab00958e0272eac277e8b093068c79245d5c567571f035a3f8f",
+    "control_sets.rpt": "412bc8be35c6d1981c1ecbba9797ee6ff8dc80460eb4d3726ab665719d019dad",
+    "drc.rpt": "1d119cf710b710ae9bb56e36e00e89f7764bfa6ff412db4ec900527148286bac",
+    "exceptions.rpt": "5d637d2ba89cd1194bda85dcdc70a14fde7a51d4e5289f0b2852f6d8b899dde6",
+    "hierarchy.rpt": "e45402c0b0e3ebf0cfef554ffa71fab167cf01d69a75334c9f06ab8f144a3458",
+    "ila_mode.txt": "f1b2f662800122bed0ff255693df89c4487fbdcf453d3524a42d4ec20c3d9c04",
+    "implementation.log": "ee63adb0b50563553b6cca770830277958878e128061e562ee64ed91d69aa65f",
+    "result.json": "34ba91ba3991515aa1240c9b69b6936e3aa1e86d8ca367cf42c035d2c0f8d233",
+    "sample_count.txt": "8ce88a8842c1584e3d6871e84e166e3b513c3ce2a9da6166760c7af1645dea29",
+    "source_manifest.json": "d31fcaa3c4fb4a364fefe042595db7b51c05ca98487f11db878e630c022558a9",
+    "synthesis_build_script.tcl": "68b4462389ff165b7065ce89dc426498d8deb25461f057a53b0fec6987607ca7",
+    "synthesis_manifest.json": "35daa3e0e2cdb0481f8b871079b082f0f7e1ecee6081e65d08987b95e35e2820",
+    "timing.rpt": "31ddd76fa4bd57f740ae5267c19aece74bbfe5c9be27beb47ecf5b8980ecea9c",
+    "utilization.rpt": "e05540a5564d53c7021c2b0898f4f4ccdce8d46edebefd0b8db13583a8c82155",
+    "zybo_demo.ltx": "ef3843b1293676d7cd14f3cb21559cbfe3d275654fd09ed6b42e676ad2735080"
+  }
+}

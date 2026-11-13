@@ -34,7 +34,9 @@ module lif_rate_aer_snn_core #(
     output wire [255:0] spike_vector,
     output wire busy,
     output wire tick_done,
-    output wire frame_done
+    output wire frame_done,
+    output wire input_event_valid,
+    output wire [8:0] input_event_packet
 );
     reg inflight;
     reg [2:0] empty_markers;
@@ -46,6 +48,8 @@ module lif_rate_aer_snn_core #(
     wire [7:0] encoder_addr;
     wire [3:0] input_ack;
     wire network_busy, network_weight_ready;
+    assign input_event_valid=encoder_req && input_ack[0];
+    assign input_event_packet={encoder_end,encoder_addr};
     wire start_fire = tick_start && tick_ready;
     wire clear_fire = sample_clear && clear_ready;
     assign busy = inflight || encoder_busy || network_busy;

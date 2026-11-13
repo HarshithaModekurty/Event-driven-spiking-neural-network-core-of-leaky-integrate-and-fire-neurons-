@@ -3,6 +3,14 @@
 See [STAGE_REPORT.md](STAGE_REPORT.md) for completed work, verification results,
 remaining project stages, and the next recommended milestone.
 
+Start the Zybo Z7-10 demonstration with the printable
+[FPGA deployment tutorial](ZYBO_Z7_10_DEMO_TUTORIAL.html), also available as
+[Markdown](ZYBO_Z7_10_DEMO_TUTORIAL.md). It covers Python/RTL comparison,
+the board bitstream, LEDs, ILA and optional Pmod UART. You can begin using
+LEDs and ILA while obtaining a 3.3 V UART adapter. Board wrapper details
+are in [BOARD_WRAPPER.md](BOARD_WRAPPER.md); physical-board validation
+must be established with real captured results.
+
 The integrated host now uses a PicoRV32 processor over AXI4-Lite to load
 weights/intensities and run the full 256-state network. The target board is
 **Zybo Z7-10** (`xc7z010clg400-1`). See [RV32_AXI_CONTROL.md](RV32_AXI_CONTROL.md)

@@ -1,0 +1,438 @@
+{
+  "scenario": "mnist",
+  "images": 20,
+  "frames": 160,
+  "neuron_states": 256,
+  "synapse_entries": 65536,
+  "state_updates_checked": 40960,
+  "encoder_packets": 6048,
+  "output_packets": 160,
+  "weights_sha256": "979adab23b7772466954b6011a3ce250e37e2fa9d32f53285555f031962e9896",
+  "records": [
+    {
+      "sample": 1,
+      "test_index": 6898,
+      "true_digit": 8,
+      "python_prediction": 5,
+      "scores": [
+        0,
+        0,
+        8,
+        0,
+        16,
+        72,
+        0,
+        0,
+        24,
+        40
+      ],
+      "image": "sample_001_test_06898_label_8.png",
+      "synaptic_events": 1680
+    },
+    {
+      "sample": 2,
+      "test_index": 8457,
+      "true_digit": 9,
+      "python_prediction": 9,
+      "scores": [
+        0,
+        0,
+        0,
+        16,
+        16,
+        16,
+        0,
+        104,
+        32,
+        160
+      ],
+      "image": "sample_002_test_08457_label_9.png",
+      "synaptic_events": 2176
+    },
+    {
+      "sample": 3,
+      "test_index": 9255,
+      "true_digit": 9,
+      "python_prediction": 9,
+      "scores": [
+        8,
+        0,
+        0,
+        0,
+        40,
+        0,
+        0,
+        32,
+        56,
+        120
+      ],
+      "image": "sample_003_test_09255_label_9.png",
+      "synaptic_events": 2176
+    },
+    {
+      "sample": 4,
+      "test_index": 9012,
+      "true_digit": 4,
+      "python_prediction": 4,
+      "scores": [
+        0,
+        0,
+        0,
+        0,
+        88,
+        0,
+        72,
+        0,
+        80,
+        56
+      ],
+      "image": "sample_004_test_09012_label_4.png",
+      "synaptic_events": 1480
+    },
+    {
+      "sample": 5,
+      "test_index": 9144,
+      "true_digit": 9,
+      "python_prediction": 9,
+      "scores": [
+        0,
+        0,
+        0,
+        0,
+        64,
+        0,
+        0,
+        32,
+        56,
+        112
+      ],
+      "image": "sample_005_test_09144_label_9.png",
+      "synaptic_events": 1760
+    },
+    {
+      "sample": 6,
+      "test_index": 9647,
+      "true_digit": 0,
+      "python_prediction": 0,
+      "scores": [
+        184,
+        0,
+        24,
+        16,
+        0,
+        112,
+        48,
+        0,
+        0,
+        0
+      ],
+      "image": "sample_006_test_09647_label_0.png",
+      "synaptic_events": 2272
+    },
+    {
+      "sample": 7,
+      "test_index": 4357,
+      "true_digit": 7,
+      "python_prediction": 7,
+      "scores": [
+        24,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        72,
+        32,
+        48
+      ],
+      "image": "sample_007_test_04357_label_7.png",
+      "synaptic_events": 1120
+    },
+    {
+      "sample": 8,
+      "test_index": 1547,
+      "true_digit": 4,
+      "python_prediction": 4,
+      "scores": [
+        0,
+        0,
+        0,
+        0,
+        96,
+        16,
+        0,
+        0,
+        40,
+        88
+      ],
+      "image": "sample_008_test_01547_label_4.png",
+      "synaptic_events": 1536
+    },
+    {
+      "sample": 9,
+      "test_index": 9343,
+      "true_digit": 6,
+      "python_prediction": 6,
+      "scores": [
+        0,
+        0,
+        96,
+        0,
+        24,
+        16,
+        160,
+        0,
+        48,
+        32
+      ],
+      "image": "sample_009_test_09343_label_6.png",
+      "synaptic_events": 1736
+    },
+    {
+      "sample": 10,
+      "test_index": 8563,
+      "true_digit": 5,
+      "python_prediction": 5,
+      "scores": [
+        40,
+        0,
+        0,
+        32,
+        0,
+        152,
+        0,
+        0,
+        48,
+        0
+      ],
+      "image": "sample_010_test_08563_label_5.png",
+      "synaptic_events": 2232
+    },
+    {
+      "sample": 11,
+      "test_index": 7725,
+      "true_digit": 1,
+      "python_prediction": 1,
+      "scores": [
+        0,
+        88,
+        40,
+        8,
+        0,
+        40,
+        40,
+        0,
+        0,
+        0
+      ],
+      "image": "sample_011_test_07725_label_1.png",
+      "synaptic_events": 952
+    },
+    {
+      "sample": 12,
+      "test_index": 2603,
+      "true_digit": 9,
+      "python_prediction": 9,
+      "scores": [
+        0,
+        0,
+        0,
+        8,
+        40,
+        48,
+        0,
+        16,
+        32,
+        112
+      ],
+      "image": "sample_012_test_02603_label_9.png",
+      "synaptic_events": 1304
+    },
+    {
+      "sample": 13,
+      "test_index": 1278,
+      "true_digit": 3,
+      "python_prediction": 3,
+      "scores": [
+        0,
+        0,
+        120,
+        128,
+        0,
+        112,
+        0,
+        0,
+        8,
+        0
+      ],
+      "image": "sample_013_test_01278_label_3.png",
+      "synaptic_events": 1944
+    },
+    {
+      "sample": 14,
+      "test_index": 9381,
+      "true_digit": 4,
+      "python_prediction": 9,
+      "scores": [
+        0,
+        0,
+        8,
+        24,
+        104,
+        0,
+        0,
+        16,
+        40,
+        120
+      ],
+      "image": "sample_014_test_09381_label_4.png",
+      "synaptic_events": 2144
+    },
+    {
+      "sample": 15,
+      "test_index": 5544,
+      "true_digit": 1,
+      "python_prediction": 1,
+      "scores": [
+        0,
+        64,
+        56,
+        64,
+        0,
+        16,
+        0,
+        8,
+        0,
+        32
+      ],
+      "image": "sample_015_test_05544_label_1.png",
+      "synaptic_events": 1408
+    },
+    {
+      "sample": 16,
+      "test_index": 1018,
+      "true_digit": 8,
+      "python_prediction": 5,
+      "scores": [
+        0,
+        0,
+        8,
+        0,
+        0,
+        144,
+        24,
+        0,
+        104,
+        8
+      ],
+      "image": "sample_016_test_01018_label_8.png",
+      "synaptic_events": 2120
+    },
+    {
+      "sample": 17,
+      "test_index": 712,
+      "true_digit": 4,
+      "python_prediction": 4,
+      "scores": [
+        0,
+        0,
+        8,
+        0,
+        88,
+        0,
+        16,
+        0,
+        8,
+        72
+      ],
+      "image": "sample_017_test_00712_label_4.png",
+      "synaptic_events": 1696
+    },
+    {
+      "sample": 18,
+      "test_index": 427,
+      "true_digit": 1,
+      "python_prediction": 1,
+      "scores": [
+        0,
+        112,
+        24,
+        16,
+        0,
+        40,
+        0,
+        0,
+        0,
+        16
+      ],
+      "image": "sample_018_test_00427_label_1.png",
+      "synaptic_events": 832
+    },
+    {
+      "sample": 19,
+      "test_index": 2702,
+      "true_digit": 6,
+      "python_prediction": 6,
+      "scores": [
+        48,
+        0,
+        32,
+        0,
+        16,
+        0,
+        112,
+        0,
+        32,
+        24
+      ],
+      "image": "sample_019_test_02702_label_6.png",
+      "synaptic_events": 2008
+    },
+    {
+      "sample": 20,
+      "test_index": 9524,
+      "true_digit": 3,
+      "python_prediction": 3,
+      "scores": [
+        0,
+        0,
+        56,
+        88,
+        0,
+        32,
+        0,
+        32,
+        0,
+        0
+      ],
+      "image": "sample_020_test_09524_label_3.png",
+      "synaptic_events": 1656
+    }
+  ],
+  "correct": 17,
+  "accuracy_percent": 85.0,
+  "firmware_instructions": 98,
+  "cpu_predictions": [
+    5,
+    9,
+    9,
+    4,
+    9,
+    0,
+    7,
+    4,
+    6,
+    5,
+    1,
+    9,
+    3,
+    9,
+    1,
+    5,
+    4,
+    1,
+    6,
+    3
+  ]
+}

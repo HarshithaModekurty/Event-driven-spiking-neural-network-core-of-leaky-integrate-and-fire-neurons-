@@ -1,0 +1,1 @@
+{"board":"Zybo Z7-10","part":"xc7z010clg400-1","scenario":"mnist","samples":20,"ila":1,"setup_slack_ns":0.017,"hold_slack_ns":0.028,"neuron_states":256,"physical_board_tested":false}

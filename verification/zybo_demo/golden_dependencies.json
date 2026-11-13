@@ -1,0 +1,13 @@
+{
+  "unchanged_from_commit": "3d19e6b74042e0f34c71ad70335566ad2ea90521",
+  "saved_checkpoint_matches_exported_model": true,
+  "source_sha256": {
+    "golden_model/lif.py": "d1ea06ac0c3ac242799b2b13c6525c139b2298f5cf10b0477428e5c9dc79fb37",
+    "golden_model/encoding.py": "41811ccafbcda52441ad666bf93be67c95f0ebac4f8f0d53a71e961b83446e56",
+    "golden_model/network.py": "26c465f719749e2191acdf6a01877cf6cdda868c94b31f32a2c792f53829accc",
+    "examples/mnist256_demo.py": "dbdcde378ca818bb079be8eeb7b04d05f9f67b037f896dee5be1e1602229123a",
+    "examples/mnist_live_demo.py": "f8c5f7678784ac1b440cc80c530b938e2c45ed3626937207cafd3f78d0d3e655",
+    "tools/run_mnist_rtl_check.py": "d6544136631ee2be5ed53dc980fb0a0e467a2dacc2a82c9fc144afd5dcfb0b17",
+    "verification/mnist256/trained_weights.json": "0ff139fa9d938be5c350f0dc90da0181427f6ef02fd281823e13f72cfbe02d2c"
+  }
+}

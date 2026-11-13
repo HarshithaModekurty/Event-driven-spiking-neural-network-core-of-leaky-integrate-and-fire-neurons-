@@ -1,0 +1,244 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><title>Zybo Z7-10 SNN deployment tutorial</title><style>body{font:17px/1.6 system-ui,sans-serif;color:#17212e;max-width:1050px;margin:40px auto;padding:0 24px}
+    h1,h2{line-height:1.2;color:#123e62}h2{margin-top:2.2em;border-top:1px solid #ccd8e2;padding-top:.8em}
+    code{font:14px Consolas,monospace;background:#eef3f7;padding:2px 4px}pre{padding:16px;background:#eef3f7;white-space:pre-wrap;overflow-wrap:anywhere}
+    table{border-collapse:collapse;width:100%;font-size:15px}th,td{border:1px solid #cbd5df;padding:9px;text-align:left;vertical-align:top}th{background:#e7eff7}
+    a{color:#125996}li{margin:.3em 0}@media print{body{font-size:11pt;margin:0;max-width:none}h2{break-after:avoid}pre,tr{break-inside:avoid}a{color:inherit}button{display:none}}</style></head><body><button onclick="window.print()">Print / Save as PDF</button><h1>Deploy and demonstrate the SNN on a Zybo Z7-10</h1>
+<p>This guide takes you from Python reference results to RTL simulation and then to a real FPGA demonstration. You can start with <strong>the board, a USB data cable, LEDs and Vivado ILA</strong>. An extra UART adapter is optional for this first test.</p>
+<p>The target is <strong>Zybo Z7-10, xc7z010clg400-1</strong>, using Vivado <strong>2023.2</strong>. The physical-board test is something you will perform; simulation and a generated bitstream alone do not establish that your board has run correctly. See the latest validation evidence in <code>verification/zybo_demo/</code> when available.</p>
+<h2>1. What you will show your professor</h2>
+<p>Put these four things side by side:</p>
+<table><thead><tr><th>Evidence</th><th>Where you see it</th><th>What it means</th></tr></thead><tbody>
+<tr><td>Actual handwritten image and label</td><td>Generated <code>images.html</code> on your laptop</td><td>The digit the dataset says is correct</td></tr>
+<tr><td>Python prediction and ten scores</td><td>Same page and <code>reference.json</code></td><td>What the saved trained model calculates</td></tr>
+<tr><td>RTL simulation result</td><td>XSim log and decoded simulated UART capture</td><td>What the actual CPU and SNN RTL calculate in simulation</td></tr>
+<tr><td>Physical FPGA prediction and scores</td><td>Four LEDs and ILA, optionally UART</td><td>What the programmed device calculates</td></tr>
+</tbody></table>
+<p>Compare Python with RTL/FPGA to check <strong>implementation agreement</strong>. Compare the predicted digit with the dataset label to measure <strong>classification accuracy</strong>. The selected 20-image set currently scores <strong>17/20 (85%)</strong> in Python. Three images are misclassified; matching those same predictions in hardware is still the expected behavior. This small fixed subset is not a full MNIST test-set score.</p>
+<h2>2. What is inside the FPGA</h2>
+<p>The design still has <strong>256 stored LIF neuron states</strong>, each with 16-bit membrane and refractory values. A shared calculation unit visits them one at a time, using read, calculate and write phases. The ten output neurons are states <strong>246–255</strong>, included within the 256.</p>
+<p>The saved offline-trained weights are loaded by a real RV32 processor through AXI4-Lite into the 256×256 signed four-bit synapse memory. Python and RTL use the same image preprocessing, weights, eight time steps and arithmetic. This board wrapper adds observation and controls; it does not retrain the network.</p>
+<p>The image is not a JPEG file sent into a neuron. Python converts the original 28×28 image into the existing trained 15×15 binary features: addresses 0–224. Address 225 supplies a bias; remaining intensities are zero. These 256 byte values are included in the boot image. The CPU writes them into the hardware rate encoder, which produces address events for the SNN. In this first demo, the images are <strong>preloaded when building the bitstream</strong>. There is no live camera, handwritten drawing input or UART image upload yet.</p>
+<p>The predicted class is the index of the largest final membrane value among states 246–255; a tie chooses the lowest digit. The CPU computes it from RTL state readbacks and writes its result into RAM. The wrapper observes that actual write and the actual scores. The expected Python classes in boot RAM are used afterward for a self-check, not to choose the displayed class.</p>
+<h2>3. What to have ready</h2>
+<ul>
+<li>Zybo Z7-10 and a data-capable micro-USB cable for the board&#x27;s **J12 USB
+ JTAG/UART connector**. A charge-only cable cannot program the board.
+</li>
+<li>Vivado 2023.2 with Zynq-7000 device support and cable drivers installed.
+</li>
+<li>Python 3.10 or newer, the repository and the saved trained checkpoint/data used by the
+ existing MNIST scripts. <code>prepare</code> reuses the checkpoint; it does not request
+ retraining. On a fresh checkout, follow the dataset/checkpoint setup in
+ <code>MNIST_RTL_VERIFICATION.md</code> first.
+</li>
+<li>Optional later: a <strong>3.3 V TTL USB-to-UART adapter</strong>, or a correctly wired
+ Pmod USBUART and jumper wires.
+</li></ul>
+<p>The board&#x27;s built-in USB UART is wired to the <strong>ARM processor&#x27;s MIO pins</strong>. Our RV32 processor is implemented in the FPGA fabric. Its UART output therefore uses <strong>Pmod JC pin 1</strong>, not that built-in COM port. J12 still provides JTAG programming and ILA without an extra adapter. The ARM does not need Vitis, Linux or an ARM application for this PL-only demonstration.</p>
+<p>Board power, jumper positions and connector numbering below follow the <a href="https://digilent.com/reference/_media/reference/programmable-logic/zybo-z7/zybo-z7_rm.pdf">Digilent Zybo Z7 reference manual</a>. Use the labels on your board and check that manual if your revision differs.</p>
+<h2>4. Generate the images and Python reference</h2>
+<p>Open PowerShell in the folder containing <code>rtl</code>, <code>tools</code>, <code>firmware</code> and <code>golden_model</code>. In the current workspace that is <code>D:\RTL_PROJECT</code>:</p>
+<pre><code>Set-Location D:\RTL_PROJECT
+if (!(Test-Path build/mnist256/trained_weights.json)) {
+    New-Item -ItemType Directory -Force build/mnist256 | Out-Null
+    Copy-Item verification/mnist256/trained_weights.json build/mnist256/trained_weights.json
+}
+python -m tools.board_demo prepare --scenario mnist</code></pre>
+<p>The conditional copy restores the committed trained checkpoint on a fresh checkout and leaves an existing checkpoint intact. Keep this step: the older exporter trains a model automatically if no checkpoint exists. With the saved checkpoint present, the log must say <code>Reusing saved offline-trained weights.</code></p>
+<p>It prints the Python predictions and makes:</p>
+<table><thead><tr><th>File under <code>build/board_demo/mnist/</code></th><th>Purpose</th></tr></thead><tbody>
+<tr><td><code>images.html</code></td><td>Actual original digits, labels and Python predictions/scores</td></tr>
+<tr><td><code>reference.json</code></td><td>Python scores and exact input/output event packets</td></tr>
+<tr><td><code>firmware.hex</code></td><td>RV32 instructions, packed learned weights and input intensities</td></tr>
+<tr><td><code>states.hex</code></td><td>Every Python neuron state after each tick</td></tr>
+<tr><td><code>predictions.hex</code></td><td>Expected final classes used by the CPU self-check</td></tr>
+</tbody></table>
+<p>Open <code>images.html</code> in a browser. It intentionally leaves the FPGA result for you to observe. UART/ILA sample indices start at <strong>00</strong> and are hexadecimal; sample 0A means the eleventh image. The original MNIST dataset index is shown in <code>reference.json</code>, which is different from this demonstration sequence number.</p>
+<p>For the first sample, the actual label is <strong>8</strong>, but Python predicts <strong>5</strong>. The expected score vector is:</p>
+<pre><code>digit:    0  1  2  3   4   5  6  7   8   9
+score:    0  0  8  0  16  72  0  0  24  40</code></pre>
+<p>Do not change a label or replace a result to make these agree.</p>
+<h2>5. Run the RTL comparison before programming</h2>
+<pre><code>python -m tools.run_board_demo_check --scenario mnist</code></pre>
+<p>This invokes Vivado XSim through <code>F:/Xilinx/Vivado/2023.2/bin</code> by default. If Vivado is elsewhere, add <code>--vivado-bin &quot;C:/your/path/Vivado/2023.2/bin&quot;</code>. This full CPU simulation can take several to tens of minutes; its log may stay at <code>run -all</code> while it works. It runs the real RV32 instructions, checks all 65,536 AXI weight writes, 160 ticks, 40,960 membrane/refractory state readbacks and the input/output event streams. It also pauses between images and decodes the actual UART TX waveform. The UART is accelerated to four clocks per bit in simulation; the bitstream uses 868 clocks per bit at 100 MHz, about 115200 baud.</p>
+<p>Look for both:</p>
+<pre><code>PASS: board UART/LED/ILA snapshot flow, real RV32/AXI boot ...
+PASS sample 00: class=5, ten scores and all input/output packets match Python ...</code></pre>
+<p>The decoded <strong>simulated</strong> serial output is <code>build/board_demo/mnist/uart_capture.txt</code>. It is not a physical FPGA capture. You can recheck it with:</p>
+<pre><code>python -m tools.board_demo verify --scenario mnist --capture build/board_demo/mnist/uart_capture.txt</code></pre>
+<p>For lower-level checks:</p>
+<pre><code>python -m unittest discover -s tests -v
+python -m tools.check_board_io</code></pre>
+<p>The second command uses the actual AMD MMCM simulation model to check 125-to-100 MHz conversion, startup reset, button debounce and reset/restart. Its Vivado installation path is currently set in <code>tools/check_board_io.py</code>. The optional unit suite also needs Icarus Verilog (<code>iverilog</code> and <code>vvp</code>) on PATH. The main board-demo comparison uses Vivado XSim.</p>
+<h2>6. Build a board bitstream with ILA</h2>
+<p>Run this from PowerShell, changing the Vivado path if needed:</p>
+<pre><code>$env:SNN_PYTHON=(Get-Command python).Source
+&amp; &#x27;F:/Xilinx/Vivado/2023.2/bin/vivado.bat&#x27; -mode batch -source tools/build_zybo_demo.tcl -log build/zybo_demo_build.log -journal build/zybo_demo_build.jou</code></pre>
+<p>Alternatively, in the Vivado Tcl Console:</p>
+<pre><code>cd D:/RTL_PROJECT
+set ::env(SNN_PYTHON) C:/msys64/mingw64/bin/python.exe
+source tools/build_zybo_demo.tcl</code></pre>
+<p>The Tcl example gives this computer&#x27;s Python path. Replace it with your own Python 3.10+ executable if using another computer. The PowerShell command above selects it automatically before Vivado changes its process environment.</p>
+<p>The script creates a separate board project under <code>build/zybo_demo/mnist/</code>. You do not need to change the top or simulation settings in the older open <code>RTL_PROJECT.xpr</code>. The top is <code>zybo_z710_top</code>; ILA is enabled by default. Each build creates a new project directory so an open older project does not need to be overwritten. Allow tens of minutes for synthesis and routing on this computer; wait for the final PASS message.</p>
+<p>The design uses the board&#x27;s 125 MHz PHY clock at K17 and an MMCM to make 100 MHz. The wrapper holds PHY reset at E17 high so that reference clock is available. The board-authored CDC exceptions cover asynchronous button/lock synchronizer inputs; AMD&#x27;s ILA also supplies its own debug/JTAG constraints. LED/UART propagation is bounded separately. No false path or multicycle exception removes a CPU or neuron calculation from timing checks.</p>
+<p>The build must finish with <code>PASS: board bitstream ...</code> and produce:</p>
+<pre><code>build/zybo_demo/mnist/zybo_demo.bit
+build/zybo_demo/mnist/zybo_demo.ltx
+build/zybo_demo/mnist/result.json
+build/zybo_demo/mnist/timing.rpt
+build/zybo_demo/mnist/utilization.rpt
+build/zybo_demo/mnist/drc.rpt</code></pre>
+<p>Check that <code>result.json</code> is from your successful run, identifies <code>xc7z010clg400-1</code>, and has nonnegative setup and hold slack. An old bitstream left after a failed build is not evidence that the new build passed. Keep <code>.bit</code> and <code>.ltx</code> together from the same successful run. The <code>.ltx</code> tells Vivado how to interpret the ILA probes.</p>
+<p>The saved learned-demo build from 13 November 2026 passes 100 MHz with <strong>+0.017 ns setup</strong> and <strong>+0.028 ns hold</strong> slack. Its reports are preserved in <code>verification/zybo_demo/board_timing/</code>. This confirms implementation timing; your programmed-board measurements are still required.</p>
+<h2>7. Connect and program the board</h2>
+<ol>
+<li>With power off, set the boot jumper <strong>JP5 to JTAG</strong> using the board&#x27;s
+ printed legend. This prevents an SD-card/Linux application from starting
+ and reconfiguring the chip during this demonstration.
+</li>
+<li>Select the intended power source with <strong>JP6</strong>. For USB power use its USB
+ position; if the board resets or power is unstable, use a suitable regulated
+ supply as specified by Digilent and select WALL. Do not guess a supply voltage.
+</li>
+<li>Connect the laptop to <strong>J12</strong> with the data cable. Switch <strong>SW4 on</strong> and
+ check that the <strong>PGOOD</strong> LED is lit.
+</li>
+<li>In Vivado choose <strong>Open Hardware Manager → Open Target → Auto Connect</strong>.
+ Expand the target. You should see an <code>xc7z010</code> FPGA device; an ARM DAP entry
+ may also appear. Select the FPGA.
+</li>
+<li>Right-click it → <strong>Program Device</strong>. Choose <code>zybo_demo.bit</code> and the matching
+ <code>zybo_demo.ltx</code>. Program it. Check the programming log and DONE indication.
+</li>
+<li>The application should wait for BTN1. Its RGB LED6 should be blue, with
+ the four digit LEDs initially off. DONE means configured; it does not mean
+ all predictions have been checked.
+</li></ol>
+<p>This is volatile JTAG programming. After power off or PROGB you must program the board again. Flash/SD boot installation is outside this first demonstration. Use <strong>BTN0</strong> for application reset, not PROGB or PS-SRST.</p>
+<h2>8. Demonstrate the digit with LEDs</h2>
+<p><strong>BTN0 restarts the application. BTN1 starts the first image or advances to the next image after the previous one is ready.</strong> Press and release BTN1; holding it does not repeatedly advance.</p>
+<p>The RGB LED6 has these meanings:</p>
+<table><thead><tr><th>Color</th><th>Meaning</th></tr></thead><tbody>
+<tr><td>Blue</td><td>Waiting for the first start, calculating, or transmitting a raster</td></tr>
+<tr><td>Green</td><td>Current image&#x27;s report is finished and the next BTN1 press can be accepted; also stays green after successful completion of all images</td></tr>
+<tr><td>Red</td><td>Bus, firmware self-check or capture error; stop and inspect/reset</td></tr>
+</tbody></table>
+<p>The predicted digit appears on <strong>LD3 LD2 LD1 LD0</strong> as a binary number. LD0 is the least significant bit. Read LEDs by their printed numbers, not by assuming left/right orientation.</p>
+<table><thead><tr><th>Digit</th><th>LD3 LD2 LD1 LD0</th></tr></thead><tbody>
+<tr><td>0</td><td>0000</td></tr>
+<tr><td>1</td><td>0001</td></tr>
+<tr><td>2</td><td>0010</td></tr>
+<tr><td>3</td><td>0011</td></tr>
+<tr><td>4</td><td>0100</td></tr>
+<tr><td>5</td><td>0101</td></tr>
+<tr><td>6</td><td>0110</td></tr>
+<tr><td>7</td><td>0111</td></tr>
+<tr><td>8</td><td>1000</td></tr>
+<tr><td>9</td><td>1001</td></tr>
+</tbody></table>
+<p>For the first sample expect <strong>0101</strong>, meaning predicted digit 5. Open the corresponding actual image on the laptop and explain that its ground truth is 8. After each image, wait for green before pressing BTN1 again. Raster transmission continues even without an adapter connected; wait for it to finish. A press during transmission is ignored. After the last sample, BTN0 restarts the set.</p>
+<p>The second image, sample <strong>01</strong>, has actual digit <strong>9</strong> and Python prediction <strong>9</strong>. Its expected LED pattern is <strong>1001</strong>. This gives you a correctly classified example immediately after the first sample&#x27;s misclassification.</p>
+<h2>9. Use ILA to prove the FPGA calculated the same scores</h2>
+<p>ILA is a small logic analyzer built into the bitstream. It observes the real programmed logic through the same JTAG cable; it is separate from XSim. The system clock keeps running while the CPU pauses between images. The ILA records 1024 clocks per capture. All probes have the same one-clock input pipeline, so the pulse and its scores remain aligned. Only <code>snapshot_pulse</code> is a trigger probe; the other signals are recorded as data.</p>
+<ol>
+<li>In Hardware Manager, refresh the programmed FPGA and open its <code>demo_ila</code>.
+ If no probes appear, verify that the <code>.bit</code> and <code>.ltx</code> are the matching pair.
+</li>
+<li>Add <code>snapshot_pulse</code> to Trigger Setup. Set its condition to <strong>equal 1</strong>.
+ This pulse lasts one clock when the actual CPU class write is captured.
+</li>
+<li>In the wave window show <code>sample_index</code>, <code>predicted_digit</code>, <code>scores</code>,
+ <code>snapshot_valid</code>, <code>error</code>, <code>waiting</code>, <code>transmitting</code> and <code>complete</code>.
+</li>
+<li>Set the trigger position near the middle of the 1024 samples and click
+ <strong>Run Trigger</strong>. Then press BTN1. For the first image, press BTN0 first
+ if you already ran it; release BTN0, arm the trigger, then press BTN1.
+</li>
+<li>At the trigger sample, <code>snapshot_pulse=1</code>, <code>snapshot_valid=1</code>,
+ <code>sample_index=00</code>, <code>predicted_digit=5</code> and <code>error=0</code> should be visible.
+ The ten scores should match the first sample in <code>reference.json</code>.
+</li>
+<li>In the 160-bit <code>scores</code> bank, digit 0 is bits <strong>15:0</strong>, digit 1 bits
+ <strong>31:16</strong>, continuing to digit 9 at <strong>159:144</strong>. Thus a displayed hex
+ bank reads digit 9 at its left end and digit 0 at its right end.
+</li>
+<li>Export each capture to CSV, retaining sample indices so you can identify
+ which input image was actually measured. Arm again before the next BTN1.
+</li></ol>
+<p>These Hardware Manager Tcl commands export hexadecimal data for the checker:</p>
+<pre><code>set demo [lindex [get_hw_ilas] 0]
+foreach probe [get_hw_probes -of_objects $demo] {
+    set_property DISPLAY_RADIX hex $probe
+    set_property DISPLAY_AS_ENUM false $probe
+}
+write_hw_ila_data -force -csv_file D:/RTL_PROJECT/build/board_demo/mnist/fpga_00.csv [upload_hw_ila_data $demo]</code></pre>
+<p>Then in PowerShell:</p>
+<pre><code>python -m tools.board_demo verify --scenario mnist --format ila --capture build/board_demo/mnist/fpga_00.csv</code></pre>
+<p>It checks the actual captured digit and all ten scores. A single capture is evidence for the sample it contains, not for all 20 images. ILA snapshots check classes/scores; full input/output packet comparison uses UART or the RTL simulation described earlier. For reproducible ILA capture controls see <a href="https://docs.amd.com/r/2023.2-English/ug908-vivado-programming-debugging/HDL-Instantiation-Debug-Probing-Flow-Overview?contentId=PvaLsgRFP80W8zKc2zfSqw">AMD UG908 HDL debug flow</a> and the <a href="https://docs.amd.com/r/2022.2-English/ug835-vivado-tcl-commands/write_hw_ila_data">CSV export command</a>.</p>
+<h2>10. Add UART later if an adapter is available</h2>
+<p>Power off before wiring. Use <strong>3.3 V TTL signaling</strong>, not an RS-232 cable or 5 V TX/RX. The pin allocation follows <a href="https://raw.githubusercontent.com/Digilent/digilent-xdc/master/Zybo-Z7-Master.xdc">Digilent&#x27;s master XDC</a>.</p>
+<table><thead><tr><th>Connection</th><th>Wire to</th></tr></thead><tbody>
+<tr><td>Zybo <strong>JC pin 1</strong> (FPGA V15), RTL TX</td><td>Adapter <strong>RX</strong></td></tr>
+<tr><td>Zybo JC ground (pin 5 or 11; confirm connector orientation)</td><td>Adapter <strong>GND</strong></td></tr>
+<tr><td>Adapter TX</td><td>Leave disconnected; this demo transmits only</td></tr>
+<tr><td>Adapter VCC</td><td>Leave disconnected when using a separately powered USB-to-UART adapter</td></tr>
+</tbody></table>
+<p>A Pmod USBUART may need its own 3.3 V power connection according to its manual. Use jumper wires to route the selected FPGA TX to the module&#x27;s RX input; plugging a module directly into JC does not guarantee its UART pins line up with this custom JC1 assignment. Confirm the adapter/module pinout first.</p>
+<p>Power the board, connect the adapter to USB, and find its COM number in Windows Device Manager → Ports. Close other terminal applications using it. Open a second PowerShell window in the repository and run, replacing COM7:</p>
+<pre><code>powershell -ExecutionPolicy Bypass -File tools/capture_demo_uart.ps1 -Port COM7 -Output build/board_demo/mnist/fpga_uart.txt -Samples 20</code></pre>
+<p>It listens at <strong>115200 baud, 8 data bits, no parity, one stop bit, no flow control</strong>. Start listening <strong>before</strong> BTN0/BTN1. Press BTN1 for every image, waiting for green each time. The capture ends after all 20 class records and all tick-end records arrive. Use a new output filename after a reset/retry. Ctrl+C stops a partial capture; let the current image finish first for a complete per-image check.</p>
+<pre><code>python -m tools.board_demo verify --scenario mnist --capture build/board_demo/mnist/fpga_uart.txt</code></pre>
+<p>For a file containing only complete individual samples, add <code>--allow-partial</code>. The verifier still requires every packet and tick-end for each reported sample. It checks the class, ten scores, all encoded input packets and all consumed output packets against Python. It prints the actual label separately.</p>
+<p>The text protocol is deliberately readable:</p>
+<pre><code>C,00,5,0000,0000,0008,0000,0010,0048,0000,0000,0018,0028
+I,00,0,005
+I,00,0,100
+O,00,0,100</code></pre>
+<p><code>C</code> means class followed by ten scores. <code>I</code>/<code>O</code> identify input/output events; their fields are sample, tick, packet. Numeric fields are hexadecimal. Packet <code>000</code>–<code>0FF</code> names a neuron/source address; <code>100</code> is <strong>end of tick</strong>, not a spike. Events are buffered on actual handshakes and sent after inference, so UART line spacing is transmission time, not neuron firing time. Reconstruct the raster from the recorded tick/address fields.</p>
+<p>The learned classifier has threshold 65535 and uses final membrane scores. Its current 20 images emit <strong>no output spikes</strong>, just the eight end markers per image. The input raster is active. An empty output raster is expected; do not lower the threshold and call the result the same trained model.</p>
+<h2>11. Show nonzero output spikes with a separate stress demonstration</h2>
+<p>The signed-ring stress scenario exercises recurrent firing/refractory behavior on the <strong>same 256-state architecture</strong>. Its weights are deterministic test weights, not learned digit-classification weights. Its numerical class field is a diagnostic argmax and has no digit-recognition meaning.</p>
+<pre><code>python -m tools.run_board_demo_check --scenario stress
+$env:SNN_SCENARIO=&#x27;stress&#x27;
+&amp; &#x27;F:/Xilinx/Vivado/2023.2/bin/vivado.bat&#x27; -mode batch -source tools/build_zybo_demo.tcl -log build/zybo_stress_build.log -journal build/zybo_stress_build.jou
+Remove-Item Env:SNN_SCENARIO</code></pre>
+<p>Program the <code>.bit</code>/<code>.ltx</code> from <code>build/zybo_demo/stress/</code> together. Capture three samples with <code>-Samples 3</code> and a new output filename; verify using <code>python -m tools.board_demo verify --scenario stress --capture YOUR_CAPTURE.txt</code>. To return to digit recognition, program the MNIST pair again. Clearly label these two demonstrations when presenting them.</p>
+<h2>12. A short presentation sequence</h2>
+<ol>
+<li>Show the PS screenshot and explain that all 256 states are retained,
+ including the ten output states. Show the synapse BRAM and routed resource report.
+</li>
+<li>Open <code>images.html</code>. Point out the actual digit, Python prediction and scores.
+</li>
+<li>Show the saved XSim PASS log and its exact state/packet comparison scope.
+</li>
+<li>Program the MNIST bitstream. Arm ILA, press BTN1 and decode the four LEDs.
+</li>
+<li>Export the ILA capture and run the checker in front of your professor.
+ Advance to a correctly classified sample as well as showing the first
+ misclassification honestly.
+</li>
+<li>If UART is available, show the real capture and packet comparison. Optionally
+ load the clearly labeled stress bitstream to show nonzero output spikes.
+</li>
+<li>Keep the physical capture files, successful build report and <code>.bit</code>/<code>.ltx</code>
+ together with the reference and firmware hashes as your evidence.
+</li></ol>
+<h2>13. If something does not work</h2>
+<table><thead><tr><th>Symptom</th><th>First checks</th></tr></thead><tbody>
+<tr><td>No device in Hardware Manager</td><td>SW4, PGOOD, J12, data cable, cable drivers, JP5 JTAG</td></tr>
+<tr><td>Device is <code>xc7z020</code></td><td>That is a different board variant; do not use this Z7-10 bitstream</td></tr>
+<tr><td>DONE lights but no application</td><td>BTN0 then release; verify programmed file, K17 clock and PHY reset E17 high</td></tr>
+<tr><td>BTN1 seems ignored</td><td>Wait for green; release the button before pressing again; blue can mean UART is still draining</td></tr>
+<tr><td>LEDs show 0000</td><td>Could mean digit 0 or no valid result yet; use snapshot_valid/sample_index in ILA</td></tr>
+<tr><td>ILA absent or probes mismatched</td><td>Matching <code>.bit</code>/<code>.ltx</code>, refresh FPGA, ensure build had ILA enabled</td></tr>
+<tr><td>ILA never triggers</td><td>Arm before BTN1; trigger on snapshot_pulse=1; first image may need BTN0 restart; try lowering JTAG target frequency if communication fails</td></tr>
+<tr><td>UART is silent</td><td>Use external adapter COM port, JC1→RX, common ground, correct 3.3 V module, 115200 8N1; built-in ARM COM port is not this PL UART</td></tr>
+<tr><td>Red RGB</td><td>Inspect actual class/scores, build/reference hashes, bus fault or overflow; restart with BTN0 and capture the first failing sample</td></tr>
+<tr><td>Checker reports wrong scores</td><td>Do not regenerate the reference with different images/weights after building; rebuild and keep matching files</td></tr>
+<tr><td>Timing/build fails</td><td>Inspect the new log; do not program an old file as proof of the failed revision; fix the cause and rerun</td></tr>
+</tbody></table>
+<h2>14. What this milestone does and what remains in the PS</h2>
+<p>This procedure gives a path to demonstrate trained pattern classification, the full 256-state core, RV32/AXI weight loading, LEDs, ILA score comparison and an RTL UART raster. It is an initial board demonstration, not completion of every requirement in the problem statement.</p>
+<p>The CPU currently polls and pops output packets. A hardware spike DMA engine and output-spike interrupt still need integration. Component formal proofs must be composed with the full controller/SoC. The paper-based optimization comparison, complete-system measurements and physical-board validation remain tracked in <code>STAGE_REPORT.md</code>. Save your measured FPGA captures before claiming the on-board demonstration passes.</p>
+<p>The current demo occupies <strong>4,394 of 4,400 slices</strong> on the Z7-10. Further integration needs a fresh packing and timing check while retaining all 256 states; spare LUT and flip-flop totals alone do not prove that it fits.</p></body></html>

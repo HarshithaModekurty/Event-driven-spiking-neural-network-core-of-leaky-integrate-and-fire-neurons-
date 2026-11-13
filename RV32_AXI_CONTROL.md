@@ -8,9 +8,10 @@ SNN registers as a standalone peripheral for an external AXI master.
 The target board is the **Zybo Z7-10**, FPGA `xc7z010clg400-1`, confirmed by
 the user. Earlier Z7-20-part reports do not establish fit/timing on this
 smaller device. The 256 stored LIF states and 256x256 synapse table are
-preserved. This stage provides processor-driven loading and inference;
-DMA, interrupt handling, UART and the board clock/reset/pin wrapper remain
-separate work.
+preserved. This document describes processor-driven loading and inference.
+The subsequent board wrapper adds clock/reset/pins, image stepping, LEDs,
+ILA snapshots and a Pmod UART raster; see `BOARD_WRAPPER.md` and
+`ZYBO_Z7_10_DEMO_TUTORIAL.html`. DMA and output interrupt integration remain.
 
 The Z7-10 placement trial exposed slice-packing pressure from independently
 enabled registers, even though aggregate LUT/FF counts were below capacity.
@@ -24,8 +25,11 @@ present, and READ/CALCULATE/WRITE still takes three clocks per neuron.
 One outstanding read and one outstanding write can coexist. AW and W are
 buffered independently: address-first, data-first and simultaneous arrivals
 work. B/R responses and payloads are registered and held until accepted.
-The backend executes each write/read side effect once, before publishing its
-response. A synchronous active-low reset cancels partial requests and held
+The backend accepts each write/read once and publishes one response. Sample
+clear is a registered command: its B response acknowledges acceptance, and
+BUSY covers the following clock in which the network is cleared. Wait for
+BUSY=0 before configuring or starting a new image. A synchronous active-low
+reset cancels partial requests and held
 responses. All signals use one clock; AWPROT/ARPROT have no protection effect.
 
 The peripheral occupies `0x40000000..0x400fffff`. Every register/window entry
@@ -182,6 +186,10 @@ when selecting a scenario there.
 
 ## Implementation scope
 
+The measurements below record the preceding `3d19e6b` host milestone.
+The board wrapper and its registered sample-clear command have separate
+implementation evidence in `verification/zybo_demo/`; see `BOARD_WRAPPER.md`.
+
 `tools/synth_rv32_z710.tcl` implements the full processor/RAM/AXI/SNN in
 a registered timing fixture on **xc7z010clg400-1**, with a 100 MHz clock,
 0.100 ns uncertainty, and no false-path or multicycle exceptions. It uses
@@ -204,9 +212,10 @@ external routed loads. These results establish registered-context closure
 on the Z7-10 part, not physical-board validation.
 
 The current spike transport is processor polling. The PS-required DMA,
-output-spike interrupt, UART raster, composed system formal proofs and
+output-spike interrupt, physical UART demonstration, composed system formal proofs and
 paper optimization comparison remain outstanding. The next hardware step
-is the Z7-10 board wrapper and first programmed-board comparison.
+is the first programmed-board comparison using the wrapper/tutorial now
+provided in `BOARD_WRAPPER.md` and `ZYBO_Z7_10_DEMO_TUTORIAL.html`.
 
 References: [Arm AXI specification](https://documentation-service.arm.com/static/67ab5a186dbc975ccea91734),
 [Digilent Zybo Z7 reference manual](https://digilent.com/reference/_media/reference/programmable-logic/zybo-z7/zybo-z7_rm.pdf).

@@ -1,0 +1,9 @@
+{
+  "tests": 25,
+  "physical_board_tested": false,
+  "source_sha256": {
+    "tools/board_build_manifest.py": "a5900995a42e2c7eed01e5bc93f80500e31de345ce45a5c6bdf15e58e29d439e",
+    "tests/test_board_build_manifest.py": "8b887cd8e5979e6a78a134b90e2819e67195f1be2e9efe4600ba299cd296462f"
+  },
+  "unit_log_sha256": "3047512fd16f2f9d054ace569bbc1baa62c4d1653e78d5c790b6a3732f94f3a2"
+}

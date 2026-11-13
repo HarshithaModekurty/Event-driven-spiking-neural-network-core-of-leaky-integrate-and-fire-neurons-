@@ -1,0 +1,20 @@
+ECHO is off.
+ECHO is off.
+
+****** xsim v2023.2 (64-bit)
+  **** SW Build 4029153 on Fri Oct 13 20:14:34 MDT 2023
+  **** IP Build 4028589 on Sat Oct 14 00:45:43 MDT 2023
+  **** SharedData Build 4025554 on Tue Oct 10 17:18:54 MDT 2023
+    ** Copyright 1986-2022 Xilinx, Inc. All Rights Reserved.
+    ** Copyright 2022-2023 Advanced Micro Devices, Inc. All Rights Reserved.
+
+source xsim.dir/board_soc/xsim_script.tcl
+# xsim {board_soc} -testplusarg DATA_DIR=D:/RTL_PROJECT/build/board_demo/mnist -autoloadwcfg -runall
+Time resolution is 1 ps
+run -all
+PASS: board UART/LED/ILA snapshot flow, real RV32/AXI boot, 65536 learned/stress weights, 20 images, 160 ticks, 40960 state reads, 20513807 cycles
+$finish called at time : 205138116 ns : File "D:/RTL_PROJECT/rtl/tb/lif_board_demo_tb.v" Line 90
+run: Time (s): cpu = 00:00:02 ; elapsed = 00:18:31 . Memory (MB): peak = 199.379 ; gain = 0.000
+exit
+INFO: xsimkernel Simulation Memory Usage: 11668 KB (Peak: 11668 KB), Simulation CPU Usage: 969218 ms
+INFO: [Common 17-206] Exiting xsim at Fri Nov 13 15:32:22 2026...

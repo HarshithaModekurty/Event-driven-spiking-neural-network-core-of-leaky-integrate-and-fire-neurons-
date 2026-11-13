@@ -3,7 +3,12 @@
 Each receipt records the source/vector hashes used for that run. Historical
 snapshots describe their recorded sources, rather than every later revision.
 
-Current RV32 integration evidence is in `axi_protocol/`, `rv32_network/`,
+The latest board-wrapper simulation evidence is in `zybo_demo/`: learned and
+stress CPU/score/packet comparisons, decoded UART, actual MMCM/button/reset
+simulation, 25 units and host regressions. Read its README for scope and the
+distinction between simulated serial output and physical FPGA captures.
+
+The preceding RV32 milestone (`3d19e6b`) evidence is in `axi_protocol/`, `rv32_network/`,
 `rv32_mnist/` and `rv32_z710_timing/`. `RV32_AXI_CONTROL.md` states which
 simulator/scenario combinations and implementation scopes were checked.
 `rv32_z710_timing/packing_baseline.*` separately records the failed

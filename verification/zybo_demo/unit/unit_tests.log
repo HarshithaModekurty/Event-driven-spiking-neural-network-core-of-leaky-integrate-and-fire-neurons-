@@ -1,0 +1,32 @@
+test_arbiter_python_match_stalls_continuous_requests_and_reset (test_aer_rtl.AERRTLTests.test_arbiter_python_match_stalls_continuous_requests_and_reset) ... ok
+test_fifo_wrap_full_replacement_empty_and_reset (test_aer_rtl.AERRTLTests.test_fifo_wrap_full_replacement_empty_and_reset) ... ok
+test_generated_bdd_matches_committed_source (test_aer_rtl.AERReferenceTests.test_generated_bdd_matches_committed_source) ... ok
+test_repeated_packets_and_recurrent_overlap_assert_one_source_bit (test_aer_rtl.AERReferenceTests.test_repeated_packets_and_recurrent_overlap_assert_one_source_bit) ... ok
+test_changed_hardware_recipe_or_checkpoint_is_rejected (test_board_build_manifest.BoardManifestTests.test_changed_hardware_recipe_or_checkpoint_is_rejected) ... ok
+test_failed_new_synthesis_cannot_rebind_an_old_checkpoint (test_board_build_manifest.BoardManifestTests.test_failed_new_synthesis_cannot_rebind_an_old_checkpoint) ... ok
+test_finalization_requires_unchanged_inputs_and_checkpoint (test_board_build_manifest.BoardManifestTests.test_finalization_requires_unchanged_inputs_and_checkpoint) ... ok
+test_implementation_only_edits_can_reuse_the_same_netlist (test_board_build_manifest.BoardManifestTests.test_implementation_only_edits_can_reuse_the_same_netlist) ... ok
+test_capture_checker_rejects_wrong_class_score_or_packet (test_board_demo.BoardDemoTests.test_capture_checker_rejects_wrong_class_score_or_packet) ... ok
+test_ila_csv_little_endian_score_bank (test_board_demo.BoardDemoTests.test_ila_csv_little_endian_score_bank) ... ok
+test_reporter_dual_port_pause_overflow_and_serial (test_board_demo.BoardDemoTests.test_reporter_dual_port_pause_overflow_and_serial) ... ok
+test_uart_production_baud_and_reset (test_board_demo.BoardDemoTests.test_uart_production_baud_and_reset) ... ok
+test_mapped_feedback_and_readout_boundaries (test_classifier_rtl.ClassifierRTLTests.test_mapped_feedback_and_readout_boundaries) ... ok
+test_population_registered_read_and_reset (test_classifier_rtl.ClassifierRTLTests.test_population_registered_read_and_reset) ... ok
+test_last_pixel_bias_and_output_states_fit_the_ps_population (test_classifier_rtl.PSClassifierMappingTests.test_last_pixel_bias_and_output_states_fit_the_ps_population) ... ok
+test_rate_encoder_emits_full_intensity_each_tick (test_golden_model.EncodingAndArbitrationTests.test_rate_encoder_emits_full_intensity_each_tick) ... ok
+test_round_robin_and_held_request (test_golden_model.EncodingAndArbitrationTests.test_round_robin_and_held_request) ... ok
+test_uart_spike_raster_format (test_golden_model.EncodingAndArbitrationTests.test_uart_spike_raster_format) ... ok
+test_leak_threshold_reset_and_refractory (test_golden_model.LIFNeuronTests.test_leak_threshold_reset_and_refractory) ... ok
+test_saturates_to_unsigned_16_bit_state (test_golden_model.LIFNeuronTests.test_saturates_to_unsigned_16_bit_state) ... ok
+test_input_spike_updates_targets_on_same_tick (test_golden_model.NetworkTests.test_input_spike_updates_targets_on_same_tick) ... ok
+test_signed_synapse_current_routing (test_golden_model.NetworkTests.test_signed_synapse_current_routing) ... ok
+test_signed_weight_and_bit_width_validation (test_golden_model.NetworkTests.test_signed_weight_and_bit_width_validation) ... ok
+test_all_legal_phase_intensity_combinations (test_rate_encoder_rtl.RateEncoderRTLTests.test_all_legal_phase_intensity_combinations) ... ok
+test_phase_continuity_stalls_cancellation_and_sample_clear (test_rate_encoder_rtl.RateEncoderRTLTests.test_phase_continuity_stalls_cancellation_and_sample_clear) ... ok
+
+----------------------------------------------------------------------
+Ran 25 tests in 7.322s
+
+OK
+PASS sample 00: class=3, ten scores and all input/output packets match Python; actual digit=N/A
+PASS ILA sample 00: actual FPGA class and all ten scores match Python

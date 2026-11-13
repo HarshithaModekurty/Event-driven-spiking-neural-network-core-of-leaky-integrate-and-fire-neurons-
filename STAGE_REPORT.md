@@ -1,9 +1,59 @@
 # RTL project stage report
 
-Report date: 2026-11-11. Authoritative specification:
+Report date: 2026-11-13. Authoritative specification:
 `Screenshot 2026-10-28 143938.png`.
 
 ## Current milestone
+
+The Zybo Z7-10 demo wrapper now adds a 125-to-100 MHz MMCM, synchronized
+startup/reset, debounced BTN1 image stepping, BTN0 restart, binary digit
+LEDs, result/score ILA probes and a buffered Pmod UART raster. It retains
+the full 256-state SNN and unchanged RV32I inference firmware. The CPU's
+actual class store and state readbacks supply the displayed result; AXI
+backend backpressure pauses software between images while clocks run.
+The host sample-clear command is registered before the wide reset/readiness
+network, with BUSY asserted during its clear cycle. This removes a long AXI
+address-decode path without changing the three-clock neuron schedule.
+See `BOARD_WRAPPER.md` and the printable `ZYBO_Z7_10_DEMO_TUTORIAL.html`.
+
+The board demo simulation passes three stress images (24 ticks, 6,144
+state readbacks) and twenty learned images (160 ticks, 40,960 readbacks),
+including actual CPU loading, image pauses, all input/output packets and
+wire-decoded UART classes/ten scores compared with Python. The selected
+learned subset remains 17/20 accurate; all Python/RTL predictions agree.
+The actual MMCM simulation also passes startup, button bounce, start and
+restart. Production UART divisor 868 is checked for every clock of each
+bit, separately from the accelerated integrated UART simulation. The unit
+suite now has 25 tests, including stale-checkpoint and immutable-build
+provenance checks. Physical-board captures remain required.
+
+The complete board wrapper now generates a matched bitstream/ILA probes pair
+for **xc7z010clg400-1 at 100 MHz**: routed setup **+0.017 ns**, hold
+**+0.028 ns**, zero failing or unconstrained internal endpoints and zero
+combinational loops. All four debug bus-skew constraints pass. Resources are
+**11,089 LUTs, 16,101 flip-flops, 33 RAMB36E1, one RAMB18E1 and zero DSPs**.
+Occupied slices are **4,394/4,400 (99.86%)**; remaining LUT/FF counts do not
+establish room for DMA/IRQ without another packing and timing check.
+`ExploreWithRemap` resolves the placement failure. The optional encoder
+enable-remap request was not applied; its control-set reduction pass changed
+zero cells. No core setup/hold path was exempted to obtain closure.
+
+DRC reports zero errors and five retained warnings: three LUT-pin warnings
+inside AMD's debug hub, unloaded debug signals, and the absent PS7 block in
+this PL-only wrapper. These are recorded in `verification/zybo_demo/board_timing/`;
+physical JTAG/LED/ILA/UART operation remains untested. The generated learned
+ROM matches the full CPU simulation's firmware hash. The stress RTL case
+passes, but its separate board bitstream has not been generated in this run.
+
+The learned classifier's output stream contains only END markers for these
+images because it uses final membrane scores with threshold 65535. Its input
+raster is active. A separate 256-state signed-ring stress build demonstrates
+nonzero output spikes; its test weights/class field are not learned-digit
+accuracy evidence. LEDs/ILA work without an extra UART adapter; the PL UART
+requires a 3.3 V adapter on JC1, since J12's UART is wired to the ARM MIO.
+
+The following RV32/core measurements describe the preceding milestone and
+its registered out-of-context fixture, separately from the board wrapper.
 
 The integrated top is now `lif_rv32_soc`: a real PicoRV32 host drives
 AXI4-Lite loading, image/tick control, spike reads and state readback for
@@ -181,7 +231,7 @@ out-of-context results, not full-SoC or board measurements. See
 | RV32 weight loading over AXI4-Lite | Real PicoRV32 CPU, independent-channel AXI endpoint, byte strobes, full table loading, firmware control and inference readback implemented and simulated |
 | DMA spike delivery | Not implemented |
 | Output-spike interrupt | Not implemented |
-| UART spike-raster dump / LEDs | Python text formatter only; RTL peripherals/demo remain |
+| UART spike-raster dump / LEDs | RTL buffered real-handshake UART and digit/status LEDs implemented; serial waveform/capture comparison passes; physical-board demonstration remains |
 | Offline-trained small-task golden model | Canonical 256-state model and saved learned checkpoint |
 | Spike-for-spike agreement | Checked for the recurrent ring/population and all 256 classifier spike bits each tick |
 | Classification accuracy | 17/20 for the selected held-out simulation subset; full-test-set/on-board measurements remain |
@@ -193,9 +243,9 @@ out-of-context results, not full-SoC or board measurements. See
 
 ## Next required milestone
 
-Add the Z7-10 board clock/reset/pin wrapper,
-generate a bitstream and compare the first programmed-board results with
-Python. Continue with DMA, interrupt and UART integration. Compose the component formal proofs with
+Use the board wrapper and tutorial to compare the first programmed-board
+scores/classes and UART packet captures with Python. Continue with DMA and
+output-spike interrupt integration. Compose the component formal proofs with
 the complete framed controller and its environment progress assumptions.
 Add the research optimization comparison;
 measure the complete implementation and demonstrate it on the target board.

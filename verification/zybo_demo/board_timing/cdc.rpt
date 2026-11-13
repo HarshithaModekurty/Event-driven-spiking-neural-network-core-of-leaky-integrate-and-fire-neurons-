@@ -1,0 +1,20 @@
+Copyright 1986-2022 Xilinx, Inc. All Rights Reserved. Copyright 2022-2023 Advanced Micro Devices, Inc. All Rights Reserved.
+---------------------------------------------------------------------------------------------------------------------------------------------
+| Tool Version : Vivado v.2023.2 (win64) Build 4029153 Fri Oct 13 20:14:34 MDT 2023
+| Date         : Fri Nov 13 16:35:06 2026
+| Host         : DESKTOP-J3M0MBG running 64-bit major release  (build 9200)
+| Command      : report_cdc -file D:/RTL_PROJECT/build/zybo_demo/mnist/cdc.rpt
+| Design       : zybo_z710_top
+| Device       : 7z010-clg400
+| Speed File   : -1  PRODUCTION 1.12 2019-11-22
+| Design State : Routed
+---------------------------------------------------------------------------------------------------------------------------------------------
+
+CDC Report
+
+Severity  Source Clock                                                                                Destination Clock                                                                           CDC Type                 Exceptions               Endpoints  Safe  Unsafe  Unknown  No ASYNC_REG  
+--------  ------------------------------------------------------------------------------------------  ------------------------------------------------------------------------------------------  -----------------------  -----------------------  ---------  ----  ------  -------  ------------  
+Info      output_clk                                                                                  dbg_hub/inst/BSCANID.u_xsdbm_id/SWITCH_N_EXT_BSCAN.bscan_inst/SERIES7_BSCAN.bscan_inst/TCK  No Common Primary Clock  Max Delay Datapath Only          2     2       0        0             0  
+Info      dbg_hub/inst/BSCANID.u_xsdbm_id/SWITCH_N_EXT_BSCAN.bscan_inst/SERIES7_BSCAN.bscan_inst/TCK  output_clk                                                                                  No Common Primary Clock  Max Delay Datapath Only          9     9       0        0             0  
+Info      input port clock                                                                            output_clk                                                                                  No Common Primary Clock  False Path                       2     2       0        0             0  
+
